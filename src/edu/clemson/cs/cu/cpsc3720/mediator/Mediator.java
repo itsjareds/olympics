@@ -2,7 +2,10 @@ package edu.clemson.cs.cu.cpsc3720.mediator;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.JDialog;
+
 import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
 
 /**
  * <h1>Mediator</h1>
@@ -16,8 +19,8 @@ import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
  */
 public class Mediator implements MediatorInterface {
 
-	// private static database object
 	private CancelButton cancelButton;
+	private LoginButton loginButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -35,13 +38,33 @@ public class Mediator implements MediatorInterface {
 	}
 
 	/**
+	 * This method gives the cancel button functionality to close the selected
+	 * window.
 	 * 
 	 * @param arg0
-	 *            - {@link java.awt.event.ActionEvent ActionEvent}
+	 *            {@link java.awt.event.ActionEvent ActionEvent}
+	 * @param dialog
+	 *            - JDialog
 	 */
 	@Override
-	public void cancel(ActionEvent arg0) {
-		// cancel and go back
+	public void cancel(ActionEvent arg0, JDialog dialog) {
+		cancelButton.setEnabled(true);
+		dialog.dispose();
 	}
 
+	public void registerLogin(LoginButton loginButton) {
+		this.loginButton = loginButton;
+	}
+
+	public void login(ActionEvent arg0, String userName) {
+		loginButton.setEnabled(true);
+
+		if (userName.equals("Admin")) {
+			// open admin jframe
+			System.out.println(userName);
+		} else if (userName.equals("Teacher")) {
+			// open teacher jframe
+			System.out.println(userName);
+		}
+	}
 }
