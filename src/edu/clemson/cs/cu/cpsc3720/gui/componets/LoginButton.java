@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
-import edu.clemson.cs.cu.cpsc3720.mediator.ComandInterface;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 public class LoginButton extends JButton implements ComandInterface {

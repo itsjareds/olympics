@@ -10,6 +10,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.TeacherDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
  * <h1>Mediator</h1>

@@ -3,6 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.mediator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
+
 /**
  * <h1>Mediator Action Listener</h1>
  * <p>

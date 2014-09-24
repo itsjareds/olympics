@@ -1,4 +1,4 @@
-package edu.clemson.cs.cu.cpsc3720.mediator;
+package edu.clemson.cs.cu.cpsc3720.main.interfaces;
 
 import java.awt.event.ActionEvent;
 
