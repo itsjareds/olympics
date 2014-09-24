@@ -78,10 +78,10 @@ public class LoginDlg extends JDialog {
 	}
 
 	public String getUserNameTextField() {
-		return this.userNameTextField.getText();
+		return this.userNameTextField.getText().trim();
 	}
 
 	public String getPasswordField() {
-		return this.passwordField.getPassword().toString();
+		return String.valueOf(this.passwordField.getPassword()).trim();
 	}
 }

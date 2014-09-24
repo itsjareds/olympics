@@ -1,9 +1,12 @@
 package edu.clemson.cs.cu.cpsc3720.mediator;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JDialog;
 
+import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
+import edu.clemson.cs.cu.cpsc3720.gui.TeacherDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
 
@@ -24,13 +27,10 @@ public class Mediator implements MediatorInterface {
 
 	/**
 	 * This method stores an instance of the static class
-	 * {@link edu.clemson.cu.cpsc215.bbest_bhglove_bcdoher.gui.componets.AboutMenuItem
-	 * AboutMenuItem} so action can be executed.
+	 * {@link edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton
+	 * CancelButton} so action can be executed.
 	 * 
-	 * @param aboutMenuItem
-	 *            -
-	 *            {@link edu.clemson.cu.cpsc215.bbest_bhglove_bcdoher.gui.componets.AboutMenuItem
-	 *            AboutMenuItem}
+	 * @param cancelButton
 	 */
 	@Override
 	public void registerCancel(CancelButton cancelButton) {
@@ -56,15 +56,31 @@ public class Mediator implements MediatorInterface {
 		this.loginButton = loginButton;
 	}
 
-	public void login(ActionEvent arg0, String userName) {
+	public void login(ActionEvent arg0, String userName, String password) {
 		loginButton.setEnabled(true);
 
+		// authenticate user, if user type is admin then open admin main frame
+		// if user is of type teacher, then open the teacher dlg
+
 		if (userName.equals("Admin")) {
-			// open admin jframe
-			System.out.println(userName);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						AdminMainFrame frame = new AdminMainFrame();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		} else if (userName.equals("Teacher")) {
-			// open teacher jframe
-			System.out.println(userName);
+			try {
+				TeacherDlg dialog = new TeacherDlg();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
