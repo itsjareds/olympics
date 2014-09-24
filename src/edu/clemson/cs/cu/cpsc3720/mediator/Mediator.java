@@ -8,8 +8,8 @@ import javax.swing.JDialog;
 import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
 import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.TeacherDlg;
-import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
-import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.LoginButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -29,7 +29,7 @@ public class Mediator implements MediatorInterface {
 
 	/**
 	 * This method stores an instance of the static class
-	 * {@link edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton
+	 * {@link edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton
 	 * CancelButton} so action can be executed.
 	 * 
 	 * @param cancelButton

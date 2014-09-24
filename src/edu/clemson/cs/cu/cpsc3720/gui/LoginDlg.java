@@ -10,8 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
-import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.LoginButton;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 

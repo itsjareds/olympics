@@ -5,8 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
-import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
-import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.LoginButton;
 
 /**
  * <h1>Mediator Interface</h1>
