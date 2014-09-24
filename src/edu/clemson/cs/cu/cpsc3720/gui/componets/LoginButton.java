@@ -27,6 +27,6 @@ public class LoginButton extends JButton implements ComandInterface {
 	public void execute(ActionEvent arg0) {
 		String userName = loginDlg.getUserNameTextField();
 		String password = loginDlg.getPasswordField();
-		mediator.login(arg0, userName, password);
+		mediator.login(arg0, userName, password, loginDlg);
 	}
 }

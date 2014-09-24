@@ -4,6 +4,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class AthleteTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 8932721969724439783L;
+
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub

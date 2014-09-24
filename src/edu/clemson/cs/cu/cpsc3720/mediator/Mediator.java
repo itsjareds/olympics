@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
+import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.TeacherDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.componets.LoginButton;
@@ -56,11 +57,14 @@ public class Mediator implements MediatorInterface {
 		this.loginButton = loginButton;
 	}
 
-	public void login(ActionEvent arg0, String userName, String password) {
+	public void login(ActionEvent arg0, String userName, String password,
+			LoginDlg loginDlg) {
 		loginButton.setEnabled(true);
 
 		// authenticate user, if user type is admin then open admin main frame
 		// if user is of type teacher, then open the teacher dlg
+
+		loginDlg.dispose();
 
 		if (userName.equals("Admin")) {
 			EventQueue.invokeLater(new Runnable() {
