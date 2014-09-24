@@ -32,7 +32,6 @@ public class LoginDlg extends JDialog {
 		setTitle("Login to T-J 1.0");
 		this.mediator = mediator;
 		setResizable(false);
-		setLocationRelativeTo(null);
 		setBounds(100, 100, 329, 185);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 323, 121);

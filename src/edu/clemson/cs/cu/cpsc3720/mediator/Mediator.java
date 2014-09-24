@@ -71,6 +71,7 @@ public class Mediator implements MediatorInterface {
 				public void run() {
 					try {
 						AdminMainFrame frame = new AdminMainFrame();
+						frame.setLocationRelativeTo(null);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -81,6 +82,7 @@ public class Mediator implements MediatorInterface {
 			try {
 				TeacherDlg dialog = new TeacherDlg();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setLocationRelativeTo(null);
 				dialog.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
