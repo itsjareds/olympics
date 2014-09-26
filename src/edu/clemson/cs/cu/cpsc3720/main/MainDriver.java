@@ -1,8 +1,8 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import javax.swing.JDialog;
+import java.awt.EventQueue;
 
-import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
+import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 public class MainDriver {
@@ -16,14 +16,17 @@ public class MainDriver {
 		/**
 		 * Launch the application.
 		 */
-		try {
-			LoginDlg dialog = new LoginDlg(mediator);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setLocationRelativeTo(null);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AdminMainFrame frame = new AdminMainFrame();
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

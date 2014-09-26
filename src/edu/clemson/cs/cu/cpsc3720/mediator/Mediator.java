@@ -1,15 +1,10 @@
 package edu.clemson.cs.cu.cpsc3720.mediator;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JDialog;
 
-import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
-import edu.clemson.cs.cu.cpsc3720.gui.LoginDlg;
-import edu.clemson.cs.cu.cpsc3720.gui.TeacherDlg;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
-import edu.clemson.cs.cu.cpsc3720.gui.components.LoginButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -25,7 +20,6 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 public class Mediator implements MediatorInterface {
 
 	private CancelButton cancelButton;
-	private LoginButton loginButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -54,40 +48,4 @@ public class Mediator implements MediatorInterface {
 		dialog.dispose();
 	}
 
-	public void registerLogin(LoginButton loginButton) {
-		this.loginButton = loginButton;
-	}
-
-	public void login(ActionEvent arg0, String userName, String password,
-			LoginDlg loginDlg) {
-		loginButton.setEnabled(true);
-
-		// authenticate user, if user type is admin then open admin main frame
-		// if user is of type teacher, then open the teacher dlg
-
-		loginDlg.dispose();
-
-		if (userName.equals("Admin")) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						AdminMainFrame frame = new AdminMainFrame();
-						frame.setLocationRelativeTo(null);
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		} else if (userName.equals("Teacher")) {
-			try {
-				TeacherDlg dialog = new TeacherDlg();
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setLocationRelativeTo(null);
-				dialog.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 }

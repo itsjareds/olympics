@@ -1,8 +1,10 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
-import java.awt.BorderLayout;
-
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
@@ -18,14 +20,29 @@ public class AdminMainFrame extends JFrame {
 	public AdminMainFrame() {
 		setTitle("Administrator View T-J 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 804, 587);
+		setBounds(0, 0, 1024, 700);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnFile.add(mntmExit);
+
+		JMenu mnAbout = new JMenu("Help");
+		menuBar.add(mnAbout);
+
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mnAbout.add(mntmAbout);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		contentPane.add(tabbedPane);
 
 		AthletePnl athletePnl = new AthletePnl();
 		tabbedPane.addTab("Athletes", null, athletePnl, null);
