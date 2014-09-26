@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -45,6 +46,7 @@ public class AthletePnl extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public AthletePnl() {
 
 		athletes = new ArrayList<Athlete>();
@@ -64,7 +66,8 @@ public class AthletePnl extends JPanel {
 					"Clemmings", new Integer(21), "Male", new School(
 							"Some School"), new ArrayList<Registration>());
 
-			heat = new Heat();
+			heat = new Heat(event, athlete.getGender(), new Integer(8),
+					new Integer(12), new Time(12, 45, 00));
 
 			athletes.add(athlete);
 			events.add(event);
@@ -72,6 +75,8 @@ public class AthletePnl extends JPanel {
 		}
 
 		athleteTableModel = new AthleteTableModel(athletes);
+		eventTableModel = new EventTableModel(events);
+		heatTableModel = new HeatTableModel(heats);
 
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
@@ -134,9 +139,9 @@ public class AthletePnl extends JPanel {
 		broupCodeTxtBox.setBounds(119, 336, 152, 28);
 		panel.add(broupCodeTxtBox);
 
-		JLabel lblEventCode_1 = new JLabel("Event Code");
-		lblEventCode_1.setBounds(369, 177, 101, 16);
-		panel.add(lblEventCode_1);
+		JLabel lblEventCode = new JLabel("Event Code");
+		lblEventCode.setBounds(369, 177, 101, 16);
+		panel.add(lblEventCode);
 
 		eventCodeTxtBox = new JTextField();
 		eventCodeTxtBox.setColumns(10);
@@ -172,22 +177,22 @@ public class AthletePnl extends JPanel {
 		lblAssociatedEvents.setBounds(369, 6, 173, 16);
 		panel.add(lblAssociatedEvents);
 
-		JLabel lblNewLabel_3 = new JLabel("Associated Heats");
-		lblNewLabel_3.setBounds(369, 233, 146, 16);
-		panel.add(lblNewLabel_3);
+		JLabel lblAssociatedHeats = new JLabel("Associated Heats");
+		lblAssociatedHeats.setBounds(369, 233, 146, 16);
+		panel.add(lblAssociatedHeats);
 
 		JScrollPane eventsScrollPane = new JScrollPane();
 		eventsScrollPane.setBounds(369, 34, 317, 103);
 		panel.add(eventsScrollPane);
 
-		eventsTable = new JTable();
+		eventsTable = new JTable(this.eventTableModel);
 		eventsScrollPane.setViewportView(eventsTable);
 
 		JScrollPane heatsScrollPane = new JScrollPane();
 		heatsScrollPane.setBounds(369, 261, 317, 114);
 		panel.add(heatsScrollPane);
 
-		heatsTable = new JTable();
+		heatsTable = new JTable(this.heatTableModel);
 		heatsScrollPane.setViewportView(heatsTable);
 
 		JComboBox<Teacher> groupLeaderComboBox = new JComboBox<Teacher>();

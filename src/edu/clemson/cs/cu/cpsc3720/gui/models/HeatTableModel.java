@@ -11,7 +11,7 @@ public class HeatTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Heat> heats = new ArrayList<>();
-	String[] colNames = { "Event", "Heat Number"};
+	String[] colNames = { "Event", "Heat Number" };
 
 	public HeatTableModel(List<Heat> heats) {
 		this.heats = heats;
@@ -49,7 +49,7 @@ public class HeatTableModel extends AbstractTableModel {
 		case 0:
 			return heats.get(row).getEvent().getEventName();
 		case 1:
-			return heats.get(row).getEvent().getHeats();
+			return heats.get(row).getEvent().getNumHeats();
 		default:
 			return null;
 		}

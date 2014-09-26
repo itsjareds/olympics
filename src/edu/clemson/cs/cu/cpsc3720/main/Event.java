@@ -151,7 +151,7 @@ public class Event {
 	 * @return the numHeats
 	 */
 	public Integer getNumHeats() {
-		return this.numHeats;
+		return 0;
 	}
 
 	/**
