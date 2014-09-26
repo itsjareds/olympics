@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -20,6 +21,7 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 public class Mediator implements MediatorInterface {
 
 	private CancelButton cancelButton;
+	private NewButton newButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -46,6 +48,16 @@ public class Mediator implements MediatorInterface {
 	public void cancel(ActionEvent arg0, JDialog dialog) {
 		cancelButton.setEnabled(true);
 		dialog.dispose();
+	}
+
+	@Override
+	public void registerNew(NewButton newButton) {
+		this.newButton = newButton;
+	}
+
+	@Override
+	public void newItem(ActionEvent arg0) {
+		this.newButton.setEnabled(true);
 	}
 
 }

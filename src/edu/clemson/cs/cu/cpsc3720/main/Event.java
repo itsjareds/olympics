@@ -16,7 +16,7 @@ public class Event {
 
 	public Event(String eventCode, String eventName, String scoreUnit,
 			Integer scoreMin, Integer scoreMax, Integer sortSeq,
-			ArrayList<Registration> registrations) {
+			ArrayList<Registration> registrations, ArrayList<Heat> heats) {
 		super();
 		this.eventCode = eventCode;
 		this.eventName = eventName;

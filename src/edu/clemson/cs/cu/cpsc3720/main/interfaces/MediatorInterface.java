@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 
 /**
  * <h1>Mediator Interface</h1>
@@ -27,4 +28,8 @@ public interface MediatorInterface {
 	public void registerCancel(CancelButton cancelButton);
 
 	public void cancel(ActionEvent arg0, JDialog dialog);
+
+	public void registerNew(NewButton newButton);
+
+	public void newItem(ActionEvent arg0);
 }

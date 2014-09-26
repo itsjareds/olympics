@@ -12,8 +12,17 @@ public class Athlete {
 	private School school;
 	private ArrayList<Registration> registrations;
 
-	public Athlete() {
+	public Athlete(Teacher groupLeader, String firstName, String lastName,
+			Integer age, String gender, School school,
+			ArrayList<Registration> registrations) {
 		super();
+		this.groupLeader = groupLeader;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.gender = gender;
+		this.school = school;
+		this.registrations = registrations;
 	}
 
 	/**

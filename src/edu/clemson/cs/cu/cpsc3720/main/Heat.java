@@ -9,9 +9,14 @@ public class Heat {
 	private Integer minAge;
 	private Integer maxAge;
 	private Time time;
-	
-	public Heat() {
+
+	public Heat(Event event, String gender, Integer minAge, Integer maxAge,
+			Time time) {
 		super();
+		this.event = event;
+		this.gender = gender;
+		this.minAge = minAge;
+		this.time = time;
 	}
 
 	/**
