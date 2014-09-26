@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -22,6 +24,8 @@ public class Mediator implements MediatorInterface {
 
 	private CancelButton cancelButton;
 	private NewButton newButton;
+	private DeleteButton deleteButton;
+	private SearchButton searchButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -58,6 +62,26 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void newItem(ActionEvent arg0) {
 		this.newButton.setEnabled(true);
+	}
+
+	@Override
+	public void registerDelete(DeleteButton deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+	@Override
+	public void delete(ActionEvent arg0) {
+		this.deleteButton.setEnabled(true);
+	}
+
+	@Override
+	public void registerSearch(SearchButton searchButton) {
+		this.searchButton = searchButton;
+	}
+
+	@Override
+	public void search(ActionEvent arg0) {
+		this.searchButton.setEnabled(true);
 	}
 
 }

@@ -12,7 +12,6 @@ public class Event {
 	private Integer sortSeq;
 	private ArrayList<Registration> registrations;
 	private ArrayList<Heat> heats;
-	private Integer numHeats;
 
 	public Event(String eventCode, String eventName, String scoreUnit,
 			Integer scoreMin, Integer scoreMax, Integer sortSeq,
@@ -154,11 +153,4 @@ public class Event {
 		return 0;
 	}
 
-	/**
-	 * @param numHeats
-	 *            the numHeats to set
-	 */
-	public void setNumHeats(Integer numHeats) {
-		this.numHeats = numHeats;
-	}
 }

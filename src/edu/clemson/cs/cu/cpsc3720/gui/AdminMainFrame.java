@@ -9,15 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
+
 public class AdminMainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1788257087454523343L;
 	private JPanel contentPane;
+	private Mediator mediator;
 
 	/**
 	 * Create the frame.
 	 */
-	public AdminMainFrame() {
+	public AdminMainFrame(Mediator mediator) {
+		this.mediator = mediator;
+
 		setTitle("Administrator View T-J 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1024, 700);
@@ -44,7 +49,7 @@ public class AdminMainFrame extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 
-		AthletePnl athletePnl = new AthletePnl();
+		AthletePnl athletePnl = new AthletePnl(this.mediator);
 		tabbedPane.addTab("Athletes", null, athletePnl, null);
 
 		EventsPnl eventsPnl = new EventsPnl();

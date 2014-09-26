@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 
 /**
  * <h1>Mediator Interface</h1>
@@ -32,4 +34,12 @@ public interface MediatorInterface {
 	public void registerNew(NewButton newButton);
 
 	public void newItem(ActionEvent arg0);
+
+	public void registerDelete(DeleteButton deleteButton);
+
+	public void delete(ActionEvent arg0);
+
+	public void search(ActionEvent arg0);
+
+	public void registerSearch(SearchButton searchButton);
 }

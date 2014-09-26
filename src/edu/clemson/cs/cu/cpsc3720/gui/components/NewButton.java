@@ -14,6 +14,7 @@ public class NewButton extends JButton implements ComandInterface {
 	private final Mediator mediator;
 
 	public NewButton(ActionListener aL, Mediator mediator) {
+		super("New");
 		this.mediator = mediator;
 		this.addActionListener(aL);
 		this.mediator.registerNew(this);

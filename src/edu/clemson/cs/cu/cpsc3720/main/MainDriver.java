@@ -19,7 +19,7 @@ public class MainDriver {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminMainFrame frame = new AdminMainFrame();
+					AdminMainFrame frame = new AdminMainFrame(mediator);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
