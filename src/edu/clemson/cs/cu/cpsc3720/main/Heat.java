@@ -4,37 +4,15 @@ import java.sql.Time;
 
 public class Heat {
 
-	private String eventCode;
-	private String eventName;
+	private Event event;
 	private String gender;
 	private Integer minAge;
 	private Integer maxAge;
 	private Time time;
 	private Integer numHeats;
 
-	public Heat(String eventCode, String eventName, String gender,
-			Integer minAge, Integer maxAge, Time time, Integer numHeats) {
-		this.eventCode = eventCode;
-		this.eventName = eventName;
-		this.gender = gender;
-		this.minAge = minAge;
-		this.maxAge = maxAge;
-		this.time = time;
-		this.numHeats = numHeats;
-	}
-
-	/**
-	 * @return the eventCode
-	 */
-	public String getEventCode() {
-		return this.eventCode;
-	}
-
-	/**
-	 * @return the eventName
-	 */
-	public String getEventName() {
-		return this.eventName;
+	public Heat() {
+		super();
 	}
 
 	/**
@@ -70,22 +48,6 @@ public class Heat {
 	 */
 	public Integer getNumHeats() {
 		return this.numHeats;
-	}
-
-	/**
-	 * @param eventCode
-	 *            the eventCode to set
-	 */
-	public void setEventCode(String eventCode) {
-		this.eventCode = eventCode;
-	}
-
-	/**
-	 * @param eventName
-	 *            the eventName to set
-	 */
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
 	}
 
 	/**
@@ -126,6 +88,21 @@ public class Heat {
 	 */
 	public void setNumHeats(Integer numHeats) {
 		this.numHeats = numHeats;
+	}
+
+	/**
+	 * @return the event
+	 */
+	public Event getEvent() {
+		return this.event;
+	}
+
+	/**
+	 * @param event
+	 *            the event to set
+	 */
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 }

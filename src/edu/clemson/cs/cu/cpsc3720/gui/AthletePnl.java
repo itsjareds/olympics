@@ -36,8 +36,7 @@ public class AthletePnl extends JPanel {
 		// create some fake athletes to put in the table
 		Athlete athlete;
 		for (int i = 0; i < 10; i++) {
-			athlete = new Athlete("", "", "", "Jimmy", "Timmy", 0, "", "", "",
-					0);
+			athlete = new Athlete();
 			athletes.add(athlete);
 		}
 		athleteTableModel = new AthleteTableModel(athletes);

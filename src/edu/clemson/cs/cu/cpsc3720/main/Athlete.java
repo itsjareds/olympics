@@ -1,53 +1,19 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import java.util.ArrayList;
+
 public class Athlete {
 
-	private String groupCode;
-	private String schoolName;
-	private String groupLeader;
+	private Teacher groupLeader;
 	private String firstName;
 	private String lastName;
 	private Integer age;
 	private String gender;
-	private String eventCode;
-	private String eventName;
-	private Integer score;
+	private School school;
+	private ArrayList<Registration> registrations;
 
-	public Athlete(String groupCode, String schoolName, String groupLeader,
-			String firstName, String lastName, Integer age, String gender,
-			String eventCode, String eventName, Integer score) {
+	public Athlete() {
 		super();
-		this.groupCode = groupCode;
-		this.schoolName = schoolName;
-		this.groupLeader = groupLeader;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
-		this.gender = gender;
-		this.eventCode = eventCode;
-		this.eventName = eventName;
-		this.score = score;
-	}
-
-	/**
-	 * @return the groupCode
-	 */
-	public String getGroupCode() {
-		return this.groupCode;
-	}
-
-	/**
-	 * @return the schoolName
-	 */
-	public String getSchoolName() {
-		return this.schoolName;
-	}
-
-	/**
-	 * @return the groupLeader
-	 */
-	public String getGroupLeader() {
-		return this.groupLeader;
 	}
 
 	/**
@@ -76,51 +42,6 @@ public class Athlete {
 	 */
 	public String getGender() {
 		return this.gender;
-	}
-
-	/**
-	 * @return the eventCode
-	 */
-	public String getEventCode() {
-		return this.eventCode;
-	}
-
-	/**
-	 * @return the eventName
-	 */
-	public String getEventName() {
-		return this.eventName;
-	}
-
-	/**
-	 * @return the score
-	 */
-	public Integer getScore() {
-		return this.score;
-	}
-
-	/**
-	 * @param groupCode
-	 *            the groupCode to set
-	 */
-	public void setGroupCode(String groupCode) {
-		this.groupCode = groupCode;
-	}
-
-	/**
-	 * @param schoolName
-	 *            the schoolName to set
-	 */
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
-	}
-
-	/**
-	 * @param groupLeader
-	 *            the groupLeader to set
-	 */
-	public void setGroupLeader(String groupLeader) {
-		this.groupLeader = groupLeader;
 	}
 
 	/**
@@ -156,27 +77,47 @@ public class Athlete {
 	}
 
 	/**
-	 * @param eventCode
-	 *            the eventCode to set
+	 * @return the groupLeader
 	 */
-	public void setEventCode(String eventCode) {
-		this.eventCode = eventCode;
+	public Teacher getGroupLeader() {
+		return this.groupLeader;
 	}
 
 	/**
-	 * @param eventName
-	 *            the eventName to set
+	 * @return the school
 	 */
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+	public School getSchool() {
+		return this.school;
 	}
 
 	/**
-	 * @param score
-	 *            the score to set
+	 * @return the registrations
 	 */
-	public void setScore(Integer score) {
-		this.score = score;
+	public ArrayList<Registration> getRegistrations() {
+		return this.registrations;
 	}
 
+	/**
+	 * @param groupLeader
+	 *            the groupLeader to set
+	 */
+	public void setGroupLeader(Teacher groupLeader) {
+		this.groupLeader = groupLeader;
+	}
+
+	/**
+	 * @param school
+	 *            the school to set
+	 */
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	/**
+	 * @param registrations
+	 *            the registrations to set
+	 */
+	public void setRegistrations(ArrayList<Registration> registrations) {
+		this.registrations = registrations;
+	}
 }

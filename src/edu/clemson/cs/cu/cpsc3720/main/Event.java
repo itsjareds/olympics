@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import java.util.ArrayList;
+
 public class Event {
 
 	private String eventCode;
@@ -8,9 +10,12 @@ public class Event {
 	private Integer scoreMin;
 	private Integer scoreMax;
 	private Integer sortSeq;
+	private ArrayList<Registration> registrations;
+	private ArrayList<Heat> heats;
 
 	public Event(String eventCode, String eventName, String scoreUnit,
-			Integer scoreMin, Integer scoreMax, Integer sortSeq) {
+			Integer scoreMin, Integer scoreMax, Integer sortSeq,
+			ArrayList<Registration> registrations) {
 		super();
 		this.eventCode = eventCode;
 		this.eventName = eventName;
@@ -18,6 +23,7 @@ public class Event {
 		this.scoreMin = scoreMin;
 		this.scoreMax = scoreMax;
 		this.sortSeq = sortSeq;
+		this.registrations = registrations;
 	}
 
 	/**
@@ -108,5 +114,35 @@ public class Event {
 	 */
 	public void setSortSeq(Integer sortSeq) {
 		this.sortSeq = sortSeq;
+	}
+
+	/**
+	 * @return the registrations
+	 */
+	public ArrayList<Registration> getRegistrations() {
+		return this.registrations;
+	}
+
+	/**
+	 * @param registrations
+	 *            the registrations to set
+	 */
+	public void setRegistrations(ArrayList<Registration> registrations) {
+		this.registrations = registrations;
+	}
+
+	/**
+	 * @return the heats
+	 */
+	public ArrayList<Heat> getHeats() {
+		return this.heats;
+	}
+
+	/**
+	 * @param heats
+	 *            the heats to set
+	 */
+	public void setHeats(ArrayList<Heat> heats) {
+		this.heats = heats;
 	}
 }
