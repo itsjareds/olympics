@@ -21,12 +21,10 @@ public class AthletePnl extends JPanel {
 	private JTextField txtHarry;
 	private JTextField txtPotter;
 	private JTextField txtHogwarts;
-	private JTextField txtProfDumbledore;
 	private JTable table;
 	private static AthleteTableModel athleteTableModel;
 	private ArrayList<Athlete> athletes = new ArrayList<Athlete>();
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField;
 	private JTextField textField_4;
@@ -90,54 +88,39 @@ public class AthletePnl extends JPanel {
 		panel.add(txtPotter);
 
 		JLabel lblSchoolName = new JLabel("School Name");
-		lblSchoolName.setBounds(6, 217, 101, 16);
+		lblSchoolName.setBounds(6, 308, 101, 16);
 		panel.add(lblSchoolName);
 
 		txtHogwarts = new JTextField();
 		txtHogwarts.setText("Hogwarts");
 		txtHogwarts.setColumns(10);
-		txtHogwarts.setBounds(119, 211, 152, 28);
+		txtHogwarts.setBounds(119, 302, 152, 28);
 		panel.add(txtHogwarts);
 
 		JLabel lblGroupLeader = new JLabel("Group Leader");
-		lblGroupLeader.setBounds(6, 251, 101, 16);
+		lblGroupLeader.setBounds(6, 274, 101, 16);
 		panel.add(lblGroupLeader);
-
-		txtProfDumbledore = new JTextField();
-		txtProfDumbledore.setText("Prof. Dumbledore");
-		txtProfDumbledore.setColumns(10);
-		txtProfDumbledore.setBounds(119, 245, 152, 28);
-		panel.add(txtProfDumbledore);
 
 		JLabel lblNewLabel = new JLabel("Athlete Information");
 		lblNewLabel.setBounds(6, 6, 265, 16);
 		panel.add(lblNewLabel);
 
 		JLabel lblGroupCode = new JLabel("Group Code");
-		lblGroupCode.setBounds(6, 285, 101, 16);
+		lblGroupCode.setBounds(6, 342, 101, 16);
 		panel.add(lblGroupCode);
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(119, 279, 152, 28);
+		textField_1.setBounds(119, 336, 152, 28);
 		panel.add(textField_1);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(119, 313, 152, 28);
-		panel.add(textField_2);
-
-		JLabel lblEventCode = new JLabel("Event Name");
-		lblEventCode.setBounds(6, 319, 101, 16);
-		panel.add(lblEventCode);
-
 		JLabel lblEventCode_1 = new JLabel("Event Code");
-		lblEventCode_1.setBounds(6, 353, 101, 16);
+		lblEventCode_1.setBounds(369, 177, 101, 16);
 		panel.add(lblEventCode_1);
 
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(119, 347, 152, 28);
+		textField_3.setBounds(534, 171, 152, 28);
 		panel.add(textField_3);
 
 		JLabel lblAge = new JLabel("Age");
@@ -148,8 +131,8 @@ public class AthletePnl extends JPanel {
 		lblGender.setBounds(6, 149, 61, 16);
 		panel.add(lblGender);
 
-		JLabel lblScore = new JLabel("Score");
-		lblScore.setBounds(6, 183, 61, 16);
+		JLabel lblScore = new JLabel("Qualifing Score");
+		lblScore.setBounds(369, 149, 133, 16);
 		panel.add(lblScore);
 
 		JComboBox comboBox_1 = new JComboBox();
@@ -161,13 +144,35 @@ public class AthletePnl extends JPanel {
 		panel.add(comboBox_2);
 
 		textField_4 = new JTextField();
-		textField_4.setBounds(119, 177, 152, 28);
+		textField_4.setBounds(534, 143, 152, 28);
 		panel.add(textField_4);
 		textField_4.setColumns(10);
 
-		JButton btnNewButton = new JButton("New");
+		JLabel lblAssociatedEvents = new JLabel("Associated Events");
+		lblAssociatedEvents.setBounds(369, 6, 173, 16);
+		panel.add(lblAssociatedEvents);
 
-		JButton btnEdit = new JButton("Edit");
+		JLabel lblNewLabel_3 = new JLabel("Associated Heats");
+		lblNewLabel_3.setBounds(369, 233, 146, 16);
+		panel.add(lblNewLabel_3);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(369, 34, 317, 103);
+		panel.add(scrollPane);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(369, 261, 317, 114);
+		panel.add(scrollPane_1);
+
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setBounds(119, 270, 152, 27);
+		panel.add(comboBox_3);
+
+		JLabel lblTeacherInformation = new JLabel("Teacher Information");
+		lblTeacherInformation.setBounds(6, 233, 157, 16);
+		panel.add(lblTeacherInformation);
+
+		JButton btnNewButton = new JButton("New");
 
 		JButton btnDestroy = new JButton("Delete");
 
@@ -208,14 +213,10 @@ public class AthletePnl extends JPanel {
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				btnEdit,
+																				btnDestroy,
 																				GroupLayout.PREFERRED_SIZE,
-																				64,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				btnDestroy))
+																				92,
+																				GroupLayout.PREFERRED_SIZE))
 														.addGroup(
 																groupLayout
 																		.createSequentialGroup()
@@ -282,11 +283,6 @@ public class AthletePnl extends JPanel {
 																Alignment.BASELINE)
 														.addComponent(
 																btnNewButton,
-																GroupLayout.PREFERRED_SIZE,
-																60,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																btnEdit,
 																GroupLayout.PREFERRED_SIZE,
 																60,
 																GroupLayout.PREFERRED_SIZE)
