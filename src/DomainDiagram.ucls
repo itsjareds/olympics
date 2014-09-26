@@ -55,29 +55,16 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton" project="JT-1.0" 
-    file="/JT-1.0/src/edu/clemson/cs/cu/cpsc3720/gui/components/CancelButton.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="82" width="149" x="226" y="510"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <interface id="8" language="java" name="edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface" project="JT-1.0" 
-    file="/JT-1.0/src/edu/clemson/cs/cu/cpsc3720/main/interfaces/ComandInterface.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="28" width="141" x="500" y="538"/>    
-    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </interface>  
-  <realization id="9">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
+  <association id="7">    
+    <bendpoint x="372" y="326"/>    
+    <bendpoint x="625" y="328"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="8" name="event"/>      
+      <multiplicity id="9" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="10">    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="11" name="registrations"/>      
@@ -87,39 +74,39 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="13">    
-    <bendpoint x="372" y="326"/>    
-    <bendpoint x="625" y="328"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="14" name="event"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="16">    
     <bendpoint x="150" y="123"/>    
     <bendpoint x="375" y="123"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="17" name="registrations"/>      
-      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+      <attribute id="14" name="registrations"/>      
+      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="20" name="heats"/>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+  <association id="16">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="17" name="athlete"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <bendpoint x="250" y="299"/>    
+    <bendpoint x="341" y="299"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="20" name="school"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="23" name="athlete"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="23" name="heats"/>      
+      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
@@ -131,21 +118,11 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="28">    
-    <bendpoint x="250" y="299"/>    
-    <bendpoint x="341" y="299"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="29" name="school"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
     <bendpoint x="867" y="102"/>    
     <bendpoint x="621" y="101"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="32" name="event"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
+      <attribute id="29" name="event"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

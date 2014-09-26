@@ -192,14 +192,14 @@ public class AthletePnl extends JPanel {
 		eventsScrollPane.setBounds(369, 34, 317, 103);
 		panel.add(eventsScrollPane);
 
-		eventsTable = new JTable(this.eventTableModel);
+		eventsTable = new JTable(AthletePnl.eventTableModel);
 		eventsScrollPane.setViewportView(eventsTable);
 
 		JScrollPane heatsScrollPane = new JScrollPane();
 		heatsScrollPane.setBounds(369, 261, 317, 114);
 		panel.add(heatsScrollPane);
 
-		heatsTable = new JTable(this.heatTableModel);
+		heatsTable = new JTable(AthletePnl.heatTableModel);
 		heatsScrollPane.setViewportView(heatsTable);
 
 		JComboBox<Teacher> groupLeaderComboBox = new JComboBox<Teacher>();
@@ -221,7 +221,7 @@ public class AthletePnl extends JPanel {
 		JButton searchBtn = new SearchButton(new MediatorActionListener(),
 				mediator);
 
-		JComboBox filterComboBox = new JComboBox();
+		JComboBox<String> filterComboBox = new JComboBox<String>();
 
 		JLabel lblNewLabel_2 = new JLabel("Filter by: ");
 		GroupLayout groupLayout = new GroupLayout(this);

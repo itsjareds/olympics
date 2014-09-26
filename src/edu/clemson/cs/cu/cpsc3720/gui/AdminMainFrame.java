@@ -1,5 +1,8 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -25,7 +28,7 @@ public class AdminMainFrame extends JFrame {
 
 		setTitle("Administrator View T-J 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1024, 700);
+		setBounds(0, 0, 900, 600);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -34,6 +37,11 @@ public class AdminMainFrame extends JFrame {
 		menuBar.add(mnFile);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnFile.add(mntmExit);
 
 		JMenu mnAbout = new JMenu("Help");
