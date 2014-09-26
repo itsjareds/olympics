@@ -18,16 +18,16 @@ import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 
 public class AthletePnl extends JPanel {
-	private JTextField txtHarry;
-	private JTextField txtPotter;
-	private JTextField txtHogwarts;
+	private JTextField athleteFirstNameTextBox;
+	private JTextField athleteLastNameTxtBox;
+	private JTextField schoolNameTxtBox;
 	private JTable table;
 	private static AthleteTableModel athleteTableModel;
 	private ArrayList<Athlete> athletes = new ArrayList<Athlete>();
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField;
-	private JTextField textField_4;
+	private JTextField broupCodeTxtBox;
+	private JTextField eventCodeTxtBox;
+	private JTextField searchTxtBox;
+	private JTextField qualifingScoreTxtBox;
 
 	/**
 	 * Create the panel.
@@ -71,31 +71,28 @@ public class AthletePnl extends JPanel {
 		lblFirstName.setBounds(6, 53, 101, 16);
 		panel.add(lblFirstName);
 
-		txtHarry = new JTextField();
-		txtHarry.setText("Harry");
-		txtHarry.setBounds(119, 47, 152, 28);
-		panel.add(txtHarry);
-		txtHarry.setColumns(10);
+		athleteFirstNameTextBox = new JTextField();
+		athleteFirstNameTextBox.setBounds(119, 47, 152, 28);
+		panel.add(athleteFirstNameTextBox);
+		athleteFirstNameTextBox.setColumns(10);
 
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setBounds(6, 87, 101, 16);
 		panel.add(lblLastName);
 
-		txtPotter = new JTextField();
-		txtPotter.setText("Potter");
-		txtPotter.setColumns(10);
-		txtPotter.setBounds(119, 81, 152, 28);
-		panel.add(txtPotter);
+		athleteLastNameTxtBox = new JTextField();
+		athleteLastNameTxtBox.setColumns(10);
+		athleteLastNameTxtBox.setBounds(119, 81, 152, 28);
+		panel.add(athleteLastNameTxtBox);
 
 		JLabel lblSchoolName = new JLabel("School Name");
 		lblSchoolName.setBounds(6, 308, 101, 16);
 		panel.add(lblSchoolName);
 
-		txtHogwarts = new JTextField();
-		txtHogwarts.setText("Hogwarts");
-		txtHogwarts.setColumns(10);
-		txtHogwarts.setBounds(119, 302, 152, 28);
-		panel.add(txtHogwarts);
+		schoolNameTxtBox = new JTextField();
+		schoolNameTxtBox.setColumns(10);
+		schoolNameTxtBox.setBounds(119, 302, 152, 28);
+		panel.add(schoolNameTxtBox);
 
 		JLabel lblGroupLeader = new JLabel("Group Leader");
 		lblGroupLeader.setBounds(6, 274, 101, 16);
@@ -109,19 +106,19 @@ public class AthletePnl extends JPanel {
 		lblGroupCode.setBounds(6, 342, 101, 16);
 		panel.add(lblGroupCode);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(119, 336, 152, 28);
-		panel.add(textField_1);
+		broupCodeTxtBox = new JTextField();
+		broupCodeTxtBox.setColumns(10);
+		broupCodeTxtBox.setBounds(119, 336, 152, 28);
+		panel.add(broupCodeTxtBox);
 
 		JLabel lblEventCode_1 = new JLabel("Event Code");
 		lblEventCode_1.setBounds(369, 177, 101, 16);
 		panel.add(lblEventCode_1);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(534, 171, 152, 28);
-		panel.add(textField_3);
+		eventCodeTxtBox = new JTextField();
+		eventCodeTxtBox.setColumns(10);
+		eventCodeTxtBox.setBounds(534, 171, 152, 28);
+		panel.add(eventCodeTxtBox);
 
 		JLabel lblAge = new JLabel("Age");
 		lblAge.setBounds(6, 115, 61, 16);
@@ -135,18 +132,18 @@ public class AthletePnl extends JPanel {
 		lblScore.setBounds(369, 149, 133, 16);
 		panel.add(lblScore);
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(119, 111, 82, 27);
-		panel.add(comboBox_1);
+		JComboBox ageComboBox = new JComboBox();
+		ageComboBox.setBounds(119, 111, 82, 27);
+		panel.add(ageComboBox);
 
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(119, 145, 82, 27);
-		panel.add(comboBox_2);
+		JComboBox genderComboBox = new JComboBox();
+		genderComboBox.setBounds(119, 145, 82, 27);
+		panel.add(genderComboBox);
 
-		textField_4 = new JTextField();
-		textField_4.setBounds(534, 143, 152, 28);
-		panel.add(textField_4);
-		textField_4.setColumns(10);
+		qualifingScoreTxtBox = new JTextField();
+		qualifingScoreTxtBox.setBounds(534, 143, 152, 28);
+		panel.add(qualifingScoreTxtBox);
+		qualifingScoreTxtBox.setColumns(10);
 
 		JLabel lblAssociatedEvents = new JLabel("Associated Events");
 		lblAssociatedEvents.setBounds(369, 6, 173, 16);
@@ -164,24 +161,24 @@ public class AthletePnl extends JPanel {
 		scrollPane_1.setBounds(369, 261, 317, 114);
 		panel.add(scrollPane_1);
 
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(119, 270, 152, 27);
-		panel.add(comboBox_3);
+		JComboBox groupLeaderComboBox = new JComboBox();
+		groupLeaderComboBox.setBounds(119, 270, 152, 27);
+		panel.add(groupLeaderComboBox);
 
 		JLabel lblTeacherInformation = new JLabel("Teacher Information");
 		lblTeacherInformation.setBounds(6, 233, 157, 16);
 		panel.add(lblTeacherInformation);
 
-		JButton btnNewButton = new JButton("New");
+		JButton newBtn = new JButton("New");
 
-		JButton btnDestroy = new JButton("Delete");
+		JButton deleteBtn = new JButton("Delete");
 
-		textField = new JTextField();
-		textField.setColumns(10);
+		searchTxtBox = new JTextField();
+		searchTxtBox.setColumns(10);
 
-		JButton btnNewButton_1 = new JButton("Search");
+		JButton searchBtn = new JButton("Search");
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox filterComboBox = new JComboBox();
 
 		JLabel lblNewLabel_2 = new JLabel("Filter by: ");
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -206,14 +203,14 @@ public class AthletePnl extends JPanel {
 																groupLayout
 																		.createSequentialGroup()
 																		.addComponent(
-																				btnNewButton,
+																				newBtn,
 																				GroupLayout.PREFERRED_SIZE,
 																				64,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				btnDestroy,
+																				deleteBtn,
 																				GroupLayout.PREFERRED_SIZE,
 																				92,
 																				GroupLayout.PREFERRED_SIZE))
@@ -225,21 +222,21 @@ public class AthletePnl extends JPanel {
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				comboBox,
+																				filterComboBox,
 																				GroupLayout.PREFERRED_SIZE,
 																				117,
 																				GroupLayout.PREFERRED_SIZE)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				textField,
+																				searchTxtBox,
 																				GroupLayout.DEFAULT_SIZE,
 																				196,
 																				Short.MAX_VALUE)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				btnNewButton_1,
+																				searchBtn,
 																				GroupLayout.DEFAULT_SIZE,
 																				124,
 																				Short.MAX_VALUE)
@@ -257,17 +254,16 @@ public class AthletePnl extends JPanel {
 														.createParallelGroup(
 																Alignment.BASELINE)
 														.addComponent(
-																comboBox,
+																filterComboBox,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																textField,
+																searchTxtBox,
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																btnNewButton_1)
+														.addComponent(searchBtn)
 														.addComponent(
 																lblNewLabel_2))
 										.addPreferredGap(
@@ -282,12 +278,12 @@ public class AthletePnl extends JPanel {
 														.createParallelGroup(
 																Alignment.BASELINE)
 														.addComponent(
-																btnNewButton,
+																newBtn,
 																GroupLayout.PREFERRED_SIZE,
 																60,
 																GroupLayout.PREFERRED_SIZE)
 														.addComponent(
-																btnDestroy,
+																deleteBtn,
 																GroupLayout.PREFERRED_SIZE,
 																60,
 																GroupLayout.PREFERRED_SIZE))

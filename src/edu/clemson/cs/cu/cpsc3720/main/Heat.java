@@ -9,7 +9,6 @@ public class Heat {
 	private Integer minAge;
 	private Integer maxAge;
 	private Time time;
-	private Integer numHeats;
 
 	public Heat() {
 		super();
@@ -44,13 +43,6 @@ public class Heat {
 	}
 
 	/**
-	 * @return the numHeats
-	 */
-	public Integer getNumHeats() {
-		return this.numHeats;
-	}
-
-	/**
 	 * @param gender
 	 *            the gender to set
 	 */
@@ -80,14 +72,6 @@ public class Heat {
 	 */
 	public void setTime(Time time) {
 		this.time = time;
-	}
-
-	/**
-	 * @param numHeats
-	 *            the numHeats to set
-	 */
-	public void setNumHeats(Integer numHeats) {
-		this.numHeats = numHeats;
 	}
 
 	/**
