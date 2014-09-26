@@ -17,6 +17,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
+import edu.clemson.cs.cu.cpsc3720.gui.models.ExtendedAthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
@@ -58,7 +59,7 @@ public class HeatPnl extends JPanel {
 					new Integer(999), new Integer(i),
 					new ArrayList<Registration>(), new ArrayList<Heat>());
 
-			athlete = new Athlete(new Teacher("G0" + i, "Jimmy", "Tim"), "Bob",
+			athlete = new Athlete(new Teacher("Jimmy", "Tim","G0" + i), "Bob",
 					"Clemmings", new Integer(21), "Male", new School(
 							"Some School"), new ArrayList<Registration>());
 
@@ -92,30 +93,30 @@ public class HeatPnl extends JPanel {
 		panel.setLayout(null);
 
 		JLabel lblFirstName = new JLabel("Event Name");
-		lblFirstName.setBounds(6, 53, 101, 16);
+		lblFirstName.setBounds(6, 32, 101, 16);
 		panel.add(lblFirstName);
 
 		athleteFirstNameTextBox = new JTextField();
-		athleteFirstNameTextBox.setBounds(119, 47, 152, 28);
+		athleteFirstNameTextBox.setBounds(86, 26, 152, 28);
 		panel.add(athleteFirstNameTextBox);
 		athleteFirstNameTextBox.setColumns(10);
 
 		JLabel lblLastName = new JLabel("Event Code");
-		lblLastName.setBounds(6, 93, 101, 16);
+		lblLastName.setBounds(6, 77, 101, 16);
 		panel.add(lblLastName);
 
 		athleteLastNameTxtBox = new JTextField();
 		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(119, 87, 152, 28);
+		athleteLastNameTxtBox.setBounds(86, 71, 152, 28);
 		panel.add(athleteLastNameTxtBox);
 
 		JLabel lblSchoolName = new JLabel("Minimum Age");
-		lblSchoolName.setBounds(6, 208, 101, 16);
+		lblSchoolName.setBounds(273, 32, 101, 16);
 		panel.add(lblSchoolName);
 
 		schoolNameTxtBox = new JTextField();
 		schoolNameTxtBox.setColumns(10);
-		schoolNameTxtBox.setBounds(119, 202, 152, 28);
+		schoolNameTxtBox.setBounds(356, 71, 52, 28);
 		panel.add(schoolNameTxtBox);
 
 		JLabel lblNewLabel = new JLabel("Heat Information");
@@ -123,47 +124,47 @@ public class HeatPnl extends JPanel {
 		panel.add(lblNewLabel);
 
 		JLabel lblGroupCode = new JLabel("Maximum Age");
-		lblGroupCode.setBounds(6, 269, 101, 16);
+		lblGroupCode.setBounds(273, 77, 101, 16);
 		panel.add(lblGroupCode);
 
 		broupCodeTxtBox = new JTextField();
 		broupCodeTxtBox.setColumns(10);
-		broupCodeTxtBox.setBounds(119, 263, 152, 28);
+		broupCodeTxtBox.setBounds(356, 26, 52, 28);
 		panel.add(broupCodeTxtBox);
 
 		JLabel lblAge = new JLabel("Gender");
-		lblAge.setBounds(6, 150, 61, 16);
+		lblAge.setBounds(6, 115, 61, 16);
 		panel.add(lblAge);
 
 		JComboBox<Integer> ageComboBox = new JComboBox<Integer>();
-		ageComboBox.setBounds(119, 145, 82, 27);
+		ageComboBox.setBounds(60, 110, 61, 27);
 		panel.add(ageComboBox);
 
 		JLabel lblNewLabel_3 = new JLabel("Associated Athletes");
-		lblNewLabel_3.setBounds(366, 26, 146, 16);
+		lblNewLabel_3.setBounds(6, 158, 146, 16);
 		panel.add(lblNewLabel_3);
 
 		JScrollPane athleteScrollPane = new JScrollPane();
-		athleteScrollPane.setBounds(362, 53, 195, 208);
+		athleteScrollPane.setBounds(0, 185, 699, 263);
 		panel.add(athleteScrollPane);
 
-		athleteTable = new JTable(new AthleteTableModel(athletes));
+		athleteTable = new JTable(new ExtendedAthleteTableModel(athletes));
 		athleteScrollPane.setViewportView(athleteTable);
 		
 		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(366, 272, 87, 23);
+		btnAdd.setBounds(397, 151, 87, 23);
 		panel.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(463, 272, 89, 23);
+		btnDelete.setBounds(494, 151, 89, 23);
 		panel.add(btnDelete);
 		
 		JLabel lblNewLabel_1 = new JLabel("Time");
-		lblNewLabel_1.setBounds(6, 327, 46, 14);
+		lblNewLabel_1.setBounds(160, 116, 46, 14);
 		panel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(119, 320, 87, 28);
+		comboBox.setBounds(193, 109, 87, 28);
 		panel.add(comboBox);
 
 		JButton newBtn = new JButton("New");
