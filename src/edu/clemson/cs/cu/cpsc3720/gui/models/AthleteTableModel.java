@@ -11,7 +11,7 @@ public class AthleteTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Athlete> athletes = new ArrayList<>();
-	String[] colNames = { "First Name", "Last Name" };
+	String[] colNames = { "Last Name", "First Name" };
 
 	public AthleteTableModel(List<Athlete> athletes) {
 		this.athletes = athletes;
@@ -47,9 +47,9 @@ public class AthleteTableModel extends AbstractTableModel {
 	public Object getValueAt(final int row, final int col) {
 		switch (col) {
 		case 0:
-			return athletes.get(row).getFirstName();
-		case 1:
 			return athletes.get(row).getLastName();
+		case 1:
+			return athletes.get(row).getFirstName();
 		default:
 			return null;
 		}

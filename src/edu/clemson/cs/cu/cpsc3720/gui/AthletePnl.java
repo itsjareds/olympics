@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,6 +28,8 @@ public class AthletePnl extends JPanel {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField;
+	private JTextField textField_4;
 
 	/**
 	 * Create the panel.
@@ -149,11 +152,33 @@ public class AthletePnl extends JPanel {
 		lblScore.setBounds(6, 183, 61, 16);
 		panel.add(lblScore);
 
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(119, 111, 82, 27);
+		panel.add(comboBox_1);
+
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(119, 145, 82, 27);
+		panel.add(comboBox_2);
+
+		textField_4 = new JTextField();
+		textField_4.setBounds(119, 177, 152, 28);
+		panel.add(textField_4);
+		textField_4.setColumns(10);
+
 		JButton btnNewButton = new JButton("New");
 
 		JButton btnEdit = new JButton("Edit");
 
 		JButton btnDestroy = new JButton("Delete");
+
+		textField = new JTextField();
+		textField.setColumns(10);
+
+		JButton btnNewButton_1 = new JButton("Search");
+
+		JComboBox comboBox = new JComboBox();
+
+		JLabel lblNewLabel_2 = new JLabel("Filter by: ");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
 				.setHorizontalGroup(groupLayout
@@ -166,6 +191,12 @@ public class AthletePnl extends JPanel {
 												groupLayout
 														.createParallelGroup(
 																Alignment.LEADING)
+														.addComponent(
+																splitPane,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																886,
+																Short.MAX_VALUE)
 														.addGroup(
 																groupLayout
 																		.createSequentialGroup()
@@ -184,39 +215,88 @@ public class AthletePnl extends JPanel {
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
-																				btnDestroy,
+																				btnDestroy))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				lblNewLabel_2)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				comboBox,
 																				GroupLayout.PREFERRED_SIZE,
-																				64,
-																				GroupLayout.PREFERRED_SIZE))
-														.addComponent(
-																splitPane,
-																Alignment.TRAILING,
-																GroupLayout.DEFAULT_SIZE,
-																886,
-																Short.MAX_VALUE))
+																				117,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				textField,
+																				GroupLayout.DEFAULT_SIZE,
+																				196,
+																				Short.MAX_VALUE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				btnNewButton_1,
+																				GroupLayout.DEFAULT_SIZE,
+																				124,
+																				Short.MAX_VALUE)
+																		.addGap(372)))
 										.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
+		groupLayout
+				.setVerticalGroup(groupLayout
+						.createParallelGroup(Alignment.TRAILING)
 						.addGroup(
 								groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnNewButton,
-												GroupLayout.PREFERRED_SIZE, 60,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnEdit,
-												GroupLayout.PREFERRED_SIZE, 60,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnDestroy,
-												GroupLayout.PREFERRED_SIZE, 60,
-												GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(splitPane, GroupLayout.DEFAULT_SIZE, 497,
-								Short.MAX_VALUE).addContainerGap()));
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																comboBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																textField,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																btnNewButton_1)
+														.addComponent(
+																lblNewLabel_2))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(splitPane,
+												GroupLayout.DEFAULT_SIZE, 461,
+												Short.MAX_VALUE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																btnNewButton,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																btnEdit,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																btnDestroy,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 		setLayout(groupLayout);
 
 	}
-
 }
