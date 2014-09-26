@@ -9,7 +9,7 @@ public class Heat {
 	private Integer minAge;
 	private Integer maxAge;
 	private Time time;
-
+	
 	public Heat() {
 		super();
 	}
