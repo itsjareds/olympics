@@ -2,8 +2,11 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.util.ArrayList;
 
-public class Athlete {
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+public class Athlete implements DatabaseSerializable {
+
+	private transient String dbId;
 	private Teacher groupLeader;
 	private String firstName;
 	private String lastName;
@@ -128,5 +131,15 @@ public class Athlete {
 	 */
 	public void setRegistrations(ArrayList<Registration> registrations) {
 		this.registrations = registrations;
+	}
+
+	@Override
+	public String getDbId() {
+		return dbId;
+	}
+
+	@Override
+	public void setDbId(String id) {
+		this.dbId = id;
 	}
 }

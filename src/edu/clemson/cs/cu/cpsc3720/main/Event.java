@@ -2,8 +2,11 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.util.ArrayList;
 
-public class Event {
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+public class Event implements DatabaseSerializable {
+
+	private transient String dbId;
 	private String eventCode;
 	private String eventName;
 	private String scoreUnit;
@@ -151,6 +154,16 @@ public class Event {
 	 */
 	public Integer getNumHeats() {
 		return 0;
+	}
+
+	@Override
+	public String getDbId() {
+		return dbId;
+	}
+
+	@Override
+	public void setDbId(String id) {
+		this.dbId = id;
 	}
 
 }

@@ -2,8 +2,11 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.sql.Time;
 
-public class Heat {
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+public class Heat implements DatabaseSerializable {
+
+	private transient String dbId;
 	private Event event;
 	private String gender;
 	private Integer minAge;
@@ -92,6 +95,16 @@ public class Heat {
 	 */
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+
+	@Override
+	public String getDbId() {
+		return dbId;
+	}
+
+	@Override
+	public void setDbId(String id) {
+		this.dbId = id;
 	}
 
 }

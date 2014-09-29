@@ -1,7 +1,10 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-public class Registration {
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+public class Registration implements DatabaseSerializable {
+
+	private transient String dbId;
 	private Event event;
 	private Athlete athlete;
 	private Integer score;
@@ -73,5 +76,15 @@ public class Registration {
 	 */
 	public void setEventCode(String eventCode) {
 		this.eventCode = eventCode;
+	}
+
+	@Override
+	public String getDbId() {
+		return dbId;
+	}
+
+	@Override
+	public void setDbId(String id) {
+		this.dbId = id;
 	}
 }

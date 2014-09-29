@@ -1,7 +1,10 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-public class Teacher {
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+public class Teacher implements DatabaseSerializable {
+
+	private transient String dbId;
 	private String firstName;
 	private String lastName;
 	private String groupCode;
@@ -57,4 +60,15 @@ public class Teacher {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	@Override
+	public String getDbId() {
+		return dbId;
+	}
+
+	@Override
+	public void setDbId(String id) {
+		this.dbId = id;
+	}
+
 }
