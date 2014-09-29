@@ -15,7 +15,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	private static String user = "root";
 	private static String pass = "passw0rd";
 
-	public DatabaseAccessObject() {
+	static {
 		db = new ODatabaseDocumentTx("remote:localhost:2424/BugSquasher");
 	}
 
