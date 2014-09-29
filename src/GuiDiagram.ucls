@@ -73,7 +73,7 @@
     <end type="TARGET" refId="4"/>  
   </realization>  
   <association id="12">    
-    <bendpoint x="301" y="-257"/>    
+    <bendpoint x="153" y="-252"/>    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="13" name="mediator"/>      
       <multiplicity id="14" minimum="0" maximum="1"/>    

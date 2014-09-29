@@ -9,23 +9,23 @@ import javax.swing.JPanel;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
-public class NewButton extends JButton implements ComandInterface {
+public class SaveButton extends JButton implements ComandInterface {
 
-	private static final long serialVersionUID = -5728398175248638254L;
+	private static final long serialVersionUID = -6163448448443567531L;
 	private final Mediator mediator;
-	private JPanel panel;
+	private final JPanel panel;
 
-	public NewButton(ActionListener aL, Mediator mediator, JPanel panel) {
-		super("New");
-		this.mediator = mediator;
+	public SaveButton(ActionListener aL, Mediator mediator, JPanel panel) {
+		super("Save");
 		this.panel = panel;
+		this.mediator = mediator;
 		this.addActionListener(aL);
-		this.mediator.registerNew(this);
+		this.mediator.registerSave(this);
 	}
 
 	@Override
 	public void execute(ActionEvent arg0) {
-		mediator.newItem(arg0, panel);
+		mediator.save(arg0, panel);
 	}
 
 }

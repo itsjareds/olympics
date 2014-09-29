@@ -3,10 +3,12 @@ package edu.clemson.cs.cu.cpsc3720.mediator;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
@@ -26,6 +28,7 @@ public class Mediator implements MediatorInterface {
 	private NewButton newButton;
 	private DeleteButton deleteButton;
 	private SearchButton searchButton;
+	private SaveButton saveButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -60,7 +63,7 @@ public class Mediator implements MediatorInterface {
 	}
 
 	@Override
-	public void newItem(ActionEvent arg0) {
+	public void newItem(ActionEvent arg0, JPanel panel) {
 		this.newButton.setEnabled(true);
 	}
 
@@ -70,7 +73,7 @@ public class Mediator implements MediatorInterface {
 	}
 
 	@Override
-	public void delete(ActionEvent arg0) {
+	public void delete(ActionEvent arg0, JPanel panel) {
 		this.deleteButton.setEnabled(true);
 	}
 
@@ -80,8 +83,19 @@ public class Mediator implements MediatorInterface {
 	}
 
 	@Override
-	public void search(ActionEvent arg0) {
+	public void search(ActionEvent arg0, JPanel panel) {
 		this.searchButton.setEnabled(true);
+	}
+
+	@Override
+	public void registerSave(SaveButton saveButton) {
+		this.saveButton = saveButton;
+	}
+
+	@Override
+	public void save(ActionEvent arg0, JPanel panel) {
+		saveButton.setVisible(true);
+		System.out.println(panel.getName());
 	}
 
 }
