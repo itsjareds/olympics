@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -15,6 +17,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
@@ -24,8 +30,11 @@ import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
+import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
+import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 public class EventsPnl extends JPanel {
+	private Mediator mediator;
 	private JTextField athleteFirstNameTextBox;
 	private JTextField athleteLastNameTxtBox;
 	private JTextField schoolNameTxtBox;
@@ -43,11 +52,12 @@ public class EventsPnl extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EventsPnl() {
+	public EventsPnl(Mediator mediator) {
 		athletes = new ArrayList<Athlete>();
 		events = new ArrayList<Event>();
 		heats = new ArrayList<Heat>();
-
+		this.mediator = mediator;
+		this.setName("EventPanel");
 		// create some fake athletes to put in the table
 		Athlete athlete;
 		Event event;
@@ -149,22 +159,39 @@ public class EventsPnl extends JPanel {
 		heatTable = new JTable(new HeatTableModel(heats));
 		heatsScrollPane.setViewportView(heatTable);
 		
-		JButton btnAdd = new JButton("Add");
+		JButton btnAdd = new NewButton(new MediatorActionListener(), mediator,
+				this);
+		btnAdd.setText("Add");
 		btnAdd.setBounds(366, 272, 87, 23);
 		panel.add(btnAdd);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new DeleteButton(new MediatorActionListener(),
+				mediator, this);
+		btnDelete.setText("Delete");
 		btnDelete.setBounds(463, 272, 89, 23);
 		panel.add(btnDelete);
 
-		JButton newBtn = new JButton("New");
+		JButton newBtn = new NewButton(new MediatorActionListener(), mediator,
+				this);
+		newBtn.setText("New");
 
-		JButton deleteBtn = new JButton("Delete");
+		JButton deleteBtn = new DeleteButton(new MediatorActionListener(),
+				mediator, this);
+		deleteBtn.setText("Delete");
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
 
-		JButton searchBtn = new JButton("Search");
+		JButton searchBtn = new SearchButton(new MediatorActionListener(),
+				mediator, this);
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		JButton saveBtn = new SaveButton(new MediatorActionListener(),
+				mediator, this);
+
+		saveBtn.setText("Save");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -175,7 +202,9 @@ public class EventsPnl extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
+							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -193,6 +222,7 @@ public class EventsPnl extends JPanel {
 					.addComponent(splitPane)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(saveBtn,0, 0,Short.MAX_VALUE)
 						.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
 						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())

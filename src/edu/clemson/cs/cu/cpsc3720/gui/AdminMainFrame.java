@@ -60,10 +60,10 @@ public class AdminMainFrame extends JFrame {
 		AthletePnl athletePnl = new AthletePnl(this.mediator);
 		tabbedPane.addTab("Athletes", null, athletePnl, null);
 
-		EventsPnl eventsPnl = new EventsPnl();
+		EventsPnl eventsPnl = new EventsPnl(this.mediator);
 		tabbedPane.addTab("Events", null, eventsPnl, null);
 
-		HeatPnl heatPnl = new HeatPnl();
+		HeatPnl heatPnl = new HeatPnl(this.mediator);
 		tabbedPane.addTab("Heats", null, heatPnl, null);
 
 		NameTagPnl nameTagPnl = new NameTagPnl();

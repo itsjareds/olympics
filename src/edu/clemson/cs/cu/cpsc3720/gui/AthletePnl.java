@@ -30,6 +30,8 @@ import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AthletePnl extends JPanel {
 	private Mediator mediator;
@@ -210,6 +212,10 @@ public class AthletePnl extends JPanel {
 
 		JButton searchBtn = new SearchButton(new MediatorActionListener(),
 				mediator, this);
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		JButton newBtn = new NewButton(new MediatorActionListener(), mediator,
 				this);

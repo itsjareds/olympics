@@ -25,9 +25,20 @@ import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
+import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
+import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
+import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+
+import java.awt.event.ActionListener;
+
+import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
+
+import java.awt.event.ActionEvent;
 
 public class HeatPnl extends JPanel {
-	
+	private Mediator mediator;
 	private JTextField athleteFirstNameTextBox;
 	private JTextField athleteLastNameTxtBox;
 	private JTextField schoolNameTxtBox;
@@ -40,16 +51,16 @@ public class HeatPnl extends JPanel {
 	private ArrayList<Heat> heats;
 	private JTextField broupCodeTxtBox;
 	private JTextField searchTxtBox;
-	private JTable athleteTable;
 
 	/**
 	 * Create the panel.
 	 */
-	public HeatPnl() {
+	public HeatPnl(Mediator mediator) {
 		athletes = new ArrayList<Athlete>();
 		events = new ArrayList<Event>();
 		heats = new ArrayList<Heat>();
-
+		this.mediator = mediator;
+		this.setName("HeatPanel");
 		// create some fake athletes to put in the table
 		Athlete athlete;
 		Event event;
@@ -93,88 +104,86 @@ public class HeatPnl extends JPanel {
 		panel.setLayout(null);
 
 		JLabel lblFirstName = new JLabel("Event Name");
-		lblFirstName.setBounds(6, 32, 101, 16);
+		lblFirstName.setBounds(6, 54, 101, 16);
 		panel.add(lblFirstName);
 
 		athleteFirstNameTextBox = new JTextField();
-		athleteFirstNameTextBox.setBounds(86, 26, 152, 28);
+		athleteFirstNameTextBox.setBounds(105, 48, 152, 28);
 		panel.add(athleteFirstNameTextBox);
 		athleteFirstNameTextBox.setColumns(10);
 
 		JLabel lblLastName = new JLabel("Event Code");
-		lblLastName.setBounds(6, 77, 101, 16);
+		lblLastName.setBounds(6, 104, 101, 16);
 		panel.add(lblLastName);
 
 		athleteLastNameTxtBox = new JTextField();
 		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(86, 71, 152, 28);
+		athleteLastNameTxtBox.setBounds(105, 98, 152, 28);
 		panel.add(athleteLastNameTxtBox);
 
 		JLabel lblSchoolName = new JLabel("Minimum Age");
-		lblSchoolName.setBounds(273, 32, 101, 16);
+		lblSchoolName.setBounds(6, 279, 101, 22);
 		panel.add(lblSchoolName);
 
 		schoolNameTxtBox = new JTextField();
 		schoolNameTxtBox.setColumns(10);
-		schoolNameTxtBox.setBounds(356, 71, 52, 28);
+		schoolNameTxtBox.setBounds(105, 319, 52, 28);
 		panel.add(schoolNameTxtBox);
 
 		JLabel lblNewLabel = new JLabel("Heat Information");
-		lblNewLabel.setBounds(6, 6, 265, 16);
+		lblNewLabel.setBounds(6, 11, 265, 16);
 		panel.add(lblNewLabel);
 
 		JLabel lblGroupCode = new JLabel("Maximum Age");
-		lblGroupCode.setBounds(273, 77, 101, 16);
+		lblGroupCode.setBounds(6, 325, 101, 16);
 		panel.add(lblGroupCode);
 
 		broupCodeTxtBox = new JTextField();
 		broupCodeTxtBox.setColumns(10);
-		broupCodeTxtBox.setBounds(356, 26, 52, 28);
+		broupCodeTxtBox.setBounds(105, 276, 52, 28);
 		panel.add(broupCodeTxtBox);
 
 		JLabel lblAge = new JLabel("Gender");
-		lblAge.setBounds(6, 115, 61, 16);
+		lblAge.setBounds(6, 170, 61, 16);
 		panel.add(lblAge);
 
 		JComboBox<Integer> ageComboBox = new JComboBox<Integer>();
-		ageComboBox.setBounds(60, 110, 61, 27);
+		ageComboBox.setToolTipText("B");
+		ageComboBox.setBounds(105, 165, 61, 27);
 		panel.add(ageComboBox);
-
-		JLabel lblNewLabel_3 = new JLabel("Associated Athletes");
-		lblNewLabel_3.setBounds(6, 158, 146, 16);
-		panel.add(lblNewLabel_3);
-
-		JScrollPane athleteScrollPane = new JScrollPane();
-		athleteScrollPane.setBounds(0, 185, 699, 263);
-		panel.add(athleteScrollPane);
-
-		athleteTable = new JTable(new ExtendedAthleteTableModel(athletes));
-		athleteScrollPane.setViewportView(athleteTable);
-		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBounds(397, 151, 87, 23);
-		panel.add(btnAdd);
-		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(494, 151, 89, 23);
-		panel.add(btnDelete);
 		
 		JLabel lblNewLabel_1 = new JLabel("Time");
-		lblNewLabel_1.setBounds(160, 116, 46, 14);
+		lblNewLabel_1.setBounds(6, 228, 46, 14);
 		panel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(193, 109, 87, 28);
+		comboBox.setBounds(103, 221, 87, 28);
 		panel.add(comboBox);
 
-		JButton newBtn = new JButton("New");
+		searchTxtBox = new JTextField();
+		searchTxtBox.setColumns(10);
+		
+		JButton newBtn = new NewButton(new MediatorActionListener(), mediator,
+				this);
+		newBtn.setText("New");
 
-		JButton deleteBtn = new JButton("Delete");
+		JButton deleteBtn = new DeleteButton(new MediatorActionListener(),
+				mediator, this);
+		deleteBtn.setText("Delete");
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
 
-		JButton searchBtn = new JButton("Search");
+		JButton searchBtn = new SearchButton(new MediatorActionListener(),
+				mediator, this);
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		JButton saveBtn = new SaveButton(new MediatorActionListener(),
+				mediator, this);
+
+		saveBtn.setText("Save");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -185,7 +194,9 @@ public class HeatPnl extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
+							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -203,6 +214,7 @@ public class HeatPnl extends JPanel {
 					.addComponent(splitPane)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(saveBtn,0, 0,Short.MAX_VALUE)
 						.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
 						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
