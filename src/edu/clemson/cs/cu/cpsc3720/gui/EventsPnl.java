@@ -34,6 +34,8 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 public class EventsPnl extends JPanel {
+
+	private static final long serialVersionUID = -3288904051405366982L;
 	private Mediator mediator;
 	private JTextField athleteFirstNameTextBox;
 	private JTextField athleteLastNameTxtBox;
@@ -158,13 +160,13 @@ public class EventsPnl extends JPanel {
 
 		heatTable = new JTable(new HeatTableModel(heats));
 		heatsScrollPane.setViewportView(heatTable);
-		
+
 		JButton btnAdd = new NewButton(new MediatorActionListener(), mediator,
 				this);
 		btnAdd.setText("Add");
 		btnAdd.setBounds(366, 272, 87, 23);
 		panel.add(btnAdd);
-		
+
 		JButton btnDelete = new DeleteButton(new MediatorActionListener(),
 				mediator, this);
 		btnDelete.setText("Delete");
@@ -193,42 +195,99 @@ public class EventsPnl extends JPanel {
 
 		saveBtn.setText("Save");
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(splitPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchBtn)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(searchBtn))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(splitPane)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(saveBtn,0, 0,Short.MAX_VALUE)
-						.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+		groupLayout
+				.setHorizontalGroup(groupLayout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																splitPane,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																660,
+																Short.MAX_VALUE)
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				newBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				64,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				deleteBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				92,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				saveBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				searchTxtBox,
+																				GroupLayout.PREFERRED_SIZE,
+																				96,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				searchBtn)))
+										.addContainerGap()));
+		groupLayout
+				.setVerticalGroup(groupLayout
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																searchTxtBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(searchBtn))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(splitPane)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(saveBtn,
+																0, 0,
+																Short.MAX_VALUE)
+														.addComponent(
+																newBtn,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																deleteBtn,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 		setLayout(groupLayout);
 
 	}
 }
-

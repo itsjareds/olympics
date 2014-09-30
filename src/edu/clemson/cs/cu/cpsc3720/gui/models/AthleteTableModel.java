@@ -18,6 +18,10 @@ public class AthleteTableModel extends AbstractTableModel {
 		update();
 	}
 
+	public Athlete getAthlete(int row) {
+		return athletes.get(row);
+	}
+
 	public void addRow(final Athlete a) {
 		athletes.add(a);
 		update();

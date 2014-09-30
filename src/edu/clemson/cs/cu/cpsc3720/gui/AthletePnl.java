@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -30,10 +32,10 @@ import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AthletePnl extends JPanel {
+
+	private static final long serialVersionUID = 2209017935088133557L;
 	private Mediator mediator;
 	private JTextField athleteFirstNameTextBox;
 	private JTextField athleteLastNameTxtBox;
@@ -45,11 +47,15 @@ public class AthletePnl extends JPanel {
 	private ArrayList<Athlete> athletes;
 	private ArrayList<Event> events;
 	private ArrayList<Heat> heats;
-	private JTextField broupCodeTxtBox;
+	private JTextField groupCodeTxtBox;
 	private JTextField searchTxtBox;
 	private JTextField qualifingScoreTxtBox;
 	private JTable eventsTable;
 	private JTable heatsTable;
+	private JTextField ageTextField;
+	private JComboBox<String> genderComboBox;
+	private JComboBox<String> groupLeaderComboBox;
+	private JComboBox<String> filterComboBox;
 
 	/**
 	 * Create the panel.
@@ -71,8 +77,8 @@ public class AthletePnl extends JPanel {
 					new Integer(999), new Integer(i),
 					new ArrayList<Registration>(), new ArrayList<Heat>());
 
-			athlete = new Athlete(new Teacher("G0" + i, "Jimmy", "Tim"), "Bob",
-					"Clemmings", new Integer(21), "Male", new School(
+			athlete = new Athlete(new Teacher("Jim", "Stanton", "G0" + i),
+					"Bob", "Clemmings", new Integer(21), "Male", new School(
 							"Some School"), new ArrayList<Registration>());
 
 			heat = new Heat(event, athlete.getGender(), new Integer(8),
@@ -87,15 +93,13 @@ public class AthletePnl extends JPanel {
 		eventTableModel = new EventTableModel(events);
 		heatTableModel = new HeatTableModel(heats);
 
+		// Panes and Panels
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
 		splitPane.setDividerLocation(160);
 
 		JScrollPane athleteScrollPane = new JScrollPane();
 		splitPane.setLeftComponent(athleteScrollPane);
-
-		table = new JTable(athleteTableModel);
-		athleteScrollPane.setViewportView(table);
 
 		JScrollPane informationScrollPane = new JScrollPane();
 		splitPane.setRightComponent(informationScrollPane);
@@ -104,32 +108,28 @@ public class AthletePnl extends JPanel {
 		informationScrollPane.setViewportView(panel);
 		panel.setLayout(null);
 
+		JScrollPane eventsScrollPane = new JScrollPane();
+		eventsScrollPane.setBounds(369, 34, 317, 103);
+		panel.add(eventsScrollPane);
+
+		JScrollPane heatsScrollPane = new JScrollPane();
+		heatsScrollPane.setBounds(369, 261, 317, 114);
+		panel.add(heatsScrollPane);
+
+		// JLables
+		JLabel lblFilter = new JLabel("Filter by: ");
+
 		JLabel lblFirstName = new JLabel("First Name");
 		lblFirstName.setBounds(6, 53, 101, 16);
 		panel.add(lblFirstName);
 
-		athleteFirstNameTextBox = new JTextField();
-		athleteFirstNameTextBox.setBounds(119, 47, 152, 28);
-		panel.add(athleteFirstNameTextBox);
-		athleteFirstNameTextBox.setColumns(10);
-
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(6, 87, 101, 16);
+		lblLastName.setBounds(6, 81, 101, 16);
 		panel.add(lblLastName);
-
-		athleteLastNameTxtBox = new JTextField();
-		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(119, 81, 152, 28);
-		panel.add(athleteLastNameTxtBox);
 
 		JLabel lblSchoolName = new JLabel("School Name");
 		lblSchoolName.setBounds(6, 308, 101, 16);
 		panel.add(lblSchoolName);
-
-		schoolNameTxtBox = new JTextField();
-		schoolNameTxtBox.setColumns(10);
-		schoolNameTxtBox.setBounds(119, 302, 152, 28);
-		panel.add(schoolNameTxtBox);
 
 		JLabel lblGroupLeader = new JLabel("Group Leader");
 		lblGroupLeader.setBounds(6, 274, 101, 16);
@@ -143,13 +143,8 @@ public class AthletePnl extends JPanel {
 		lblGroupCode.setBounds(6, 342, 101, 16);
 		panel.add(lblGroupCode);
 
-		broupCodeTxtBox = new JTextField();
-		broupCodeTxtBox.setColumns(10);
-		broupCodeTxtBox.setBounds(119, 336, 152, 28);
-		panel.add(broupCodeTxtBox);
-
 		JLabel lblAge = new JLabel("Age");
-		lblAge.setBounds(6, 115, 61, 16);
+		lblAge.setBounds(6, 109, 61, 16);
 		panel.add(lblAge);
 
 		JLabel lblGender = new JLabel("Gender");
@@ -160,19 +155,6 @@ public class AthletePnl extends JPanel {
 		lblScore.setBounds(369, 149, 133, 16);
 		panel.add(lblScore);
 
-		JComboBox<Integer> ageComboBox = new JComboBox<Integer>();
-		ageComboBox.setBounds(119, 111, 82, 27);
-		panel.add(ageComboBox);
-
-		JComboBox<String> genderComboBox = new JComboBox<String>();
-		genderComboBox.setBounds(119, 145, 82, 27);
-		panel.add(genderComboBox);
-
-		qualifingScoreTxtBox = new JTextField();
-		qualifingScoreTxtBox.setBounds(534, 143, 152, 28);
-		panel.add(qualifingScoreTxtBox);
-		qualifingScoreTxtBox.setColumns(10);
-
 		JLabel lblAssociatedEvents = new JLabel("Associated Events");
 		lblAssociatedEvents.setBounds(369, 6, 173, 16);
 		panel.add(lblAssociatedEvents);
@@ -181,54 +163,120 @@ public class AthletePnl extends JPanel {
 		lblAssociatedHeats.setBounds(369, 233, 146, 16);
 		panel.add(lblAssociatedHeats);
 
-		JScrollPane eventsScrollPane = new JScrollPane();
-		eventsScrollPane.setBounds(369, 34, 317, 103);
-		panel.add(eventsScrollPane);
-
-		eventsTable = new JTable(AthletePnl.eventTableModel);
-		eventsScrollPane.setViewportView(eventsTable);
-
-		JScrollPane heatsScrollPane = new JScrollPane();
-		heatsScrollPane.setBounds(369, 261, 317, 114);
-		panel.add(heatsScrollPane);
-
-		heatsTable = new JTable(AthletePnl.heatTableModel);
-		heatsScrollPane.setViewportView(heatsTable);
-
-		JComboBox<Teacher> groupLeaderComboBox = new JComboBox<Teacher>();
-		groupLeaderComboBox.setBounds(119, 270, 152, 27);
-		panel.add(groupLeaderComboBox);
-
 		JLabel lblTeacherInformation = new JLabel("Teacher Information");
 		lblTeacherInformation.setBounds(6, 233, 157, 16);
 		panel.add(lblTeacherInformation);
 
-		searchTxtBox = new JTextField();
-		searchTxtBox.setColumns(10);
-
-		JComboBox<String> filterComboBox = new JComboBox<String>();
-
-		JLabel lblNewLabel_2 = new JLabel("Filter by: ");
-
+		// JButtons
 		JButton searchBtn = new SearchButton(new MediatorActionListener(),
 				mediator, this);
-		searchBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		searchBtn.setText("Search");
 
 		JButton newBtn = new NewButton(new MediatorActionListener(), mediator,
 				this);
 		newBtn.setText("New");
 
-		JButton deleteBtn = new DeleteButton(new MediatorActionListener(),
-				mediator, this);
+		final JButton deleteBtn = new DeleteButton(
+				new MediatorActionListener(), mediator, this);
 		deleteBtn.setText("Delete");
 
 		JButton saveBtn = new SaveButton(new MediatorActionListener(),
 				mediator, this);
-
 		saveBtn.setText("Save");
+
+		// JTextFields
+		searchTxtBox = new JTextField();
+		searchTxtBox.setColumns(10);
+
+		ageTextField = new JTextField();
+		ageTextField.setBounds(119, 103, 152, 28);
+		panel.add(ageTextField);
+		ageTextField.setColumns(10);
+
+		athleteFirstNameTextBox = new JTextField();
+		athleteFirstNameTextBox.setBounds(119, 47, 152, 28);
+		panel.add(athleteFirstNameTextBox);
+		athleteFirstNameTextBox.setColumns(10);
+
+		athleteLastNameTxtBox = new JTextField();
+		athleteLastNameTxtBox.setColumns(10);
+		athleteLastNameTxtBox.setBounds(119, 75, 152, 28);
+		panel.add(athleteLastNameTxtBox);
+
+		schoolNameTxtBox = new JTextField();
+		schoolNameTxtBox.setColumns(10);
+		schoolNameTxtBox.setBounds(119, 302, 152, 28);
+		panel.add(schoolNameTxtBox);
+
+		groupCodeTxtBox = new JTextField();
+		groupCodeTxtBox.setColumns(10);
+		groupCodeTxtBox.setBounds(119, 336, 152, 28);
+		panel.add(groupCodeTxtBox);
+
+		// JComboBoxes
+		String[] teachers = { " ", "Jim Stanton", "Bob Uptown" };
+		groupLeaderComboBox = new JComboBox<String>(teachers);
+		groupLeaderComboBox.setBounds(119, 270, 152, 27);
+		panel.add(groupLeaderComboBox);
+
+		String[] genders = { " ", "Male", "Female" };
+		genderComboBox = new JComboBox<String>(genders);
+		genderComboBox.setBounds(119, 145, 121, 27);
+		panel.add(genderComboBox);
+
+		String[] filters = { " ", "First Name", "Last Name", "School",
+				"Group Leader", "Event", "Heat", };
+		filterComboBox = new JComboBox<String>(filters);
+
+		// JTables
+		heatsTable = new JTable(AthletePnl.heatTableModel);
+		heatsScrollPane.setViewportView(heatsTable);
+
+		eventsTable = new JTable(AthletePnl.eventTableModel);
+		eventsScrollPane.setViewportView(eventsTable);
+		eventsTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent mevt) {
+				if (eventsTable.getSelectedRow() != -1) {
+					deleteBtn.setEnabled(true);
+				}
+				if (eventsTable.getRowCount() > 0)
+
+					if (mevt.getClickCount() == 2) {
+						// on double click, open the events panel
+					}
+			}
+		});
+
+		table = new JTable(athleteTableModel);
+		athleteScrollPane.setViewportView(table);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent mevt) {
+				if (table.getSelectedRow() != -1) {
+					deleteBtn.setEnabled(true);
+				}
+				if (table.getRowCount() > 0)
+
+					if (mevt.getClickCount() == 1) {
+						AthleteTableModel atm = (AthleteTableModel) table
+								.getModel();
+						Athlete a = atm.getAthlete(table.getSelectedRow());
+						athleteFirstNameTextBox.setText(a.getFirstName());
+						athleteLastNameTxtBox.setText(a.getLastName());
+						schoolNameTxtBox.setText(a.getSchool().getSchoolName());
+						groupCodeTxtBox.setText(a.getGroupLeader()
+								.getGroupCode());
+						genderComboBox.setSelectedItem(a.getGender());
+						ageTextField.setText(a.getAge().toString());
+						groupLeaderComboBox.setSelectedItem(a.getGroupLeader()
+								.getFirstName()
+								+ " "
+								+ a.getGroupLeader().getLastName());
+					}
+			}
+		});
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
 				.setHorizontalGroup(groupLayout
@@ -273,7 +321,7 @@ public class AthletePnl extends JPanel {
 																groupLayout
 																		.createSequentialGroup()
 																		.addComponent(
-																				lblNewLabel_2)
+																				lblFilter)
 																		.addPreferredGap(
 																				ComponentPlacement.RELATED)
 																		.addComponent(
@@ -323,8 +371,7 @@ public class AthletePnl extends JPanel {
 																GroupLayout.PREFERRED_SIZE,
 																GroupLayout.DEFAULT_SIZE,
 																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lblNewLabel_2))
+														.addComponent(lblFilter))
 										.addPreferredGap(
 												ComponentPlacement.RELATED)
 										.addComponent(splitPane)

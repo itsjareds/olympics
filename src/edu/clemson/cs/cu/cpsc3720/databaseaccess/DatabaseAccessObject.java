@@ -33,9 +33,11 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	public void save(T t) {
 		db.open(user, pass);
+
 		ODocument doc = db.getRecord(new ORecordId(t.getDbId()));
 		doc.fromJSON(new Gson().toJson(t));
 		doc.save();
+
 		db.close();
 	}
 
