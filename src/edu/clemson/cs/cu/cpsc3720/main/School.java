@@ -28,7 +28,7 @@ public class School implements DatabaseSerializable {
 
 	@Override
 	public String getDbId() {
-		return dbId;
+		return this.dbId;
 	}
 
 	@Override

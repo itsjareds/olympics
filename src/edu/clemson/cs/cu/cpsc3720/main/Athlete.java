@@ -2,30 +2,77 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.util.ArrayList;
 
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 public class Athlete implements DatabaseSerializable {
 
 	private transient String dbId;
-	private Teacher groupLeader;
+	private transient Teacher teacher;
+	private String teacherRef;
 	private String firstName;
 	private String lastName;
 	private Integer age;
 	private String gender;
-	private School school;
-	private ArrayList<Registration> registrations;
+	private transient School school;
+	private String schoolRef;
+	private transient ArrayList<Registration> registrations;
+	private ArrayList<String> regRefs;
 
-	public Athlete(Teacher groupLeader, String firstName, String lastName,
-			Integer age, String gender, School school,
-			ArrayList<Registration> registrations) {
+	public Athlete(String teacherRef, String firstName, String lastName,
+			Integer age, String gender, String schoolRef,
+			ArrayList<String> regRefs) {
 		super();
-		this.groupLeader = groupLeader;
+		this.teacherRef = teacherRef;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.gender = gender;
-		this.school = school;
-		this.registrations = registrations;
+		this.schoolRef = schoolRef;
+		this.regRefs = regRefs;
+	}
+
+	public void loadRefs() {
+		loadTeacher();
+		loadSchool();
+		loadRegistrations();
+	}
+
+	public Teacher getTeacher() {
+		loadTeacher();
+		return teacher;
+	}
+
+	public void loadTeacher() {
+		teacher = DaoRepository.getTeachers().query(Teacher.class, teacherRef);
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public String getTeacherRef() {
+		return teacherRef;
+	}
+
+	public void setTeacherRef(String teacherRef) {
+		this.teacherRef = teacherRef;
+	}
+
+	public String getSchoolRef() {
+		return schoolRef;
+	}
+
+	public void setSchoolRef(String schoolRef) {
+		this.schoolRef = schoolRef;
+	}
+
+	public ArrayList<String> getRegRefs() {
+		return regRefs;
+	}
+
+	public void setRegRefs(ArrayList<String> regRefs) {
+		this.regRefs = regRefs;
 	}
 
 	/**
@@ -92,21 +139,36 @@ public class Athlete implements DatabaseSerializable {
 	 * @return the groupLeader
 	 */
 	public Teacher getGroupLeader() {
-		return this.groupLeader;
+		return this.teacher;
 	}
 
 	/**
 	 * @return the school
 	 */
 	public School getSchool() {
+		loadSchool();
 		return this.school;
+	}
+
+	public void loadSchool() {
+		school = DaoRepository.getSchools().query(School.class, schoolRef);
 	}
 
 	/**
 	 * @return the registrations
 	 */
 	public ArrayList<Registration> getRegistrations() {
+		loadRegistrations();
 		return this.registrations;
+	}
+
+	public void loadRegistrations() {
+		if (registrations == null)
+			registrations = new ArrayList<Registration>();
+		registrations.clear();
+		for (String ref : regRefs)
+			registrations.add(DaoRepository.getRegistrations().query(
+					Registration.class, ref));
 	}
 
 	/**
@@ -114,7 +176,7 @@ public class Athlete implements DatabaseSerializable {
 	 *            the groupLeader to set
 	 */
 	public void setGroupLeader(Teacher groupLeader) {
-		this.groupLeader = groupLeader;
+		this.teacher = groupLeader;
 	}
 
 	/**
@@ -135,7 +197,7 @@ public class Athlete implements DatabaseSerializable {
 
 	@Override
 	public String getDbId() {
-		return dbId;
+		return this.dbId;
 	}
 
 	@Override

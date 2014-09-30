@@ -1,7 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import java.util.ArrayList;
-
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 public class Event implements DatabaseSerializable {
@@ -13,12 +11,9 @@ public class Event implements DatabaseSerializable {
 	private Integer scoreMin;
 	private Integer scoreMax;
 	private Integer sortSeq;
-	private ArrayList<Registration> registrations;
-	private ArrayList<Heat> heats;
 
 	public Event(String eventCode, String eventName, String scoreUnit,
-			Integer scoreMin, Integer scoreMax, Integer sortSeq,
-			ArrayList<Registration> registrations, ArrayList<Heat> heats) {
+			Integer scoreMin, Integer scoreMax, Integer sortSeq) {
 		super();
 		this.eventCode = eventCode;
 		this.eventName = eventName;
@@ -26,7 +21,6 @@ public class Event implements DatabaseSerializable {
 		this.scoreMin = scoreMin;
 		this.scoreMax = scoreMax;
 		this.sortSeq = sortSeq;
-		this.registrations = registrations;
 	}
 
 	/**
@@ -119,46 +113,9 @@ public class Event implements DatabaseSerializable {
 		this.sortSeq = sortSeq;
 	}
 
-	/**
-	 * @return the registrations
-	 */
-	public ArrayList<Registration> getRegistrations() {
-		return this.registrations;
-	}
-
-	/**
-	 * @param registrations
-	 *            the registrations to set
-	 */
-	public void setRegistrations(ArrayList<Registration> registrations) {
-		this.registrations = registrations;
-	}
-
-	/**
-	 * @return the heats
-	 */
-	public ArrayList<Heat> getHeats() {
-		return this.heats;
-	}
-
-	/**
-	 * @param heats
-	 *            the heats to set
-	 */
-	public void setHeats(ArrayList<Heat> heats) {
-		this.heats = heats;
-	}
-
-	/**
-	 * @return the numHeats
-	 */
-	public Integer getNumHeats() {
-		return 0;
-	}
-
 	@Override
 	public String getDbId() {
-		return dbId;
+		return this.dbId;
 	}
 
 	@Override

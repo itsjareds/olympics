@@ -1,6 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
-import java.sql.Time;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -15,27 +16,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
-import edu.clemson.cs.cu.cpsc3720.gui.models.ExtendedAthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
-import edu.clemson.cs.cu.cpsc3720.main.Registration;
-import edu.clemson.cs.cu.cpsc3720.main.School;
-import edu.clemson.cs.cu.cpsc3720.main.Teacher;
-import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
-import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
-import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
-import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
-
-import java.awt.event.ActionListener;
-
-import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
-
-import java.awt.event.ActionEvent;
+import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 public class HeatPnl extends JPanel {
 	private Mediator mediator;
@@ -61,26 +54,10 @@ public class HeatPnl extends JPanel {
 		heats = new ArrayList<Heat>();
 		this.mediator = mediator;
 		this.setName("HeatPanel");
-		// create some fake athletes to put in the table
-		Athlete athlete;
-		Event event;
-		Heat heat;
-		for (int i = 0; i < 100; i++) {
-			event = new Event("E" + i, "Some Event", "N D T", new Integer(0),
-					new Integer(999), new Integer(i),
-					new ArrayList<Registration>(), new ArrayList<Heat>());
 
-			athlete = new Athlete(new Teacher("Jimmy", "Tim","G0" + i), "Bob",
-					"Clemmings", new Integer(21), "Male", new School(
-							"Some School"), new ArrayList<Registration>());
-
-			heat = new Heat(event, athlete.getGender(), new Integer(8),
-					new Integer(12), new Time(12, 45, 00));
-
-			athletes.add(athlete);
-			events.add(event);
-			heats.add(heat);
-		}
+		athletes = DaoRepository.getAthletes().objects;
+		events = DaoRepository.getEvents().objects;
+		heats = DaoRepository.getHeats().objects;
 
 		athleteTableModel = new AthleteTableModel(athletes);
 		eventTableModel = new EventTableModel(events);
@@ -151,18 +128,18 @@ public class HeatPnl extends JPanel {
 		ageComboBox.setToolTipText("B");
 		ageComboBox.setBounds(105, 165, 61, 27);
 		panel.add(ageComboBox);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Time");
 		lblNewLabel_1.setBounds(6, 228, 46, 14);
 		panel.add(lblNewLabel_1);
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(103, 221, 87, 28);
 		panel.add(comboBox);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
-		
+
 		JButton newBtn = new NewButton(new MediatorActionListener(), mediator,
 				this);
 		newBtn.setText("New");
@@ -185,42 +162,99 @@ public class HeatPnl extends JPanel {
 
 		saveBtn.setText("Save");
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(splitPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchBtn)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(searchBtn))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(splitPane)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(saveBtn,0, 0,Short.MAX_VALUE)
-						.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+		groupLayout
+				.setHorizontalGroup(groupLayout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addComponent(
+																splitPane,
+																Alignment.TRAILING,
+																GroupLayout.DEFAULT_SIZE,
+																660,
+																Short.MAX_VALUE)
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				newBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				64,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				deleteBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				92,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				saveBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				searchTxtBox,
+																				GroupLayout.PREFERRED_SIZE,
+																				96,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				searchBtn)))
+										.addContainerGap()));
+		groupLayout
+				.setVerticalGroup(groupLayout
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(
+																searchTxtBox,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(searchBtn))
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addComponent(splitPane)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(saveBtn,
+																0, 0,
+																Short.MAX_VALUE)
+														.addComponent(
+																newBtn,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																deleteBtn,
+																GroupLayout.PREFERRED_SIZE,
+																60,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
 		setLayout(groupLayout);
 
 	}
 }
-

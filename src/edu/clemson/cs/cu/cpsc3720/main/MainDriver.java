@@ -2,6 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.awt.EventQueue;
 
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
@@ -19,6 +20,13 @@ public class MainDriver {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					DaoRepository.getAthletes().load(Athlete.class);
+					DaoRepository.getEvents().load(Event.class);
+					DaoRepository.getHeats().load(Heat.class);
+					DaoRepository.getRegistrations().load(Registration.class);
+					DaoRepository.getSchools().load(School.class);
+					DaoRepository.getTeachers().load(Teacher.class);
+
 					AdminMainFrame frame = new AdminMainFrame(mediator);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);

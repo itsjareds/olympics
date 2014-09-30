@@ -2,7 +2,6 @@ package edu.clemson.cs.cu.cpsc3720.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -17,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
@@ -27,9 +27,6 @@ import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
-import edu.clemson.cs.cu.cpsc3720.main.Registration;
-import edu.clemson.cs.cu.cpsc3720.main.School;
-import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
@@ -60,26 +57,10 @@ public class EventsPnl extends JPanel {
 		heats = new ArrayList<Heat>();
 		this.mediator = mediator;
 		this.setName("EventPanel");
-		// create some fake athletes to put in the table
-		Athlete athlete;
-		Event event;
-		Heat heat;
-		for (int i = 0; i < 100; i++) {
-			event = new Event("E" + i, "Some Event", "N D T", new Integer(0),
-					new Integer(999), new Integer(i),
-					new ArrayList<Registration>(), new ArrayList<Heat>());
 
-			athlete = new Athlete(new Teacher("G0" + i, "Jimmy", "Tim"), "Bob",
-					"Clemmings", new Integer(21), "Male", new School(
-							"Some School"), new ArrayList<Registration>());
-
-			heat = new Heat(event, athlete.getGender(), new Integer(8),
-					new Integer(12), new Time(12, 45, 00));
-
-			athletes.add(athlete);
-			events.add(event);
-			heats.add(heat);
-		}
+		athletes = DaoRepository.getAthletes().objects;
+		events = DaoRepository.getEvents().objects;
+		heats = DaoRepository.getHeats().objects;
 
 		athleteTableModel = new AthleteTableModel(athletes);
 		eventTableModel = new EventTableModel(events);

@@ -49,7 +49,7 @@ public class HeatTableModel extends AbstractTableModel {
 		case 0:
 			return heats.get(row).getEvent().getEventName();
 		case 1:
-			return heats.get(row).getEvent().getNumHeats();
+			return heats.get(row).getNumHeats();
 		default:
 			return null;
 		}

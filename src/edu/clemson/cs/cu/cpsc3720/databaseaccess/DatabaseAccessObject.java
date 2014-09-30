@@ -10,35 +10,79 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 public class DatabaseAccessObject<T extends DatabaseSerializable> {
-	protected ArrayList<T> objects = new ArrayList<T>();
+	public final ArrayList<T> objects = new ArrayList<T>();
 	private static ODatabaseDocumentTx db;
 	private static String user = "root";
 	private static String pass = "passw0rd";
+	private static boolean isOpen = false;
 
 	static {
 		db = new ODatabaseDocumentTx("remote:localhost:2424/BugSquasher");
 	}
 
+	public static void open() {
+		if (!isOpen) {
+			db.open(user, pass);
+			isOpen = true;
+		}
+	}
+
+	public static void close() {
+		if (isOpen) {
+			db.close();
+			isOpen = false;
+		}
+	}
+
+	public T query(Class<T> classOfT, String ref) {
+		T ret = null;
+
+		/* Search local cache first */
+		for (T t : objects) {
+			if (t.getDbId().equals(ref)) {
+				ret = t;
+				break;
+			}
+		}
+
+		if (ret == null) {
+			open();
+
+			if (db.getMetadata().getSchema()
+					.existsClass(classOfT.getSimpleName())) {
+				for (ODocument doc : db.browseClass(classOfT.getSimpleName())) {
+					T t = new Gson().fromJson(doc.toJSON(), classOfT);
+					t.setDbId(doc.getIdentity().toString());
+					if (t.getDbId().equals(ref)) {
+						ret = t;
+						objects.add(t);
+						break;
+					}
+				}
+			}
+		}
+
+		return ret;
+	}
+
 	public void load(Class<T> classOfT) {
-		db.open(user, pass);
+		open();
 
 		for (ODocument objDoc : db.browseClass(classOfT.getSimpleName())) {
 			T obj = new Gson().fromJson(objDoc.toJSON(), classOfT);
 			obj.setDbId(objDoc.getIdentity().toString());
 			objects.add(obj);
 		}
-
-		db.close();
 	}
 
 	public void save(T t) {
-		db.open(user, pass);
+		open();
 
-		ODocument doc = db.getRecord(new ORecordId(t.getDbId()));
-		doc.fromJSON(new Gson().toJson(t));
-		doc.save();
-
-		db.close();
+		ODocument doc = new ODocument(t.getClass().getSimpleName());
+		if (t.getDbId() != null)
+			doc = db.getRecord(new ORecordId(t.getDbId()));
+		String json = new Gson().toJson(t);
+		doc.fromJSON(json);
+		t.setDbId(doc.save().getIdentity().toString());
 	}
-
 }

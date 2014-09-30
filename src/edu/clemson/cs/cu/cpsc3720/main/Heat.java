@@ -1,25 +1,51 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import java.sql.Time;
-
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 public class Heat implements DatabaseSerializable {
 
 	private transient String dbId;
-	private Event event;
+	private transient Event event;
+	private String eventRef;
 	private String gender;
 	private Integer minAge;
 	private Integer maxAge;
-	private Time time;
+	private String time;
+	private Integer numHeats;
 
-	public Heat(Event event, String gender, Integer minAge, Integer maxAge,
-			Time time) {
+	public Heat(String eventRef, String gender, Integer minAge, Integer maxAge,
+			String time, int numHeats) {
 		super();
-		this.event = event;
+		this.eventRef = eventRef;
 		this.gender = gender;
 		this.minAge = minAge;
 		this.time = time;
+		this.numHeats = numHeats;
+	}
+
+	public void loadRefs() {
+		loadEvent();
+	}
+
+	public void loadEvent() {
+		this.event = DaoRepository.getEvents().query(Event.class, eventRef);
+	}
+
+	public Integer getNumHeats() {
+		return numHeats;
+	}
+
+	public void setNumHeats(Integer numHeats) {
+		this.numHeats = numHeats;
+	}
+
+	public String getEventRef() {
+		return eventRef;
+	}
+
+	public void setEventRef(String eventRef) {
+		this.eventRef = eventRef;
 	}
 
 	/**
@@ -46,7 +72,7 @@ public class Heat implements DatabaseSerializable {
 	/**
 	 * @return the time
 	 */
-	public Time getTime() {
+	public String getTime() {
 		return this.time;
 	}
 
@@ -78,7 +104,7 @@ public class Heat implements DatabaseSerializable {
 	 * @param time
 	 *            the time to set
 	 */
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -86,6 +112,7 @@ public class Heat implements DatabaseSerializable {
 	 * @return the event
 	 */
 	public Event getEvent() {
+		loadEvent();
 		return this.event;
 	}
 
@@ -99,7 +126,7 @@ public class Heat implements DatabaseSerializable {
 
 	@Override
 	public String getDbId() {
-		return dbId;
+		return this.dbId;
 	}
 
 	@Override

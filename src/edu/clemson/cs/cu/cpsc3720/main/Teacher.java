@@ -63,12 +63,11 @@ public class Teacher implements DatabaseSerializable {
 
 	@Override
 	public String getDbId() {
-		return dbId;
+		return this.dbId;
 	}
 
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
-
 }
