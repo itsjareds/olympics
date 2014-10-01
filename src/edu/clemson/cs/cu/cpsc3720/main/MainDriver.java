@@ -14,19 +14,23 @@ public class MainDriver {
 
 		MainDriver.mediator = new Mediator();
 
+		try {
+			DaoRepository.getAthletes().load(Athlete.class);
+			DaoRepository.getEvents().load(Event.class);
+			DaoRepository.getHeats().load(Heat.class);
+			DaoRepository.getRegistrations().load(Registration.class);
+			DaoRepository.getSchools().load(School.class);
+			DaoRepository.getTeachers().load(Teacher.class);
+		} catch (IllegalArgumentException e) {
+			// classes not in database, do not load
+		}
+
 		/**
 		 * Launch the application.
 		 */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DaoRepository.getAthletes().load(Athlete.class);
-					DaoRepository.getEvents().load(Event.class);
-					DaoRepository.getHeats().load(Heat.class);
-					DaoRepository.getRegistrations().load(Registration.class);
-					DaoRepository.getSchools().load(School.class);
-					DaoRepository.getTeachers().load(Teacher.class);
-
 					AdminMainFrame frame = new AdminMainFrame(mediator);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
