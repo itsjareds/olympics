@@ -20,6 +20,7 @@ public class Heat implements DatabaseSerializable {
 		this.eventRef = eventRef;
 		this.gender = gender;
 		this.minAge = minAge;
+		this.maxAge = maxAge;
 		this.time = time;
 		this.numHeats = numHeats;
 	}
