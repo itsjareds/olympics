@@ -28,7 +28,8 @@ public class AdminMainFrame extends JFrame {
 
 		setTitle("Administrator View T-J 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 900, 600);
+		setBounds(0, 0, 1000, 600);
+		this.setResizable(false);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
