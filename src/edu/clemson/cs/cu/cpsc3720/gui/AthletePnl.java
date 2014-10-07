@@ -39,7 +39,6 @@ public class AthletePnl extends JPanel {
 	private final JTextField athleteFirstNameTextBox;
 	private final JTextField athleteLastNameTxtBox;
 	private final ArrayList<Athlete> athletes;
-	private final JTextField broupCodeTxtBox;
 	private final ArrayList<Event> events;
 	private final JTable eventsTable;
 	private final ArrayList<Heat> heats;
@@ -122,14 +121,9 @@ public class AthletePnl extends JPanel {
 		lblNewLabel.setBounds(56, 6, 251, 16);
 		panel.add(lblNewLabel);
 
-		final JLabel lblGroupCode = new JLabel("Group Code");
-		lblGroupCode.setBounds(16, 345, 291, 16);
-		panel.add(lblGroupCode);
-
-		broupCodeTxtBox = new JTextField();
-		broupCodeTxtBox.setColumns(10);
-		broupCodeTxtBox.setBounds(16, 358, 291, 28);
-		panel.add(broupCodeTxtBox);
+		final JLabel lblSchoolGroupCode = new JLabel("School / Group Code");
+		lblSchoolGroupCode.setBounds(16, 345, 291, 16);
+		panel.add(lblSchoolGroupCode);
 
 		final JLabel lblBirthday = new JLabel("Birth Date");
 		lblBirthday.setBounds(16, 118, 85, 22);
@@ -252,6 +246,10 @@ public class AthletePnl extends JPanel {
 		final JLabel lblRegisterForEvent = new JLabel("Register for Event");
 		lblRegisterForEvent.setBounds(438, 6, 146, 16);
 		panel.add(lblRegisterForEvent);
+
+		JComboBox<Teacher> schoolGroupCodeComboBox = new JComboBox<Teacher>();
+		schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
+		panel.add(schoolGroupCodeComboBox);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);

@@ -11,7 +11,7 @@ public class EventTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Event> events = new ArrayList<>();
-	String[] colNames = { "Event Code", "Event Name" };
+	String[] colNames = { "Event Code", "Event Name", "Score Code" };
 
 	public EventTableModel(List<Event> events) {
 		this.events = events;
@@ -34,7 +34,7 @@ public class EventTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -54,6 +54,8 @@ public class EventTableModel extends AbstractTableModel {
 			return events.get(row).getEventCode();
 		case 1:
 			return events.get(row).getEventName();
+		case 2:
+			return events.get(row).getScoreUnit();
 		default:
 			return null;
 		}
