@@ -95,7 +95,10 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
 		saveButton.setVisible(true);
+		if (panel.getName() == "AthletePanel") {
+			//
+			//
+		}
 		System.out.println(panel.getName());
 	}
-
 }

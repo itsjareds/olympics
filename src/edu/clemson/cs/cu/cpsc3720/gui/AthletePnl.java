@@ -44,7 +44,6 @@ public class AthletePnl extends JPanel {
 	private final ArrayList<Heat> heats;
 	private final JTable heatsTable;
 	private final Mediator mediator;
-	private final JTextField schoolNameTxtBox;
 	private final JTextField searchTxtBox;
 	private final JTable table;
 	private double dividerLocation;
@@ -107,11 +106,6 @@ public class AthletePnl extends JPanel {
 		final JLabel lblSchoolName = new JLabel("School Name");
 		lblSchoolName.setBounds(16, 302, 291, 16);
 		panel.add(lblSchoolName);
-
-		schoolNameTxtBox = new JTextField();
-		schoolNameTxtBox.setColumns(10);
-		schoolNameTxtBox.setBounds(16, 318, 291, 28);
-		panel.add(schoolNameTxtBox);
 
 		final JLabel lblGroupLeader = new JLabel("Group Leader");
 		lblGroupLeader.setBounds(16, 261, 291, 16);
@@ -250,6 +244,10 @@ public class AthletePnl extends JPanel {
 		JComboBox<Teacher> schoolGroupCodeComboBox = new JComboBox<Teacher>();
 		schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
 		panel.add(schoolGroupCodeComboBox);
+
+		JComboBox<Teacher> schoolNameComboBox = new JComboBox<Teacher>();
+		schoolNameComboBox.setBounds(16, 315, 291, 27);
+		panel.add(schoolNameComboBox);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
