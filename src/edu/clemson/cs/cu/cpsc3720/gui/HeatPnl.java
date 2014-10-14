@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -30,9 +32,6 @@ import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class HeatPnl extends JPanel {
 
