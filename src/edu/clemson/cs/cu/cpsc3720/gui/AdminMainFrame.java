@@ -80,10 +80,10 @@ public class AdminMainFrame extends JFrame {
 		HeatPnl heatPnl = new HeatPnl(this.mediator);
 		tabbedPane.addTab("Heats", null, heatPnl, null);
 
-		usersPnl userPnl = new usersPnl();
+		UsersPnl userPnl = new UsersPnl();
 		tabbedPane.addTab("Users", null, userPnl, null);
 
-		schoolsPnl schoolPnl = new schoolsPnl();
+		SchoolsPnl schoolPnl = new SchoolsPnl();
 		tabbedPane.addTab("Schools", null, schoolPnl, null);
 	}
 
