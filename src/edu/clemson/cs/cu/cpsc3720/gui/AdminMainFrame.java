@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
+import javax.swing.JCheckBoxMenuItem;
 
 public class AdminMainFrame extends JFrame {
 
@@ -44,6 +45,18 @@ public class AdminMainFrame extends JFrame {
 			}
 		});
 		mnFile.add(mntmExit);
+		
+		JMenu mnGenerate = new JMenu("Generate");
+		menuBar.add(mnGenerate);
+		
+		JMenuItem mntmGenerateNametags = new JMenuItem("Nametags");
+		mnGenerate.add(mntmGenerateNametags);
+		
+		JMenuItem mntmGenerateGroupSheets = new JMenuItem("Group Sheets");
+		mnGenerate.add(mntmGenerateGroupSheets);
+		
+		JMenuItem mntmGenerateHeatSheets = new JMenuItem("Heat Sheets");
+		mnGenerate.add(mntmGenerateHeatSheets);
 
 		JMenu mnAbout = new JMenu("Help");
 		menuBar.add(mnAbout);
@@ -72,9 +85,6 @@ public class AdminMainFrame extends JFrame {
 
 		schoolsPnl schoolPnl = new schoolsPnl();
 		tabbedPane.addTab("Schools", null, schoolPnl, null);
-
-		NameTagPnl nameTagPnl = new NameTagPnl();
-		tabbedPane.addTab("Generate", null, nameTagPnl, null);
 	}
 
 }
