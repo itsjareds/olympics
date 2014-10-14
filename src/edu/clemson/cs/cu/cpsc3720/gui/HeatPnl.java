@@ -67,7 +67,7 @@ public class HeatPnl extends JPanel {
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
 		dividerLocation = 0.8;
-		splitPane.setDividerLocation(250);
+		splitPane.setDividerLocation(650);
 
 		final JScrollPane athleteScrollPane = new JScrollPane();
 		splitPane.setLeftComponent(athleteScrollPane);
@@ -83,7 +83,7 @@ public class HeatPnl extends JPanel {
 		panel.setLayout(null);
 
 		final JLabel lblFirstName = new JLabel("Event Code");
-		lblFirstName.setBounds(16, 109, 291, 16);
+		lblFirstName.setBounds(16, 98, 291, 16);
 		panel.add(lblFirstName);
 
 		final JLabel lblLastName = new JLabel("Event Name");
@@ -92,7 +92,7 @@ public class HeatPnl extends JPanel {
 
 		athleteLastNameTxtBox = new JTextField();
 		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(103, 103, 78, 28);
+		athleteLastNameTxtBox.setBounds(110, 92, 78, 28);
 		panel.add(athleteLastNameTxtBox);
 
 		final JLabel lblNewLabel = new JLabel("Heat Information");
@@ -100,43 +100,43 @@ public class HeatPnl extends JPanel {
 		panel.add(lblNewLabel);
 
 		final JLabel lblScore = new JLabel("Minimum Age");
-		lblScore.setBounds(16, 198, 117, 16);
+		lblScore.setBounds(16, 174, 117, 16);
 		panel.add(lblScore);
 
 		final JComboBox<Integer> feetComboBox = new JComboBox<Integer>();
-		feetComboBox.setBounds(110, 193, 61, 27);
+		feetComboBox.setBounds(110, 169, 61, 27);
 		panel.add(feetComboBox);
 		
 		JLabel lblScoringUnit = new JLabel("Gender");
-		lblScoringUnit.setBounds(16, 151, 89, 14);
+		lblScoringUnit.setBounds(16, 137, 89, 14);
 		panel.add(lblScoringUnit);
 		
 		JLabel lblMaximumScore = new JLabel("Maximum Age");
-		lblMaximumScore.setBounds(16, 257, 105, 14);
+		lblMaximumScore.setBounds(16, 213, 105, 14);
 		panel.add(lblMaximumScore);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(110, 251, 61, 27);
+		comboBox_1.setBounds(110, 207, 61, 27);
 		panel.add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(110, 145, 61, 27);
+		comboBox_2.setBounds(110, 131, 61, 27);
 		panel.add(comboBox_2);
 		
 		JLabel lblFt_1 = new JLabel("Time");
-		lblFt_1.setBounds(331, 151, 46, 14);
+		lblFt_1.setBounds(16, 251, 46, 14);
 		panel.add(lblFt_1);
 		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(378, 145, 89, 27);
+		comboBox_3.setBounds(110, 245, 89, 27);
 		panel.add(comboBox_3);
 		
 		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(331, 54, 68, 27);
+		comboBox_4.setBounds(110, 282, 68, 27);
 		panel.add(comboBox_4);
 		
-		JLabel lblIn_1 = new JLabel("Heat Number");
-		lblIn_1.setBounds(331, 34, 89, 14);
+		JLabel lblIn_1 = new JLabel("Division");
+		lblIn_1.setBounds(16, 288, 89, 14);
 		panel.add(lblIn_1);
 		
 		JComboBox comboBox = new JComboBox();

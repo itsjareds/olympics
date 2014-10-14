@@ -69,7 +69,7 @@ public class EventsPnl extends JPanel {
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
-		dividerLocation = 0.8;
+		dividerLocation = 1.8;
 		splitPane.setDividerLocation(250);
 
 		final JScrollPane athleteScrollPane = new JScrollPane();
@@ -155,7 +155,7 @@ public class EventsPnl extends JPanel {
 		secComboBox.setBounds(115, 271, 61, 27);
 		panel.add(secComboBox);
 		
-		JLabel lblScoringUnit = new JLabel("Scoring Unit");
+		JLabel lblScoringUnit = new JLabel("Score Code");
 		lblScoringUnit.setBounds(16, 151, 89, 14);
 		panel.add(lblScoringUnit);
 		
