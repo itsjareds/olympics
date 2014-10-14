@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -29,6 +32,8 @@ public class Mediator implements MediatorInterface {
 	private DeleteButton deleteButton;
 	private SearchButton searchButton;
 	private SaveButton saveButton;
+	private UnregisterButton unregisterButton;
+	private RegisterButton registerButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -68,6 +73,17 @@ public class Mediator implements MediatorInterface {
 	}
 
 	@Override
+	public void registerUnregister(UnregisterButton unregisterButton) {
+		this.unregisterButton = unregisterButton;
+
+	}
+
+	@Override
+	public void registerRegister(RegisterButton registerButton) {
+		this.registerButton = registerButton;
+	}
+
+	@Override
 	public void registerDelete(DeleteButton deleteButton) {
 		this.deleteButton = deleteButton;
 	}
@@ -96,9 +112,17 @@ public class Mediator implements MediatorInterface {
 	public void save(ActionEvent arg0, JPanel panel) {
 		saveButton.setVisible(true);
 		if (panel.getName() == "AthletePanel") {
-			//
-			//
+			MaintainAthleteController mac = new MaintainAthleteController();
+			mac.saveAthlete(panel);
 		}
 		System.out.println(panel.getName());
+	}
+
+	public void registerAthlete() {
+
+	}
+
+	public void unregisterAthlete() {
+
 	}
 }

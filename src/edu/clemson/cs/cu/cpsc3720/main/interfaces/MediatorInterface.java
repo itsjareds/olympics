@@ -8,8 +8,10 @@ import javax.swing.JPanel;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 
 /**
  * <h1>Mediator Interface</h1>
@@ -48,4 +50,8 @@ public interface MediatorInterface {
 	public void registerSave(SaveButton saveButton);
 
 	public void save(ActionEvent arg0, JPanel panel);
+
+	public void registerUnregister(UnregisterButton unregisterButton);
+
+	public void registerRegister(RegisterButton registerButton);
 }
