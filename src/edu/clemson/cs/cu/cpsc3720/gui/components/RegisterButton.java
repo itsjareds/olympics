@@ -11,6 +11,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 public class RegisterButton extends JButton implements ComandInterface {
 
+	private static final long serialVersionUID = -7299646163349628035L;
 	private final Mediator mediator;
 	private JPanel panel;
 

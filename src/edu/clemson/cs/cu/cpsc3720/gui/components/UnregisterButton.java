@@ -11,7 +11,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 public class UnregisterButton extends JButton implements ComandInterface {
 
-	private static final long serialVersionUID = -5728398175248638254L;
+	private static final long serialVersionUID = 6543859565869791840L;
 	private final Mediator mediator;
 	private JPanel panel;
 
