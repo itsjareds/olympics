@@ -156,11 +156,11 @@ public class EventsPnl extends JPanel {
 		panel.add(secComboBox);
 		
 		JLabel lblScoringUnit = new JLabel("Score Code");
-		lblScoringUnit.setBounds(16, 151, 89, 14);
+		lblScoringUnit.setBounds(16, 167, 89, 14);
 		panel.add(lblScoringUnit);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(98, 148, 61, 20);
+		comboBox.setBounds(97, 161, 61, 26);
 		panel.add(comboBox);
 		
 		JLabel lblMaximumScore = new JLabel("Maximum Score");
@@ -198,6 +198,14 @@ public class EventsPnl extends JPanel {
 		JLabel lblSec_1 = new JLabel("sec");
 		lblSec_1.setBounds(513, 277, 46, 14);
 		panel.add(lblSec_1);
+		
+		JLabel lblGender = new JLabel("Gender");
+		lblGender.setBounds(16, 129, 46, 14);
+		panel.add(lblGender);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		comboBox_5.setBounds(97, 123, 51, 27);
+		panel.add(comboBox_5);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);

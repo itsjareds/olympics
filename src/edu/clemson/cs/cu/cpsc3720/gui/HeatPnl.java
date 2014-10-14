@@ -128,7 +128,7 @@ public class HeatPnl extends JPanel {
 		panel.add(lblFt_1);
 		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(110, 245, 89, 27);
+		comboBox_3.setBounds(110, 245, 46, 27);
 		panel.add(comboBox_3);
 		
 		JComboBox comboBox_4 = new JComboBox();
@@ -142,6 +142,18 @@ public class HeatPnl extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(16, 53, 251, 28);
 		panel.add(comboBox);
+		
+		JLabel lblHr = new JLabel(":");
+		lblHr.setBounds(165, 251, 46, 14);
+		panel.add(lblHr);
+		
+		JComboBox comboBox_6 = new JComboBox();
+		comboBox_6.setBounds(175, 245, 46, 27);
+		panel.add(comboBox_6);
+		
+		JComboBox comboBox_7 = new JComboBox();
+		comboBox_7.setBounds(228, 245, 45, 27);
+		panel.add(comboBox_7);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
