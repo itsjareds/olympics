@@ -80,6 +80,7 @@ public class AthletePnl extends JPanel {
 	private JScrollPane eventsScrollPane;
 	private JScrollPane heatsScrollPane;
 	private JLabel lblFilterBy;
+	private ArrayList<Teacher> leaders;
 
 	public Athlete getAthlete() {
 		// TODO Fix the getter for this class
@@ -148,7 +149,7 @@ public class AthletePnl extends JPanel {
 		}
 		// --------- End Panes and Panels ----------- //
 
-		// -------- Start Text Boxes ------------ //
+		// ----------- Start Text Boxes ------------ //
 		{
 			athleteFirstNameTextBox = new JTextField();
 			athleteFirstNameTextBox.setBounds(16, 50, 291, 28);
@@ -369,14 +370,14 @@ public class AthletePnl extends JPanel {
 			panel.add(schoolGroupCodeComboBox);
 
 			// teacher/group leader combo box
-			ArrayList<Teacher> leaderNames = new ArrayList<>();
-			leaderNames.add(new Teacher("", "", ""));
+			leaders = new ArrayList<>();
+			leaders.add(new Teacher("", "", ""));
 			for (Teacher teacher : teachers) {
-				leaderNames.add(teacher);
+				leaders.add(teacher);
 			}
-			// Collections.sort(leaderNames);
-			Teacher[] listNames = new Teacher[leaderNames.size()];
-			listNames = leaderNames.toArray(listNames);
+			Collections.sort(leaders);
+			Teacher[] listNames = new Teacher[leaders.size()];
+			listNames = leaders.toArray(listNames);
 			groupLeaderComboBox = new JComboBox<Teacher>(listNames);
 			groupLeaderComboBox.setBounds(16, 276, 291, 27);
 			panel.add(groupLeaderComboBox);
@@ -474,20 +475,26 @@ public class AthletePnl extends JPanel {
 
 							// fill in athlete information
 
+							// Set group leader combo box
+							DatabaseAccessObject<Teacher> daot = new DatabaseAccessObject<>();
+							Teacher t = daot.query(Teacher.class,
+									athlete.getTeacherRef());
+							groupLeaderComboBox.setSelectedItem(t);
+
 							// fill event list based on events athlete is
 							// registered for
 							List<Event> associatedEvents = new ArrayList<>();
 							ArrayList<String> arefs = athlete.getRegRefs();
 							ArrayList<String> rrefs = new ArrayList<>();
 							for (String ref : arefs) {
-								DatabaseAccessObject<Registration> dao = new DatabaseAccessObject<>();
-								Registration r = dao.query(Registration.class,
+								DatabaseAccessObject<Registration> daor = new DatabaseAccessObject<>();
+								Registration r = daor.query(Registration.class,
 										ref);
 								rrefs.add(r.getEventRef());
 							}
 							for (String ref : rrefs) {
-								DatabaseAccessObject<Event> dao = new DatabaseAccessObject<>();
-								Event e = dao.query(Event.class, ref);
+								DatabaseAccessObject<Event> daoe = new DatabaseAccessObject<>();
+								Event e = daoe.query(Event.class, ref);
 								if (e != null)
 									associatedEvents.add(e);
 							}

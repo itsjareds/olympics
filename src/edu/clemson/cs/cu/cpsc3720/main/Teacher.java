@@ -2,7 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
-public class Teacher implements DatabaseSerializable {
+public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 
 	private transient String dbId;
 	private String firstName;
@@ -77,6 +77,24 @@ public class Teacher implements DatabaseSerializable {
 		retVal = getLastName() + ", " + getFirstName();
 		if (retVal.trim().equals(","))
 			retVal = "";
+		return retVal;
+	}
+
+	@Override
+	public int compareTo(Teacher t) {
+		int retVal = 0;
+		retVal = this.lastName.compareTo(t.getLastName());
+		return retVal;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		boolean retVal = false;
+		if (o instanceof Teacher) {
+			Teacher t = (Teacher) o;
+			if (this.toString().equals(t.toString()))
+				retVal = true;
+		}
 		return retVal;
 	}
 }
