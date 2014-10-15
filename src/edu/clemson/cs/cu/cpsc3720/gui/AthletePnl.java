@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,7 +31,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
-import edu.clemson.cs.cu.cpsc3720.main.Registration;
+import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
@@ -49,277 +49,433 @@ public class AthletePnl extends JPanel {
 	private final JTable heatsTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
-	private double dividerLocation;
 	private final JTable athleteTable;
+	private double dividerLocation;
+	private JComboBox<String> monthComboBox;
+	private JComboBox<String> genderComboBox;
+	private JComboBox<String> groupLeaderComboBox;
+	private JComboBox<String> dayComboBox;
+	private JComboBox<String> yearComboBox;
+	private JComboBox<String> eventComboBox;
+	private JComboBox<String> inchComboBox;
+	private JComboBox<String> feetComboBox;
+	private JComboBox<String> minComboBox;
+	private JComboBox<String> secComboBox;
+	private JComboBox<String> schoolGroupCodeComboBox;
+	private JComboBox<String> schoolNameComboBox;
+	private JComboBox<String> filterComboBox;
+	private SearchButton searchBtn;
+	private RegisterButton btnRegister;
+	private UnregisterButton btnUnregister;
+	private NewButton newBtn;
+	private DeleteButton deleteBtn;
+	private SaveButton saveBtn;
+	private JSplitPane splitPane;
+	private JScrollPane athleteScrollPane;
+	private JScrollPane informationScrollPane;
+	private JPanel panel;
+	private JScrollPane eventsScrollPane;
+	private JScrollPane heatsScrollPane;
+	private JLabel lblFilterBy;
+
+	public Athlete getAthlete() {
+		// TODO Fix the getter for this class
+		Athlete athlete = athleteTableModel.getAthlete(athleteTable
+				.getSelectedRow());
+		Teacher teacher = athlete.getTeacher();
+		String teacherRef = teacher.getDbId();
+		String firstName = athleteFirstNameTextBox.getText();
+		String lastName = athleteLastNameTxtBox.getText();
+		Integer age = 0;
+		String gender = "";
+		String schoolRef = "";
+		ArrayList<String> regRefs = null;
+		Athlete newAthlete = new Athlete(teacherRef, firstName, lastName, age,
+				gender, schoolRef, regRefs);
+		return newAthlete;
+	}
 
 	/**
 	 * Create the panel.
 	 */
 	public AthletePnl(final Mediator mediator) {
+
 		this.mediator = mediator;
 		this.setName("AthletePanel");
 
-		athletes = DaoRepository.getAthletes().objects;
-		events = new ArrayList<Event>();
-		final ArrayList<Registration> regs = athletes.get(0).getRegistrations();
-		for (final Registration r : regs) {
-			events.add(r.getEvent());
+		// ---------- Start Init --------------- //
+		{
+			athletes = DaoRepository.getAthletes().objects;
+			events = DaoRepository.getEvents().objects;
+			heats = DaoRepository.getHeats().objects;
+
+			athleteTableModel = new AthleteTableModel(athletes);
+			eventTableModel = new EventTableModel(events);
+			heatTableModel = new HeatTableModel(heats);
+
 		}
-		heats = new ArrayList<Heat>();
+		// ------------ End Init ------------- //
 
-		athleteTableModel = new AthleteTableModel(athletes);
-		eventTableModel = new EventTableModel(events);
-		heatTableModel = new HeatTableModel(heats);
+		// --------- Start Panes and Panels --------- //
+		{
+			splitPane = new JSplitPane();
+			splitPane.setDividerSize(1);
+			dividerLocation = 0.8;
+			splitPane.setDividerLocation(250);
+			{
+				athleteScrollPane = new JScrollPane();
+				splitPane.setLeftComponent(athleteScrollPane);
 
-		final JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerSize(1);
-		dividerLocation = 0.8;
-		splitPane.setDividerLocation(250);
-
-		final JScrollPane athleteScrollPane = new JScrollPane();
-		splitPane.setLeftComponent(athleteScrollPane);
-
-		athleteTable = new JTable(athleteTableModel);
-		athleteScrollPane.setViewportView(athleteTable);
-
-		final JScrollPane informationScrollPane = new JScrollPane();
-		splitPane.setRightComponent(informationScrollPane);
-
-		final JPanel panel = new JPanel();
-		informationScrollPane.setViewportView(panel);
-		panel.setLayout(null);
-
-		final JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(16, 34, 291, 16);
-		panel.add(lblFirstName);
-
-		athleteFirstNameTextBox = new JTextField();
-		athleteFirstNameTextBox.setBounds(16, 50, 291, 28);
-		panel.add(athleteFirstNameTextBox);
-		athleteFirstNameTextBox.setColumns(10);
-
-		final JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(16, 75, 291, 16);
-		panel.add(lblLastName);
-
-		athleteLastNameTxtBox = new JTextField();
-		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(16, 90, 291, 28);
-		panel.add(athleteLastNameTxtBox);
-
-		final JLabel lblSchoolName = new JLabel("School Name");
-		lblSchoolName.setBounds(16, 302, 291, 16);
-		panel.add(lblSchoolName);
-
-		final JLabel lblGroupLeader = new JLabel("Group Leader");
-		lblGroupLeader.setBounds(16, 261, 291, 16);
-		panel.add(lblGroupLeader);
-
-		final JLabel lblNewLabel = new JLabel("Athlete Information");
-		lblNewLabel.setBounds(56, 6, 251, 16);
-		panel.add(lblNewLabel);
-
-		final JLabel lblSchoolGroupCode = new JLabel("School / Group Code");
-		lblSchoolGroupCode.setBounds(16, 345, 291, 16);
-		panel.add(lblSchoolGroupCode);
-
-		final JLabel lblBirthday = new JLabel("Birth Date");
-		lblBirthday.setBounds(16, 118, 85, 22);
-		panel.add(lblBirthday);
-
-		final JLabel lblGender = new JLabel("Gender");
-		lblGender.setBounds(16, 195, 85, 16);
-		panel.add(lblGender);
-
-		final JLabel lblScore = new JLabel("Qualifing Score");
-		lblScore.setBounds(361, 70, 117, 16);
-		panel.add(lblScore);
-
-		final JComboBox<Integer> monthComboBox = new JComboBox<Integer>();
-		monthComboBox.setBounds(66, 139, 75, 27);
-		panel.add(monthComboBox);
-
-		final JComboBox<String> genderComboBox = new JComboBox<String>();
-		genderComboBox.setBounds(66, 191, 98, 27);
-		panel.add(genderComboBox);
-
-		final JLabel lblAssociatedEvents = new JLabel("Registered Events");
-		lblAssociatedEvents.setBounds(438, 170, 173, 16);
-		panel.add(lblAssociatedEvents);
-
-		final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
-		lblAssociatedHeats.setBounds(438, 256, 146, 16);
-		panel.add(lblAssociatedHeats);
-
-		final JScrollPane eventsScrollPane = new JScrollPane();
-		eventsScrollPane.setBounds(361, 194, 309, 56);
-		panel.add(eventsScrollPane);
-
-		eventsTable = new JTable(AthletePnl.eventTableModel);
-		eventsScrollPane.setViewportView(eventsTable);
-
-		final JScrollPane heatsScrollPane = new JScrollPane();
-		heatsScrollPane.setBounds(361, 279, 309, 107);
-		panel.add(heatsScrollPane);
-
-		heatsTable = new JTable(AthletePnl.heatTableModel);
-		heatsScrollPane.setViewportView(heatsTable);
-
-		final JComboBox<Teacher> groupLeaderComboBox = new JComboBox<Teacher>();
-		groupLeaderComboBox.setBounds(16, 276, 291, 27);
-		panel.add(groupLeaderComboBox);
-
-		final JLabel lblTeacherInformation = new JLabel("Teacher Information");
-		lblTeacherInformation.setBounds(56, 233, 251, 16);
-		panel.add(lblTeacherInformation);
-
-		final JComboBox<Integer> dayComboBox = new JComboBox<Integer>();
-		dayComboBox.setBounds(176, 139, 131, 27);
-		panel.add(dayComboBox);
-
-		final JComboBox<Integer> yearComboBox = new JComboBox<Integer>();
-		yearComboBox.setBounds(66, 166, 98, 27);
-		panel.add(yearComboBox);
-
-		final JLabel lblMonth = new JLabel("Month");
-		lblMonth.setBounds(16, 143, 85, 16);
-		panel.add(lblMonth);
-
-		final JLabel lblDay = new JLabel("Day");
-		lblDay.setBounds(152, 143, 155, 16);
-		panel.add(lblDay);
-
-		final JLabel lblYear = new JLabel("Year");
-		lblYear.setBounds(16, 170, 85, 16);
-		panel.add(lblYear);
-
-		final JLabel lblEvents = new JLabel("Add Event");
-		lblEvents.setBounds(361, 38, 82, 16);
-		panel.add(lblEvents);
-
-		final JComboBox<Integer> comboBox = new JComboBox<Integer>();
-		comboBox.setBounds(430, 34, 240, 27);
-		panel.add(comboBox);
-
-		final JLabel lblFt = new JLabel("ft.");
-		lblFt.setBounds(481, 70, 50, 16);
-		panel.add(lblFt);
-
-		final JLabel lblIn = new JLabel("In.");
-		lblIn.setBounds(586, 70, 61, 16);
-		panel.add(lblIn);
-
-		final JComboBox<Integer> inchComboBox = new JComboBox<Integer>();
-		inchComboBox.setBounds(609, 66, 61, 27);
-		panel.add(inchComboBox);
-
-		final JComboBox<Integer> feetComboBox = new JComboBox<Integer>();
-		feetComboBox.setBounds(513, 66, 61, 27);
-		panel.add(feetComboBox);
-
-		final JLabel lblMin = new JLabel("min");
-		lblMin.setBounds(481, 98, 61, 16);
-		panel.add(lblMin);
-
-		final JLabel lblSec = new JLabel("sec");
-		lblSec.setBounds(586, 98, 50, 16);
-		panel.add(lblSec);
-
-		final JComboBox<Integer> minComboBox = new JComboBox<Integer>();
-		minComboBox.setBounds(513, 97, 61, 27);
-		panel.add(minComboBox);
-
-		final JComboBox<Integer> secComboBox = new JComboBox<Integer>();
-		secComboBox.setBounds(609, 94, 61, 27);
-		panel.add(secComboBox);
-
-		final JLabel lblRegisterForEvent = new JLabel("Register for Event");
-		lblRegisterForEvent.setBounds(438, 6, 146, 16);
-		panel.add(lblRegisterForEvent);
-
-		JComboBox<Teacher> schoolGroupCodeComboBox = new JComboBox<Teacher>();
-		schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
-		panel.add(schoolGroupCodeComboBox);
-
-		JComboBox<Teacher> schoolNameComboBox = new JComboBox<Teacher>();
-		schoolNameComboBox.setBounds(16, 315, 291, 27);
-		panel.add(schoolNameComboBox);
-
-		searchTxtBox = new JTextField();
-		searchTxtBox.setColumns(10);
-
-		final JComboBox<String> filterComboBox = new JComboBox<String>();
-
-		final JLabel lblFilterBy = new JLabel("Filter by: ");
-
-		final JButton searchBtn = new SearchButton(
-				new MediatorActionListener(), mediator, this);
-		searchBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
+				informationScrollPane = new JScrollPane();
+				splitPane.setRightComponent(informationScrollPane);
 			}
-		});
 
-		final JButton btnRegister = new RegisterButton(
-				new MediatorActionListener(), mediator, this);
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			panel = new JPanel();
+			informationScrollPane.setViewportView(panel);
+			panel.setLayout(null);
+			{
+				heatsScrollPane = new JScrollPane();
+				heatsScrollPane.setBounds(361, 279, 309, 107);
+				panel.add(heatsScrollPane);
+
+				eventsScrollPane = new JScrollPane();
+				eventsScrollPane.setBounds(361, 194, 309, 56);
+				panel.add(eventsScrollPane);
 			}
-		});
-		btnRegister.setBounds(440, 131, 117, 29);
-		panel.add(btnRegister);
-		btnRegister.setText("Register");
+		}
+		// --------- End Panes and Panels ----------- //
 
-		final JButton btnUnregister = new UnregisterButton(
-				new MediatorActionListener(), mediator, this);
-		btnUnregister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		// -------- Start Text Boxes ------------ //
+		{
+			athleteFirstNameTextBox = new JTextField();
+			athleteFirstNameTextBox.setBounds(16, 50, 291, 28);
+			panel.add(athleteFirstNameTextBox);
+			athleteFirstNameTextBox.setColumns(10);
+
+			athleteLastNameTxtBox = new JTextField();
+			athleteLastNameTxtBox.setColumns(10);
+			athleteLastNameTxtBox.setBounds(16, 90, 291, 28);
+			panel.add(athleteLastNameTxtBox);
+
+			searchTxtBox = new JTextField();
+			searchTxtBox.setColumns(10);
+		}
+		// ------- End Text Boxes ------------- //
+
+		// --------- Start Tables ------------ //
+		{
+			athleteTable = new JTable(athleteTableModel);
+			athleteScrollPane.setViewportView(athleteTable);
+
+			eventsTable = new JTable(AthletePnl.eventTableModel);
+			eventsScrollPane.setViewportView(eventsTable);
+
+			heatsTable = new JTable(AthletePnl.heatTableModel);
+			heatsScrollPane.setViewportView(heatsTable);
+		}
+		// --------- End Tables --------------- //
+
+		// --------- Start Lables ------------ //
+		{
+			final JLabel lblFirstName = new JLabel("First Name");
+			lblFirstName.setBounds(16, 34, 291, 16);
+			panel.add(lblFirstName);
+
+			final JLabel lblLastName = new JLabel("Last Name");
+			lblLastName.setBounds(16, 75, 291, 16);
+			panel.add(lblLastName);
+
+			final JLabel lblSchoolName = new JLabel("School Name");
+			lblSchoolName.setBounds(16, 302, 291, 16);
+			panel.add(lblSchoolName);
+
+			final JLabel lblGroupLeader = new JLabel("Group Leader");
+			lblGroupLeader.setBounds(16, 261, 291, 16);
+			panel.add(lblGroupLeader);
+
+			final JLabel lblNewLabel = new JLabel("Athlete Information");
+			lblNewLabel.setBounds(56, 6, 251, 16);
+			panel.add(lblNewLabel);
+
+			final JLabel lblSchoolGroupCode = new JLabel("School / Group Code");
+			lblSchoolGroupCode.setBounds(16, 345, 291, 16);
+			panel.add(lblSchoolGroupCode);
+
+			final JLabel lblBirthday = new JLabel("Birth Date");
+			lblBirthday.setBounds(16, 118, 85, 22);
+			panel.add(lblBirthday);
+
+			final JLabel lblGender = new JLabel("Gender");
+			lblGender.setBounds(16, 195, 85, 16);
+			panel.add(lblGender);
+
+			final JLabel lblScore = new JLabel("Qualifing Score");
+			lblScore.setBounds(361, 70, 117, 16);
+			panel.add(lblScore);
+
+			final JLabel lblAssociatedEvents = new JLabel("Registered Events");
+			lblAssociatedEvents.setBounds(438, 170, 173, 16);
+			panel.add(lblAssociatedEvents);
+
+			final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
+			lblAssociatedHeats.setBounds(438, 256, 146, 16);
+			panel.add(lblAssociatedHeats);
+
+			final JLabel lblTeacherInformation = new JLabel(
+					"Teacher Information");
+			lblTeacherInformation.setBounds(56, 233, 251, 16);
+			panel.add(lblTeacherInformation);
+
+			final JLabel lblMonth = new JLabel("Month");
+			lblMonth.setBounds(16, 143, 85, 16);
+			panel.add(lblMonth);
+
+			final JLabel lblDay = new JLabel("Day");
+			lblDay.setBounds(152, 143, 155, 16);
+			panel.add(lblDay);
+
+			final JLabel lblYear = new JLabel("Year");
+			lblYear.setBounds(16, 170, 85, 16);
+			panel.add(lblYear);
+
+			final JLabel lblEvents = new JLabel("Add Event");
+			lblEvents.setBounds(361, 38, 82, 16);
+			panel.add(lblEvents);
+
+			final JLabel lblFt = new JLabel("ft.");
+			lblFt.setBounds(481, 70, 50, 16);
+			panel.add(lblFt);
+
+			final JLabel lblIn = new JLabel("In.");
+			lblIn.setBounds(586, 70, 61, 16);
+			panel.add(lblIn);
+
+			final JLabel lblMin = new JLabel("min");
+			lblMin.setBounds(481, 98, 61, 16);
+			panel.add(lblMin);
+
+			final JLabel lblSec = new JLabel("sec");
+			lblSec.setBounds(586, 98, 50, 16);
+			panel.add(lblSec);
+
+			final JLabel lblRegisterForEvent = new JLabel("Register for Event");
+			lblRegisterForEvent.setBounds(438, 6, 146, 16);
+			panel.add(lblRegisterForEvent);
+
+			lblFilterBy = new JLabel("Filter by: ");
+
+		}
+		// --------- End Labels ------------ //
+
+		// ------- Start Combo Boxes -------- //
+		{
+			// filter combo box
+			String[] filters = { "First Name", "Last Name", "Age",
+					"School Name", "Group Leader", "Group Code" };
+			filterComboBox = new JComboBox<String>(filters);
+
+			// days combo box
+			ArrayList<String> days = new ArrayList<String>();
+			days.add("");
+			for (int i = 0; i < 31; i++) {
+				Integer val = new Integer(i + 1);
+				days.add(val.toString());
 			}
-		});
-		btnUnregister.setBounds(557, 131, 113, 29);
-		panel.add(btnUnregister);
-		btnUnregister.setText("Unregister");
+			String[] listDays = new String[days.size()];
+			listDays = days.toArray(listDays);
+			dayComboBox = new JComboBox<String>(listDays);
+			dayComboBox.setBounds(176, 139, 131, 27);
+			panel.add(dayComboBox);
 
-		final JButton newBtn = new NewButton(new MediatorActionListener(),
-				mediator, this);
-		newBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			// months combo box
+			ArrayList<String> months = new ArrayList<String>();
+			months.add("");
+			for (int i = 0; i < 12; i++) {
+				Integer val = new Integer(i + 1);
+				months.add(val.toString());
 			}
-		});
-		newBtn.setText("New");
+			String[] listMonths = new String[months.size()];
+			listMonths = months.toArray(listMonths);
+			monthComboBox = new JComboBox<String>(listMonths);
+			monthComboBox.setBounds(66, 139, 75, 27);
+			panel.add(monthComboBox);
 
-		final JButton deleteBtn = new DeleteButton(
-				new MediatorActionListener(), mediator, this);
-		deleteBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			// years combo box
+			ArrayList<String> years = new ArrayList<String>();
+			years.add("");
+			int minAge = 2014 - 8;
+			int maxAge = 2014 - 100;
+			for (int i = minAge; i > maxAge; i--) {
+				Integer val = new Integer(i + 1);
+				years.add(val.toString());
 			}
-		});
-		deleteBtn.setText("Delete");
-		deleteBtn.setEnabled(false);
+			String[] listYears = new String[years.size()];
+			listYears = years.toArray(listYears);
+			yearComboBox = new JComboBox<String>(listYears);
+			yearComboBox.setBounds(66, 166, 98, 27);
+			panel.add(yearComboBox);
 
-		final JButton saveBtn = new SaveButton(new MediatorActionListener(),
-				mediator, this);
-		saveBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			String[] genders = { "", "Male", "Female" };
+			genderComboBox = new JComboBox<String>(genders);
+			genderComboBox.setBounds(66, 191, 98, 27);
+			panel.add(genderComboBox);
+
+			minComboBox = new JComboBox<String>();
+			minComboBox.setBounds(513, 97, 61, 27);
+			panel.add(minComboBox);
+
+			secComboBox = new JComboBox<String>();
+			secComboBox.setBounds(609, 94, 61, 27);
+			panel.add(secComboBox);
+
+			inchComboBox = new JComboBox<String>();
+			inchComboBox.setBounds(609, 66, 61, 27);
+			panel.add(inchComboBox);
+
+			feetComboBox = new JComboBox<String>();
+			feetComboBox.setBounds(513, 66, 61, 27);
+			panel.add(feetComboBox);
+
+			// events combo box
+			ArrayList<String> eventStrings = new ArrayList<String>();
+			eventStrings.add("");
+			for (Event event : events) {
+				String eventString = event.getEventName();
+				eventStrings.add(eventString);
 			}
-		});
-		saveBtn.setText("Save");
+			Collections.sort(eventStrings);
+			String[] listEvents = new String[eventStrings.size()];
+			listEvents = eventStrings.toArray(listEvents);
+			eventComboBox = new JComboBox<String>(listEvents);
+			eventComboBox.setBounds(430, 34, 240, 27);
+			panel.add(eventComboBox);
 
-		athleteTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(final MouseEvent mevt) {
-				if (athleteTable.getSelectedRow() != -1) {
-					deleteBtn.setEnabled(true);
+			// school/group code combo box
+			ArrayList<Teacher> teachers = DaoRepository.getTeachers().objects;
+			ArrayList<String> groupCodes = new ArrayList<String>();
+			groupCodes.add("");
+			for (Teacher teacher : teachers) {
+				String groupCode = teacher.getGroupCode();
+				groupCodes.add(groupCode);
+			}
+			Collections.sort(groupCodes);
+			String[] listCodes = new String[groupCodes.size()];
+			listCodes = groupCodes.toArray(listCodes);
+			schoolGroupCodeComboBox = new JComboBox<String>(listCodes);
+			schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
+			panel.add(schoolGroupCodeComboBox);
+
+			// teacher/group leader combo box
+			ArrayList<String> leaderNames = new ArrayList<String>();
+			leaderNames.add("");
+			for (Teacher teacher : teachers) {
+				String name = teacher.getLastName() + ", "
+						+ teacher.getFirstName();
+				leaderNames.add(name);
+			}
+			Collections.sort(leaderNames);
+			String[] listNames = new String[leaderNames.size()];
+			listNames = leaderNames.toArray(listNames);
+			groupLeaderComboBox = new JComboBox<String>(listNames);
+			groupLeaderComboBox.setBounds(16, 276, 291, 27);
+			panel.add(groupLeaderComboBox);
+
+			// schools combo box
+			ArrayList<School> schools = DaoRepository.getSchools().objects;
+			ArrayList<String> schoolStrings = new ArrayList<String>();
+			schoolStrings.add("");
+			for (School school : schools) {
+				String schoolString = school.getSchoolName();
+				schoolStrings.add(schoolString);
+			}
+			Collections.sort(schoolStrings);
+			String[] listSchools = new String[schoolStrings.size()];
+			listSchools = schoolStrings.toArray(listSchools);
+			schoolNameComboBox = new JComboBox<String>(listSchools);
+			schoolNameComboBox.setBounds(16, 315, 291, 27);
+			panel.add(schoolNameComboBox);
+		}
+		// ----------- End Combo Box -------- //
+
+		// ----------- Start Buttons -------- //
+		{
+			searchBtn = new SearchButton(new MediatorActionListener(),
+					mediator, this);
+			final JPanel thisPanel = this;
+			searchBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					mediator.save(e, thisPanel);
 				}
-				if (athleteTable.getRowCount() > 0)
+			});
+			searchBtn.setText("Search");
 
-					if (mevt.getClickCount() == 2) {
-						//
-						//
+			btnRegister = new RegisterButton(new MediatorActionListener(),
+					mediator, this);
+			btnRegister.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					mediator.registerAthlete();
+				}
+			});
+			btnRegister.setBounds(440, 131, 117, 29);
+			panel.add(btnRegister);
+			btnRegister.setText("Register");
+
+			btnUnregister = new UnregisterButton(new MediatorActionListener(),
+					mediator, this);
+			btnUnregister.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnUnregister.setBounds(557, 131, 113, 29);
+			panel.add(btnUnregister);
+			btnUnregister.setText("Unregister");
+
+			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
+			newBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			newBtn.setText("New");
+
+			deleteBtn = new DeleteButton(new MediatorActionListener(),
+					mediator, this);
+			deleteBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			deleteBtn.setText("Delete");
+			deleteBtn.setEnabled(false);
+
+			saveBtn = new SaveButton(new MediatorActionListener(), mediator,
+					this);
+			saveBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			saveBtn.setText("Save");
+		}
+		// ------------- End Buttons -------------- //
+
+		// ------------ Start Table Event ----------- //
+		{
+			athleteTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(final MouseEvent mevt) {
+					if (athleteTable.getSelectedRow() != -1) {
+						deleteBtn.setEnabled(true);
 					}
-			}
-		});
+					if (athleteTable.getRowCount() > 0)
 
-		// ************ Generated By Window Builder ************* //
+						if (mevt.getClickCount() == 2) {
+							// fill in athlete information
+							//
+						}
+				}
+			});
+		}
+		// ------------ End Table Events --------------- //
+
+		// ---------------- Generated By Window Builder ---------------- //
 		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
 				.setHorizontalGroup(groupLayout
