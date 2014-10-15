@@ -70,4 +70,13 @@ public class Teacher implements DatabaseSerializable {
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
+
+	@Override
+	public String toString() {
+		String retVal = "";
+		retVal = getLastName() + ", " + getFirstName();
+		if (retVal.trim().equals(","))
+			retVal = "";
+		return retVal;
+	}
 }

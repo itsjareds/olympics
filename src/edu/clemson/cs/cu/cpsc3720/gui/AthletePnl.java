@@ -56,7 +56,7 @@ public class AthletePnl extends JPanel {
 	private double dividerLocation;
 	private JComboBox<String> monthComboBox;
 	private JComboBox<String> genderComboBox;
-	private JComboBox<String> groupLeaderComboBox;
+	private JComboBox<Teacher> groupLeaderComboBox;
 	private JComboBox<String> dayComboBox;
 	private JComboBox<String> yearComboBox;
 	private JComboBox<String> eventComboBox;
@@ -113,8 +113,8 @@ public class AthletePnl extends JPanel {
 			heats = DaoRepository.getHeats().objects;
 
 			athleteTableModel = new AthleteTableModel(athletes);
-			eventTableModel = new EventTableModel(events);
-			heatTableModel = new HeatTableModel(heats);
+			eventTableModel = new EventTableModel(new ArrayList<Event>());
+			heatTableModel = new HeatTableModel(new ArrayList<Heat>());
 
 		}
 		// ------------ End Init ------------- //
@@ -369,17 +369,15 @@ public class AthletePnl extends JPanel {
 			panel.add(schoolGroupCodeComboBox);
 
 			// teacher/group leader combo box
-			ArrayList<String> leaderNames = new ArrayList<String>();
-			leaderNames.add("");
+			ArrayList<Teacher> leaderNames = new ArrayList<>();
+			leaderNames.add(new Teacher("", "", ""));
 			for (Teacher teacher : teachers) {
-				String name = teacher.getLastName() + ", "
-						+ teacher.getFirstName();
-				leaderNames.add(name);
+				leaderNames.add(teacher);
 			}
-			Collections.sort(leaderNames);
-			String[] listNames = new String[leaderNames.size()];
+			// Collections.sort(leaderNames);
+			Teacher[] listNames = new Teacher[leaderNames.size()];
 			listNames = leaderNames.toArray(listNames);
-			groupLeaderComboBox = new JComboBox<String>(listNames);
+			groupLeaderComboBox = new JComboBox<Teacher>(listNames);
 			groupLeaderComboBox.setBounds(16, 276, 291, 27);
 			panel.add(groupLeaderComboBox);
 
@@ -461,7 +459,6 @@ public class AthletePnl extends JPanel {
 
 		// ------------ Start Table Events ----------- //
 		{
-			final AthletePnl thisPanel = this;
 			athleteTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(final MouseEvent mevt) {
