@@ -28,10 +28,8 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
-import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
-import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
@@ -39,16 +37,14 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 public class AthletePnl extends JPanel {
+	private static final long serialVersionUID = -3647303070052872171L;
 	private static AthleteTableModel athleteTableModel;
 	private static EventTableModel eventTableModel;
-	private static HeatTableModel heatTableModel;
 	private final JTextField athleteFirstNameTextBox;
 	private final JTextField athleteLastNameTxtBox;
 	private final ArrayList<Athlete> athletes;
 	private final ArrayList<Event> events;
 	private final JTable eventsTable;
-	private final ArrayList<Heat> heats;
-	private final JTable heatsTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
 	private final JTable athleteTable;
@@ -113,11 +109,10 @@ public class AthletePnl extends JPanel {
 		{
 			athletes = DaoRepository.getAthletes().objects;
 			events = DaoRepository.getEvents().objects;
-			heats = DaoRepository.getHeats().objects;
 
+			Collections.sort(athletes);
 			athleteTableModel = new AthleteTableModel(athletes);
 			eventTableModel = new EventTableModel(new ArrayList<Event>());
-			heatTableModel = new HeatTableModel(new ArrayList<Heat>());
 
 		}
 		// ------------ End Init ------------- //
@@ -140,12 +135,8 @@ public class AthletePnl extends JPanel {
 			informationScrollPane.setViewportView(panel);
 			panel.setLayout(null);
 			{
-				heatsScrollPane = new JScrollPane();
-				heatsScrollPane.setBounds(361, 279, 309, 107);
-				panel.add(heatsScrollPane);
-
 				eventsScrollPane = new JScrollPane();
-				eventsScrollPane.setBounds(361, 194, 309, 56);
+				eventsScrollPane.setBounds(361, 194, 309, 200);
 				panel.add(eventsScrollPane);
 			}
 		}
@@ -176,8 +167,6 @@ public class AthletePnl extends JPanel {
 			eventsTable = new JTable(AthletePnl.eventTableModel);
 			eventsScrollPane.setViewportView(eventsTable);
 
-			heatsTable = new JTable(AthletePnl.heatTableModel);
-			heatsScrollPane.setViewportView(heatsTable);
 		}
 		// --------- End Tables --------------- //
 
@@ -222,10 +211,6 @@ public class AthletePnl extends JPanel {
 			final JLabel lblAssociatedEvents = new JLabel("Registered Events");
 			lblAssociatedEvents.setBounds(438, 170, 173, 16);
 			panel.add(lblAssociatedEvents);
-
-			final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
-			lblAssociatedHeats.setBounds(438, 256, 146, 16);
-			panel.add(lblAssociatedHeats);
 
 			final JLabel lblTeacherInformation = new JLabel(
 					"Teacher Information");

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
-public class Athlete implements DatabaseSerializable {
+public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 
 	private transient String dbId;
 	private transient Teacher teacher;
@@ -203,5 +203,14 @@ public class Athlete implements DatabaseSerializable {
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
+	}
+
+	@Override
+	public int compareTo(Athlete o) {
+		int retVal = 0;
+		retVal = this.getLastName().compareTo(o.getLastName());
+		if (retVal == 0)
+			retVal = this.getFirstName().compareTo(o.getFirstName());
+		return retVal;
 	}
 }
