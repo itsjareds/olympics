@@ -65,7 +65,7 @@ public class AthletePnl extends JPanel {
 	private JComboBox<String> minComboBox;
 	private JComboBox<String> secComboBox;
 	private JComboBox<String> schoolGroupCodeComboBox;
-	private JComboBox<String> schoolNameComboBox;
+	private JComboBox<School> schoolNameComboBox;
 	private JComboBox<String> filterComboBox;
 	private SearchButton searchBtn;
 	private RegisterButton btnRegister;
@@ -80,7 +80,8 @@ public class AthletePnl extends JPanel {
 	private JScrollPane eventsScrollPane;
 	private JScrollPane heatsScrollPane;
 	private JLabel lblFilterBy;
-	private ArrayList<Teacher> leaders;
+	private ArrayList<Teacher> teacherList;
+	private ArrayList<School> schoolList;
 
 	public Athlete getAthlete() {
 		// TODO Fix the getter for this class
@@ -370,30 +371,25 @@ public class AthletePnl extends JPanel {
 			panel.add(schoolGroupCodeComboBox);
 
 			// teacher/group leader combo box
-			leaders = new ArrayList<>();
-			leaders.add(new Teacher("", "", ""));
-			for (Teacher teacher : teachers) {
-				leaders.add(teacher);
-			}
-			Collections.sort(leaders);
-			Teacher[] listNames = new Teacher[leaders.size()];
-			listNames = leaders.toArray(listNames);
+			teacherList = new ArrayList<>();
+			teacherList.add(new Teacher("", "", ""));
+			teacherList.addAll(teachers);
+			Collections.sort(teacherList);
+			Teacher[] listNames = new Teacher[teacherList.size()];
+			listNames = teacherList.toArray(listNames);
 			groupLeaderComboBox = new JComboBox<Teacher>(listNames);
 			groupLeaderComboBox.setBounds(16, 276, 291, 27);
 			panel.add(groupLeaderComboBox);
 
 			// schools combo box
 			ArrayList<School> schools = DaoRepository.getSchools().objects;
-			ArrayList<String> schoolStrings = new ArrayList<String>();
-			schoolStrings.add("");
-			for (School school : schools) {
-				String schoolString = school.getSchoolName();
-				schoolStrings.add(schoolString);
-			}
-			Collections.sort(schoolStrings);
-			String[] listSchools = new String[schoolStrings.size()];
-			listSchools = schoolStrings.toArray(listSchools);
-			schoolNameComboBox = new JComboBox<String>(listSchools);
+			schoolList = new ArrayList<>();
+			schoolList.add(new School(""));
+			schoolList.addAll(schools);
+			Collections.sort(schoolList);
+			School[] listSchools = new School[schoolList.size()];
+			listSchools = schoolList.toArray(listSchools);
+			schoolNameComboBox = new JComboBox<School>(listSchools);
 			schoolNameComboBox.setBounds(16, 315, 291, 27);
 			panel.add(schoolNameComboBox);
 		}
@@ -464,41 +460,14 @@ public class AthletePnl extends JPanel {
 				@Override
 				public void mouseClicked(final MouseEvent mevt) {
 					if (athleteTable.getSelectedRow() != -1) {
+
 						deleteBtn.setEnabled(true);
 					}
 					if (athleteTable.getRowCount() > 0)
 
 						if (mevt.getClickCount() == 2) {
 
-							Athlete athlete = athleteTableModel
-									.getAthlete(athleteTable.getSelectedRow());
-
-							// fill in athlete information
-
-							// Set group leader combo box
-							DatabaseAccessObject<Teacher> daot = new DatabaseAccessObject<>();
-							Teacher t = daot.query(Teacher.class,
-									athlete.getTeacherRef());
-							groupLeaderComboBox.setSelectedItem(t);
-
-							// fill event list based on events athlete is
-							// registered for
-							List<Event> associatedEvents = new ArrayList<>();
-							ArrayList<String> arefs = athlete.getRegRefs();
-							ArrayList<String> rrefs = new ArrayList<>();
-							for (String ref : arefs) {
-								DatabaseAccessObject<Registration> daor = new DatabaseAccessObject<>();
-								Registration r = daor.query(Registration.class,
-										ref);
-								rrefs.add(r.getEventRef());
-							}
-							for (String ref : rrefs) {
-								DatabaseAccessObject<Event> daoe = new DatabaseAccessObject<>();
-								Event e = daoe.query(Event.class, ref);
-								if (e != null)
-									associatedEvents.add(e);
-							}
-							eventTableModel.setEvents(associatedEvents);
+							fillPanel();
 						}
 				}
 			});
@@ -635,6 +604,56 @@ public class AthletePnl extends JPanel {
 																GroupLayout.PREFERRED_SIZE))
 										.addContainerGap(23, Short.MAX_VALUE)));
 		setLayout(groupLayout);
+
+	}
+
+	private void fillPanel() {
+		Athlete athlete = athleteTableModel.getAthlete(athleteTable
+				.getSelectedRow());
+		List<Event> associatedEvents = new ArrayList<>();
+		ArrayList<String> arefs = athlete.getRegRefs();
+		ArrayList<String> rrefs = new ArrayList<>();
+
+		// set name
+		athleteFirstNameTextBox.setText(athlete.getFirstName());
+		athleteLastNameTxtBox.setText(athlete.getLastName());
+
+		// set gender
+		String gender = athlete.getGender().toUpperCase();
+		if (gender.equals("M"))
+			gender = "Male";
+		else if (gender.equals("F"))
+			gender = "Female";
+		genderComboBox.setSelectedItem(gender);
+
+		// Set group leader
+		DatabaseAccessObject<Teacher> daot = DaoRepository.getTeachers();
+		Teacher t = daot.query(Teacher.class, athlete.getTeacherRef());
+		groupLeaderComboBox.setSelectedItem(t);
+
+		// set group code
+		String groupCode = t.getGroupCode();
+		schoolGroupCodeComboBox.setSelectedItem(groupCode);
+
+		// fill event list
+		for (String ref : arefs) {
+			DatabaseAccessObject<Registration> daor = DaoRepository
+					.getRegistrations();
+			Registration r = daor.query(Registration.class, ref);
+			rrefs.add(r.getEventRef());
+		}
+		for (String ref : rrefs) {
+			DatabaseAccessObject<Event> daoe = DaoRepository.getEvents();
+			Event e = daoe.query(Event.class, ref);
+			if (e != null)
+				associatedEvents.add(e);
+		}
+		eventTableModel.setEvents(associatedEvents);
+
+		// set school
+		DatabaseAccessObject<School> daos = DaoRepository.getSchools();
+		School s = daos.query(School.class, athlete.getSchoolRef());
+		schoolNameComboBox.setSelectedItem(s);
 
 	}
 }
