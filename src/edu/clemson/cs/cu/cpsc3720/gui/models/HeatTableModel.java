@@ -11,9 +11,15 @@ public class HeatTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Heat> heats = new ArrayList<>();
-	String[] colNames = { "Event Code","Event", "Minimun Age", "Maximum Age", "Gender", "Time", "Division" };
+	String[] colNames = { "Event Code", "Event", "Minimun Age", "Maximum Age",
+			"Gender", "Time", "Division" };
 
 	public HeatTableModel(List<Heat> heats) {
+		this.heats = heats;
+		update();
+	}
+
+	public void setHeats(List<Heat> heats) {
 		this.heats = heats;
 		update();
 	}

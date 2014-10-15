@@ -7,12 +7,18 @@ import javax.swing.table.AbstractTableModel;
 
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 
-public class ExtendedAthleteTableModel extends AbstractTableModel{
+public class ExtendedAthleteTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Athlete> athletes = new ArrayList<>();
-	String[] colNames = { "Rank", "Last Name", "First Name", "Age", "Sex", "Time", "Group", "Supervisor" };
+	String[] colNames = { "Rank", "Last Name", "First Name", "Age", "Sex",
+			"Time", "Group", "Supervisor" };
 
 	public ExtendedAthleteTableModel(List<Athlete> athletes) {
+		this.athletes = athletes;
+		update();
+	}
+
+	public void setAthletes(List<Athlete> athletes) {
 		this.athletes = athletes;
 		update();
 	}
@@ -58,9 +64,11 @@ public class ExtendedAthleteTableModel extends AbstractTableModel{
 		case 5:
 			return 0;
 		case 6:
-			return athletes.get(row).getGroupLeader().getGroupCode() + " " + athletes.get(row).getSchool().getSchoolName();
+			return athletes.get(row).getGroupLeader().getGroupCode() + " "
+					+ athletes.get(row).getSchool().getSchoolName();
 		case 7:
-			return athletes.get(row).getGroupLeader().getFirstName() + " " +  athletes.get(row).getGroupLeader().getLastName();
+			return athletes.get(row).getGroupLeader().getFirstName() + " "
+					+ athletes.get(row).getGroupLeader().getLastName();
 		default:
 			return null;
 		}

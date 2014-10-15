@@ -18,6 +18,11 @@ public class EventTableModel extends AbstractTableModel {
 		update();
 	}
 
+	public void setEvents(List<Event> events) {
+		this.events = events;
+		update();
+	}
+
 	public Event getEvent(int row) {
 		return events.get(row);
 	}
