@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DatabaseAccessObject;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
@@ -31,6 +33,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
+import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
@@ -456,8 +459,9 @@ public class AthletePnl extends JPanel {
 		}
 		// ------------- End Buttons -------------- //
 
-		// ------------ Start Table Event ----------- //
+		// ------------ Start Table Events ----------- //
 		{
+			final AthletePnl thisPanel = this;
 			athleteTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(final MouseEvent mevt) {
@@ -467,8 +471,30 @@ public class AthletePnl extends JPanel {
 					if (athleteTable.getRowCount() > 0)
 
 						if (mevt.getClickCount() == 2) {
+
+							Athlete athlete = athleteTableModel
+									.getAthlete(athleteTable.getSelectedRow());
+
 							// fill in athlete information
-							//
+
+							// fill event list based on events athlete is
+							// registered for
+							List<Event> associatedEvents = new ArrayList<>();
+							ArrayList<String> arefs = athlete.getRegRefs();
+							ArrayList<String> rrefs = new ArrayList<>();
+							for (String ref : arefs) {
+								DatabaseAccessObject<Registration> dao = new DatabaseAccessObject<>();
+								Registration r = dao.query(Registration.class,
+										ref);
+								rrefs.add(r.getEventRef());
+							}
+							for (String ref : rrefs) {
+								DatabaseAccessObject<Event> dao = new DatabaseAccessObject<>();
+								Event e = dao.query(Event.class, ref);
+								if (e != null)
+									associatedEvents.add(e);
+							}
+							eventTableModel.setEvents(associatedEvents);
 						}
 				}
 			});

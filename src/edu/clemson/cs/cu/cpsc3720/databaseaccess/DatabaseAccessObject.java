@@ -47,7 +47,6 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 		if (ret == null) {
 			open();
-
 			if (db.getMetadata().getSchema()
 					.existsClass(classOfT.getSimpleName())) {
 				for (ODocument doc : db.browseClass(classOfT.getSimpleName())) {
