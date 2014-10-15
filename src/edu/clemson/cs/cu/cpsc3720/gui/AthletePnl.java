@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -59,7 +58,7 @@ public class AthletePnl extends JPanel {
 	private JComboBox<Teacher> groupLeaderComboBox;
 	private JComboBox<String> dayComboBox;
 	private JComboBox<String> yearComboBox;
-	private JComboBox<String> eventComboBox;
+	private JComboBox<Event> eventComboBox;
 	private JComboBox<String> inchComboBox;
 	private JComboBox<String> feetComboBox;
 	private JComboBox<String> minComboBox;
@@ -82,6 +81,8 @@ public class AthletePnl extends JPanel {
 	private JLabel lblFilterBy;
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<School> schoolList;
+	private ArrayList<Event> eventList;
+	private ArrayList<Event> associatedEvents;
 
 	public Athlete getAthlete() {
 		// TODO Fix the getter for this class
@@ -328,30 +329,31 @@ public class AthletePnl extends JPanel {
 			minComboBox = new JComboBox<String>();
 			minComboBox.setBounds(513, 97, 61, 27);
 			panel.add(minComboBox);
+			minComboBox.setEnabled(false);
 
 			secComboBox = new JComboBox<String>();
 			secComboBox.setBounds(609, 94, 61, 27);
 			panel.add(secComboBox);
+			secComboBox.setEnabled(false);
 
 			inchComboBox = new JComboBox<String>();
 			inchComboBox.setBounds(609, 66, 61, 27);
 			panel.add(inchComboBox);
+			inchComboBox.setEnabled(false);
 
 			feetComboBox = new JComboBox<String>();
 			feetComboBox.setBounds(513, 66, 61, 27);
 			panel.add(feetComboBox);
+			feetComboBox.setEnabled(false);
 
 			// events combo box
-			ArrayList<String> eventStrings = new ArrayList<String>();
-			eventStrings.add("");
-			for (Event event : events) {
-				String eventString = event.getEventName();
-				eventStrings.add(eventString);
-			}
-			Collections.sort(eventStrings);
-			String[] listEvents = new String[eventStrings.size()];
-			listEvents = eventStrings.toArray(listEvents);
-			eventComboBox = new JComboBox<String>(listEvents);
+			eventList = new ArrayList<Event>();
+			eventList.add(new Event("", "", "", 0, 0, 0));
+			eventList.addAll(events);
+			Collections.sort(eventList);
+			Event[] listEvents = new Event[eventList.size()];
+			listEvents = eventList.toArray(listEvents);
+			eventComboBox = new JComboBox<Event>(listEvents);
 			eventComboBox.setBounds(430, 34, 240, 27);
 			panel.add(eventComboBox);
 
@@ -417,6 +419,7 @@ public class AthletePnl extends JPanel {
 			btnRegister.setBounds(440, 131, 117, 29);
 			panel.add(btnRegister);
 			btnRegister.setText("Register");
+			btnRegister.setEnabled(false);
 
 			btnUnregister = new UnregisterButton(new MediatorActionListener(),
 					mediator, this);
@@ -427,6 +430,7 @@ public class AthletePnl extends JPanel {
 			btnUnregister.setBounds(557, 131, 113, 29);
 			panel.add(btnUnregister);
 			btnUnregister.setText("Unregister");
+			btnUnregister.setEnabled(false);
 
 			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
 			newBtn.addActionListener(new ActionListener() {
@@ -468,6 +472,23 @@ public class AthletePnl extends JPanel {
 						if (mevt.getClickCount() == 2) {
 
 							fillPanel();
+							if (associatedEvents.size() < 2)
+								btnRegister.setEnabled(true);
+						}
+				}
+			});
+
+			eventsTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(final MouseEvent mevt) {
+					if (eventsTable.getSelectedRow() != -1) {
+
+						btnUnregister.setEnabled(true);
+					}
+					if (eventsTable.getRowCount() > 0)
+
+						if (mevt.getClickCount() == 2) {
+
 						}
 				}
 			});
@@ -610,7 +631,7 @@ public class AthletePnl extends JPanel {
 	private void fillPanel() {
 		Athlete athlete = athleteTableModel.getAthlete(athleteTable
 				.getSelectedRow());
-		List<Event> associatedEvents = new ArrayList<>();
+		associatedEvents = new ArrayList<Event>();
 		ArrayList<String> arefs = athlete.getRegRefs();
 		ArrayList<String> rrefs = new ArrayList<>();
 

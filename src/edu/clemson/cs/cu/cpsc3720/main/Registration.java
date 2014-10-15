@@ -3,7 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
-public class Registration implements DatabaseSerializable {
+public class Registration implements DatabaseSerializable,
+		Comparable<Registration> {
 
 	private transient String dbId;
 	private transient Event event;
@@ -104,4 +105,12 @@ public class Registration implements DatabaseSerializable {
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
+
+	@Override
+	public int compareTo(Registration o) {
+		int retVal = 0;
+		retVal = this.getDbId().compareTo(o.getDbId());
+		return retVal;
+	}
+
 }

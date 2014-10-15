@@ -2,7 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
-public class Event implements DatabaseSerializable {
+public class Event implements DatabaseSerializable, Comparable<Event> {
 
 	private transient String dbId;
 	private String eventCode;
@@ -132,5 +132,25 @@ public class Event implements DatabaseSerializable {
 	@Override
 	public String toString() {
 		return this.getEventName();
+	}
+
+	@Override
+	public int compareTo(Event o) {
+		int retVal = 0;
+		retVal = this.getEventName().compareTo(o.getEventName());
+		return retVal;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		boolean retVal = false;
+		if (o instanceof Event) {
+			Event e = (Event) o;
+			String thisEvent = this.getDbId() + this.getEventName();
+			String thatEvent = e.getDbId() + e.getEventName();
+			if (thisEvent.equals(thatEvent))
+				retVal = true;
+		}
+		return retVal;
 	}
 }
