@@ -44,6 +44,12 @@ public class EventsPnl extends JPanel {
 	private final JComboBox<String> scoreUnitCombo;
 	private final JComboBox<Integer> minFtCombo;
 	private final JComboBox<Integer> minInCombo;
+	private final JComboBox<Integer> minMinCombo;
+	private final JComboBox<Integer> minSecCombo;
+	private final JComboBox<Integer> maxFtCombo;
+	private final JComboBox<Integer> maxInCombo;
+	private final JComboBox<Integer> maxMinCombo;
+	private final JComboBox<Integer> maxSecCombo;
 
 	private final ArrayList<Athlete> athletes;
 	private final ArrayList<Event> events;
@@ -53,6 +59,7 @@ public class EventsPnl extends JPanel {
 	private final JTextField searchTxtBox;
 	private final JTable table;
 	private double dividerLocation;
+	private Event loadedEvent;
 
 	/**
 	 * Create the panel.
@@ -61,6 +68,7 @@ public class EventsPnl extends JPanel {
 		this.mediator = mediator;
 		this.setName("EventPanel");
 
+		loadedEvent = new Event("", "", "", 0, 0, 0);
 		events = DaoRepository.getEvents().objects;
 		athletes = DaoRepository.getAthletes().objects;
 		final ArrayList<Registration> regs = athletes.get(0).getRegistrations();
@@ -69,9 +77,7 @@ public class EventsPnl extends JPanel {
 		}
 		heats = new ArrayList<Heat>();
 
-		athleteTableModel = new AthleteTableModel(athletes);
 		eventTableModel = new EventTableModel(events);
-		heatTableModel = new HeatTableModel(heats);
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
@@ -129,35 +135,35 @@ public class EventsPnl extends JPanel {
 		heatsScrollPane.setViewportView(heatsTable);
 
 		final JLabel lblFt = new JLabel("ft.");
-		lblFt.setBounds(87, 234, 50, 16);
+		lblFt.setBounds(108, 234, 50, 16);
 		panel.add(lblFt);
 
 		final JLabel lblIn = new JLabel("In.");
-		lblIn.setBounds(186, 234, 61, 16);
+		lblIn.setBounds(265, 234, 61, 16);
 		panel.add(lblIn);
 
 		minInCombo = new JComboBox<Integer>();
-		minInCombo.setBounds(115, 229, 61, 27);
+		minInCombo.setBounds(173, 230, 80, 27);
 		panel.add(minInCombo);
 
 		minFtCombo = new JComboBox<Integer>();
-		minFtCombo.setBounds(16, 229, 61, 27);
+		minFtCombo.setBounds(16, 229, 80, 27);
 		panel.add(minFtCombo);
 
 		final JLabel lblMin = new JLabel("min");
-		lblMin.setBounds(87, 276, 61, 16);
+		lblMin.setBounds(108, 276, 61, 16);
 		panel.add(lblMin);
 
 		final JLabel lblSec = new JLabel("sec");
-		lblSec.setBounds(186, 276, 50, 16);
+		lblSec.setBounds(265, 276, 50, 16);
 		panel.add(lblSec);
 
-		final JComboBox<Integer> minMinCombo = new JComboBox<Integer>();
-		minMinCombo.setBounds(16, 271, 61, 27);
+		minMinCombo = new JComboBox<Integer>();
+		minMinCombo.setBounds(16, 271, 80, 27);
 		panel.add(minMinCombo);
 
-		final JComboBox<Integer> minSecCombo = new JComboBox<Integer>();
-		minSecCombo.setBounds(115, 271, 61, 27);
+		minSecCombo = new JComboBox<Integer>();
+		minSecCombo.setBounds(173, 272, 80, 27);
 		panel.add(minSecCombo);
 
 		JLabel lblScoringUnit = new JLabel("Score Unit");
@@ -165,43 +171,43 @@ public class EventsPnl extends JPanel {
 		panel.add(lblScoringUnit);
 
 		scoreUnitCombo = new JComboBox<String>();
-		scoreUnitCombo.setBounds(97, 161, 61, 26);
+		scoreUnitCombo.setBounds(97, 161, 128, 26);
 		panel.add(scoreUnitCombo);
 
 		JLabel lblMaximumScore = new JLabel("Maximum Score");
 		lblMaximumScore.setBounds(343, 199, 105, 14);
 		panel.add(lblMaximumScore);
 
-		JComboBox maxFtCombo = new JComboBox();
-		maxFtCombo.setBounds(340, 229, 61, 27);
+		maxFtCombo = new JComboBox<Integer>();
+		maxFtCombo.setBounds(340, 229, 80, 27);
 		panel.add(maxFtCombo);
 
-		JComboBox maxMinCombo = new JComboBox();
-		maxMinCombo.setBounds(340, 271, 61, 27);
+		maxMinCombo = new JComboBox<Integer>();
+		maxMinCombo.setBounds(340, 271, 80, 27);
 		panel.add(maxMinCombo);
 
 		JLabel lblFt_1 = new JLabel("ft.");
-		lblFt_1.setBounds(411, 235, 46, 14);
+		lblFt_1.setBounds(432, 235, 46, 14);
 		panel.add(lblFt_1);
 
 		JLabel lblMin_1 = new JLabel("min");
-		lblMin_1.setBounds(411, 277, 46, 14);
+		lblMin_1.setBounds(432, 277, 46, 14);
 		panel.add(lblMin_1);
 
-		JComboBox<Integer> maxInCombo = new JComboBox<Integer>();
-		maxInCombo.setBounds(442, 229, 61, 27);
+		maxInCombo = new JComboBox<Integer>();
+		maxInCombo.setBounds(490, 230, 80, 27);
 		panel.add(maxInCombo);
 
-		JComboBox<Integer> maxSecCombo = new JComboBox<Integer>();
-		maxSecCombo.setBounds(442, 271, 61, 26);
+		maxSecCombo = new JComboBox<Integer>();
+		maxSecCombo.setBounds(490, 272, 80, 26);
 		panel.add(maxSecCombo);
 
 		JLabel lblIn_1 = new JLabel("In.");
-		lblIn_1.setBounds(513, 235, 46, 14);
+		lblIn_1.setBounds(580, 235, 46, 14);
 		panel.add(lblIn_1);
 
 		JLabel lblSec_1 = new JLabel("sec");
-		lblSec_1.setBounds(513, 277, 46, 14);
+		lblSec_1.setBounds(580, 277, 46, 14);
 		panel.add(lblSec_1);
 
 		JLabel lblGender = new JLabel("Gender");
@@ -209,7 +215,7 @@ public class EventsPnl extends JPanel {
 		panel.add(lblGender);
 
 		genderCombo = new JComboBox<String>();
-		genderCombo.setBounds(97, 123, 51, 27);
+		genderCombo.setBounds(97, 123, 128, 27);
 		panel.add(genderCombo);
 
 		searchTxtBox = new JTextField();
@@ -235,20 +241,51 @@ public class EventsPnl extends JPanel {
 				mediator, this);
 		saveBtn.setText("Save");
 
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(final MouseEvent mevt) {
-				if (table.getSelectedRow() != -1) {
-					deleteBtn.setEnabled(true);
-				}
-				if (table.getRowCount() > 0)
+		/* Load initial values */
+		{
+			genderCombo.addItem("Male");
+			genderCombo.addItem("Female");
+			genderCombo.setSelectedItem(null);
 
-					if (mevt.getClickCount() == 2) {
-						// call contreoller to load data
-						// maintain event conreoller, Read event
-					}
+			scoreUnitCombo.addItem("D");
+			scoreUnitCombo.addItem("T");
+			scoreUnitCombo.addItem("N");
+			scoreUnitCombo.setSelectedItem(null);
+
+			for (Integer i = 0; i <= 9999; i++) {
+				minFtCombo.addItem(i);
+				maxFtCombo.addItem(i);
 			}
-		});
+			for (Integer i = 0; i <= 99; i++) {
+				minInCombo.addItem(i);
+				maxInCombo.addItem(i);
+			}
+			for (Integer i = 0; i <= 9999; i++) {
+				minMinCombo.addItem(i);
+				maxMinCombo.addItem(i);
+			}
+			for (Integer i = 0; i <= 99; i++) {
+				minSecCombo.addItem(i);
+				maxSecCombo.addItem(i);
+			}
+		}
+
+		/* Click events */
+		{
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(final MouseEvent mevt) {
+					if (table.getSelectedRow() != -1) {
+						deleteBtn.setEnabled(true);
+					}
+					if (table.getRowCount() > 0)
+						if (mevt.getClickCount() == 2) {
+							setEvent(eventTableModel.getEvent(table
+									.getSelectedRow()));
+						}
+				}
+			});
+		}
 
 		// ************ Generated By Window Builder ************* //
 		final GroupLayout groupLayout = new GroupLayout(this);
@@ -343,15 +380,96 @@ public class EventsPnl extends JPanel {
 
 	}
 
+	public void setEvent(Event e) {
+		loadedEvent = e;
+		eventCodeTextBox.setText(e.getEventCode());
+		eventNameTextBox.setText(e.getEventName());
+		scoreUnitCombo.setSelectedItem(e.getScoreUnit());
+		minFtCombo.setSelectedIndex(0);
+		minFtCombo.setEnabled(false);
+		minInCombo.setSelectedIndex(0);
+		minInCombo.setEnabled(false);
+		minMinCombo.setSelectedIndex(0);
+		minMinCombo.setEnabled(false);
+		minSecCombo.setSelectedIndex(0);
+		minSecCombo.setEnabled(false);
+		maxFtCombo.setSelectedIndex(0);
+		maxFtCombo.setEnabled(false);
+		maxInCombo.setSelectedIndex(0);
+		maxInCombo.setEnabled(false);
+		maxMinCombo.setSelectedIndex(0);
+		maxMinCombo.setEnabled(false);
+		maxSecCombo.setSelectedIndex(0);
+		maxSecCombo.setEnabled(false);
+		if (e.getScoreUnit().equals("D")) {
+			minFtCombo
+					.setSelectedItem(Event.extractMajorScore(e.getScoreMin()));
+			minInCombo
+					.setSelectedItem(Event.extractMinorScore(e.getScoreMin()));
+			maxFtCombo
+					.setSelectedItem(Event.extractMajorScore(e.getScoreMax()));
+			maxInCombo
+					.setSelectedItem(Event.extractMinorScore(e.getScoreMax()));
+
+			minFtCombo.setEnabled(true);
+			minInCombo.setEnabled(true);
+			maxFtCombo.setEnabled(true);
+			maxInCombo.setEnabled(true);
+		} else if (e.getScoreUnit().equals("T")) {
+			minMinCombo
+					.setSelectedItem(Event.extractMajorScore(e.getScoreMin()));
+			minSecCombo
+					.setSelectedItem(Event.extractMinorScore(e.getScoreMin()));
+			maxMinCombo
+					.setSelectedItem(Event.extractMajorScore(e.getScoreMax()));
+			maxSecCombo
+					.setSelectedItem(Event.extractMinorScore(e.getScoreMax()));
+
+			minMinCombo.setEnabled(true);
+			minSecCombo.setEnabled(true);
+			maxMinCombo.setEnabled(true);
+			maxSecCombo.setEnabled(true);
+		}
+	}
+
 	public Event getEvent() {
 		String eventCode = eventCodeTextBox.getText();
 		String eventName = eventNameTextBox.getText();
 		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
-		Integer scoreMin = ((Integer) minFtCombo.getSelectedItem()) * 100
-				+ (Integer) minInCombo.getSelectedItem();
+		Integer scoreMin = 0;
 		Integer scoreMax = 0;
 		Integer sortSeq = 0;
-		return new Event(eventCode, eventName, scoreUnit, scoreMax, scoreMin,
-				sortSeq);
+		if (scoreUnitCombo.getSelectedItem() != null) {
+			if (scoreUnit.equals("D")) {
+				if (minFtCombo.getSelectedItem() != null
+						&& minInCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) minFtCombo.getSelectedItem()) * 100
+							+ (Integer) minInCombo.getSelectedItem();
+				}
+				if (maxFtCombo.getSelectedItem() != null
+						&& maxInCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) maxFtCombo.getSelectedItem()) * 100
+							+ (Integer) maxInCombo.getSelectedItem();
+				}
+			} else if (scoreUnit.equals("T")) {
+				if (minMinCombo.getSelectedItem() != null
+						&& minSecCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) minMinCombo.getSelectedItem()) * 100
+							+ (Integer) minSecCombo.getSelectedItem();
+				}
+				if (maxMinCombo.getSelectedItem() != null
+						&& maxSecCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) maxMinCombo.getSelectedItem()) * 100
+							+ (Integer) maxSecCombo.getSelectedItem();
+				}
+			}
+		}
+		loadedEvent.setEventCode(eventCode);
+		loadedEvent.setEventName(eventName);
+		loadedEvent.setScoreUnit(scoreUnit);
+		loadedEvent.setScoreMin(scoreMin);
+		loadedEvent.setScoreMax(scoreMax);
+		loadedEvent.setSortSeq(sortSeq);
+		return loadedEvent;
 	}
 }

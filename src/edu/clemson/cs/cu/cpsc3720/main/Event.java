@@ -113,6 +113,14 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
+	public static Integer extractMajorScore(Integer score) {
+		return score / 100;
+	}
+
+	public static Integer extractMinorScore(Integer score) {
+		return score % 100;
+	}
+
 	public static String scoreToString(Integer score) {
 		Integer ft = score / 100;
 		Integer in = score % 100;
