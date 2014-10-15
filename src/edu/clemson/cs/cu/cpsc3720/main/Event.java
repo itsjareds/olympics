@@ -113,6 +113,12 @@ public class Event implements DatabaseSerializable {
 		this.sortSeq = sortSeq;
 	}
 
+	public static String scoreToString(Integer score) {
+		Integer ft = score / 100;
+		Integer in = score % 100;
+		return ft.toString() + in.toString();
+	}
+
 	@Override
 	public String getDbId() {
 		return this.dbId;
@@ -123,4 +129,8 @@ public class Event implements DatabaseSerializable {
 		this.dbId = id;
 	}
 
+	@Override
+	public String toString() {
+		return this.getEventName();
+	}
 }

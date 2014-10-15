@@ -38,8 +38,13 @@ public class EventsPnl extends JPanel {
 	private static AthleteTableModel athleteTableModel;
 	private static EventTableModel eventTableModel;
 	private static HeatTableModel heatTableModel;
-	private final JTextField athleteFirstNameTextBox;
-	private final JTextField athleteLastNameTxtBox;
+	private final JTextField eventCodeTextBox;
+	private final JTextField eventNameTextBox;
+	private final JComboBox<String> genderCombo;
+	private final JComboBox<String> scoreUnitCombo;
+	private final JComboBox<Integer> minFtCombo;
+	private final JComboBox<Integer> minInCombo;
+
 	private final ArrayList<Athlete> athletes;
 	private final ArrayList<Event> events;
 	private final ArrayList<Heat> heats;
@@ -90,19 +95,19 @@ public class EventsPnl extends JPanel {
 		lblFirstName.setBounds(16, 34, 291, 16);
 		panel.add(lblFirstName);
 
-		athleteFirstNameTextBox = new JTextField();
-		athleteFirstNameTextBox.setBounds(16, 50, 291, 28);
-		panel.add(athleteFirstNameTextBox);
-		athleteFirstNameTextBox.setColumns(10);
+		eventCodeTextBox = new JTextField();
+		eventCodeTextBox.setBounds(16, 50, 291, 28);
+		panel.add(eventCodeTextBox);
+		eventCodeTextBox.setColumns(10);
 
 		final JLabel lblLastName = new JLabel("Event Name");
 		lblLastName.setBounds(16, 75, 291, 16);
 		panel.add(lblLastName);
 
-		athleteLastNameTxtBox = new JTextField();
-		athleteLastNameTxtBox.setColumns(10);
-		athleteLastNameTxtBox.setBounds(16, 90, 291, 28);
-		panel.add(athleteLastNameTxtBox);
+		eventNameTextBox = new JTextField();
+		eventNameTextBox.setColumns(10);
+		eventNameTextBox.setBounds(16, 90, 291, 28);
+		panel.add(eventNameTextBox);
 
 		final JLabel lblNewLabel = new JLabel("Event Information");
 		lblNewLabel.setBounds(56, 6, 251, 16);
@@ -115,7 +120,6 @@ public class EventsPnl extends JPanel {
 		final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
 		lblAssociatedHeats.setBounds(372, 6, 146, 16);
 		panel.add(lblAssociatedHeats);
-
 
 		final JScrollPane heatsScrollPane = new JScrollPane();
 		heatsScrollPane.setBounds(343, 34, 309, 107);
@@ -132,13 +136,13 @@ public class EventsPnl extends JPanel {
 		lblIn.setBounds(186, 234, 61, 16);
 		panel.add(lblIn);
 
-		final JComboBox<Integer> inchComboBox = new JComboBox<Integer>();
-		inchComboBox.setBounds(115, 229, 61, 27);
-		panel.add(inchComboBox);
+		minInCombo = new JComboBox<Integer>();
+		minInCombo.setBounds(115, 229, 61, 27);
+		panel.add(minInCombo);
 
-		final JComboBox<Integer> feetComboBox = new JComboBox<Integer>();
-		feetComboBox.setBounds(16, 229, 61, 27);
-		panel.add(feetComboBox);
+		minFtCombo = new JComboBox<Integer>();
+		minFtCombo.setBounds(16, 229, 61, 27);
+		panel.add(minFtCombo);
 
 		final JLabel lblMin = new JLabel("min");
 		lblMin.setBounds(87, 276, 61, 16);
@@ -148,65 +152,65 @@ public class EventsPnl extends JPanel {
 		lblSec.setBounds(186, 276, 50, 16);
 		panel.add(lblSec);
 
-		final JComboBox<Integer> minComboBox = new JComboBox<Integer>();
-		minComboBox.setBounds(16, 271, 61, 27);
-		panel.add(minComboBox);
+		final JComboBox<Integer> minMinCombo = new JComboBox<Integer>();
+		minMinCombo.setBounds(16, 271, 61, 27);
+		panel.add(minMinCombo);
 
-		final JComboBox<Integer> secComboBox = new JComboBox<Integer>();
-		secComboBox.setBounds(115, 271, 61, 27);
-		panel.add(secComboBox);
-		
-		JLabel lblScoringUnit = new JLabel("Score Code");
+		final JComboBox<Integer> minSecCombo = new JComboBox<Integer>();
+		minSecCombo.setBounds(115, 271, 61, 27);
+		panel.add(minSecCombo);
+
+		JLabel lblScoringUnit = new JLabel("Score Unit");
 		lblScoringUnit.setBounds(16, 167, 89, 14);
 		panel.add(lblScoringUnit);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(97, 161, 61, 26);
-		panel.add(comboBox);
-		
+
+		scoreUnitCombo = new JComboBox<String>();
+		scoreUnitCombo.setBounds(97, 161, 61, 26);
+		panel.add(scoreUnitCombo);
+
 		JLabel lblMaximumScore = new JLabel("Maximum Score");
 		lblMaximumScore.setBounds(343, 199, 105, 14);
 		panel.add(lblMaximumScore);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(340, 229, 61, 27);
-		panel.add(comboBox_1);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(340, 271, 61, 27);
-		panel.add(comboBox_2);
-		
+
+		JComboBox maxFtCombo = new JComboBox();
+		maxFtCombo.setBounds(340, 229, 61, 27);
+		panel.add(maxFtCombo);
+
+		JComboBox maxMinCombo = new JComboBox();
+		maxMinCombo.setBounds(340, 271, 61, 27);
+		panel.add(maxMinCombo);
+
 		JLabel lblFt_1 = new JLabel("ft.");
 		lblFt_1.setBounds(411, 235, 46, 14);
 		panel.add(lblFt_1);
-		
+
 		JLabel lblMin_1 = new JLabel("min");
 		lblMin_1.setBounds(411, 277, 46, 14);
 		panel.add(lblMin_1);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(442, 229, 61, 27);
-		panel.add(comboBox_3);
-		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(442, 271, 61, 26);
-		panel.add(comboBox_4);
-		
+
+		JComboBox<Integer> maxInCombo = new JComboBox<Integer>();
+		maxInCombo.setBounds(442, 229, 61, 27);
+		panel.add(maxInCombo);
+
+		JComboBox<Integer> maxSecCombo = new JComboBox<Integer>();
+		maxSecCombo.setBounds(442, 271, 61, 26);
+		panel.add(maxSecCombo);
+
 		JLabel lblIn_1 = new JLabel("In.");
 		lblIn_1.setBounds(513, 235, 46, 14);
 		panel.add(lblIn_1);
-		
+
 		JLabel lblSec_1 = new JLabel("sec");
 		lblSec_1.setBounds(513, 277, 46, 14);
 		panel.add(lblSec_1);
-		
+
 		JLabel lblGender = new JLabel("Gender");
 		lblGender.setBounds(16, 129, 46, 14);
 		panel.add(lblGender);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(97, 123, 51, 27);
-		panel.add(comboBox_5);
+
+		genderCombo = new JComboBox<String>();
+		genderCombo.setBounds(97, 123, 51, 27);
+		panel.add(genderCombo);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
@@ -231,7 +235,6 @@ public class EventsPnl extends JPanel {
 				mediator, this);
 		saveBtn.setText("Save");
 
-		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent mevt) {
@@ -241,51 +244,114 @@ public class EventsPnl extends JPanel {
 				if (table.getRowCount() > 0)
 
 					if (mevt.getClickCount() == 2) {
-						//call contreoller to load data
-						//maintain event conreoller, Read event
+						// call contreoller to load data
+						// maintain event conreoller, Read event
 					}
 			}
 		});
 
-
 		// ************ Generated By Window Builder ************* //
 		final GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(searchBtn, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
-						.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 937, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(searchTxtBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(searchBtn, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(splitPane, GroupLayout.PREFERRED_SIZE, 417, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addComponent(newBtn, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addComponent(saveBtn, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-					.addGap(88))
-		);
+		groupLayout
+				.setHorizontalGroup(groupLayout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																Alignment.LEADING,
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				newBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				deleteBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				100,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				saveBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				111,
+																				GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(
+																				searchTxtBox,
+																				GroupLayout.PREFERRED_SIZE,
+																				194,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				searchBtn,
+																				GroupLayout.PREFERRED_SIZE,
+																				103,
+																				GroupLayout.PREFERRED_SIZE))
+														.addComponent(
+																splitPane,
+																GroupLayout.PREFERRED_SIZE,
+																937,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+				Alignment.TRAILING).addGroup(
+				groupLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								groupLayout
+										.createParallelGroup(Alignment.LEADING)
+										.addComponent(searchTxtBox,
+												GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(searchBtn,
+												GroupLayout.PREFERRED_SIZE, 23,
+												GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(splitPane, GroupLayout.PREFERRED_SIZE,
+								417, GroupLayout.PREFERRED_SIZE)
+						.addGap(6)
+						.addGroup(
+								groupLayout
+										.createParallelGroup(Alignment.LEADING)
+										.addComponent(deleteBtn,
+												GroupLayout.PREFERRED_SIZE, 31,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(newBtn,
+												GroupLayout.PREFERRED_SIZE, 31,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(saveBtn,
+												GroupLayout.PREFERRED_SIZE, 31,
+												GroupLayout.PREFERRED_SIZE))
+						.addGap(88)));
 		setLayout(groupLayout);
 
 	}
-}
 
+	public Event getEvent() {
+		String eventCode = eventCodeTextBox.getText();
+		String eventName = eventNameTextBox.getText();
+		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
+		Integer scoreMin = ((Integer) minFtCombo.getSelectedItem()) * 100
+				+ (Integer) minInCombo.getSelectedItem();
+		Integer scoreMax = 0;
+		Integer sortSeq = 0;
+		return new Event(eventCode, eventName, scoreUnit, scoreMax, scoreMin,
+				sortSeq);
+	}
+}

@@ -6,6 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
+import edu.clemson.cs.cu.cpsc3720.controllers.MaintainEventController;
+import edu.clemson.cs.cu.cpsc3720.gui.EventsPnl;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
@@ -114,6 +116,14 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName() == "AthletePanel") {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.saveAthlete(panel);
+		} else if (panel.getName() == "EventPanel") {
+			MaintainEventController mec = new MaintainEventController();
+			EventsPnl epl = (EventsPnl) panel;
+			mec.createEvent(epl.getEvent());
+		} else if (panel.getName() == "HeatPanel") {
+			// MaintainHeatController mhc = new MaintainHeatController();
+			// Heat h = new Heat();
+			// mhc.createHeat(h);
 		}
 		System.out.println(panel.getName());
 	}
