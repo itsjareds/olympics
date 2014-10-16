@@ -12,9 +12,8 @@ public class MaintainEventController {
 
 	public void deleteEvent(Event e) {
 		System.out.println("Deleting event " + e);
-		if (e.getDbId() != null) {
-
-		}
+		Event event = DaoRepository.getEvents().delete(e);
+		System.out.println("Deleted event " + event);
 	}
 
 }
