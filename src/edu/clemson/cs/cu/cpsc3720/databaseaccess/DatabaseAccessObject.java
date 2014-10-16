@@ -3,6 +3,7 @@ package edu.clemson.cs.cu.cpsc3720.databaseaccess;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.id.ORecordId;
 import com.orientechnologies.orient.core.record.impl.ODocument;
@@ -11,27 +12,12 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public final ArrayList<T> objects = new ArrayList<T>();
-	private static ODatabaseDocumentTx db;
 	private static String user = "root";
 	private static String pass = "passw0rd";
-	private static boolean isOpen = false;
 
-	static {
-		db = new ODatabaseDocumentTx("remote:localhost:2424/BugSquasher");
-	}
-
-	public static void open() {
-		if (!isOpen) {
-			db.open(user, pass);
-			isOpen = true;
-		}
-	}
-
-	public static void close() {
-		if (isOpen) {
-			db.close();
-			isOpen = false;
-		}
+	private static ODatabaseDocumentTx getDb() {
+		return ODatabaseDocumentPool.global().acquire(
+				"remote:localhost:2424/BugSquasher", user, pass);
 	}
 
 	public T query(Class<T> classOfT, String ref) {
@@ -46,7 +32,8 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		}
 
 		if (ret == null) {
-			open();
+			ODatabaseDocumentTx db = getDb();
+
 			if (db.getMetadata().getSchema()
 					.existsClass(classOfT.getSimpleName())) {
 				for (ODocument doc : db.browseClass(classOfT.getSimpleName())) {
@@ -59,29 +46,42 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 					}
 				}
 			}
+
+			// db.close();
 		}
 
 		return ret;
 	}
 
 	public void load(Class<T> classOfT) {
-		open();
+		ODatabaseDocumentTx db = getDb();
 
 		for (ODocument objDoc : db.browseClass(classOfT.getSimpleName())) {
 			T obj = new Gson().fromJson(objDoc.toJSON(), classOfT);
 			obj.setDbId(objDoc.getIdentity().toString());
 			objects.add(obj);
 		}
+
+		// db.close();
 	}
 
 	public void save(T t) {
-		open();
+		ODatabaseDocumentTx db = getDb();
 
-		ODocument doc = new ODocument(t.getClass().getSimpleName());
-		if (t.getDbId() != null)
+		ODocument doc = new ODocument();
+		if (t.getDbId() != null) {
+			doc = new ODocument(t.getClass().getSimpleName());
 			doc = db.getRecord(new ORecordId(t.getDbId()));
+		} else {
+			System.out.println("Making new record for " + t + " of class "
+					+ t.getClass().getSimpleName());
+		}
 		String json = new Gson().toJson(t);
 		doc.fromJSON(json);
+		doc.setClassName(t.getClass().getSimpleName());
 		t.setDbId(doc.save().getIdentity().toString());
+		System.out.println("Retrieved dbId " + t.getDbId());
+
+		// db.close();
 	}
 }

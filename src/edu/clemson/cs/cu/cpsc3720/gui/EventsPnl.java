@@ -31,7 +31,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 public class EventsPnl extends JPanel {
 
 	private static AthleteTableModel athleteTableModel;
-	private static EventTableModel eventTableModel;
+	public static EventTableModel eventTableModel;
 	private static HeatTableModel heatTableModel;
 	private final JTextField eventCodeTextBox;
 	private final JTextField eventNameTextBox;
@@ -49,7 +49,7 @@ public class EventsPnl extends JPanel {
 	private final JTable heatsTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
-	private final JTable table;
+	public final JTable table;
 	private double dividerLocation;
 	private Event loadedEvent;
 
