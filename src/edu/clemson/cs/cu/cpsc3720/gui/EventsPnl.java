@@ -4,7 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,21 +22,17 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
-import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
+@SuppressWarnings("serial")
 public class EventsPnl extends JPanel {
 
-	private AthleteTableModel athleteTableModel;
-	private EventTableModel eventTableModel;
-	private HeatTableModel heatTableModel;
 	private final JTextField eventCodeTextBox;
 	private final JTextField eventNameTextBox;
-	private final JComboBox<String> genderCombo;
 	private final JComboBox<String> scoreUnitCombo;
 	private final JComboBox<Integer> minFtCombo;
 	private final JComboBox<Integer> minInCombo;
@@ -48,11 +43,13 @@ public class EventsPnl extends JPanel {
 	private final JComboBox<Integer> maxMinCombo;
 	private final JComboBox<Integer> maxSecCombo;
 
-	private final JTable heatsTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
-	private final JTable table;
-	private double dividerLocation;
+
+	private EventTableModel eventTableModel;
+	private HeatTableModel heatTableModel;
+	private final JTable heatsTable;
+	private final JTable eventsTable;
 	private Event loadedEvent;
 
 	/**
@@ -64,20 +61,19 @@ public class EventsPnl extends JPanel {
 
 		loadedEvent = new Event("", "", "", 0, 0, 0);
 
-		ArrayList<Event> associatedEvents = new ArrayList<Event>();
-		associatedEvents.addAll(DaoRepository.getEvents().objects);
-		eventTableModel = new EventTableModel(DaoRepository.getEvents().objects);
+		eventTableModel = new EventTableModel(DaoRepository.getEventsDao().objects);
+		heatTableModel = new HeatTableModel(DaoRepository.getHeatsDao().objects);
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
-		dividerLocation = 1.8;
+		double dividerLocation = 1.8;
 		splitPane.setDividerLocation(250);
 
 		final JScrollPane scrollPane = new JScrollPane();
 		splitPane.setLeftComponent(scrollPane);
 
-		table = new JTable(eventTableModel);
-		scrollPane.setViewportView(table);
+		eventsTable = new JTable(eventTableModel);
+		scrollPane.setViewportView(eventsTable);
 
 		final JScrollPane informationScrollPane = new JScrollPane();
 		splitPane.setRightComponent(informationScrollPane);
@@ -109,7 +105,7 @@ public class EventsPnl extends JPanel {
 		panel.add(lblNewLabel);
 
 		final JLabel lblScore = new JLabel("Minimum Score");
-		lblScore.setBounds(16, 198, 117, 16);
+		lblScore.setBounds(16, 181, 117, 16);
 		panel.add(lblScore);
 
 		final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
@@ -117,95 +113,87 @@ public class EventsPnl extends JPanel {
 		panel.add(lblAssociatedHeats);
 
 		final JScrollPane heatsScrollPane = new JScrollPane();
-		heatsScrollPane.setBounds(343, 34, 309, 107);
+		heatsScrollPane.setBounds(319, 34, 343, 197);
 		panel.add(heatsScrollPane);
 
 		heatsTable = new JTable(heatTableModel);
 		heatsScrollPane.setViewportView(heatsTable);
 
 		final JLabel lblFt = new JLabel("ft.");
-		lblFt.setBounds(108, 234, 50, 16);
+		lblFt.setBounds(108, 214, 50, 16);
 		panel.add(lblFt);
 
 		final JLabel lblIn = new JLabel("In.");
-		lblIn.setBounds(265, 234, 61, 16);
+		lblIn.setBounds(265, 214, 61, 16);
 		panel.add(lblIn);
 
 		minInCombo = new JComboBox<Integer>();
-		minInCombo.setBounds(173, 230, 80, 27);
+		minInCombo.setBounds(173, 210, 80, 27);
 		panel.add(minInCombo);
 
 		minFtCombo = new JComboBox<Integer>();
-		minFtCombo.setBounds(16, 229, 80, 27);
+		minFtCombo.setBounds(16, 209, 80, 27);
 		panel.add(minFtCombo);
 
 		final JLabel lblMin = new JLabel("min");
-		lblMin.setBounds(108, 276, 61, 16);
+		lblMin.setBounds(108, 256, 61, 16);
 		panel.add(lblMin);
 
 		final JLabel lblSec = new JLabel("sec");
-		lblSec.setBounds(265, 276, 50, 16);
+		lblSec.setBounds(265, 256, 50, 16);
 		panel.add(lblSec);
 
 		minMinCombo = new JComboBox<Integer>();
-		minMinCombo.setBounds(16, 271, 80, 27);
+		minMinCombo.setBounds(16, 251, 80, 27);
 		panel.add(minMinCombo);
 
 		minSecCombo = new JComboBox<Integer>();
-		minSecCombo.setBounds(173, 272, 80, 27);
+		minSecCombo.setBounds(173, 252, 80, 27);
 		panel.add(minSecCombo);
 
 		JLabel lblScoringUnit = new JLabel("Score Unit");
-		lblScoringUnit.setBounds(16, 167, 89, 14);
+		lblScoringUnit.setBounds(16, 148, 89, 14);
 		panel.add(lblScoringUnit);
 
 		scoreUnitCombo = new JComboBox<String>();
-		scoreUnitCombo.setBounds(97, 161, 128, 26);
+		scoreUnitCombo.setBounds(98, 143, 128, 26);
 		panel.add(scoreUnitCombo);
 
 		JLabel lblMaximumScore = new JLabel("Maximum Score");
-		lblMaximumScore.setBounds(343, 199, 105, 14);
+		lblMaximumScore.setBounds(19, 291, 105, 14);
 		panel.add(lblMaximumScore);
 
 		maxFtCombo = new JComboBox<Integer>();
-		maxFtCombo.setBounds(340, 229, 80, 27);
+		maxFtCombo.setBounds(16, 321, 80, 27);
 		panel.add(maxFtCombo);
 
 		maxMinCombo = new JComboBox<Integer>();
-		maxMinCombo.setBounds(340, 271, 80, 27);
+		maxMinCombo.setBounds(16, 363, 80, 27);
 		panel.add(maxMinCombo);
 
 		JLabel lblFt_1 = new JLabel("ft.");
-		lblFt_1.setBounds(432, 235, 46, 14);
+		lblFt_1.setBounds(108, 327, 46, 14);
 		panel.add(lblFt_1);
 
 		JLabel lblMin_1 = new JLabel("min");
-		lblMin_1.setBounds(432, 277, 46, 14);
+		lblMin_1.setBounds(108, 369, 46, 14);
 		panel.add(lblMin_1);
 
 		maxInCombo = new JComboBox<Integer>();
-		maxInCombo.setBounds(490, 230, 80, 27);
+		maxInCombo.setBounds(173, 321, 80, 27);
 		panel.add(maxInCombo);
 
 		maxSecCombo = new JComboBox<Integer>();
-		maxSecCombo.setBounds(490, 272, 80, 26);
+		maxSecCombo.setBounds(173, 363, 80, 26);
 		panel.add(maxSecCombo);
 
 		JLabel lblIn_1 = new JLabel("In.");
-		lblIn_1.setBounds(580, 235, 46, 14);
+		lblIn_1.setBounds(261, 327, 46, 14);
 		panel.add(lblIn_1);
 
 		JLabel lblSec_1 = new JLabel("sec");
-		lblSec_1.setBounds(580, 277, 46, 14);
+		lblSec_1.setBounds(261, 369, 46, 14);
 		panel.add(lblSec_1);
-
-		JLabel lblGender = new JLabel("Gender");
-		lblGender.setBounds(16, 129, 46, 14);
-		panel.add(lblGender);
-
-		genderCombo = new JComboBox<String>();
-		genderCombo.setBounds(97, 123, 128, 27);
-		panel.add(genderCombo);
 
 		searchTxtBox = new JTextField();
 		searchTxtBox.setColumns(10);
@@ -225,9 +213,6 @@ public class EventsPnl extends JPanel {
 
 		/* Load initial values */
 		{
-			genderCombo.addItem("Male");
-			genderCombo.addItem("Female");
-			genderCombo.setSelectedItem(null);
 
 			scoreUnitCombo.addItem("N");
 			scoreUnitCombo.addItem("D");
@@ -254,17 +239,17 @@ public class EventsPnl extends JPanel {
 
 		/* Click events */
 		{
-			table.addMouseListener(new MouseAdapter() {
+			eventsTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(final MouseEvent mevt) {
-					if (table.getSelectedRow() != -1) {
+					if (eventsTable.getSelectedRow() != -1)
 						deleteBtn.setEnabled(true);
-					}
-					if (table.getRowCount() > 0)
-						if (mevt.getClickCount() == 2) {
-							setEvent(eventTableModel.getEvent(table
+					if (eventsTable.getRowCount() > 0) {
+						if (mevt.getClickCount() == 1) {
+							setEvent(eventTableModel.getEvent(eventsTable
 									.getSelectedRow()));
 						}
+					}
 				}
 			});
 		}
@@ -426,13 +411,13 @@ public class EventsPnl extends JPanel {
 	public void setEvent(Event e) {
 		if (e == null) {
 			e = new Event("", "", "N", 0, 0, 0);
-			table.clearSelection();
+			eventsTable.clearSelection();
 		} else {
-			int index = DaoRepository.getEvents().objects.indexOf(e);
+			int index = DaoRepository.getEventsDao().objects.indexOf(e);
 			if (index == -1)
-				table.clearSelection();
+				eventsTable.clearSelection();
 			else
-				table.setRowSelectionInterval(index, index);
+				eventsTable.setRowSelectionInterval(index, index);
 		}
 		loadedEvent = e;
 		eventCodeTextBox.setText(e.getEventCode());

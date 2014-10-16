@@ -30,7 +30,7 @@ public class Heat implements DatabaseSerializable {
 	}
 
 	public void loadEvent() {
-		this.event = DaoRepository.getEvents().query(Event.class, eventRef);
+		this.event = DaoRepository.getEventsDao().query(Event.class, eventRef);
 	}
 
 	public Integer getNumHeats() {

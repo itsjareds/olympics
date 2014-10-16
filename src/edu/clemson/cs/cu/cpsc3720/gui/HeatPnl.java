@@ -42,7 +42,7 @@ public class HeatPnl extends JPanel {
 		this.mediator = mediator;
 		this.setName("HeatPanel");
 
-		heatTableModel = new HeatTableModel(DaoRepository.getHeats().objects);
+		heatTableModel = new HeatTableModel(DaoRepository.getHeatsDao().objects);
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);

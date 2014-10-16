@@ -7,12 +7,12 @@ public class MaintainEventController {
 
 	public void saveEvent(Event e) {
 		System.out.println("Saving event " + e);
-		DaoRepository.getEvents().save(e);
+		DaoRepository.getEventsDao().save(e);
 	}
 
 	public void deleteEvent(Event e) {
 		System.out.println("Deleting event " + e);
-		DaoRepository.getEvents().delete(e);
+		DaoRepository.getEventsDao().delete(e);
 	}
 
 }

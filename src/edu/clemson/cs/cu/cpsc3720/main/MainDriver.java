@@ -18,12 +18,12 @@ public class MainDriver {
 		MainDriver.mediator = new Mediator();
 
 		try {
-			DaoRepository.getAthletes().load(Athlete.class);
-			DaoRepository.getEvents().load(Event.class);
-			DaoRepository.getHeats().load(Heat.class);
-			DaoRepository.getRegistrations().load(Registration.class);
-			DaoRepository.getSchools().load(School.class);
-			DaoRepository.getTeachers().load(Teacher.class);
+			DaoRepository.getAthletesDao().load(Athlete.class);
+			DaoRepository.getEventsDao().load(Event.class);
+			DaoRepository.getHeatsDao().load(Heat.class);
+			DaoRepository.getRegistrationsDao().load(Registration.class);
+			DaoRepository.getSchoolsDao().load(School.class);
+			DaoRepository.getTeachersDao().load(Teacher.class);
 		} catch (IllegalArgumentException e) {
 			// classes not in database, do not load
 		}

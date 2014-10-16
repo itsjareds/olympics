@@ -8,50 +8,50 @@ import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 
 public class DaoRepository {
-	private static DatabaseAccessObject<Athlete> athletes;
-	private static DatabaseAccessObject<Event> events;
-	private static DatabaseAccessObject<Heat> heats;
-	private static DatabaseAccessObject<Registration> registrations;
-	private static DatabaseAccessObject<School> schools;
-	private static DatabaseAccessObject<Teacher> teachers;
+	private static DatabaseAccessObject<Athlete> athletesDao;
+	private static DatabaseAccessObject<Event> eventsDao;
+	private static DatabaseAccessObject<Heat> heatsDao;
+	private static DatabaseAccessObject<Registration> registrationsDao;
+	private static DatabaseAccessObject<School> schoolsDao;
+	private static DatabaseAccessObject<Teacher> teachersDao;
 
 	private DaoRepository() {
 
 	}
 
-	public static DatabaseAccessObject<Athlete> getAthletes() {
-		if (athletes == null)
-			athletes = new DatabaseAccessObject<Athlete>();
-		return athletes;
+	public static DatabaseAccessObject<Athlete> getAthletesDao() {
+		if (athletesDao == null)
+			athletesDao = new DatabaseAccessObject<Athlete>();
+		return athletesDao;
 	}
 
-	public static DatabaseAccessObject<Event> getEvents() {
-		if (events == null)
-			events = new DatabaseAccessObject<Event>();
-		return events;
+	public static DatabaseAccessObject<Event> getEventsDao() {
+		if (eventsDao == null)
+			eventsDao = new DatabaseAccessObject<Event>();
+		return eventsDao;
 	}
 
-	public static DatabaseAccessObject<Heat> getHeats() {
-		if (heats == null)
-			heats = new DatabaseAccessObject<Heat>();
-		return heats;
+	public static DatabaseAccessObject<Heat> getHeatsDao() {
+		if (heatsDao == null)
+			heatsDao = new DatabaseAccessObject<Heat>();
+		return heatsDao;
 	}
 
-	public static DatabaseAccessObject<Registration> getRegistrations() {
-		if (registrations == null)
-			registrations = new DatabaseAccessObject<Registration>();
-		return registrations;
+	public static DatabaseAccessObject<Registration> getRegistrationsDao() {
+		if (registrationsDao == null)
+			registrationsDao = new DatabaseAccessObject<Registration>();
+		return registrationsDao;
 	}
 
-	public static DatabaseAccessObject<School> getSchools() {
-		if (schools == null)
-			schools = new DatabaseAccessObject<School>();
-		return schools;
+	public static DatabaseAccessObject<School> getSchoolsDao() {
+		if (schoolsDao == null)
+			schoolsDao = new DatabaseAccessObject<School>();
+		return schoolsDao;
 	}
 
-	public static DatabaseAccessObject<Teacher> getTeachers() {
-		if (teachers == null)
-			teachers = new DatabaseAccessObject<Teacher>();
-		return teachers;
+	public static DatabaseAccessObject<Teacher> getTeachersDao() {
+		if (teachersDao == null)
+			teachersDao = new DatabaseAccessObject<Teacher>();
+		return teachersDao;
 	}
 }

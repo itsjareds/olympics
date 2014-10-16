@@ -86,8 +86,8 @@ public class AthletePnl extends JPanel {
 
 		// ---------- Start Init --------------- //
 		{
-			athletes = DaoRepository.getAthletes().objects;
-			events = DaoRepository.getEvents().objects;
+			athletes = DaoRepository.getAthletesDao().objects;
+			events = DaoRepository.getEventsDao().objects;
 
 			Collections.sort(athletes);
 			athleteTableModel = new AthleteTableModel(athletes);
@@ -270,7 +270,7 @@ public class AthletePnl extends JPanel {
 			panel.add(eventComboBox);
 
 			// school/group code combo box
-			ArrayList<Teacher> teachers = DaoRepository.getTeachers().objects;
+			ArrayList<Teacher> teachers = DaoRepository.getTeachersDao().objects;
 			ArrayList<String> groupCodes = new ArrayList<String>();
 			groupCodes.add("");
 			for (Teacher teacher : teachers) {
@@ -308,7 +308,7 @@ public class AthletePnl extends JPanel {
 			panel.add(groupLeaderComboBox);
 
 			// schools combo box
-			ArrayList<School> schools = DaoRepository.getSchools().objects;
+			ArrayList<School> schools = DaoRepository.getSchoolsDao().objects;
 			schoolList = new ArrayList<>();
 			schoolList.add(new School(""));
 			schoolList.addAll(schools);
@@ -544,7 +544,7 @@ public class AthletePnl extends JPanel {
 		genderComboBox.setSelectedItem(gender);
 
 		// Set group leader
-		DatabaseAccessObject<Teacher> daot = DaoRepository.getTeachers();
+		DatabaseAccessObject<Teacher> daot = DaoRepository.getTeachersDao();
 		Teacher t = daot.query(Teacher.class, athlete.getTeacherRef());
 		groupLeaderComboBox.setSelectedItem(t);
 
@@ -555,12 +555,12 @@ public class AthletePnl extends JPanel {
 		// fill event list
 		for (String ref : arefs) {
 			DatabaseAccessObject<Registration> daor = DaoRepository
-					.getRegistrations();
+					.getRegistrationsDao();
 			Registration r = daor.query(Registration.class, ref);
 			rrefs.add(r.getEventRef());
 		}
 		for (String ref : rrefs) {
-			DatabaseAccessObject<Event> daoe = DaoRepository.getEvents();
+			DatabaseAccessObject<Event> daoe = DaoRepository.getEventsDao();
 			Event e = daoe.query(Event.class, ref);
 			if (e != null)
 				associatedEvents.add(e);
@@ -568,7 +568,7 @@ public class AthletePnl extends JPanel {
 		eventTableModel.setEvents(associatedEvents);
 
 		// set school
-		DatabaseAccessObject<School> daos = DaoRepository.getSchools();
+		DatabaseAccessObject<School> daos = DaoRepository.getSchoolsDao();
 		School s = daos.query(School.class, athlete.getSchoolRef());
 		schoolNameComboBox.setSelectedItem(s);
 
