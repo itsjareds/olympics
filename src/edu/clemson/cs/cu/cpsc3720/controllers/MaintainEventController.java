@@ -1,23 +1,20 @@
 package edu.clemson.cs.cu.cpsc3720.controllers;
 
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 
 public class MaintainEventController {
 
-	public void createEvent(Event e) {
-		System.out.println(e);
+	public void saveEvent(Event e) {
+		System.out.println("Saving event " + e);
+		DaoRepository.getEvents().save(e);
 	}
 
-	public void readEvent() {
+	public void deleteEvent(Event e) {
+		System.out.println("Deleting event " + e);
+		if (e.getDbId() != null) {
 
-	}
-
-	public void updateEvent() {
-
-	}
-
-	public void deleteEvent() {
-
+		}
 	}
 
 }
