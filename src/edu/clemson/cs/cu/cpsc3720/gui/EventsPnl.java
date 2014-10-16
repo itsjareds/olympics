@@ -361,6 +361,16 @@ public class EventsPnl extends JPanel {
 	}
 
 	public void setEvent(Event e) {
+		if (e == null) {
+			e = new Event("", "", "", 0, 0, 0);
+			table.clearSelection();
+		} else {
+			int index = DaoRepository.getEvents().objects.indexOf(e);
+			if (index == -1)
+				table.clearSelection();
+			else
+				table.setRowSelectionInterval(index, index);
+		}
 		loadedEvent = e;
 		eventCodeTextBox.setText(e.getEventCode());
 		eventNameTextBox.setText(e.getEventName());
