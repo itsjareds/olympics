@@ -72,7 +72,16 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void newItem(ActionEvent arg0, JPanel panel) {
 		this.newButton.setEnabled(true);
-
+		if (panel.getName().equals("AthletePanel")) {
+			MaintainAthleteController mac = new MaintainAthleteController();
+		} else if (panel.getName().equals("EventPanel")) {
+			EventsPnl epl = (EventsPnl) panel;
+			epl.setEvent(null);
+		} else if (panel.getName().equals("HeatPanel")) {
+			// MaintainHeatController mhc = new MaintainHeatController();
+			// Heat h = new Heat();
+			// mhc.createHeat(h);
+		}
 		System.out.println(panel.getName());
 	}
 
@@ -95,7 +104,17 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
 		this.deleteButton.setEnabled(true);
-
+		if (panel.getName().equals("AthletePanel")) {
+			MaintainAthleteController mac = new MaintainAthleteController();
+		} else if (panel.getName().equals("EventPanel")) {
+			MaintainEventController mec = new MaintainEventController();
+			EventsPnl epl = (EventsPnl) panel;
+			mec.deleteEvent(epl.getEvent());
+		} else if (panel.getName().equals("HeatPanel")) {
+			// MaintainHeatController mhc = new MaintainHeatController();
+			// Heat h = new Heat();
+			// mhc.createHeat(h);
+		}
 		System.out.println(panel.getName());
 	}
 
@@ -117,21 +136,19 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
 		saveButton.setVisible(true);
-		if (panel.getName() == "AthletePanel") {
+		if (panel.getName().equals("AthletePanel")) {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.saveAthlete(panel);
-			System.out.println(panel.getName());
-		} else if (panel.getName() == "EventPanel") {
+		} else if (panel.getName().equals("EventPanel")) {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
-			mec.createEvent(epl.getEvent());
-			System.out.println(panel.getName());
-		} else if (panel.getName() == "HeatPanel") {
+			mec.saveEvent(epl.getEvent());
+		} else if (panel.getName().equals("HeatPanel")) {
 			// MaintainHeatController mhc = new MaintainHeatController();
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
-			System.out.println(panel.getName());
 		}
+		System.out.println(panel.getName());
 	}
 
 	@Override
