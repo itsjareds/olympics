@@ -2,8 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.gui;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,6 +15,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
@@ -25,6 +26,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
+import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
@@ -61,8 +63,9 @@ public class EventsPnl extends JPanel {
 
 		loadedEvent = new Event("", "", "", 0, 0, 0);
 
-		eventTableModel = new EventTableModel(DaoRepository.getEventsDao().objects);
-		heatTableModel = new HeatTableModel(DaoRepository.getHeatsDao().objects);
+		eventTableModel = new EventTableModel(
+				DaoRepository.getEventsDao().objects);
+		heatTableModel = new HeatTableModel(new ArrayList<Heat>());
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
@@ -239,19 +242,17 @@ public class EventsPnl extends JPanel {
 
 		/* Click events */
 		{
-			eventsTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(final MouseEvent mevt) {
-					if (eventsTable.getSelectedRow() != -1)
-						deleteBtn.setEnabled(true);
-					if (eventsTable.getRowCount() > 0) {
-						if (mevt.getClickCount() == 1) {
-							setEvent(eventTableModel.getEvent(eventsTable
-									.getSelectedRow()));
+			eventsTable.getSelectionModel().addListSelectionListener(
+					new ListSelectionListener() {
+						public void valueChanged(ListSelectionEvent e) {
+							if (eventsTable.getSelectedRow() != -1)
+								deleteBtn.setEnabled(true);
+							if (eventsTable.getRowCount() > 0) {
+								setEvent(eventTableModel.getEvent(eventsTable
+										.getSelectedRow()));
+							}
 						}
-					}
-				}
-			});
+					});
 		}
 
 		/* Score unit combo change listener */
@@ -409,6 +410,7 @@ public class EventsPnl extends JPanel {
 	}
 
 	public void setEvent(Event e) {
+		/* Fill event form */
 		if (e == null) {
 			e = new Event("", "", "N", 0, 0, 0);
 			eventsTable.clearSelection();
@@ -423,6 +425,17 @@ public class EventsPnl extends JPanel {
 		eventCodeTextBox.setText(e.getEventCode());
 		eventNameTextBox.setText(e.getEventName());
 		scoreUnitCombo.setSelectedItem(e.getScoreUnit());
+
+		/* Fill heats table */
+		if (e.getDbId() != null) {
+			ArrayList<Heat> heats = new ArrayList<Heat>();
+			for (Heat h : DaoRepository.getHeatsDao().objects) {
+				if (h.getEventRef() != null
+						&& h.getEventRef().equals(e.getDbId()))
+					heats.add(h);
+			}
+			heatTableModel.setHeats(heats);
+		}
 	}
 
 	public Event getEvent() {
