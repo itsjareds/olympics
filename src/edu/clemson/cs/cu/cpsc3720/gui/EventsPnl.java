@@ -245,11 +245,13 @@ public class EventsPnl extends JPanel {
 			eventsTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
 						public void valueChanged(ListSelectionEvent e) {
-							if (eventsTable.getSelectedRow() != -1)
+							if (eventsTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
-							if (eventsTable.getRowCount() > 0) {
-								setEvent(eventTableModel.getEvent(eventsTable
-										.getSelectedRow()));
+								if (eventsTable.getRowCount() > 0) {
+									setEvent(eventTableModel
+											.getEvent(eventsTable
+													.getSelectedRow()));
+								}
 							}
 						}
 					});
@@ -427,15 +429,15 @@ public class EventsPnl extends JPanel {
 		scoreUnitCombo.setSelectedItem(e.getScoreUnit());
 
 		/* Fill heats table */
+		ArrayList<Heat> heats = new ArrayList<Heat>();
 		if (e.getDbId() != null) {
-			ArrayList<Heat> heats = new ArrayList<Heat>();
 			for (Heat h : DaoRepository.getHeatsDao().objects) {
 				if (h.getEventRef() != null
 						&& h.getEventRef().equals(e.getDbId()))
 					heats.add(h);
 			}
-			heatTableModel.setHeats(heats);
 		}
+		heatTableModel.setHeats(heats);
 	}
 
 	public Event getEvent() {
