@@ -1,7 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -26,10 +24,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
-import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
-import edu.clemson.cs.cu.cpsc3720.main.Heat;
-import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
@@ -51,9 +46,6 @@ public class EventsPnl extends JPanel {
 	private final JComboBox<Integer> maxMinCombo;
 	private final JComboBox<Integer> maxSecCombo;
 
-	private final ArrayList<Athlete> athletes;
-	private final ArrayList<Event> events;
-	private final ArrayList<Heat> heats;
 	private final JTable heatsTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
@@ -69,26 +61,21 @@ public class EventsPnl extends JPanel {
 		this.setName("EventPanel");
 
 		loadedEvent = new Event("", "", "", 0, 0, 0);
-		events = DaoRepository.getEvents().objects;
-		athletes = DaoRepository.getAthletes().objects;
-		final ArrayList<Registration> regs = athletes.get(0).getRegistrations();
-		for (final Registration r : regs) {
-			events.add(r.getEvent());
-		}
-		heats = new ArrayList<Heat>();
 
-		eventTableModel = new EventTableModel(events);
+		ArrayList<Event> associatedEvents = new ArrayList<Event>();
+		associatedEvents.addAll(DaoRepository.getEvents().objects);
+		eventTableModel = new EventTableModel(DaoRepository.getEvents().objects);
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);
 		dividerLocation = 1.8;
 		splitPane.setDividerLocation(250);
 
-		final JScrollPane athleteScrollPane = new JScrollPane();
-		splitPane.setLeftComponent(athleteScrollPane);
+		final JScrollPane scrollPane = new JScrollPane();
+		splitPane.setLeftComponent(scrollPane);
 
 		table = new JTable(eventTableModel);
-		athleteScrollPane.setViewportView(table);
+		scrollPane.setViewportView(table);
 
 		final JScrollPane informationScrollPane = new JScrollPane();
 		splitPane.setRightComponent(informationScrollPane);
@@ -223,23 +210,16 @@ public class EventsPnl extends JPanel {
 
 		final JButton searchBtn = new SearchButton(
 				new MediatorActionListener(), mediator, this);
-		searchBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-			}
-		});
 
 		final JButton newBtn = new NewButton(new MediatorActionListener(),
 				mediator, this);
-		newBtn.setText("New");
 
 		final JButton deleteBtn = new DeleteButton(
 				new MediatorActionListener(), mediator, this);
-		deleteBtn.setText("Delete");
 		deleteBtn.setEnabled(false);
 
 		final JButton saveBtn = new SaveButton(new MediatorActionListener(),
 				mediator, this);
-		saveBtn.setText("Save");
 
 		/* Load initial values */
 		{
