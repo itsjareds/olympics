@@ -16,7 +16,7 @@ public class UnregisterButton extends JButton implements ComandInterface {
 	private JPanel panel;
 
 	public UnregisterButton(ActionListener aL, Mediator mediator, JPanel panel) {
-		super("New");
+		super("Unregister");
 		this.mediator = mediator;
 		this.panel = panel;
 		this.addActionListener(aL);

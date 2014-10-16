@@ -385,15 +385,12 @@ public class AthletePnl extends JPanel {
 			// Search Button
 			searchBtn = new SearchButton(new MediatorActionListener(),
 					mediator, this);
-			final JPanel thisPanel = this;
-			searchBtn.setText("Search");
 
 			// Register Button
 			btnRegister = new RegisterButton(new MediatorActionListener(),
 					mediator, this);
 			btnRegister.setBounds(440, 131, 117, 29);
 			panel.add(btnRegister);
-			btnRegister.setText("Register");
 			btnRegister.setEnabled(false);
 
 			// Unregister Button
@@ -401,23 +398,19 @@ public class AthletePnl extends JPanel {
 					mediator, this);
 			btnUnregister.setBounds(557, 131, 113, 29);
 			panel.add(btnUnregister);
-			btnUnregister.setText("Unregister");
 			btnUnregister.setEnabled(false);
 
 			// New Button
 			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
-			newBtn.setText("New");
 
 			// Delete Button
 			deleteBtn = new DeleteButton(new MediatorActionListener(),
 					mediator, this);
-			deleteBtn.setText("Delete");
 			deleteBtn.setEnabled(false);
 
 			// Save Button
 			saveBtn = new SaveButton(new MediatorActionListener(), mediator,
 					this);
-			saveBtn.setText("Save");
 		}
 		// ------------- End Buttons -------------- //
 

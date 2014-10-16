@@ -16,7 +16,7 @@ public class RegisterButton extends JButton implements ComandInterface {
 	private JPanel panel;
 
 	public RegisterButton(ActionListener aL, Mediator mediator, JPanel panel) {
-		super("New");
+		super("Register");
 		this.mediator = mediator;
 		this.panel = panel;
 		this.addActionListener(aL);
