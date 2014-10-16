@@ -11,7 +11,7 @@ public class HeatTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Heat> heats = new ArrayList<>();
-	String[] colNames = { "Event Code", "Event", "Minimun Age", "Maximum Age",
+	String[] colNames = { "Event Code", "Event", "Minimum Age", "Maximum Age",
 			"Gender", "Time", "Division" };
 
 	public HeatTableModel(List<Heat> heats) {
@@ -51,8 +51,24 @@ public class HeatTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(final int row, final int col) {
-
-		return null;
+		switch (col) {
+		case 0:
+			return heats.get(row).getEvent().getEventCode();
+		case 1:
+			return heats.get(row).getEvent().getEventName();
+		case 2:
+			return heats.get(row).getMinAge();
+		case 3:
+			return heats.get(row).getMaxAge();
+		case 4:
+			return heats.get(row).getGender();
+		case 5:
+			return heats.get(row).getTime();
+		case 6:
+			return heats.get(row).getNumHeats();
+		default:
+			return null;
+		}
 	}
 
 	@Override

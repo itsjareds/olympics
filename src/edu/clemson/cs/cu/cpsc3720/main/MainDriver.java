@@ -2,7 +2,10 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.awt.EventQueue;
 
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
+
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.databaseaccess.DatabaseAccessObject;
 import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
@@ -39,6 +42,9 @@ public class MainDriver {
 				}
 			}
 		});
-	}
 
+		ODatabaseDocumentTx db = DatabaseAccessObject.getDb();
+		if (!db.isClosed())
+			DatabaseAccessObject.getDb().close();
+	}
 }

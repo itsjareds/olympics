@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,24 +22,14 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
-import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
-import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
-import edu.clemson.cs.cu.cpsc3720.main.Athlete;
-import edu.clemson.cs.cu.cpsc3720.main.Event;
-import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 public class HeatPnl extends JPanel {
 
-	private static AthleteTableModel athleteTableModel;
-	private static EventTableModel eventTableModel;
-	private static HeatTableModel heatTableModel;
+	private HeatTableModel heatTableModel;
 	private final JTextField athleteLastNameTxtBox;
-	private final ArrayList<Athlete> athletes;
-	private final ArrayList<Event> events;
-	private final ArrayList<Heat> heats;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
 	private final JTable table;
@@ -53,13 +42,7 @@ public class HeatPnl extends JPanel {
 		this.mediator = mediator;
 		this.setName("HeatPanel");
 
-		events = DaoRepository.getEvents().objects;
-		athletes = DaoRepository.getAthletes().objects;
-		heats = DaoRepository.getHeats().objects;
-
-		athleteTableModel = new AthleteTableModel(athletes);
-		eventTableModel = new EventTableModel(events);
-		heatTableModel = new HeatTableModel(heats);
+		heatTableModel = new HeatTableModel(DaoRepository.getHeats().objects);
 
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(1);

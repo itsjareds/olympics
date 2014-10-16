@@ -15,7 +15,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	private static String user = "root";
 	private static String pass = "passw0rd";
 
-	private static ODatabaseDocumentTx getDb() {
+	public static ODatabaseDocumentTx getDb() {
 		return ODatabaseDocumentPool.global().acquire(
 				"remote:localhost:2424/BugSquasher", user, pass);
 	}
@@ -33,23 +33,24 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	public T delete(String ref) {
 		T ret = null;
-		ODatabaseDocumentTx db = getDb();
+		if (ref != null) {
+			ODatabaseDocumentTx db = getDb();
+			T cached = searchCache(ref);
+			if (cached != null)
+				objects.remove(cached);
 
-		T cached = searchCache(ref);
-		if (cached != null)
-			objects.remove(cached);
+			ODocument doc = db.getRecord(new ORecordId(ref));
+			if (doc != null)
+				db.delete(doc);
 
-		ODocument doc = db.getRecord(new ORecordId(ref));
-		if (doc != null)
-			db.delete(doc);
-
-		db.close();
+			db.close();
+		}
 		return ret;
 	}
 
 	public T delete(T t) {
 		T ret = null;
-		if (t.getDbId() != null)
+		if (t != null && t.getDbId() != null)
 			ret = delete(t.getDbId());
 		return ret;
 	}
@@ -97,17 +98,20 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public void save(T t) {
 		ODatabaseDocumentTx db = getDb();
 
-		ODocument doc = new ODocument(t.getClass().getSimpleName());
-		if (t.getDbId() != null)
-			doc = db.getRecord(new ORecordId(t.getDbId()));
-		String json = new Gson().toJson(t);
-		doc.fromJSON(json);
-		t.setDbId(doc.save().getIdentity().toString());
+		if (t != null) {
+			ODocument doc = new ODocument(t.getClass().getSimpleName());
+			if (t.getDbId() != null
+					&& db.getRecord(new ORecordId(t.getDbId())) != null)
+				doc = db.getRecord(new ORecordId(t.getDbId()));
+			String json = new Gson().toJson(t);
+			doc.fromJSON(json);
+			t.setDbId(doc.save().getIdentity().toString());
 
-		/* Add to local cache */
-		T cached = searchCache(t.getDbId());
-		if (cached == null)
-			objects.add(t);
+			/* Add to local cache */
+			T cached = searchCache(t.getDbId());
+			if (cached == null)
+				objects.add(t);
+		}
 
 		db.close();
 	}
