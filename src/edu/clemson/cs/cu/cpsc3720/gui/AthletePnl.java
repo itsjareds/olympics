@@ -606,7 +606,7 @@ public class AthletePnl extends JPanel {
 			athlete = athleteTableModel.getAthlete(athleteTable
 					.getSelectedRow());
 		} else {
-			athlete = new Athlete("", "", "", null, "", "", null);
+			athlete = new Athlete(null, "", "", null, "", "", null);
 		}
 
 		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
@@ -619,7 +619,10 @@ public class AthletePnl extends JPanel {
 		Integer age = (Integer) ageComboBox.getSelectedItem();
 
 		String gender = (String) genderComboBox.getSelectedItem();
-		gender = gender.substring(0, 1);
+		if (gender.equals("Male"))
+			gender = "M";
+		else if (gender.equals("Female"))
+			gender = "F";
 
 		School school = (School) schoolNameComboBox.getSelectedItem();
 		String schoolRef = school.getDbId();

@@ -150,6 +150,7 @@ public class Mediator implements MediatorInterface {
 					+ a.getGender() + " " + a.getAge() + " " + a.getSchoolRef()
 					+ " " + a.getTeacherRef() + " " + a.getRegRefs() + " dbid:"
 					+ a.getDbId());
+
 			if (a.getFirstName().trim().length() > 0
 					&& a.getFirstName().trim().length() > 0
 					&& a.getGender().trim().length() >= 1
@@ -163,6 +164,7 @@ public class Mediator implements MediatorInterface {
 
 				mac.saveAthlete(apl.getAthlete());
 				apl.updateTables();
+				apl.clearPanel();
 			}
 
 		} else if (panel.getName().equals("EventPanel")) {
