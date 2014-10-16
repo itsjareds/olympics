@@ -47,11 +47,9 @@ public class AthletePnl extends JPanel {
 	private final JTextField searchTxtBox;
 	private final JTable athleteTable;
 	private double dividerLocation;
-	private JComboBox<String> monthComboBox;
+	private JComboBox<Integer> ageComboBox;
 	private JComboBox<String> genderComboBox;
 	private JComboBox<Teacher> groupLeaderComboBox;
-	private JComboBox<String> dayComboBox;
-	private JComboBox<String> yearComboBox;
 	private JComboBox<Event> eventComboBox;
 	private JComboBox<String> inchComboBox;
 	private JComboBox<String> feetComboBox;
@@ -177,12 +175,12 @@ public class AthletePnl extends JPanel {
 			lblSchoolGroupCode.setBounds(16, 345, 291, 16);
 			panel.add(lblSchoolGroupCode);
 
-			final JLabel lblBirthday = new JLabel("Birth Date");
-			lblBirthday.setBounds(16, 118, 85, 22);
-			panel.add(lblBirthday);
+			final JLabel lblAge = new JLabel("Age");
+			lblAge.setBounds(16, 140, 85, 22);
+			panel.add(lblAge);
 
 			final JLabel lblGender = new JLabel("Gender");
-			lblGender.setBounds(16, 195, 85, 16);
+			lblGender.setBounds(16, 168, 85, 16);
 			panel.add(lblGender);
 
 			final JLabel lblScore = new JLabel("Qualifing Score");
@@ -197,18 +195,6 @@ public class AthletePnl extends JPanel {
 					"Teacher Information");
 			lblTeacherInformation.setBounds(56, 233, 251, 16);
 			panel.add(lblTeacherInformation);
-
-			final JLabel lblMonth = new JLabel("Month");
-			lblMonth.setBounds(16, 143, 85, 16);
-			panel.add(lblMonth);
-
-			final JLabel lblDay = new JLabel("Day");
-			lblDay.setBounds(152, 143, 155, 16);
-			panel.add(lblDay);
-
-			final JLabel lblYear = new JLabel("Year");
-			lblYear.setBounds(16, 170, 85, 16);
-			panel.add(lblYear);
 
 			final JLabel lblEvents = new JLabel("Add Event");
 			lblEvents.setBounds(361, 38, 82, 16);
@@ -246,50 +232,10 @@ public class AthletePnl extends JPanel {
 					"School Name", "Group Leader", "Group Code" };
 			filterComboBox = new JComboBox<String>(filters);
 
-			// days combo box
-			ArrayList<String> days = new ArrayList<String>();
-			days.add("");
-			for (int i = 0; i < 31; i++) {
-				Integer val = new Integer(i + 1);
-				days.add(val.toString());
-			}
-			String[] listDays = new String[days.size()];
-			listDays = days.toArray(listDays);
-			dayComboBox = new JComboBox<String>(listDays);
-			dayComboBox.setBounds(176, 139, 131, 27);
-			panel.add(dayComboBox);
-
-			// months combo box
-			ArrayList<String> months = new ArrayList<String>();
-			months.add("");
-			for (int i = 0; i < 12; i++) {
-				Integer val = new Integer(i + 1);
-				months.add(val.toString());
-			}
-			String[] listMonths = new String[months.size()];
-			listMonths = months.toArray(listMonths);
-			monthComboBox = new JComboBox<String>(listMonths);
-			monthComboBox.setBounds(66, 139, 75, 27);
-			panel.add(monthComboBox);
-
-			// years combo box
-			ArrayList<String> years = new ArrayList<String>();
-			years.add("");
-			int minAge = 2014 - 8;
-			int maxAge = 2014 - 100;
-			for (int i = minAge; i > maxAge; i--) {
-				Integer val = new Integer(i + 1);
-				years.add(val.toString());
-			}
-			String[] listYears = new String[years.size()];
-			listYears = years.toArray(listYears);
-			yearComboBox = new JComboBox<String>(listYears);
-			yearComboBox.setBounds(66, 166, 98, 27);
-			panel.add(yearComboBox);
-
+			// gender combo box
 			String[] genders = { "", "Male", "Female" };
 			genderComboBox = new JComboBox<String>(genders);
-			genderComboBox.setBounds(66, 191, 98, 27);
+			genderComboBox.setBounds(66, 165, 98, 27);
 			panel.add(genderComboBox);
 
 			minComboBox = new JComboBox<String>();
@@ -337,6 +283,18 @@ public class AthletePnl extends JPanel {
 			schoolGroupCodeComboBox = new JComboBox<String>(listCodes);
 			schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
 			panel.add(schoolGroupCodeComboBox);
+
+			// age combo box
+			ArrayList<Integer> ages = new ArrayList<>();
+			for (int i = 8; i < 100; i++) {
+				Integer val = new Integer(i);
+				ages.add(val);
+			}
+			Integer[] listAges = new Integer[ages.size()];
+			listAges = ages.toArray(listAges);
+			ageComboBox = new JComboBox<>(listAges);
+			ageComboBox.setBounds(66, 139, 75, 27);
+			panel.add(ageComboBox);
 
 			// teacher/group leader combo box
 			teacherList = new ArrayList<>();
@@ -630,8 +588,7 @@ public class AthletePnl extends JPanel {
 
 			String lastName = athleteLastNameTxtBox.getText();
 
-			// calculate age here
-			Integer age = athlete.getAge();
+			Integer age = (Integer) ageComboBox.getSelectedItem();
 
 			String gender = (String) genderComboBox.getSelectedItem();
 			gender = gender.substring(0, 0);
@@ -653,8 +610,6 @@ public class AthletePnl extends JPanel {
 			athlete.setAge(age);
 			athlete.setGender(gender);
 			athlete.setRegRefs(regRefs);
-		} else {
-			// create a new athlete and save it.
 		}
 
 		return athlete;
