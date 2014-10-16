@@ -75,6 +75,7 @@ public class AthletePnl extends JPanel {
 	private ArrayList<School> schoolList;
 	private ArrayList<Event> eventList;
 	private ArrayList<Event> associatedEvents;
+	private Athlete loadedAthlete;
 
 	/**
 	 * Create the panel.
@@ -535,6 +536,9 @@ public class AthletePnl extends JPanel {
 		athleteFirstNameTextBox.setText(athlete.getFirstName());
 		athleteLastNameTxtBox.setText(athlete.getLastName());
 
+		// set age
+		ageComboBox.setSelectedItem(athlete.getAge());
+
 		// set gender
 		String gender = athlete.getGender().toUpperCase();
 		if (gender.equals("M"))
@@ -614,4 +618,33 @@ public class AthletePnl extends JPanel {
 
 		return athlete;
 	}
+
+	public void clearPanel() {
+
+		athleteTable.clearSelection();
+
+		// set name
+		athleteFirstNameTextBox.setText("");
+		athleteLastNameTxtBox.setText("");
+
+		// set age
+		ageComboBox.setSelectedIndex(0);
+
+		// set gender
+		genderComboBox.setSelectedIndex(0);
+
+		// Set group leader
+		groupLeaderComboBox.setSelectedIndex(0);
+
+		// set group code
+		schoolGroupCodeComboBox.setSelectedIndex(0);
+
+		// fill event list
+		eventTableModel.setEvents(new ArrayList<Event>());
+
+		// set school
+		schoolNameComboBox.setSelectedIndex(0);
+
+	}
+
 }

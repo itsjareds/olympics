@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainEventController;
+import edu.clemson.cs.cu.cpsc3720.gui.AthletePnl;
 import edu.clemson.cs.cu.cpsc3720.gui.EventsPnl;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
@@ -73,7 +74,8 @@ public class Mediator implements MediatorInterface {
 	public void newItem(ActionEvent arg0, JPanel panel) {
 		this.newButton.setEnabled(true);
 		if (panel.getName().equals("AthletePanel")) {
-			MaintainAthleteController mac = new MaintainAthleteController();
+			AthletePnl apl = (AthletePnl) panel;
+			apl.clearPanel();
 		} else if (panel.getName().equals("EventPanel")) {
 			EventsPnl epl = (EventsPnl) panel;
 			epl.setEvent(null);
@@ -82,7 +84,6 @@ public class Mediator implements MediatorInterface {
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
 		}
-		System.out.println(panel.getName());
 	}
 
 	@Override
@@ -117,7 +118,6 @@ public class Mediator implements MediatorInterface {
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
 		}
-		System.out.println(panel.getName());
 	}
 
 	@Override
@@ -140,7 +140,8 @@ public class Mediator implements MediatorInterface {
 		saveButton.setVisible(true);
 		if (panel.getName().equals("AthletePanel")) {
 			MaintainAthleteController mac = new MaintainAthleteController();
-			mac.saveAthlete(panel);
+			AthletePnl apl = (AthletePnl) panel;
+			mac.saveAthlete(apl.getAthlete());
 		} else if (panel.getName().equals("EventPanel")) {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
