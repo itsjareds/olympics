@@ -54,4 +54,8 @@ public interface MediatorInterface {
 	public void registerUnregister(UnregisterButton unregisterButton);
 
 	public void registerRegister(RegisterButton registerButton);
+
+	public void registerAthlete(ActionEvent e, JPanel thisPanel);
+
+	public void unregisterAthlete(ActionEvent e, JPanel thisPanel);
 }

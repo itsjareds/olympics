@@ -1,7 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -384,61 +382,41 @@ public class AthletePnl extends JPanel {
 
 		// ----------- Start Buttons -------- //
 		{
+			// Search Button
 			searchBtn = new SearchButton(new MediatorActionListener(),
 					mediator, this);
 			final JPanel thisPanel = this;
-			searchBtn.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-					mediator.save(e, thisPanel);
-				}
-			});
 			searchBtn.setText("Search");
 
+			// Register Button
 			btnRegister = new RegisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnRegister.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					mediator.registerAthlete();
-				}
-			});
 			btnRegister.setBounds(440, 131, 117, 29);
 			panel.add(btnRegister);
 			btnRegister.setText("Register");
 			btnRegister.setEnabled(false);
 
+			// Unregister Button
 			btnUnregister = new UnregisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnUnregister.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			btnUnregister.setBounds(557, 131, 113, 29);
 			panel.add(btnUnregister);
 			btnUnregister.setText("Unregister");
 			btnUnregister.setEnabled(false);
 
+			// New Button
 			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
-			newBtn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			newBtn.setText("New");
 
+			// Delete Button
 			deleteBtn = new DeleteButton(new MediatorActionListener(),
 					mediator, this);
-			deleteBtn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			deleteBtn.setText("Delete");
 			deleteBtn.setEnabled(false);
 
+			// Save Button
 			saveBtn = new SaveButton(new MediatorActionListener(), mediator,
 					this);
-			saveBtn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			saveBtn.setText("Save");
 		}
 		// ------------- End Buttons -------------- //
@@ -457,8 +435,7 @@ public class AthletePnl extends JPanel {
 						if (mevt.getClickCount() == 2) {
 
 							fillPanel();
-							if (associatedEvents.size() < 2)
-								btnRegister.setEnabled(true);
+							btnRegister.setEnabled(true);
 						}
 				}
 			});

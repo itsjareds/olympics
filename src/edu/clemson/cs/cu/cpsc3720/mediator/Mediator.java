@@ -72,6 +72,8 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void newItem(ActionEvent arg0, JPanel panel) {
 		this.newButton.setEnabled(true);
+
+		System.out.println(panel.getName());
 	}
 
 	@Override
@@ -93,6 +95,8 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
 		this.deleteButton.setEnabled(true);
+
+		System.out.println(panel.getName());
 	}
 
 	@Override
@@ -116,23 +120,27 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName() == "AthletePanel") {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.saveAthlete(panel);
+			System.out.println(panel.getName());
 		} else if (panel.getName() == "EventPanel") {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			mec.createEvent(epl.getEvent());
+			System.out.println(panel.getName());
 		} else if (panel.getName() == "HeatPanel") {
 			// MaintainHeatController mhc = new MaintainHeatController();
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
+			System.out.println(panel.getName());
 		}
-		System.out.println(panel.getName());
 	}
 
-	public void registerAthlete() {
+	@Override
+	public void registerAthlete(ActionEvent e, JPanel thisPanel) {
 
 	}
 
-	public void unregisterAthlete() {
+	@Override
+	public void unregisterAthlete(ActionEvent e, JPanel thisPanel) {
 
 	}
 }
