@@ -15,6 +15,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DatabaseAccessObject;
@@ -375,20 +377,31 @@ public class AthletePnl extends JPanel {
 				}
 			});
 
-			eventsTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(final MouseEvent mevt) {
-					if (eventsTable.getSelectedRow() != -1) {
-
-						btnUnregister.setEnabled(true);
-					}
-					if (eventsTable.getRowCount() > 0)
-
-						if (mevt.getClickCount() == 2) {
-
+			athleteTable.getSelectionModel().addListSelectionListener(
+					new ListSelectionListener() {
+						@Override
+						public void valueChanged(ListSelectionEvent e) {
+							if (athleteTable.getSelectedRow() != -1)
+								deleteBtn.setEnabled(true);
+							if (eventsTable.getRowCount() > 0) {
+								fillPanel();
+							}
 						}
-				}
-			});
+					});
+
+			eventsTable.getSelectionModel().addListSelectionListener(
+					new ListSelectionListener() {
+						@Override
+						public void valueChanged(ListSelectionEvent e) {
+							if (eventsTable.getSelectedRow() != -1)
+								btnUnregister.setEnabled(true);
+							if (eventsTable.getRowCount() >= 2) {
+								btnRegister.setEnabled(false);
+							} else {
+								btnRegister.setEnabled(true);
+							}
+						}
+					});
 		}
 		// ------------ End Table Events --------------- //
 
@@ -526,8 +539,15 @@ public class AthletePnl extends JPanel {
 	}
 
 	private void fillPanel() {
-		Athlete athlete = athleteTableModel.getAthlete(athleteTable
-				.getSelectedRow());
+
+		Athlete athlete = new Athlete("", "", "", new Integer(8), "", "",
+				new ArrayList<String>());
+
+		if (athleteTable.getSelectedRow() != -1) {
+			athlete = athleteTableModel.getAthlete(athleteTable
+					.getSelectedRow());
+		}
+
 		associatedEvents = new ArrayList<Event>();
 		ArrayList<String> arefs = athlete.getRegRefs();
 		ArrayList<String> rrefs = new ArrayList<>();
@@ -561,7 +581,8 @@ public class AthletePnl extends JPanel {
 			DatabaseAccessObject<Registration> daor = DaoRepository
 					.getRegistrationsDao();
 			Registration r = daor.query(Registration.class, ref);
-			rrefs.add(r.getEventRef());
+			if (r != null)
+				rrefs.add(r.getEventRef());
 		}
 		for (String ref : rrefs) {
 			DatabaseAccessObject<Event> daoe = DaoRepository.getEventsDao();
@@ -584,37 +605,40 @@ public class AthletePnl extends JPanel {
 		if (athleteTable.getSelectedRow() != -1) {
 			athlete = athleteTableModel.getAthlete(athleteTable
 					.getSelectedRow());
+		} else {
+			athlete = new Athlete("", "", "", null, "", "", null);
+		}
 
-			Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
-			String teacherRef = teacher.getDbId();
+		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
+		String teacherRef = teacher.getDbId();
 
-			String firstName = athleteFirstNameTextBox.getText();
+		String firstName = athleteFirstNameTextBox.getText();
 
-			String lastName = athleteLastNameTxtBox.getText();
+		String lastName = athleteLastNameTxtBox.getText();
 
-			Integer age = (Integer) ageComboBox.getSelectedItem();
+		Integer age = (Integer) ageComboBox.getSelectedItem();
 
-			String gender = (String) genderComboBox.getSelectedItem();
-			gender = gender.substring(0, 0);
+		String gender = (String) genderComboBox.getSelectedItem();
+		gender = gender.substring(0, 1);
 
-			School school = (School) schoolNameComboBox.getSelectedItem();
-			String schoolRef = school.getDbId();
+		School school = (School) schoolNameComboBox.getSelectedItem();
+		String schoolRef = school.getDbId();
 
-			ArrayList<String> regRefs = new ArrayList<>();
+		ArrayList<String> regRefs = new ArrayList<>();
+		if (associatedEvents != null)
 			for (Event e : associatedEvents) {
 				regRefs.add(e.getDbId());
 			}
 
-			athlete.setTeacher(teacher);
-			athlete.setTeacherRef(teacherRef);
-			athlete.setFirstName(firstName);
-			athlete.setLastName(lastName);
-			athlete.setSchool(school);
-			athlete.setSchoolRef(schoolRef);
-			athlete.setAge(age);
-			athlete.setGender(gender);
-			athlete.setRegRefs(regRefs);
-		}
+		athlete.setFirstName(firstName);
+		athlete.setLastName(lastName);
+		athlete.setAge(age);
+		athlete.setGender(gender);
+		athlete.setRegRefs(regRefs);
+		athlete.setTeacher(teacher);
+		athlete.setTeacherRef(teacherRef);
+		athlete.setSchool(school);
+		athlete.setSchoolRef(schoolRef);
 
 		return athlete;
 	}
@@ -622,29 +646,19 @@ public class AthletePnl extends JPanel {
 	public void clearPanel() {
 
 		athleteTable.clearSelection();
-
-		// set name
 		athleteFirstNameTextBox.setText("");
 		athleteLastNameTxtBox.setText("");
-
-		// set age
 		ageComboBox.setSelectedIndex(0);
-
-		// set gender
 		genderComboBox.setSelectedIndex(0);
-
-		// Set group leader
 		groupLeaderComboBox.setSelectedIndex(0);
-
-		// set group code
 		schoolGroupCodeComboBox.setSelectedIndex(0);
-
-		// fill event list
 		eventTableModel.setEvents(new ArrayList<Event>());
-
-		// set school
 		schoolNameComboBox.setSelectedIndex(0);
+	}
 
+	public void updateTables() {
+		athleteTableModel.update();
+		eventTableModel.update();
 	}
 
 }

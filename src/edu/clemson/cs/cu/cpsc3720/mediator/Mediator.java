@@ -16,6 +16,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
+import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -137,23 +138,47 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
+
 		saveButton.setVisible(true);
 		if (panel.getName().equals("AthletePanel")) {
+
 			MaintainAthleteController mac = new MaintainAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			mac.saveAthlete(apl.getAthlete());
+			Athlete a = apl.getAthlete();
+
+			System.out.println(a.getFirstName() + " " + a.getLastName() + " "
+					+ a.getGender() + " " + a.getAge() + " " + a.getSchoolRef()
+					+ " " + a.getTeacherRef() + " " + a.getRegRefs() + " dbid:"
+					+ a.getDbId());
+			if (a.getFirstName().trim().length() > 0
+					&& a.getFirstName().trim().length() > 0
+					&& a.getGender().trim().length() >= 1
+					&& a.getAge().toString().length() >= 1
+					&& a.getSchoolRef().trim().length() >= 1
+					&& a.getTeacherRef().trim().length() >= 1
+					&& a.getRegRefs().size() <= 2) {
+
+				System.out.println("Saving: " + a.getFirstName() + " "
+						+ a.getLastName());
+
+				mac.saveAthlete(apl.getAthlete());
+				apl.updateTables();
+			}
+
 		} else if (panel.getName().equals("EventPanel")) {
+
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			mec.saveEvent(epl.getEvent());
 			epl.updateTable();
 			epl.setEvent(null);
+
 		} else if (panel.getName().equals("HeatPanel")) {
+
 			// MaintainHeatController mhc = new MaintainHeatController();
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
 		}
-		System.out.println(panel.getName());
 	}
 
 	@Override
