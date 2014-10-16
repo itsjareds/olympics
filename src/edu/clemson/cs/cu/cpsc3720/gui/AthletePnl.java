@@ -78,23 +78,6 @@ public class AthletePnl extends JPanel {
 	private ArrayList<Event> eventList;
 	private ArrayList<Event> associatedEvents;
 
-	public Athlete getAthlete() {
-		// TODO Fix the getter for this class
-		Athlete athlete = athleteTableModel.getAthlete(athleteTable
-				.getSelectedRow());
-		Teacher teacher = athlete.getTeacher();
-		String teacherRef = teacher.getDbId();
-		String firstName = athleteFirstNameTextBox.getText();
-		String lastName = athleteLastNameTxtBox.getText();
-		Integer age = 0;
-		String gender = "";
-		String schoolRef = "";
-		ArrayList<String> regRefs = null;
-		Athlete newAthlete = new Athlete(teacherRef, firstName, lastName, age,
-				gender, schoolRef, regRefs);
-		return newAthlete;
-	}
-
 	/**
 	 * Create the panel.
 	 */
@@ -425,7 +408,7 @@ public class AthletePnl extends JPanel {
 					}
 					if (athleteTable.getRowCount() > 0)
 
-						if (mevt.getClickCount() == 2) {
+						if (mevt.getClickCount() == 1) {
 
 							fillPanel();
 							btnRegister.setEnabled(true);
@@ -631,5 +614,49 @@ public class AthletePnl extends JPanel {
 		School s = daos.query(School.class, athlete.getSchoolRef());
 		schoolNameComboBox.setSelectedItem(s);
 
+	}
+
+	public Athlete getAthlete() {
+		Athlete athlete = null;
+
+		if (athleteTable.getSelectedRow() != -1) {
+			athlete = athleteTableModel.getAthlete(athleteTable
+					.getSelectedRow());
+
+			Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
+			String teacherRef = teacher.getDbId();
+
+			String firstName = athleteFirstNameTextBox.getText();
+
+			String lastName = athleteLastNameTxtBox.getText();
+
+			// calculate age here
+			Integer age = athlete.getAge();
+
+			String gender = (String) genderComboBox.getSelectedItem();
+			gender = gender.substring(0, 0);
+
+			School school = (School) schoolNameComboBox.getSelectedItem();
+			String schoolRef = school.getDbId();
+
+			ArrayList<String> regRefs = new ArrayList<>();
+			for (Event e : associatedEvents) {
+				regRefs.add(e.getDbId());
+			}
+
+			athlete.setTeacher(teacher);
+			athlete.setTeacherRef(teacherRef);
+			athlete.setFirstName(firstName);
+			athlete.setLastName(lastName);
+			athlete.setSchool(school);
+			athlete.setSchoolRef(schoolRef);
+			athlete.setAge(age);
+			athlete.setGender(gender);
+			athlete.setRegRefs(regRefs);
+		} else {
+			// create a new athlete and save it.
+		}
+
+		return athlete;
 	}
 }
