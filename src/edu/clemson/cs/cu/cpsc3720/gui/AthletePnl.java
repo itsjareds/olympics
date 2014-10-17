@@ -3,8 +3,6 @@ package edu.clemson.cs.cu.cpsc3720.gui;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -371,35 +369,17 @@ public class AthletePnl extends JPanel {
 
 		// ------------ Start Table Events ----------- //
 		{
-			athleteTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(final MouseEvent mevt) {
-					if (athleteTable.getSelectedRow() != -1) {
-
-						deleteBtn.setEnabled(true);
-					}
-					if (athleteTable.getRowCount() > 0) {
-
-						fillPanel();
-					}
-				}
-			});
-
 			athleteTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if (athleteTable.getSelectedRow() != -1) {
+							if (athleteTable.getSelectedRow() != -1)
 								deleteBtn.setEnabled(true);
-								btnRegister.setEnabled(true);
-							} else {
+							else
 								deleteBtn.setEnabled(false);
-								btnRegister.setEnabled(true);
-							}
 
-							if (registrationTable.getRowCount() > 0) {
+							if (registrationTable.getRowCount() > 0)
 								fillPanel();
-							}
 						}
 					});
 
@@ -415,6 +395,22 @@ public class AthletePnl extends JPanel {
 							}
 						}
 					});
+
+			eventComboBox.addItemListener(new ItemListener() {
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						Event event = (Event) eventComboBox.getSelectedItem();
+						if (athleteTable.getSelectedRow() != -1
+								&& event != null
+								&& event.getEventName() != null
+								&& event.getEventName().trim().length() != 0)
+							btnRegister.setEnabled(true);
+						else
+							btnRegister.setEnabled(false);
+					}
+				}
+			});
 		}
 		// ------------ End Table Events --------------- //
 
@@ -670,7 +666,6 @@ public class AthletePnl extends JPanel {
 	}
 
 	public Registration getRegistration() {
-
 		Event e = (Event) eventComboBox.getSelectedItem();
 		Athlete a = athleteTableModel.getAthlete(athleteTable.getSelectedRow());
 		// TODO get score form combo boxes
@@ -679,7 +674,6 @@ public class AthletePnl extends JPanel {
 	}
 
 	public void clearPanel() {
-
 		athleteTable.clearSelection();
 		athleteFirstNameTextBox.setText("");
 		athleteLastNameTxtBox.setText("");
