@@ -138,11 +138,11 @@ public class EventsPnl extends JPanel {
 			final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
 			lblAssociatedHeats
 					.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-			lblAssociatedHeats.setBounds(381, 214, 146, 16);
+			lblAssociatedHeats.setBounds(473, 214, 146, 16);
 			panel.add(lblAssociatedHeats);
 
 			final JScrollPane heatsScrollPane = new JScrollPane();
-			heatsScrollPane.setBounds(319, 242, 343, 111);
+			heatsScrollPane.setBounds(331, 236, 343, 167);
 			panel.add(heatsScrollPane);
 
 			heatsTable = new JTable(heatTableModel);
@@ -226,59 +226,59 @@ public class EventsPnl extends JPanel {
 
 			JLabel lblAddNewEvent = new JLabel("Add New Heat");
 			lblAddNewEvent.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-			lblAddNewEvent.setBounds(381, 6, 105, 16);
+			lblAddNewEvent.setBounds(486, 6, 105, 16);
 			panel.add(lblAddNewEvent);
 
 			JLabel lblMinimumAge = new JLabel("Minimum Age");
-			lblMinimumAge.setBounds(338, 39, 97, 16);
+			lblMinimumAge.setBounds(364, 40, 97, 16);
 			panel.add(lblMinimumAge);
 
 			JLabel lblMaximumAge = new JLabel("Maximum Age");
-			lblMaximumAge.setBounds(338, 67, 97, 16);
+			lblMaximumAge.setBounds(364, 68, 97, 16);
 			panel.add(lblMaximumAge);
 
 			JLabel lblGender = new JLabel("Gender");
-			lblGender.setBounds(338, 93, 61, 16);
+			lblGender.setBounds(364, 94, 61, 16);
 			panel.add(lblGender);
 
 			minAgeCombo = new JComboBox<Integer>();
-			minAgeCombo.setBounds(447, 23, 80, 50);
+			minAgeCombo.setBounds(565, 37, 80, 26);
 			panel.add(minAgeCombo);
 
 			maxAgeCombo = new JComboBox<Integer>();
-			maxAgeCombo.setBounds(447, 50, 80, 50);
+			maxAgeCombo.setBounds(565, 63, 80, 26);
 			panel.add(maxAgeCombo);
 
 			genderCombo = new JComboBox<String>();
-			genderCombo.setBounds(447, 77, 172, 50);
+			genderCombo.setBounds(473, 89, 172, 26);
 			panel.add(genderCombo);
 
 			JLabel lblTime = new JLabel("Time");
-			lblTime.setBounds(338, 119, 61, 16);
+			lblTime.setBounds(364, 120, 61, 16);
 			panel.add(lblTime);
 
 			hourCombo = new JComboBox<Integer>();
-			hourCombo.setBounds(447, 104, 80, 50);
+			hourCombo.setBounds(473, 104, 80, 50);
 			panel.add(hourCombo);
 
 			JLabel lblH = new JLabel("h");
-			lblH.setBounds(525, 123, 13, 16);
+			lblH.setBounds(551, 121, 13, 16);
 			panel.add(lblH);
 
 			minCombo = new JComboBox<Integer>();
-			minCombo.setBounds(539, 104, 80, 50);
+			minCombo.setBounds(565, 115, 80, 26);
 			panel.add(minCombo);
 
 			JLabel lblM = new JLabel("m");
-			lblM.setBounds(617, 123, 19, 16);
+			lblM.setBounds(643, 121, 19, 16);
 			panel.add(lblM);
 
 			JLabel lblDivision = new JLabel("Division");
-			lblDivision.setBounds(338, 145, 61, 16);
+			lblDivision.setBounds(364, 146, 61, 16);
 			panel.add(lblDivision);
 
 			divisionCombo = new JComboBox<Integer>();
-			divisionCombo.setBounds(447, 131, 80, 50);
+			divisionCombo.setBounds(565, 141, 80, 26);
 			panel.add(divisionCombo);
 
 			searchTxtBox = new JTextField();
@@ -297,18 +297,18 @@ public class EventsPnl extends JPanel {
 					this);
 
 			addBtn = new AddButton(new MediatorActionListener(), mediator, this);
-			addBtn.setBounds(341, 173, 80, 29);
+			addBtn.setBounds(395, 173, 80, 29);
 			panel.add(addBtn);
 
 			clearBtn = new ClearButton(new MediatorActionListener(), mediator,
 					this);
-			clearBtn.setBounds(427, 173, 80, 29);
+			clearBtn.setBounds(481, 173, 80, 29);
 			panel.add(clearBtn);
 
 			removeBtn = new RemoveButton(new MediatorActionListener(),
 					mediator, this);
 			removeBtn.setEnabled(false);
-			removeBtn.setBounds(511, 173, 80, 29);
+			removeBtn.setBounds(565, 173, 80, 29);
 			panel.add(removeBtn);
 		}
 
@@ -350,6 +350,7 @@ public class EventsPnl extends JPanel {
 				maxAgeCombo.addItem(i);
 			}
 			// Gender
+			genderCombo.addItem("Both");
 			genderCombo.addItem("Male");
 			genderCombo.addItem("Female");
 			// Division
@@ -366,11 +367,12 @@ public class EventsPnl extends JPanel {
 							if (eventsTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
 								if (eventsTable.getRowCount() > 0) {
-									setHeat(null);
 									setEvent(eventTableModel
 											.getEvent(eventsTable
 													.getSelectedRow()));
 								}
+							} else {
+								deleteBtn.setEnabled(false);
 							}
 						}
 					});
@@ -567,6 +569,7 @@ public class EventsPnl extends JPanel {
 		eventNameTextBox.setText(e.getEventName());
 		scoreUnitCombo.setSelectedItem(e.getScoreUnit());
 
+		setHeat(null);
 		loadHeats(e);
 	}
 
@@ -614,7 +617,7 @@ public class EventsPnl extends JPanel {
 	public void setHeat(Heat h) {
 		/* Fill heat form */
 		if (h == null) {
-			h = new Heat(loadedEvent.getDbId(), "", 0, 0, "", 0);
+			h = new Heat(loadedEvent.getDbId(), "", 1, 1, "", 1);
 			heatsTable.clearSelection();
 		} else {
 			int index = heatTableModel.indexOf(h);
@@ -630,6 +633,8 @@ public class EventsPnl extends JPanel {
 			genderCombo.setSelectedItem("Male");
 		else if (h.getGender().equals("F"))
 			genderCombo.setSelectedItem("Female");
+		else if (h.getGender().equals("B"))
+			genderCombo.setSelectedItem("Both");
 		hourCombo.setSelectedItem(Heat.extractHour(h.getTime()));
 		minCombo.setSelectedItem(Heat.extractMinute(h.getTime()));
 		divisionCombo.setSelectedItem(h.getNumHeats());
@@ -649,6 +654,8 @@ public class EventsPnl extends JPanel {
 			loadedHeat.setGender("M");
 		else if (gender.equals("Female"))
 			loadedHeat.setGender("F");
+		else if (gender.equals("Both"))
+			loadedHeat.setGender("B");
 		loadedHeat.setTime(time);
 		loadedHeat.setNumHeats(division);
 		return loadedHeat;

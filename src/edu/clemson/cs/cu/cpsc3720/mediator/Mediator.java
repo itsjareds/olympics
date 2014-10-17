@@ -119,10 +119,6 @@ public class Mediator implements MediatorInterface {
 			mec.deleteEvent(epl.getEvent());
 			epl.getEventTableModel().update();
 			epl.setEvent(null);
-		} else if (panel.getName().equals("HeatPanel")) {
-			// MaintainHeatController mhc = new MaintainHeatController();
-			// Heat h = new Heat();
-			// mhc.createHeat(h);
 		}
 	}
 
