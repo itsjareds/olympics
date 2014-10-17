@@ -21,37 +21,38 @@ public class DaoRepository {
 
 	public static DatabaseAccessObject<Athlete> getAthletesDao() {
 		if (athletesDao == null)
-			athletesDao = new DatabaseAccessObject<Athlete>();
+			athletesDao = new DatabaseAccessObject<Athlete>(Athlete.class);
 		return athletesDao;
 	}
 
 	public static DatabaseAccessObject<Event> getEventsDao() {
 		if (eventsDao == null)
-			eventsDao = new DatabaseAccessObject<Event>();
+			eventsDao = new DatabaseAccessObject<Event>(Event.class);
 		return eventsDao;
 	}
 
 	public static DatabaseAccessObject<Heat> getHeatsDao() {
 		if (heatsDao == null)
-			heatsDao = new DatabaseAccessObject<Heat>();
+			heatsDao = new DatabaseAccessObject<Heat>(Heat.class);
 		return heatsDao;
 	}
 
 	public static DatabaseAccessObject<Registration> getRegistrationsDao() {
 		if (registrationsDao == null)
-			registrationsDao = new DatabaseAccessObject<Registration>();
+			registrationsDao = new DatabaseAccessObject<Registration>(
+					Registration.class);
 		return registrationsDao;
 	}
 
 	public static DatabaseAccessObject<School> getSchoolsDao() {
 		if (schoolsDao == null)
-			schoolsDao = new DatabaseAccessObject<School>();
+			schoolsDao = new DatabaseAccessObject<School>(School.class);
 		return schoolsDao;
 	}
 
 	public static DatabaseAccessObject<Teacher> getTeachersDao() {
 		if (teachersDao == null)
-			teachersDao = new DatabaseAccessObject<Teacher>();
+			teachersDao = new DatabaseAccessObject<Teacher>(Teacher.class);
 		return teachersDao;
 	}
 }

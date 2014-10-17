@@ -11,7 +11,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 public class AddButton extends JButton implements CommandInterface {
 
-	private static final long serialVersionUID = 4810322146053818837L;
+	private static final long serialVersionUID = 3932286544230936861L;
 	private final Mediator mediator;
 	private final JPanel panel;
 

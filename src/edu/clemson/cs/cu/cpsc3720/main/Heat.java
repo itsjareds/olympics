@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import java.text.DecimalFormat;
+
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
@@ -30,7 +32,7 @@ public class Heat implements DatabaseSerializable {
 	}
 
 	public void loadEvent() {
-		this.event = DaoRepository.getEventsDao().query(Event.class, eventRef);
+		this.event = DaoRepository.getEventsDao().query(eventRef);
 	}
 
 	public Integer getNumHeats() {
@@ -135,4 +137,60 @@ public class Heat implements DatabaseSerializable {
 		this.dbId = id;
 	}
 
+	public static Integer extractHour(String time) {
+		Integer ret = 0;
+		if (time != null) {
+			int depth = 0;
+			String[] tokens = time.split(":");
+			if (tokens.length > depth) {
+				try {
+					ret = Integer.parseInt(tokens[depth]);
+				} catch (NumberFormatException e) {
+					ret = 0;
+				}
+			}
+		}
+		return ret;
+	}
+
+	public static Integer extractMinute(String time) {
+		Integer ret = 0;
+		if (time != null) {
+			int depth = 1;
+			String[] tokens = time.split(":");
+			if (tokens.length > depth) {
+				try {
+					ret = Integer.parseInt(tokens[depth]);
+				} catch (NumberFormatException e) {
+					ret = 0;
+				}
+			}
+		}
+		return ret;
+	}
+
+	public static Integer extractSecond(String time) {
+		Integer ret = 0;
+		if (time != null) {
+			int depth = 2;
+			String[] tokens = time.split(":");
+			if (tokens.length > depth) {
+				try {
+					ret = Integer.parseInt(tokens[depth]);
+				} catch (NumberFormatException e) {
+					ret = 0;
+				}
+			}
+		}
+		return ret;
+	}
+
+	public static String createTimeString(Integer hour, Integer minute,
+			Integer second) {
+		DecimalFormat df = new DecimalFormat("00");
+		String h = df.format(hour);
+		String m = df.format(minute);
+		String s = df.format(second);
+		return h + ":" + m + ":" + s;
+	}
 }

@@ -13,6 +13,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.AthletePnl;
 import edu.clemson.cs.cu.cpsc3720.gui.EventsPnl;
 import edu.clemson.cs.cu.cpsc3720.gui.components.AddButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.ClearButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
@@ -44,6 +45,7 @@ public class Mediator implements MediatorInterface {
 	private RegisterButton registerButton;
 	private AddButton addButton;
 	private RemoveButton removeButton;
+	private ClearButton clearButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -68,7 +70,6 @@ public class Mediator implements MediatorInterface {
 	 */
 	@Override
 	public void cancel(ActionEvent arg0, JDialog dialog) {
-		cancelButton.setEnabled(true);
 		dialog.dispose();
 	}
 
@@ -79,17 +80,12 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void newItem(ActionEvent arg0, JPanel panel) {
-		this.newButton.setEnabled(true);
 		if (panel.getName().equals("AthletePanel")) {
 			AthletePnl apl = (AthletePnl) panel;
 			apl.clearPanel();
 		} else if (panel.getName().equals("EventPanel")) {
 			EventsPnl epl = (EventsPnl) panel;
 			epl.setEvent(null);
-		} else if (panel.getName().equals("HeatPanel")) {
-			// MaintainHeatController mhc = new MaintainHeatController();
-			// Heat h = new Heat();
-			// mhc.createHeat(h);
 		}
 	}
 
@@ -111,24 +107,19 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
-
-		this.deleteButton.setEnabled(true);
 		if (panel.getName().equals("AthletePanel")) {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
 			mac.deleteAthlete(apl.getAthlete());
 			apl.updateTables();
 			apl.clearPanel();
-
 		} else if (panel.getName().equals("EventPanel")) {
-
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			mec.deleteEvent(epl.getEvent());
-			epl.updateTable();
+			epl.getEventTableModel().update();
 			epl.setEvent(null);
 		} else if (panel.getName().equals("HeatPanel")) {
-
 			// MaintainHeatController mhc = new MaintainHeatController();
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
@@ -152,8 +143,6 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
-
-		saveButton.setVisible(true);
 		if (panel.getName().equals("AthletePanel")) {
 
 			MaintainAthleteController mac = new MaintainAthleteController();
@@ -174,18 +163,12 @@ public class Mediator implements MediatorInterface {
 			}
 
 		} else if (panel.getName().equals("EventPanel")) {
-
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			mec.saveEvent(epl.getEvent());
-			epl.updateTable();
+			epl.getEventTableModel().update();
 			epl.setEvent(null);
 
-		} else if (panel.getName().equals("HeatPanel")) {
-
-			// MaintainHeatController mhc = new MaintainHeatController();
-			// Heat h = new Heat();
-			// mhc.createHeat(h);
 		}
 	}
 
@@ -205,20 +188,25 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void add(ActionEvent arg0, JPanel panel) {
-		addButton.setVisible(true);
 		if (panel.getName().equals("EventPanel")) {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
-			// mhc.addHeat(epl.getHeat());
-			// epl.updateHeatTable();
-			// epl.clearHeat();
+			mhc.addHeat(epl.getHeat());
+			epl.loadHeats(epl.getEvent());
+			epl.setHeat(null);
 		}
 		System.out.println(panel.getName());
 	}
 
 	@Override
 	public void remove(ActionEvent arg0, JPanel panel) {
-		removeButton.setVisible(true);
+		if (panel.getName().equals("EventPanel")) {
+			MaintainHeatController mhc = new MaintainHeatController();
+			EventsPnl epl = (EventsPnl) panel;
+			mhc.removeHeat(epl.getHeat());
+			epl.loadHeats(epl.getEvent());
+			epl.setHeat(null);
+		}
 		System.out.println(panel.getName());
 	}
 
@@ -230,5 +218,19 @@ public class Mediator implements MediatorInterface {
 	@Override
 	public void registerRemove(RemoveButton removeButton) {
 		this.removeButton = removeButton;
+	}
+
+	@Override
+	public void clear(ActionEvent arg0, JPanel panel) {
+		if (panel.getName().equals("EventPanel")) {
+			EventsPnl epl = (EventsPnl) panel;
+			epl.setHeat(null);
+		}
+		System.out.println(panel.getName());
+	}
+
+	@Override
+	public void registerClear(ClearButton clearButton) {
+		this.clearButton = clearButton;
 	}
 }

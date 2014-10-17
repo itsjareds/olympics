@@ -44,7 +44,7 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	public void loadTeacher() {
-		teacher = DaoRepository.getTeachersDao().query(Teacher.class, teacherRef);
+		teacher = DaoRepository.getTeachersDao().query(teacherRef);
 	}
 
 	public void setTeacher(Teacher teacher) {
@@ -151,7 +151,7 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	public void loadSchool() {
-		school = DaoRepository.getSchoolsDao().query(School.class, schoolRef);
+		school = DaoRepository.getSchoolsDao().query(schoolRef);
 	}
 
 	/**
@@ -167,8 +167,7 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 			registrations = new ArrayList<Registration>();
 		registrations.clear();
 		for (String ref : regRefs)
-			registrations.add(DaoRepository.getRegistrationsDao().query(
-					Registration.class, ref));
+			registrations.add(DaoRepository.getRegistrationsDao().query(ref));
 	}
 
 	/**

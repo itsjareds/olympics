@@ -25,12 +25,11 @@ public class Registration implements DatabaseSerializable,
 	}
 
 	public void loadEvent() {
-		this.event = DaoRepository.getEventsDao().query(Event.class, eventRef);
+		this.event = DaoRepository.getEventsDao().query(eventRef);
 	}
 
 	public void loadAthlete() {
-		this.athlete = DaoRepository.getAthletesDao().query(Athlete.class,
-				athleteRef);
+		this.athlete = DaoRepository.getAthletesDao().query(athleteRef);
 	}
 
 	public String getEventRef() {

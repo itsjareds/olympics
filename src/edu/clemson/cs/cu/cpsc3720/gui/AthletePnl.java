@@ -595,7 +595,7 @@ public class AthletePnl extends JPanel {
 
 		// Set group leader
 		DatabaseAccessObject<Teacher> daot = DaoRepository.getTeachersDao();
-		Teacher t = daot.query(Teacher.class, athlete.getTeacherRef());
+		Teacher t = daot.query(athlete.getTeacherRef());
 		groupLeaderComboBox.setSelectedItem(t);
 
 		// set group code
@@ -609,13 +609,13 @@ public class AthletePnl extends JPanel {
 		for (String ref : arefs) {
 			DatabaseAccessObject<Registration> daor = DaoRepository
 					.getRegistrationsDao();
-			Registration r = daor.query(Registration.class, ref);
+			Registration r = daor.query(ref);
 			if (r != null)
 				rrefs.add(r.getEventRef());
 		}
 		for (String ref : rrefs) {
 			DatabaseAccessObject<Event> daoe = DaoRepository.getEventsDao();
-			Event e = daoe.query(Event.class, ref);
+			Event e = daoe.query(ref);
 			if (e != null)
 				associatedEvents.add(e);
 		}
@@ -623,7 +623,7 @@ public class AthletePnl extends JPanel {
 
 		// set school
 		DatabaseAccessObject<School> daos = DaoRepository.getSchoolsDao();
-		School s = daos.query(School.class, athlete.getSchoolRef());
+		School s = daos.query(athlete.getSchoolRef());
 		schoolNameComboBox.setSelectedItem(s);
 
 	}

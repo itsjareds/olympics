@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.gui.components.AddButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.ClearButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RemoveButton;
@@ -55,14 +56,24 @@ public class EventsPnl extends JPanel {
 	private final JComboBox<Integer> minCombo;
 	private final JComboBox<Integer> divisionCombo;
 
+	private final JButton newBtn;
+	private final JButton saveBtn;
+	private final JButton deleteBtn;
+	private final JButton searchBtn;
+	private final JButton addBtn;
+	private final JButton removeBtn;
+	private final JButton clearBtn;
+
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
+	private final JSplitPane splitPane;
 
 	private EventTableModel eventTableModel;
 	private HeatTableModel heatTableModel;
 	private final JTable heatsTable;
 	private final JTable eventsTable;
 	private Event loadedEvent;
+	private Heat loadedHeat;
 
 	/**
 	 * Create the panel.
@@ -77,221 +88,229 @@ public class EventsPnl extends JPanel {
 				DaoRepository.getEventsDao().objects);
 		heatTableModel = new HeatTableModel(new ArrayList<Heat>());
 
-		final JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerSize(1);
-		double dividerLocation = 1.8;
-		splitPane.setDividerLocation(250);
+		/* Add components */
+		{
+			splitPane = new JSplitPane();
+			splitPane.setDividerSize(1);
+			double dividerLocation = 1.8;
+			splitPane.setDividerLocation(250);
 
-		final JScrollPane scrollPane = new JScrollPane();
-		splitPane.setLeftComponent(scrollPane);
+			final JScrollPane scrollPane = new JScrollPane();
+			splitPane.setLeftComponent(scrollPane);
 
-		eventsTable = new JTable(eventTableModel);
-		scrollPane.setViewportView(eventsTable);
+			eventsTable = new JTable(eventTableModel);
+			scrollPane.setViewportView(eventsTable);
 
-		final JScrollPane informationScrollPane = new JScrollPane();
-		splitPane.setRightComponent(informationScrollPane);
+			final JScrollPane informationScrollPane = new JScrollPane();
+			splitPane.setRightComponent(informationScrollPane);
 
-		final JPanel panel = new JPanel();
-		informationScrollPane.setViewportView(panel);
-		panel.setLayout(null);
+			final JPanel panel = new JPanel();
+			informationScrollPane.setViewportView(panel);
+			panel.setLayout(null);
 
-		final JLabel lblFirstName = new JLabel("Event Code");
-		lblFirstName.setBounds(16, 34, 291, 16);
-		panel.add(lblFirstName);
+			final JLabel lblFirstName = new JLabel("Event Code");
+			lblFirstName.setBounds(16, 34, 291, 16);
+			panel.add(lblFirstName);
 
-		eventCodeTextBox = new JTextField();
-		eventCodeTextBox.setBounds(16, 50, 291, 28);
-		panel.add(eventCodeTextBox);
-		eventCodeTextBox.setColumns(10);
+			eventCodeTextBox = new JTextField();
+			eventCodeTextBox.setBounds(16, 50, 291, 28);
+			panel.add(eventCodeTextBox);
+			eventCodeTextBox.setColumns(10);
 
-		final JLabel lblLastName = new JLabel("Event Name");
-		lblLastName.setBounds(16, 75, 291, 16);
-		panel.add(lblLastName);
+			final JLabel lblLastName = new JLabel("Event Name");
+			lblLastName.setBounds(16, 75, 291, 16);
+			panel.add(lblLastName);
 
-		eventNameTextBox = new JTextField();
-		eventNameTextBox.setColumns(10);
-		eventNameTextBox.setBounds(16, 90, 291, 28);
-		panel.add(eventNameTextBox);
+			eventNameTextBox = new JTextField();
+			eventNameTextBox.setColumns(10);
+			eventNameTextBox.setBounds(16, 90, 291, 28);
+			panel.add(eventNameTextBox);
 
-		final JLabel lblNewLabel = new JLabel("Event Information");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblNewLabel.setBounds(56, 6, 251, 16);
-		panel.add(lblNewLabel);
+			final JLabel lblNewLabel = new JLabel("Event Information");
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+			lblNewLabel.setBounds(56, 6, 251, 16);
+			panel.add(lblNewLabel);
 
-		final JLabel lblScore = new JLabel("Minimum Score");
-		lblScore.setBounds(16, 181, 117, 16);
-		panel.add(lblScore);
+			final JLabel lblScore = new JLabel("Minimum Score");
+			lblScore.setBounds(16, 181, 117, 16);
+			panel.add(lblScore);
 
-		final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
-		lblAssociatedHeats.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblAssociatedHeats.setBounds(372, 6, 146, 16);
-		panel.add(lblAssociatedHeats);
+			final JLabel lblAssociatedHeats = new JLabel("Associated Heats");
+			lblAssociatedHeats
+					.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+			lblAssociatedHeats.setBounds(381, 214, 146, 16);
+			panel.add(lblAssociatedHeats);
 
-		final JScrollPane heatsScrollPane = new JScrollPane();
-		heatsScrollPane.setBounds(319, 34, 343, 162);
-		panel.add(heatsScrollPane);
+			final JScrollPane heatsScrollPane = new JScrollPane();
+			heatsScrollPane.setBounds(319, 242, 343, 111);
+			panel.add(heatsScrollPane);
 
-		heatsTable = new JTable(heatTableModel);
-		heatsScrollPane.setViewportView(heatsTable);
+			heatsTable = new JTable(heatTableModel);
+			heatsScrollPane.setViewportView(heatsTable);
 
-		final JLabel lblFt = new JLabel("ft.");
-		lblFt.setBounds(108, 214, 50, 16);
-		panel.add(lblFt);
+			final JLabel lblFt = new JLabel("ft.");
+			lblFt.setBounds(108, 214, 50, 16);
+			panel.add(lblFt);
 
-		final JLabel lblIn = new JLabel("In.");
-		lblIn.setBounds(265, 214, 61, 16);
-		panel.add(lblIn);
+			final JLabel lblIn = new JLabel("In.");
+			lblIn.setBounds(265, 214, 61, 16);
+			panel.add(lblIn);
 
-		minInCombo = new JComboBox<Integer>();
-		minInCombo.setBounds(173, 210, 80, 27);
-		panel.add(minInCombo);
+			minInCombo = new JComboBox<Integer>();
+			minInCombo.setBounds(173, 210, 80, 27);
+			panel.add(minInCombo);
 
-		minFtCombo = new JComboBox<Integer>();
-		minFtCombo.setBounds(16, 209, 80, 27);
-		panel.add(minFtCombo);
+			minFtCombo = new JComboBox<Integer>();
+			minFtCombo.setBounds(16, 209, 80, 27);
+			panel.add(minFtCombo);
 
-		final JLabel lblMin = new JLabel("min");
-		lblMin.setBounds(108, 256, 61, 16);
-		panel.add(lblMin);
+			final JLabel lblMin = new JLabel("min");
+			lblMin.setBounds(108, 256, 61, 16);
+			panel.add(lblMin);
 
-		final JLabel lblSec = new JLabel("sec");
-		lblSec.setBounds(265, 256, 50, 16);
-		panel.add(lblSec);
+			final JLabel lblSec = new JLabel("sec");
+			lblSec.setBounds(265, 256, 50, 16);
+			panel.add(lblSec);
 
-		minMinCombo = new JComboBox<Integer>();
-		minMinCombo.setBounds(16, 251, 80, 27);
-		panel.add(minMinCombo);
+			minMinCombo = new JComboBox<Integer>();
+			minMinCombo.setBounds(16, 251, 80, 27);
+			panel.add(minMinCombo);
 
-		minSecCombo = new JComboBox<Integer>();
-		minSecCombo.setBounds(173, 252, 80, 27);
-		panel.add(minSecCombo);
+			minSecCombo = new JComboBox<Integer>();
+			minSecCombo.setBounds(173, 252, 80, 27);
+			panel.add(minSecCombo);
 
-		JLabel lblScoringUnit = new JLabel("Score Unit");
-		lblScoringUnit.setBounds(16, 148, 89, 14);
-		panel.add(lblScoringUnit);
+			JLabel lblScoringUnit = new JLabel("Score Unit");
+			lblScoringUnit.setBounds(16, 148, 89, 14);
+			panel.add(lblScoringUnit);
 
-		scoreUnitCombo = new JComboBox<String>();
-		scoreUnitCombo.setBounds(98, 143, 128, 26);
-		panel.add(scoreUnitCombo);
+			scoreUnitCombo = new JComboBox<String>();
+			scoreUnitCombo.setBounds(98, 143, 128, 26);
+			panel.add(scoreUnitCombo);
 
-		JLabel lblMaximumScore = new JLabel("Maximum Score");
-		lblMaximumScore.setBounds(19, 291, 105, 14);
-		panel.add(lblMaximumScore);
+			JLabel lblMaximumScore = new JLabel("Maximum Score");
+			lblMaximumScore.setBounds(19, 291, 105, 14);
+			panel.add(lblMaximumScore);
 
-		maxFtCombo = new JComboBox<Integer>();
-		maxFtCombo.setBounds(16, 321, 80, 27);
-		panel.add(maxFtCombo);
+			maxFtCombo = new JComboBox<Integer>();
+			maxFtCombo.setBounds(16, 321, 80, 27);
+			panel.add(maxFtCombo);
 
-		maxMinCombo = new JComboBox<Integer>();
-		maxMinCombo.setBounds(16, 363, 80, 27);
-		panel.add(maxMinCombo);
+			maxMinCombo = new JComboBox<Integer>();
+			maxMinCombo.setBounds(16, 363, 80, 27);
+			panel.add(maxMinCombo);
 
-		JLabel lblFt_1 = new JLabel("ft.");
-		lblFt_1.setBounds(108, 327, 46, 14);
-		panel.add(lblFt_1);
+			JLabel lblFt_1 = new JLabel("ft.");
+			lblFt_1.setBounds(108, 327, 46, 14);
+			panel.add(lblFt_1);
 
-		JLabel lblMin_1 = new JLabel("min");
-		lblMin_1.setBounds(108, 369, 46, 14);
-		panel.add(lblMin_1);
+			JLabel lblMin_1 = new JLabel("min");
+			lblMin_1.setBounds(108, 369, 46, 14);
+			panel.add(lblMin_1);
 
-		maxInCombo = new JComboBox<Integer>();
-		maxInCombo.setBounds(173, 321, 80, 27);
-		panel.add(maxInCombo);
+			maxInCombo = new JComboBox<Integer>();
+			maxInCombo.setBounds(173, 321, 80, 27);
+			panel.add(maxInCombo);
 
-		maxSecCombo = new JComboBox<Integer>();
-		maxSecCombo.setBounds(173, 363, 80, 26);
-		panel.add(maxSecCombo);
+			maxSecCombo = new JComboBox<Integer>();
+			maxSecCombo.setBounds(173, 363, 80, 26);
+			panel.add(maxSecCombo);
 
-		JLabel lblIn_1 = new JLabel("In.");
-		lblIn_1.setBounds(261, 327, 46, 14);
-		panel.add(lblIn_1);
+			JLabel lblIn_1 = new JLabel("In.");
+			lblIn_1.setBounds(261, 327, 46, 14);
+			panel.add(lblIn_1);
 
-		JLabel lblSec_1 = new JLabel("sec");
-		lblSec_1.setBounds(261, 369, 46, 14);
-		panel.add(lblSec_1);
+			JLabel lblSec_1 = new JLabel("sec");
+			lblSec_1.setBounds(261, 369, 46, 14);
+			panel.add(lblSec_1);
 
-		JLabel lblAddNewEvent = new JLabel("Add New Heat");
-		lblAddNewEvent.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblAddNewEvent.setBounds(372, 208, 105, 16);
-		panel.add(lblAddNewEvent);
+			JLabel lblAddNewEvent = new JLabel("Add New Heat");
+			lblAddNewEvent.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+			lblAddNewEvent.setBounds(381, 6, 105, 16);
+			panel.add(lblAddNewEvent);
 
-		JLabel lblMinimumAge = new JLabel("Minimum Age");
-		lblMinimumAge.setBounds(319, 241, 97, 16);
-		panel.add(lblMinimumAge);
+			JLabel lblMinimumAge = new JLabel("Minimum Age");
+			lblMinimumAge.setBounds(338, 39, 97, 16);
+			panel.add(lblMinimumAge);
 
-		JLabel lblMaximumAge = new JLabel("Maximum Age");
-		lblMaximumAge.setBounds(319, 269, 97, 16);
-		panel.add(lblMaximumAge);
+			JLabel lblMaximumAge = new JLabel("Maximum Age");
+			lblMaximumAge.setBounds(338, 67, 97, 16);
+			panel.add(lblMaximumAge);
 
-		JLabel lblGender = new JLabel("Gender");
-		lblGender.setBounds(319, 295, 61, 16);
-		panel.add(lblGender);
+			JLabel lblGender = new JLabel("Gender");
+			lblGender.setBounds(338, 93, 61, 16);
+			panel.add(lblGender);
 
-		minAgeCombo = new JComboBox<Integer>();
-		minAgeCombo.setBounds(428, 225, 80, 50);
-		panel.add(minAgeCombo);
+			minAgeCombo = new JComboBox<Integer>();
+			minAgeCombo.setBounds(447, 23, 80, 50);
+			panel.add(minAgeCombo);
 
-		maxAgeCombo = new JComboBox<Integer>();
-		maxAgeCombo.setBounds(428, 252, 80, 50);
-		panel.add(maxAgeCombo);
+			maxAgeCombo = new JComboBox<Integer>();
+			maxAgeCombo.setBounds(447, 50, 80, 50);
+			panel.add(maxAgeCombo);
 
-		genderCombo = new JComboBox<String>();
-		genderCombo.setBounds(428, 279, 80, 50);
-		panel.add(genderCombo);
+			genderCombo = new JComboBox<String>();
+			genderCombo.setBounds(447, 77, 172, 50);
+			panel.add(genderCombo);
 
-		JLabel lblTime = new JLabel("Time");
-		lblTime.setBounds(319, 321, 61, 16);
-		panel.add(lblTime);
+			JLabel lblTime = new JLabel("Time");
+			lblTime.setBounds(338, 119, 61, 16);
+			panel.add(lblTime);
 
-		hourCombo = new JComboBox<Integer>();
-		hourCombo.setBounds(428, 306, 80, 50);
-		panel.add(hourCombo);
+			hourCombo = new JComboBox<Integer>();
+			hourCombo.setBounds(447, 104, 80, 50);
+			panel.add(hourCombo);
 
-		JLabel lblH = new JLabel("h");
-		lblH.setBounds(506, 325, 13, 16);
-		panel.add(lblH);
+			JLabel lblH = new JLabel("h");
+			lblH.setBounds(525, 123, 13, 16);
+			panel.add(lblH);
 
-		minCombo = new JComboBox<Integer>();
-		minCombo.setBounds(520, 306, 80, 50);
-		panel.add(minCombo);
+			minCombo = new JComboBox<Integer>();
+			minCombo.setBounds(539, 104, 80, 50);
+			panel.add(minCombo);
 
-		JLabel lblM = new JLabel("m");
-		lblM.setBounds(598, 325, 19, 16);
-		panel.add(lblM);
+			JLabel lblM = new JLabel("m");
+			lblM.setBounds(617, 123, 19, 16);
+			panel.add(lblM);
 
-		JLabel lblDivision = new JLabel("Division");
-		lblDivision.setBounds(319, 347, 61, 16);
-		panel.add(lblDivision);
+			JLabel lblDivision = new JLabel("Division");
+			lblDivision.setBounds(338, 145, 61, 16);
+			panel.add(lblDivision);
 
-		divisionCombo = new JComboBox<Integer>();
-		divisionCombo.setBounds(428, 333, 80, 50);
-		panel.add(divisionCombo);
+			divisionCombo = new JComboBox<Integer>();
+			divisionCombo.setBounds(447, 131, 80, 50);
+			panel.add(divisionCombo);
 
-		searchTxtBox = new JTextField();
-		searchTxtBox.setColumns(10);
+			searchTxtBox = new JTextField();
+			searchTxtBox.setColumns(10);
 
-		final JButton searchBtn = new SearchButton(
-				new MediatorActionListener(), mediator, this);
+			searchBtn = new SearchButton(new MediatorActionListener(),
+					mediator, this);
 
-		final JButton newBtn = new NewButton(new MediatorActionListener(),
-				mediator, this);
+			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
 
-		final JButton deleteBtn = new DeleteButton(
-				new MediatorActionListener(), mediator, this);
-		deleteBtn.setEnabled(false);
+			deleteBtn = new DeleteButton(new MediatorActionListener(),
+					mediator, this);
+			deleteBtn.setEnabled(false);
 
-		final JButton saveBtn = new SaveButton(new MediatorActionListener(),
-				mediator, this);
+			saveBtn = new SaveButton(new MediatorActionListener(), mediator,
+					this);
 
-		AddButton addButton = new AddButton(new MediatorActionListener(),
-				mediator, this);
-		addButton.setBounds(319, 375, 100, 16);
-		panel.add(addButton);
+			addBtn = new AddButton(new MediatorActionListener(), mediator, this);
+			addBtn.setBounds(341, 173, 80, 29);
+			panel.add(addBtn);
 
-		RemoveButton removeButton = new RemoveButton(
-				new MediatorActionListener(), mediator, this);
-		removeButton.setBounds(438, 374, 100, 16);
-		panel.add(removeButton);
+			clearBtn = new ClearButton(new MediatorActionListener(), mediator,
+					this);
+			clearBtn.setBounds(427, 173, 80, 29);
+			panel.add(clearBtn);
+
+			removeBtn = new RemoveButton(new MediatorActionListener(),
+					mediator, this);
+			removeBtn.setEnabled(false);
+			removeBtn.setBounds(511, 173, 80, 29);
+			panel.add(removeBtn);
+		}
 
 		/* Load initial values */
 		{
@@ -326,7 +345,7 @@ public class EventsPnl extends JPanel {
 				maxSecCombo.addItem(i);
 			}
 			// Age
-			for (Integer i = 0; i <= 99; i++) {
+			for (Integer i = 1; i <= 99; i++) {
 				minAgeCombo.addItem(i);
 				maxAgeCombo.addItem(i);
 			}
@@ -334,12 +353,12 @@ public class EventsPnl extends JPanel {
 			genderCombo.addItem("Male");
 			genderCombo.addItem("Female");
 			// Division
-			for (Integer i = 0; i < 10; i++) {
+			for (Integer i = 1; i <= 10; i++) {
 				divisionCombo.addItem(i);
 			}
 		}
 
-		/* Click events */
+		/* EventsTable selection listener */
 		{
 			eventsTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
@@ -347,10 +366,30 @@ public class EventsPnl extends JPanel {
 							if (eventsTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
 								if (eventsTable.getRowCount() > 0) {
+									setHeat(null);
 									setEvent(eventTableModel
 											.getEvent(eventsTable
 													.getSelectedRow()));
 								}
+							}
+						}
+					});
+		}
+
+		/* HeatTable selection listener */
+		{
+			heatsTable.getSelectionModel().addListSelectionListener(
+					new ListSelectionListener() {
+						public void valueChanged(ListSelectionEvent e) {
+							if (heatsTable.getSelectedRow() != -1) {
+								removeBtn.setEnabled(true);
+								if (heatsTable.getRowCount() > 0) {
+									setHeat(heatTableModel.getHeat(heatsTable
+											.getSelectedRow()));
+								}
+							} else {
+								removeBtn.setEnabled(false);
+								setHeat(null);
 							}
 						}
 					});
@@ -368,6 +407,7 @@ public class EventsPnl extends JPanel {
 
 		/* Set initially loaded event to empty */
 		setEvent(null);
+		setHeat(null);
 
 		// ************ Generated By Window Builder ************* //
 		final GroupLayout groupLayout = new GroupLayout(this);
@@ -516,7 +556,7 @@ public class EventsPnl extends JPanel {
 			e = new Event("", "", "N", 0, 0, 0);
 			eventsTable.clearSelection();
 		} else {
-			int index = DaoRepository.getEventsDao().objects.indexOf(e);
+			int index = eventTableModel.indexOf(e);
 			if (index == -1)
 				eventsTable.clearSelection();
 			else
@@ -527,16 +567,7 @@ public class EventsPnl extends JPanel {
 		eventNameTextBox.setText(e.getEventName());
 		scoreUnitCombo.setSelectedItem(e.getScoreUnit());
 
-		/* Fill heats table */
-		ArrayList<Heat> heats = new ArrayList<Heat>();
-		if (e.getDbId() != null) {
-			for (Heat h : DaoRepository.getHeatsDao().objects) {
-				if (h.getEventRef() != null
-						&& h.getEventRef().equals(e.getDbId()))
-					heats.add(h);
-			}
-		}
-		heatTableModel.setHeats(heats);
+		loadHeats(e);
 	}
 
 	public Event getEvent() {
@@ -580,7 +611,68 @@ public class EventsPnl extends JPanel {
 		return loadedEvent;
 	}
 
-	public void updateTable() {
-		eventTableModel.update();
+	public void setHeat(Heat h) {
+		/* Fill heat form */
+		if (h == null) {
+			h = new Heat(loadedEvent.getDbId(), "", 0, 0, "", 0);
+			heatsTable.clearSelection();
+		} else {
+			int index = heatTableModel.indexOf(h);
+			if (index == -1)
+				heatsTable.clearSelection();
+			else
+				heatsTable.setRowSelectionInterval(index, index);
+		}
+		loadedHeat = h;
+		minAgeCombo.setSelectedItem(h.getMinAge());
+		maxAgeCombo.setSelectedItem(h.getMaxAge());
+		if (h.getGender().equals("M"))
+			genderCombo.setSelectedItem("Male");
+		else if (h.getGender().equals("F"))
+			genderCombo.setSelectedItem("Female");
+		hourCombo.setSelectedItem(Heat.extractHour(h.getTime()));
+		minCombo.setSelectedItem(Heat.extractMinute(h.getTime()));
+		divisionCombo.setSelectedItem(h.getNumHeats());
 	}
+
+	public Heat getHeat() {
+		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
+		Integer maxAge = (Integer) maxAgeCombo.getSelectedItem();
+		String gender = (String) genderCombo.getSelectedItem();
+		String time = Heat.createTimeString(
+				(Integer) hourCombo.getSelectedItem(),
+				(Integer) minCombo.getSelectedItem(), 0);
+		Integer division = (Integer) divisionCombo.getSelectedItem();
+		loadedHeat.setMinAge(minAge);
+		loadedHeat.setMaxAge(maxAge);
+		if (gender.equals("Male"))
+			loadedHeat.setGender("M");
+		else if (gender.equals("Female"))
+			loadedHeat.setGender("F");
+		loadedHeat.setTime(time);
+		loadedHeat.setNumHeats(division);
+		return loadedHeat;
+	}
+
+	public void loadHeats(Event e) {
+		/* Fill heats table */
+		ArrayList<Heat> heats = new ArrayList<Heat>();
+		if (e.getDbId() != null) {
+			for (Heat h : DaoRepository.getHeatsDao().objects) {
+				if (h.getEventRef() != null
+						&& h.getEventRef().equals(e.getDbId()))
+					heats.add(h);
+			}
+		}
+		heatTableModel.setHeats(heats);
+	}
+
+	public EventTableModel getEventTableModel() {
+		return eventTableModel;
+	}
+
+	public HeatTableModel getHeatTableModel() {
+		return heatTableModel;
+	}
+
 }

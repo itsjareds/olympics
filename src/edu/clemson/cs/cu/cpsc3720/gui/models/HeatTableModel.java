@@ -23,13 +23,18 @@ public class HeatTableModel extends AbstractTableModel {
 		update();
 	}
 
-	public void addRow(final Heat a) {
-		heats.add(a);
+	public void addRow(final Heat h) {
+		heats.add(h);
 		update();
 	}
 
 	public void deleteRow(final int row) {
 		heats.remove(row);
+		update();
+	}
+
+	public void deleteHeat(final Heat h) {
+		heats.remove(h);
 		update();
 	}
 
@@ -46,6 +51,14 @@ public class HeatTableModel extends AbstractTableModel {
 	@Override
 	public int getRowCount() {
 		return heats.size();
+	}
+
+	public Heat getHeat(int row) {
+		return heats.get(row);
+	}
+
+	public Integer indexOf(Heat h) {
+		return heats.indexOf(h);
 	}
 
 	@Override

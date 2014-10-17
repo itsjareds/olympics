@@ -9,28 +9,27 @@ import javax.swing.JPanel;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
-public class RemoveButton extends JButton implements CommandInterface {
+public class ClearButton extends JButton implements CommandInterface {
 
-	private static final long serialVersionUID = 7977707859821379410L;
 	private final Mediator mediator;
 	private final JPanel panel;
 
 	/**
-	 * Instantiates a button called "Remove" and performs a remove action.
+	 * Instantiates a button called "Clear" and performs a clear action.
 	 * 
 	 * @param aL
-	 *            - ActionListener for the button
+	 *            - ActionListerner for the button
 	 * @param mediator
 	 *            - a instance of the mediator
-	 * @param panel
+	 * @param dialog
 	 *            - a instance of the panel being used
 	 */
-	public RemoveButton(ActionListener aL, Mediator mediator, JPanel panel) {
-		super("Remove");
+	public ClearButton(ActionListener aL, Mediator mediator, JPanel panel) {
+		super("Clear");
 		this.mediator = mediator;
 		this.panel = panel;
 		addActionListener(aL);
-		this.mediator.registerRemove(this);
+		this.mediator.registerClear(this);
 	}
 
 	/**
@@ -41,7 +40,7 @@ public class RemoveButton extends JButton implements CommandInterface {
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {
-		mediator.remove(arg0, panel);
+		mediator.clear(arg0, panel);
 	}
 
 }

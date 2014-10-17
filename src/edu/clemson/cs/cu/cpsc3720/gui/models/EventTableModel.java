@@ -27,6 +27,10 @@ public class EventTableModel extends AbstractTableModel {
 		return events.get(row);
 	}
 
+	public Integer indexOf(Event e) {
+		return events.indexOf(e);
+	}
+
 	public void addRow(final Event a) {
 		events.add(a);
 		update();

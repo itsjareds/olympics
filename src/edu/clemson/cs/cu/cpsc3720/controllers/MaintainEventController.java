@@ -10,9 +10,9 @@ public class MaintainEventController {
 		DaoRepository.getEventsDao().save(e);
 	}
 
-	public void deleteEvent(Event e) {
+	public Event deleteEvent(Event e) {
 		System.out.println("Deleting event " + e);
-		DaoRepository.getEventsDao().delete(e);
+		return DaoRepository.getEventsDao().delete(e);
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.gui.components.AddButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.ClearButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
@@ -57,6 +58,8 @@ public interface MediatorInterface {
 
 	public void remove(ActionEvent arg0, JPanel panel);
 
+	public void clear(ActionEvent arg0, JPanel panel);
+
 	public void registerUnregister(UnregisterButton unregisterButton);
 
 	public void registerRegister(RegisterButton registerButton);
@@ -68,5 +71,7 @@ public interface MediatorInterface {
 	public void registerAdd(AddButton addButton);
 
 	public void registerRemove(RemoveButton removeButton);
+
+	public void registerClear(ClearButton clearButton);
 
 }

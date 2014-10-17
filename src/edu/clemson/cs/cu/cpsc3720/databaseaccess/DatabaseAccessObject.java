@@ -14,6 +14,11 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public final ArrayList<T> objects = new ArrayList<T>();
 	private static String user = "root";
 	private static String pass = "passw0rd";
+	private Class<T> classOfT;
+
+	public DatabaseAccessObject(Class<T> classOfT) {
+		this.classOfT = classOfT;
+	}
 
 	public static ODatabaseDocumentTx getDb() {
 		return ODatabaseDocumentPool.global().acquire(
@@ -40,8 +45,12 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 				objects.remove(cached);
 
 			ODocument doc = db.getRecord(new ORecordId(ref));
-			if (doc != null)
+			T dbObject = new Gson().fromJson(doc.toJSON(), classOfT);
+			dbObject.setDbId(doc.getIdentity().toString());
+			if (doc != null) {
 				db.delete(doc);
+				ret = dbObject;
+			}
 
 			db.close();
 		}
@@ -55,7 +64,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		return ret;
 	}
 
-	public T query(Class<T> classOfT, String ref) {
+	public T query(String ref) {
 		T ret = null;
 
 		/* Search local cache first */
@@ -83,7 +92,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		return ret;
 	}
 
-	public void load(Class<T> classOfT) {
+	public void load() {
 		ODatabaseDocumentTx db = getDb();
 
 		for (ODocument objDoc : db.browseClass(classOfT.getSimpleName())) {
