@@ -3,6 +3,7 @@ package edu.clemson.cs.cu.cpsc3720.mediator;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
@@ -187,9 +188,15 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("EventPanel")) {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
-			mhc.addHeat(epl.getHeat());
-			epl.loadHeats(epl.getEvent());
-			epl.setHeat(null);
+			boolean added = mhc.addHeat(epl.getHeat());
+			if (added) {
+				epl.loadHeats(epl.getEvent());
+				epl.setHeat(null);
+			} else {
+				JOptionPane
+						.showMessageDialog(null,
+								"Could not add heat. Save your event before editing heats.");
+			}
 		}
 		System.out.println(panel.getName());
 	}

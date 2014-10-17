@@ -298,11 +298,13 @@ public class EventsPnl extends JPanel {
 
 			addBtn = new AddButton(new MediatorActionListener(), mediator, this);
 			addBtn.setBounds(395, 173, 80, 29);
+			addBtn.setEnabled(false);
 			panel.add(addBtn);
 
 			clearBtn = new ClearButton(new MediatorActionListener(), mediator,
 					this);
 			clearBtn.setBounds(481, 173, 80, 29);
+			clearBtn.setEnabled(false);
 			panel.add(clearBtn);
 
 			removeBtn = new RemoveButton(new MediatorActionListener(),
@@ -366,6 +368,8 @@ public class EventsPnl extends JPanel {
 						public void valueChanged(ListSelectionEvent e) {
 							if (eventsTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
+								addBtn.setEnabled(true);
+								clearBtn.setEnabled(true);
 								if (eventsTable.getRowCount() > 0) {
 									setEvent(eventTableModel
 											.getEvent(eventsTable
@@ -373,6 +377,8 @@ public class EventsPnl extends JPanel {
 								}
 							} else {
 								deleteBtn.setEnabled(false);
+								addBtn.setEnabled(false);
+								clearBtn.setEnabled(false);
 							}
 						}
 					});
