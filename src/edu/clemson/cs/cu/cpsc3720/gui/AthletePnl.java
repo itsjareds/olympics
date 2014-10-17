@@ -30,7 +30,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
-import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
+import edu.clemson.cs.cu.cpsc3720.gui.models.RegistrationTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
@@ -42,12 +42,12 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 public class AthletePnl extends JPanel {
 	private static final long serialVersionUID = -3647303070052872171L;
 	private static AthleteTableModel athleteTableModel;
-	private static EventTableModel eventTableModel;
+	private static RegistrationTableModel registrationTableModel;
 	private final JTextField athleteFirstNameTextBox;
 	private final JTextField athleteLastNameTxtBox;
 	private final ArrayList<Athlete> athletes;
 	private final ArrayList<Event> events;
-	private final JTable eventsTable;
+	private final JTable registrationTable;
 	private final Mediator mediator;
 	private final JTextField searchTxtBox;
 	private final JTable athleteTable;
@@ -79,7 +79,7 @@ public class AthletePnl extends JPanel {
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<School> schoolList;
 	private ArrayList<Event> eventList;
-	private ArrayList<Event> associatedEvents;
+	private ArrayList<Registration> associatedRegistrations;
 	private Athlete loadedAthlete;
 
 	/**
@@ -97,7 +97,8 @@ public class AthletePnl extends JPanel {
 
 			Collections.sort(athletes);
 			athleteTableModel = new AthleteTableModel(athletes);
-			eventTableModel = new EventTableModel(new ArrayList<Event>());
+			registrationTableModel = new RegistrationTableModel(
+					new ArrayList<Registration>());
 
 		}
 		// ------------ End Init ------------- //
@@ -149,8 +150,8 @@ public class AthletePnl extends JPanel {
 			athleteTable = new JTable(athleteTableModel);
 			athleteScrollPane.setViewportView(athleteTable);
 
-			eventsTable = new JTable(AthletePnl.eventTableModel);
-			eventsScrollPane.setViewportView(eventsTable);
+			registrationTable = new JTable(AthletePnl.registrationTableModel);
+			eventsScrollPane.setViewportView(registrationTable);
 
 		}
 		// --------- End Tables --------------- //
@@ -393,28 +394,22 @@ public class AthletePnl extends JPanel {
 							else
 								deleteBtn.setEnabled(false);
 
-							if (eventsTable.getRowCount() > 0) {
+							if (registrationTable.getRowCount() > 0) {
 								fillPanel();
 							}
 						}
 					});
 
-			eventsTable.getSelectionModel().addListSelectionListener(
+			registrationTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
+							if (registrationTable.getSelectedRow() != -1
+									&& athleteTable.getSelectedRow() != -1)
 
-							if (eventsTable.getSelectedRow() != -1)
-
-								btnUnregister.setEnabled(true);
-							if (eventsTable.getRowCount() >= 2) {
-
-								btnRegister.setEnabled(false);
-							} else {
-
-								btnRegister.setEnabled(true);
-							}
-
+								if (athleteTable.getSelectedRow() != -1) {
+									btnRegister.setEnabled(true);
+								}
 						}
 					});
 		}
@@ -574,7 +569,7 @@ public class AthletePnl extends JPanel {
 					.getSelectedRow());
 		}
 
-		associatedEvents = new ArrayList<Event>();
+		associatedRegistrations = new ArrayList<Registration>();
 		ArrayList<String> arefs = athlete.getRegRefs();
 		ArrayList<String> rrefs = new ArrayList<>();
 
@@ -605,21 +600,17 @@ public class AthletePnl extends JPanel {
 		} else {
 			schoolGroupCodeComboBox.setSelectedIndex(0);
 		}
-		// fill event list
+
+		// fill registration list
 		for (String ref : arefs) {
 			DatabaseAccessObject<Registration> daor = DaoRepository
 					.getRegistrationsDao();
 			Registration r = daor.query(ref);
 			if (r != null)
-				rrefs.add(r.getEventRef());
+				associatedRegistrations.add(r);
 		}
-		for (String ref : rrefs) {
-			DatabaseAccessObject<Event> daoe = DaoRepository.getEventsDao();
-			Event e = daoe.query(ref);
-			if (e != null)
-				associatedEvents.add(e);
-		}
-		eventTableModel.setEvents(associatedEvents);
+
+		registrationTableModel.setRegistrations(associatedRegistrations);
 
 		// set school
 		DatabaseAccessObject<School> daos = DaoRepository.getSchoolsDao();
@@ -657,9 +648,9 @@ public class AthletePnl extends JPanel {
 		String schoolRef = school.getDbId();
 
 		ArrayList<String> regRefs = new ArrayList<>();
-		if (associatedEvents != null)
-			for (Event e : associatedEvents) {
-				regRefs.add(e.getDbId());
+		if (associatedRegistrations != null)
+			for (Registration r : associatedRegistrations) {
+				regRefs.add(r.getDbId());
 			}
 
 		athlete.setFirstName(firstName);
@@ -676,9 +667,12 @@ public class AthletePnl extends JPanel {
 	}
 
 	public Registration getRegistration() {
-		Registration r = null;
 
-		return r;
+		Event e = (Event) eventComboBox.getSelectedItem();
+		Athlete a = athleteTableModel.getAthlete(athleteTable.getSelectedRow());
+		// TODO get score form combo boxes
+		Integer score = new Integer(0);
+		return new Registration(e.getDbId(), a.getDbId(), score);
 	}
 
 	public void clearPanel() {
@@ -690,13 +684,13 @@ public class AthletePnl extends JPanel {
 		genderComboBox.setSelectedIndex(0);
 		groupLeaderComboBox.setSelectedIndex(0);
 		schoolGroupCodeComboBox.setSelectedIndex(0);
-		eventTableModel.setEvents(new ArrayList<Event>());
+		registrationTableModel.setRegistrations(new ArrayList<Registration>());
 		schoolNameComboBox.setSelectedIndex(0);
 	}
 
 	public void updateTables() {
 		athleteTableModel.update();
-		eventTableModel.update();
+		registrationTableModel.update();
 	}
 
 	private void setUnits() {
@@ -705,5 +699,13 @@ public class AthletePnl extends JPanel {
 		// this.inchComboBox
 		// this.minComboBox
 		// this.secComboBox
+	}
+
+	public void setRegEnabled(boolean bool) {
+		btnRegister.setEnabled(bool);
+	}
+
+	public void setUnregEnabled(boolean bool) {
+		btnUnregister.setEnabled(bool);
 	}
 }

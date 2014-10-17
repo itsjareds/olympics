@@ -174,7 +174,7 @@ public class Mediator implements MediatorInterface {
 		AthletePnl apl = (AthletePnl) panel;
 		RegisterAthleteController rac = new RegisterAthleteController();
 		rac.saveRegistration(apl.getRegistration());
-
+		apl.updateTables();
 	}
 
 	@Override
