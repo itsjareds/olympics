@@ -389,10 +389,13 @@ public class AthletePnl extends JPanel {
 					new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if (athleteTable.getSelectedRow() != -1)
+							if (athleteTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
-							else
+								btnRegister.setEnabled(true);
+							} else {
 								deleteBtn.setEnabled(false);
+								btnRegister.setEnabled(true);
+							}
 
 							if (registrationTable.getRowCount() > 0) {
 								fillPanel();
@@ -405,11 +408,11 @@ public class AthletePnl extends JPanel {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
 							if (registrationTable.getSelectedRow() != -1
-									&& athleteTable.getSelectedRow() != -1)
-
-								if (athleteTable.getSelectedRow() != -1) {
-									btnRegister.setEnabled(true);
-								}
+									&& athleteTable.getSelectedRow() != -1) {
+								btnUnregister.setEnabled(true);
+							} else {
+								btnUnregister.setEnabled(false);
+							}
 						}
 					});
 		}
