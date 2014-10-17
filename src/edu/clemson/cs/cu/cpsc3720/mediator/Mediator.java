@@ -30,11 +30,11 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
  * <p>
  * The Mediator class implements the MediatorInterface and executes the various
  * actions assigned to its respective button.
- * 
  * @author Darrell Best - bbest
  * @version 1.0
  * @since 2014-09-22
  */
+@SuppressWarnings("unused")
 public class Mediator implements MediatorInterface {
 
 	private CancelButton cancelButton;
@@ -52,7 +52,6 @@ public class Mediator implements MediatorInterface {
 	 * This method stores an instance of the static class
 	 * {@link edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton
 	 * CancelButton} so action can be executed.
-	 * 
 	 * @param cancelButton
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerCancel(CancelButton)
 	 */
@@ -64,12 +63,10 @@ public class Mediator implements MediatorInterface {
 	/**
 	 * This method gives the cancel button functionality to close the selected
 	 * window.
-	 * 
-	 * @param arg0
-	 *            {@link java.awt.event.ActionEvent ActionEvent}
-	 * @param dialog
-	 *            - JDialog
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#cancel(ActionEvent, JDialog)
+	 * @param arg0 {@link java.awt.event.ActionEvent ActionEvent}
+	 * @param dialog - JDialog
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#cancel(ActionEvent,
+	 *      JDialog)
 	 */
 	@Override
 	public void cancel(ActionEvent arg0, JDialog dialog) {
@@ -90,7 +87,8 @@ public class Mediator implements MediatorInterface {
 	 * Method newItem.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#newItem(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#newItem(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void newItem(ActionEvent arg0, JPanel panel) {
@@ -138,7 +136,8 @@ public class Mediator implements MediatorInterface {
 	 * Method delete.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#delete(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#delete(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
@@ -171,7 +170,8 @@ public class Mediator implements MediatorInterface {
 	 * Method search.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#search(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#search(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void search(ActionEvent arg0, JPanel panel) {
@@ -192,7 +192,8 @@ public class Mediator implements MediatorInterface {
 	 * Method save.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#save(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#save(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
@@ -229,7 +230,8 @@ public class Mediator implements MediatorInterface {
 	 * Method registerAthlete.
 	 * @param e ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerAthlete(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerAthlete(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void registerAthlete(ActionEvent e, JPanel panel) {
@@ -243,7 +245,8 @@ public class Mediator implements MediatorInterface {
 	 * Method unregisterAthlete.
 	 * @param e ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#unregisterAthlete(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#unregisterAthlete(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void unregisterAthlete(ActionEvent e, JPanel panel) {
@@ -255,7 +258,8 @@ public class Mediator implements MediatorInterface {
 	 * Method add.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#add(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#add(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void add(ActionEvent arg0, JPanel panel) {
@@ -279,7 +283,8 @@ public class Mediator implements MediatorInterface {
 	 * Method remove.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#remove(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#remove(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void remove(ActionEvent arg0, JPanel panel) {
@@ -317,7 +322,8 @@ public class Mediator implements MediatorInterface {
 	 * Method clear.
 	 * @param arg0 ActionEvent
 	 * @param panel JPanel
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#clear(ActionEvent, JPanel)
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#clear(ActionEvent,
+	 *      JPanel)
 	 */
 	@Override
 	public void clear(ActionEvent arg0, JPanel panel) {
