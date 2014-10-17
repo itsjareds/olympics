@@ -3,7 +3,7 @@ package edu.clemson.cs.cu.cpsc3720.mediator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 
 /**
  * <h1>Mediator Action Listener</h1>
@@ -22,7 +22,7 @@ public class MediatorActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		ComandInterface command = (ComandInterface) arg0.getSource();
+		CommandInterface command = (CommandInterface) arg0.getSource();
 		command.execute(arg0);
 	}
 }

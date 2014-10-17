@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
-public class DeleteButton extends JButton implements ComandInterface {
+public class DeleteButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = -6231899390514652352L;
 	private Mediator mediator;

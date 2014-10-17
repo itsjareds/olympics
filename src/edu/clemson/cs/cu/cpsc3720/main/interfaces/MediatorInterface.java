@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import edu.clemson.cs.cu.cpsc3720.gui.components.AddButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.RemoveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
@@ -51,6 +53,10 @@ public interface MediatorInterface {
 
 	public void save(ActionEvent arg0, JPanel panel);
 
+	public void add(ActionEvent arg0, JPanel panel);
+
+	public void remove(ActionEvent arg0, JPanel panel);
+
 	public void registerUnregister(UnregisterButton unregisterButton);
 
 	public void registerRegister(RegisterButton registerButton);
@@ -58,4 +64,9 @@ public interface MediatorInterface {
 	public void registerAthlete(ActionEvent e, JPanel thisPanel);
 
 	public void unregisterAthlete(ActionEvent e, JPanel thisPanel);
+
+	public void registerAdd(AddButton addButton);
+
+	public void registerRemove(RemoveButton removeButton);
+
 }

@@ -11,7 +11,7 @@ public class EventTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8932721969724439783L;
 	private List<Event> events = new ArrayList<>();
-	String[] colNames = { "Event Code", "Event Name", "Score Code" };
+	String[] colNames = { "Code", "Event Name", "Unit" };
 
 	public EventTableModel(List<Event> events) {
 		this.events = events;

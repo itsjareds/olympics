@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
-public class NewButton extends JButton implements ComandInterface {
+public class NewButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = -5728398175248638254L;
 	private final Mediator mediator;

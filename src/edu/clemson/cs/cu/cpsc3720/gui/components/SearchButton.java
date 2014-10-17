@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.ComandInterface;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
-public class SearchButton extends JButton implements ComandInterface {
+public class SearchButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = 8988096125384043296L;
 	private Mediator mediator;

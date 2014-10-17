@@ -4,34 +4,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
-public class CancelButton extends JButton implements CommandInterface {
+public class AddButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = 4810322146053818837L;
 	private final Mediator mediator;
-	private final JDialog dialog;
+	private final JPanel panel;
 
 	/**
-	 * Instantiates a button called "Cancel" and gives it the action to close a
-	 * window.
+	 * Instantiates a button called "Add" and performs an add action.
 	 * 
 	 * @param aL
 	 *            - ActionListerner for the button
 	 * @param mediator
 	 *            - a instance of the mediator
 	 * @param dialog
-	 *            - a instance of the window being used
+	 *            - a instance of the panel being used
 	 */
-	public CancelButton(ActionListener aL, Mediator mediator, JDialog dialog) {
-		super("Cancel");
+	public AddButton(ActionListener aL, Mediator mediator, JPanel panel) {
+		super("Add");
 		this.mediator = mediator;
-		this.dialog = dialog;
+		this.panel = panel;
 		addActionListener(aL);
-		this.mediator.registerCancel(this);
+		this.mediator.registerAdd(this);
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class CancelButton extends JButton implements CommandInterface {
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {
-		mediator.cancel(arg0, dialog);
+		mediator.add(arg0, panel);
 	}
 
 }

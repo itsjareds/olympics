@@ -7,13 +7,16 @@ import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainEventController;
+import edu.clemson.cs.cu.cpsc3720.controllers.MaintainHeatController;
 import edu.clemson.cs.cu.cpsc3720.controllers.RegisterAthleteController;
 import edu.clemson.cs.cu.cpsc3720.gui.AthletePnl;
 import edu.clemson.cs.cu.cpsc3720.gui.EventsPnl;
+import edu.clemson.cs.cu.cpsc3720.gui.components.AddButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
+import edu.clemson.cs.cu.cpsc3720.gui.components.RemoveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
@@ -39,6 +42,8 @@ public class Mediator implements MediatorInterface {
 	private SaveButton saveButton;
 	private UnregisterButton unregisterButton;
 	private RegisterButton registerButton;
+	private AddButton addButton;
+	private RemoveButton removeButton;
 
 	/**
 	 * This method stores an instance of the static class
@@ -196,5 +201,34 @@ public class Mediator implements MediatorInterface {
 	public void unregisterAthlete(ActionEvent e, JPanel panel) {
 		AthletePnl apl = (AthletePnl) panel;
 
+	}
+
+	@Override
+	public void add(ActionEvent arg0, JPanel panel) {
+		addButton.setVisible(true);
+		if (panel.getName().equals("EventPanel")) {
+			MaintainHeatController mhc = new MaintainHeatController();
+			EventsPnl epl = (EventsPnl) panel;
+			// mhc.addHeat(epl.getHeat());
+			// epl.updateHeatTable();
+			// epl.clearHeat();
+		}
+		System.out.println(panel.getName());
+	}
+
+	@Override
+	public void remove(ActionEvent arg0, JPanel panel) {
+		removeButton.setVisible(true);
+		System.out.println(panel.getName());
+	}
+
+	@Override
+	public void registerAdd(AddButton addButton) {
+		this.addButton = addButton;
+	}
+
+	@Override
+	public void registerRemove(RemoveButton removeButton) {
+		this.removeButton = removeButton;
 	}
 }
