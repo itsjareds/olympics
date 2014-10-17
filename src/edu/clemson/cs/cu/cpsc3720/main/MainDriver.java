@@ -2,6 +2,9 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.awt.EventQueue;
 
+import javax.swing.JOptionPane;
+
+import com.orientechnologies.common.io.OIOException;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
@@ -24,6 +27,10 @@ public class MainDriver {
 			DaoRepository.getRegistrationsDao().load();
 			DaoRepository.getSchoolsDao().load();
 			DaoRepository.getTeachersDao().load();
+		} catch (OIOException e) {
+			JOptionPane
+					.showMessageDialog(null,
+							"Failed to connect to database. Check your network connection.");
 		} catch (IllegalArgumentException e) {
 			// classes not in database, do not load
 		}
