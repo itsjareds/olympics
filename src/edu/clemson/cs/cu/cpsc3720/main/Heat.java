@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class Heat implements DatabaseSerializable {
 
 	private transient String dbId;
@@ -16,6 +18,15 @@ public class Heat implements DatabaseSerializable {
 	private String time;
 	private Integer numHeats;
 
+	/**
+	 * Constructor for Heat.
+	 * @param eventRef String
+	 * @param gender String
+	 * @param minAge Integer
+	 * @param maxAge Integer
+	 * @param time String
+	 * @param numHeats int
+	 */
 	public Heat(String eventRef, String gender, Integer minAge, Integer maxAge,
 			String time, int numHeats) {
 		super();
@@ -35,46 +46,62 @@ public class Heat implements DatabaseSerializable {
 		this.event = DaoRepository.getEventsDao().query(eventRef);
 	}
 
+	/**
+	 * Method getNumHeats.
+	 * @return Integer
+	 */
 	public Integer getNumHeats() {
 		return numHeats;
 	}
 
+	/**
+	 * Method setNumHeats.
+	 * @param numHeats Integer
+	 */
 	public void setNumHeats(Integer numHeats) {
 		this.numHeats = numHeats;
 	}
 
+	/**
+	 * Method getEventRef.
+	 * @return String
+	 */
 	public String getEventRef() {
 		return eventRef;
 	}
 
+	/**
+	 * Method setEventRef.
+	 * @param eventRef String
+	 */
 	public void setEventRef(String eventRef) {
 		this.eventRef = eventRef;
 	}
 
 	/**
-	 * @return the gender
-	 */
+	
+	 * @return the gender */
 	public String getGender() {
 		return this.gender;
 	}
 
 	/**
-	 * @return the minAge
-	 */
+	
+	 * @return the minAge */
 	public Integer getMinAge() {
 		return this.minAge;
 	}
 
 	/**
-	 * @return the maxAge
-	 */
+	
+	 * @return the maxAge */
 	public Integer getMaxAge() {
 		return this.maxAge;
 	}
 
 	/**
-	 * @return the time
-	 */
+	
+	 * @return the time */
 	public String getTime() {
 		return this.time;
 	}
@@ -112,8 +139,8 @@ public class Heat implements DatabaseSerializable {
 	}
 
 	/**
-	 * @return the event
-	 */
+	
+	 * @return the event */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
@@ -127,16 +154,31 @@ public class Heat implements DatabaseSerializable {
 		this.event = event;
 	}
 
+	/**
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
+	 */
 	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
+	/**
+	 * Method setDbId.
+	 * @param id String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 */
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
+	/**
+	 * Method extractHour.
+	 * @param time String
+	 * @return Integer
+	 */
 	public static Integer extractHour(String time) {
 		Integer ret = 0;
 		if (time != null) {
@@ -153,6 +195,11 @@ public class Heat implements DatabaseSerializable {
 		return ret;
 	}
 
+	/**
+	 * Method extractMinute.
+	 * @param time String
+	 * @return Integer
+	 */
 	public static Integer extractMinute(String time) {
 		Integer ret = 0;
 		if (time != null) {
@@ -169,6 +216,11 @@ public class Heat implements DatabaseSerializable {
 		return ret;
 	}
 
+	/**
+	 * Method extractSecond.
+	 * @param time String
+	 * @return Integer
+	 */
 	public static Integer extractSecond(String time) {
 		Integer ret = 0;
 		if (time != null) {
@@ -185,6 +237,13 @@ public class Heat implements DatabaseSerializable {
 		return ret;
 	}
 
+	/**
+	 * Method createTimeString.
+	 * @param hour Integer
+	 * @param minute Integer
+	 * @param second Integer
+	 * @return String
+	 */
 	public static String createTimeString(Integer hour, Integer minute,
 			Integer second) {
 		DecimalFormat df = new DecimalFormat("00");

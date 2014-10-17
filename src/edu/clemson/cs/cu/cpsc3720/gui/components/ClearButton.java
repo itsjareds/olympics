@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
+/**
+ */
 public class ClearButton extends JButton implements CommandInterface {
 
 	private final Mediator mediator;
@@ -21,8 +23,8 @@ public class ClearButton extends JButton implements CommandInterface {
 	 *            - ActionListerner for the button
 	 * @param mediator
 	 *            - a instance of the mediator
-	 * @param dialog
-	 *            - a instance of the panel being used
+	
+	 * @param panel JPanel
 	 */
 	public ClearButton(ActionListener aL, Mediator mediator, JPanel panel) {
 		super("Clear");
@@ -36,7 +38,9 @@ public class ClearButton extends JButton implements CommandInterface {
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
 	 * 
-	 * @param - ActionEvent {@link java.awt.event.ActionEvent Action Event}
+	
+	 * @param arg0 ActionEvent
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {

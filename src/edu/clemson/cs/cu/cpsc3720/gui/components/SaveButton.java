@@ -9,12 +9,20 @@ import javax.swing.JPanel;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
+/**
+ */
 public class SaveButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = -6163448448443567531L;
 	private final Mediator mediator;
 	private final JPanel panel;
 
+	/**
+	 * Constructor for SaveButton.
+	 * @param aL ActionListener
+	 * @param mediator Mediator
+	 * @param panel JPanel
+	 */
 	public SaveButton(ActionListener aL, Mediator mediator, JPanel panel) {
 		super("Save");
 		this.panel = panel;
@@ -23,6 +31,11 @@ public class SaveButton extends JButton implements CommandInterface {
 		this.mediator.registerSave(this);
 	}
 
+	/**
+	 * Method execute.
+	 * @param arg0 ActionEvent
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
+	 */
 	@Override
 	public void execute(ActionEvent arg0) {
 		mediator.save(arg0, panel);

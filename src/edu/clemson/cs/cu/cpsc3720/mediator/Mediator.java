@@ -54,6 +54,7 @@ public class Mediator implements MediatorInterface {
 	 * CancelButton} so action can be executed.
 	 * 
 	 * @param cancelButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerCancel(CancelButton)
 	 */
 	@Override
 	public void registerCancel(CancelButton cancelButton) {
@@ -68,17 +69,29 @@ public class Mediator implements MediatorInterface {
 	 *            {@link java.awt.event.ActionEvent ActionEvent}
 	 * @param dialog
 	 *            - JDialog
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#cancel(ActionEvent, JDialog)
 	 */
 	@Override
 	public void cancel(ActionEvent arg0, JDialog dialog) {
 		dialog.dispose();
 	}
 
+	/**
+	 * Method registerNew.
+	 * @param newButton NewButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerNew(NewButton)
+	 */
 	@Override
 	public void registerNew(NewButton newButton) {
 		this.newButton = newButton;
 	}
 
+	/**
+	 * Method newItem.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#newItem(ActionEvent, JPanel)
+	 */
 	@Override
 	public void newItem(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("AthletePanel")) {
@@ -90,22 +103,43 @@ public class Mediator implements MediatorInterface {
 		}
 	}
 
+	/**
+	 * Method registerUnregister.
+	 * @param unregisterButton UnregisterButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerUnregister(UnregisterButton)
+	 */
 	@Override
 	public void registerUnregister(UnregisterButton unregisterButton) {
 		this.unregisterButton = unregisterButton;
 
 	}
 
+	/**
+	 * Method registerRegister.
+	 * @param registerButton RegisterButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerRegister(RegisterButton)
+	 */
 	@Override
 	public void registerRegister(RegisterButton registerButton) {
 		this.registerButton = registerButton;
 	}
 
+	/**
+	 * Method registerDelete.
+	 * @param deleteButton DeleteButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerDelete(DeleteButton)
+	 */
 	@Override
 	public void registerDelete(DeleteButton deleteButton) {
 		this.deleteButton = deleteButton;
 	}
 
+	/**
+	 * Method delete.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#delete(ActionEvent, JPanel)
+	 */
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("AthletePanel")) {
@@ -123,21 +157,43 @@ public class Mediator implements MediatorInterface {
 		}
 	}
 
+	/**
+	 * Method registerSearch.
+	 * @param searchButton SearchButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerSearch(SearchButton)
+	 */
 	@Override
 	public void registerSearch(SearchButton searchButton) {
 		this.searchButton = searchButton;
 	}
 
+	/**
+	 * Method search.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#search(ActionEvent, JPanel)
+	 */
 	@Override
 	public void search(ActionEvent arg0, JPanel panel) {
 		this.searchButton.setEnabled(true);
 	}
 
+	/**
+	 * Method registerSave.
+	 * @param saveButton SaveButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerSave(SaveButton)
+	 */
 	@Override
 	public void registerSave(SaveButton saveButton) {
 		this.saveButton = saveButton;
 	}
 
+	/**
+	 * Method save.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#save(ActionEvent, JPanel)
+	 */
 	@Override
 	public void save(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("AthletePanel")) {
@@ -169,6 +225,12 @@ public class Mediator implements MediatorInterface {
 		}
 	}
 
+	/**
+	 * Method registerAthlete.
+	 * @param e ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerAthlete(ActionEvent, JPanel)
+	 */
 	@Override
 	public void registerAthlete(ActionEvent e, JPanel panel) {
 		AthletePnl apl = (AthletePnl) panel;
@@ -177,12 +239,24 @@ public class Mediator implements MediatorInterface {
 		apl.updateTables();
 	}
 
+	/**
+	 * Method unregisterAthlete.
+	 * @param e ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#unregisterAthlete(ActionEvent, JPanel)
+	 */
 	@Override
 	public void unregisterAthlete(ActionEvent e, JPanel panel) {
 		AthletePnl apl = (AthletePnl) panel;
 
 	}
 
+	/**
+	 * Method add.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#add(ActionEvent, JPanel)
+	 */
 	@Override
 	public void add(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("EventPanel")) {
@@ -201,6 +275,12 @@ public class Mediator implements MediatorInterface {
 		System.out.println(panel.getName());
 	}
 
+	/**
+	 * Method remove.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#remove(ActionEvent, JPanel)
+	 */
 	@Override
 	public void remove(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("EventPanel")) {
@@ -213,16 +293,32 @@ public class Mediator implements MediatorInterface {
 		System.out.println(panel.getName());
 	}
 
+	/**
+	 * Method registerAdd.
+	 * @param addButton AddButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerAdd(AddButton)
+	 */
 	@Override
 	public void registerAdd(AddButton addButton) {
 		this.addButton = addButton;
 	}
 
+	/**
+	 * Method registerRemove.
+	 * @param removeButton RemoveButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerRemove(RemoveButton)
+	 */
 	@Override
 	public void registerRemove(RemoveButton removeButton) {
 		this.removeButton = removeButton;
 	}
 
+	/**
+	 * Method clear.
+	 * @param arg0 ActionEvent
+	 * @param panel JPanel
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#clear(ActionEvent, JPanel)
+	 */
 	@Override
 	public void clear(ActionEvent arg0, JPanel panel) {
 		if (panel.getName().equals("EventPanel")) {
@@ -232,6 +328,11 @@ public class Mediator implements MediatorInterface {
 		System.out.println(panel.getName());
 	}
 
+	/**
+	 * Method registerClear.
+	 * @param clearButton ClearButton
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface#registerClear(ClearButton)
+	 */
 	@Override
 	public void registerClear(ClearButton clearButton) {
 		this.clearButton = clearButton;

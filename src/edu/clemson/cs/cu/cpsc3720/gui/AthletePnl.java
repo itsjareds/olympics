@@ -37,6 +37,8 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
+/**
+ */
 public class AthletePnl extends JPanel {
 	private static final long serialVersionUID = -3647303070052872171L;
 	private static AthleteTableModel athleteTableModel;
@@ -82,6 +84,7 @@ public class AthletePnl extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param mediator Mediator
 	 */
 	public AthletePnl(final Mediator mediator) {
 
@@ -618,6 +621,10 @@ public class AthletePnl extends JPanel {
 
 	}
 
+	/**
+	 * Method getAthlete.
+	 * @return Athlete
+	 */
 	public Athlete getAthlete() {
 		Athlete athlete = null;
 
@@ -665,6 +672,10 @@ public class AthletePnl extends JPanel {
 		return athlete;
 	}
 
+	/**
+	 * Method getRegistration.
+	 * @return Registration
+	 */
 	public Registration getRegistration() {
 		Event e = (Event) eventComboBox.getSelectedItem();
 		Athlete a = athleteTableModel.getAthlete(athleteTable.getSelectedRow());
@@ -698,10 +709,18 @@ public class AthletePnl extends JPanel {
 		// this.secComboBox
 	}
 
+	/**
+	 * Method setRegEnabled.
+	 * @param bool boolean
+	 */
 	public void setRegEnabled(boolean bool) {
 		btnRegister.setEnabled(bool);
 	}
 
+	/**
+	 * Method setUnregEnabled.
+	 * @param bool boolean
+	 */
 	public void setUnregEnabled(boolean bool) {
 		btnUnregister.setEnabled(bool);
 	}

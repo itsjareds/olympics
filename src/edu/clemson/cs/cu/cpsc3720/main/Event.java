@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class Event implements DatabaseSerializable, Comparable<Event> {
 
 	private transient String dbId;
@@ -12,6 +14,15 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 	private Integer scoreMax;
 	private Integer sortSeq;
 
+	/**
+	 * Constructor for Event.
+	 * @param eventCode String
+	 * @param eventName String
+	 * @param scoreUnit String
+	 * @param scoreMin Integer
+	 * @param scoreMax Integer
+	 * @param sortSeq Integer
+	 */
 	public Event(String eventCode, String eventName, String scoreUnit,
 			Integer scoreMin, Integer scoreMax, Integer sortSeq) {
 		super();
@@ -24,43 +35,43 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 	}
 
 	/**
-	 * @return the eventCode
-	 */
+	
+	 * @return the eventCode */
 	public String getEventCode() {
 		return this.eventCode;
 	}
 
 	/**
-	 * @return the eventName
-	 */
+	
+	 * @return the eventName */
 	public String getEventName() {
 		return this.eventName;
 	}
 
 	/**
-	 * @return the scoreUnit
-	 */
+	
+	 * @return the scoreUnit */
 	public String getScoreUnit() {
 		return this.scoreUnit;
 	}
 
 	/**
-	 * @return the scoreMin
-	 */
+	
+	 * @return the scoreMin */
 	public Integer getScoreMin() {
 		return this.scoreMin;
 	}
 
 	/**
-	 * @return the scoreMax
-	 */
+	
+	 * @return the scoreMax */
 	public Integer getScoreMax() {
 		return this.scoreMax;
 	}
 
 	/**
-	 * @return the sortSeq
-	 */
+	
+	 * @return the sortSeq */
 	public Integer getSortSeq() {
 		return this.sortSeq;
 	}
@@ -113,35 +124,69 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
+	/**
+	 * Method extractMajorScore.
+	 * @param score Integer
+	 * @return Integer
+	 */
 	public static Integer extractMajorScore(Integer score) {
 		return score / 100;
 	}
 
+	/**
+	 * Method extractMinorScore.
+	 * @param score Integer
+	 * @return Integer
+	 */
 	public static Integer extractMinorScore(Integer score) {
 		return score % 100;
 	}
 
+	/**
+	 * Method scoreToString.
+	 * @param score Integer
+	 * @return String
+	 */
 	public static String scoreToString(Integer score) {
 		Integer ft = score / 100;
 		Integer in = score % 100;
 		return ft.toString() + in.toString();
 	}
 
+	/**
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
+	 */
 	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
+	/**
+	 * Method setDbId.
+	 * @param id String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 */
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return this.getEventName();
 	}
 
+	/**
+	 * Method compareTo.
+	 * @param o Event
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Event o) {
 		int retVal = 0;
@@ -149,6 +194,11 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		return retVal;
 	}
 
+	/**
+	 * Method equals.
+	 * @param o Object
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o) {
 		boolean retVal = false;

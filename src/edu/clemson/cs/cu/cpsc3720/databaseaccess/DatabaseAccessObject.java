@@ -10,21 +10,36 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public final ArrayList<T> objects = new ArrayList<T>();
 	private static String user = "root";
 	private static String pass = "passw0rd";
 	private final Class<T> classOfT;
 
+	/**
+	 * Constructor for DatabaseAccessObject.
+	 * @param classOfT Class<T>
+	 */
 	public DatabaseAccessObject(Class<T> classOfT) {
 		this.classOfT = classOfT;
 	}
 
+	/**
+	 * Method getDb.
+	 * @return ODatabaseDocumentTx
+	 */
 	public static ODatabaseDocumentTx getDb() {
 		return ODatabaseDocumentPool.global().acquire(
 				"remote:localhost:2424/BugSquasher", user, pass);
 	}
 
+	/**
+	 * Method searchCache.
+	 * @param ref String
+	 * @return T
+	 */
 	public T searchCache(String ref) {
 		T ret = null;
 		for (T t : objects) {
@@ -36,6 +51,11 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		return ret;
 	}
 
+	/**
+	 * Method delete.
+	 * @param ref String
+	 * @return T
+	 */
 	public T delete(String ref) {
 		T ret = null;
 		if (ref != null) {
@@ -57,6 +77,11 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		return ret;
 	}
 
+	/**
+	 * Method delete.
+	 * @param t T
+	 * @return T
+	 */
 	public T delete(T t) {
 		T ret = null;
 		if (t != null && t.getDbId() != null)
@@ -64,6 +89,11 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		return ret;
 	}
 
+	/**
+	 * Method query.
+	 * @param ref String
+	 * @return T
+	 */
 	public T query(String ref) {
 		T ret = null;
 
@@ -104,6 +134,10 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		db.close();
 	}
 
+	/**
+	 * Method save.
+	 * @param t T
+	 */
 	public void save(T t) {
 		ODatabaseDocumentTx db = getDb();
 

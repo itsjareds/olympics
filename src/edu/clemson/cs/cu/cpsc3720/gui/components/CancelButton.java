@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
+/**
+ */
 public class CancelButton extends JButton implements CommandInterface {
 
 	private static final long serialVersionUID = 4810322146053818837L;
@@ -38,7 +40,9 @@ public class CancelButton extends JButton implements CommandInterface {
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
 	 * 
-	 * @param - ActionEvent {@link java.awt.event.ActionEvent Action Event}
+	
+	 * @param arg0 ActionEvent
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {

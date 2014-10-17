@@ -34,6 +34,8 @@ import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
+/**
+ */
 @SuppressWarnings("serial")
 public class EventsPnl extends JPanel {
 
@@ -77,6 +79,7 @@ public class EventsPnl extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param mediator Mediator
 	 */
 	public EventsPnl(final Mediator mediator) {
 		this.mediator = mediator;
@@ -558,6 +561,10 @@ public class EventsPnl extends JPanel {
 		}
 	}
 
+	/**
+	 * Method setEvent.
+	 * @param e Event
+	 */
 	public void setEvent(Event e) {
 		/* Fill event form */
 		if (e == null) {
@@ -579,6 +586,10 @@ public class EventsPnl extends JPanel {
 		loadHeats(e);
 	}
 
+	/**
+	 * Method getEvent.
+	 * @return Event
+	 */
 	public Event getEvent() {
 		String eventCode = eventCodeTextBox.getText();
 		String eventName = eventNameTextBox.getText();
@@ -620,6 +631,10 @@ public class EventsPnl extends JPanel {
 		return loadedEvent;
 	}
 
+	/**
+	 * Method setHeat.
+	 * @param h Heat
+	 */
 	public void setHeat(Heat h) {
 		/* Fill heat form */
 		if (h == null) {
@@ -646,6 +661,10 @@ public class EventsPnl extends JPanel {
 		divisionCombo.setSelectedItem(h.getNumHeats());
 	}
 
+	/**
+	 * Method getHeat.
+	 * @return Heat
+	 */
 	public Heat getHeat() {
 		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
 		Integer maxAge = (Integer) maxAgeCombo.getSelectedItem();
@@ -667,6 +686,10 @@ public class EventsPnl extends JPanel {
 		return loadedHeat;
 	}
 
+	/**
+	 * Method loadHeats.
+	 * @param e Event
+	 */
 	public void loadHeats(Event e) {
 		/* Fill heats table */
 		ArrayList<Heat> heats = new ArrayList<Heat>();
@@ -680,10 +703,18 @@ public class EventsPnl extends JPanel {
 		heatTableModel.setHeats(heats);
 	}
 
+	/**
+	 * Method getEventTableModel.
+	 * @return EventTableModel
+	 */
 	public EventTableModel getEventTableModel() {
 		return eventTableModel;
 	}
 
+	/**
+	 * Method getHeatTableModel.
+	 * @return HeatTableModel
+	 */
 	public HeatTableModel getHeatTableModel() {
 		return heatTableModel;
 	}

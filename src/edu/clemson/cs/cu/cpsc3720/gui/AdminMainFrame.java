@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
+/**
+ */
 public class AdminMainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1788257087454523343L;
@@ -22,6 +24,7 @@ public class AdminMainFrame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param mediator Mediator
 	 */
 	public AdminMainFrame(Mediator mediator) {
 		this.mediator = mediator;

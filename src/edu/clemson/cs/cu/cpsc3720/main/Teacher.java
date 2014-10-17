@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 
 	private transient String dbId;
@@ -9,6 +11,12 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 	private String lastName;
 	private String groupCode;
 
+	/**
+	 * Constructor for Teacher.
+	 * @param firstName String
+	 * @param lastName String
+	 * @param groupCode String
+	 */
 	public Teacher(String firstName, String lastName, String groupCode) {
 		super();
 		this.groupCode = groupCode;
@@ -17,8 +25,8 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 	}
 
 	/**
-	 * @return the groupCode
-	 */
+	
+	 * @return the groupCode */
 	public String getGroupCode() {
 		return this.groupCode;
 	}
@@ -32,15 +40,15 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 	}
 
 	/**
-	 * @return the firstName
-	 */
+	
+	 * @return the firstName */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
 	/**
-	 * @return the lastName
-	 */
+	
+	 * @return the lastName */
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -61,16 +69,30 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
+	 */
 	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
+	/**
+	 * Method setDbId.
+	 * @param id String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 */
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		String retVal = "";
@@ -80,6 +102,11 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 		return retVal;
 	}
 
+	/**
+	 * Method compareTo.
+	 * @param t Teacher
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Teacher t) {
 		int retVal = 0;
@@ -87,6 +114,11 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 		return retVal;
 	}
 
+	/**
+	 * Method equals.
+	 * @param o Object
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o) {
 		boolean retVal = false;

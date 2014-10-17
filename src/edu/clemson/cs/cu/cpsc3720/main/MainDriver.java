@@ -12,10 +12,16 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DatabaseAccessObject;
 import edu.clemson.cs.cu.cpsc3720.gui.AdminMainFrame;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
+/**
+ */
 public class MainDriver {
 	// owns a private static database object and mediator
 	private static Mediator mediator;
 
+	/**
+	 * Method main.
+	 * @param args String[]
+	 */
 	public static void main(String[] args) {
 
 		MainDriver.mediator = new Mediator();

@@ -2,18 +2,24 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class School implements DatabaseSerializable, Comparable<School> {
 
 	private transient String dbId;
 	private String schoolName;
 
+	/**
+	 * Constructor for School.
+	 * @param schoolName String
+	 */
 	public School(String schoolName) {
 		this.schoolName = schoolName;
 	}
 
 	/**
-	 * @return the schoolName
-	 */
+	
+	 * @return the schoolName */
 	public String getSchoolName() {
 		return this.schoolName;
 	}
@@ -26,16 +32,30 @@ public class School implements DatabaseSerializable, Comparable<School> {
 		this.schoolName = schoolName;
 	}
 
+	/**
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
+	 */
 	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
+	/**
+	 * Method setDbId.
+	 * @param id String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 */
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		String retVal = "";
@@ -43,6 +63,11 @@ public class School implements DatabaseSerializable, Comparable<School> {
 		return retVal;
 	}
 
+	/**
+	 * Method compareTo.
+	 * @param o School
+	 * @return int
+	 */
 	@Override
 	public int compareTo(School o) {
 		int retVal = 0;
@@ -50,6 +75,11 @@ public class School implements DatabaseSerializable, Comparable<School> {
 		return retVal;
 	}
 
+	/**
+	 * Method equals.
+	 * @param o Object
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o) {
 		boolean retVal = false;

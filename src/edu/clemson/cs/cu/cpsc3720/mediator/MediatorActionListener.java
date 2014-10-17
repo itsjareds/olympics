@@ -19,6 +19,8 @@ public class MediatorActionListener implements ActionListener {
 	/**
 	 * This method assigns a command and then executes the intended action for
 	 * the button or menu item.
+	 * @param arg0 ActionEvent
+	 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

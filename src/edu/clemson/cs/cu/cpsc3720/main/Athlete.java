@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
+/**
+ */
 public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 
 	private transient String dbId;
@@ -19,6 +21,16 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	private transient ArrayList<Registration> registrations;
 	private ArrayList<String> regRefs;
 
+	/**
+	 * Constructor for Athlete.
+	 * @param teacherRef String
+	 * @param firstName String
+	 * @param lastName String
+	 * @param age Integer
+	 * @param gender String
+	 * @param schoolRef String
+	 * @param regRefs ArrayList<String>
+	 */
 	public Athlete(String teacherRef, String firstName, String lastName,
 			Integer age, String gender, String schoolRef,
 			ArrayList<String> regRefs) {
@@ -38,6 +50,10 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 		loadRegistrations();
 	}
 
+	/**
+	 * Method getTeacher.
+	 * @return Teacher
+	 */
 	public Teacher getTeacher() {
 		loadTeacher();
 		return teacher;
@@ -47,58 +63,86 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 		teacher = DaoRepository.getTeachersDao().query(teacherRef);
 	}
 
+	/**
+	 * Method setTeacher.
+	 * @param teacher Teacher
+	 */
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
 
+	/**
+	 * Method getTeacherRef.
+	 * @return String
+	 */
 	public String getTeacherRef() {
 		return teacherRef;
 	}
 
+	/**
+	 * Method setTeacherRef.
+	 * @param teacherRef String
+	 */
 	public void setTeacherRef(String teacherRef) {
 		this.teacherRef = teacherRef;
 	}
 
+	/**
+	 * Method getSchoolRef.
+	 * @return String
+	 */
 	public String getSchoolRef() {
 		return schoolRef;
 	}
 
+	/**
+	 * Method setSchoolRef.
+	 * @param schoolRef String
+	 */
 	public void setSchoolRef(String schoolRef) {
 		this.schoolRef = schoolRef;
 	}
 
+	/**
+	 * Method getRegRefs.
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getRegRefs() {
 		return regRefs;
 	}
 
+	/**
+	 * Method setRegRefs.
+	 * @param regRefs ArrayList<String>
+	 */
 	public void setRegRefs(ArrayList<String> regRefs) {
 		this.regRefs = regRefs;
 	}
 
 	/**
-	 * @return the firstName
-	 */
+	
+	 * @return the firstName */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
 	/**
-	 * @return the lastName
-	 */
+	
+	 * @return the lastName */
 	public String getLastName() {
 		return this.lastName;
 	}
 
 	/**
-	 * @return the age
-	 */
+	
+	 * @return the age */
 	public Integer getAge() {
 		return this.age;
 	}
 
 	/**
-	 * @return the gender
-	 */
+	
+	 * @return the gender */
 	public String getGender() {
 		return this.gender;
 	}
@@ -136,15 +180,15 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	/**
-	 * @return the groupLeader
-	 */
+	
+	 * @return the groupLeader */
 	public Teacher getGroupLeader() {
 		return this.teacher;
 	}
 
 	/**
-	 * @return the school
-	 */
+	
+	 * @return the school */
 	public School getSchool() {
 		loadSchool();
 		return this.school;
@@ -155,8 +199,8 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	/**
-	 * @return the registrations
-	 */
+	
+	 * @return the registrations */
 	public ArrayList<Registration> getRegistrations() {
 		loadRegistrations();
 		return this.registrations;
@@ -194,16 +238,31 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 		this.registrations = registrations;
 	}
 
+	/**
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
+	 */
 	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
+	/**
+	 * Method setDbId.
+	 * @param id String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 */
 	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
+	/**
+	 * Method compareTo.
+	 * @param o Athlete
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Athlete o) {
 		int retVal = 0;
