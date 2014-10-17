@@ -14,7 +14,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public final ArrayList<T> objects = new ArrayList<T>();
 	private static String user = "root";
 	private static String pass = "passw0rd";
-	private Class<T> classOfT;
+	private final Class<T> classOfT;
 
 	public DatabaseAccessObject(Class<T> classOfT) {
 		this.classOfT = classOfT;
