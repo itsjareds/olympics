@@ -1,6 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.gui.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -74,6 +75,7 @@ public class AthleteTableModel extends AbstractTableModel {
 	}
 
 	public void update() {
+		Collections.sort(athletes);
 		fireTableDataChanged();
 	}
 

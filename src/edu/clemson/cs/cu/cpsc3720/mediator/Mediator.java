@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainEventController;
+import edu.clemson.cs.cu.cpsc3720.controllers.RegisterAthleteController;
 import edu.clemson.cs.cu.cpsc3720.gui.AthletePnl;
 import edu.clemson.cs.cu.cpsc3720.gui.EventsPnl;
 import edu.clemson.cs.cu.cpsc3720.gui.components.CancelButton;
@@ -105,16 +106,24 @@ public class Mediator implements MediatorInterface {
 
 	@Override
 	public void delete(ActionEvent arg0, JPanel panel) {
+
 		this.deleteButton.setEnabled(true);
 		if (panel.getName().equals("AthletePanel")) {
 			MaintainAthleteController mac = new MaintainAthleteController();
+			AthletePnl apl = (AthletePnl) panel;
+			mac.deleteAthlete(apl.getAthlete());
+			apl.updateTables();
+			apl.clearPanel();
+
 		} else if (panel.getName().equals("EventPanel")) {
+
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			mec.deleteEvent(epl.getEvent());
 			epl.updateTable();
 			epl.setEvent(null);
 		} else if (panel.getName().equals("HeatPanel")) {
+
 			// MaintainHeatController mhc = new MaintainHeatController();
 			// Heat h = new Heat();
 			// mhc.createHeat(h);
@@ -146,11 +155,6 @@ public class Mediator implements MediatorInterface {
 			AthletePnl apl = (AthletePnl) panel;
 			Athlete a = apl.getAthlete();
 
-			System.out.println(a.getFirstName() + " " + a.getLastName() + " "
-					+ a.getGender() + " " + a.getAge() + " " + a.getSchoolRef()
-					+ " " + a.getTeacherRef() + " " + a.getRegRefs() + " dbid:"
-					+ a.getDbId());
-
 			if (a.getFirstName().trim().length() > 0
 					&& a.getFirstName().trim().length() > 0
 					&& a.getGender().trim().length() >= 1
@@ -158,9 +162,6 @@ public class Mediator implements MediatorInterface {
 					&& a.getSchoolRef().trim().length() >= 1
 					&& a.getTeacherRef().trim().length() >= 1
 					&& a.getRegRefs().size() <= 2) {
-
-				System.out.println("Saving: " + a.getFirstName() + " "
-						+ a.getLastName());
 
 				mac.saveAthlete(apl.getAthlete());
 				apl.updateTables();
@@ -184,12 +185,16 @@ public class Mediator implements MediatorInterface {
 	}
 
 	@Override
-	public void registerAthlete(ActionEvent e, JPanel thisPanel) {
+	public void registerAthlete(ActionEvent e, JPanel panel) {
+		AthletePnl apl = (AthletePnl) panel;
+		RegisterAthleteController rac = new RegisterAthleteController();
+		rac.saveRegistration(apl.getRegistration());
 
 	}
 
 	@Override
-	public void unregisterAthlete(ActionEvent e, JPanel thisPanel) {
+	public void unregisterAthlete(ActionEvent e, JPanel panel) {
+		AthletePnl apl = (AthletePnl) panel;
 
 	}
 }

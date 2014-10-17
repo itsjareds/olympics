@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -171,6 +172,7 @@ public class AthletePnl extends JPanel {
 			panel.add(lblGroupLeader);
 
 			final JLabel lblNewLabel = new JLabel("Athlete Information");
+			lblNewLabel.setFont(new Font("Lucido Grande", Font.BOLD, 13));
 			lblNewLabel.setBounds(56, 6, 251, 16);
 			panel.add(lblNewLabel);
 
@@ -192,11 +194,15 @@ public class AthletePnl extends JPanel {
 
 			final JLabel lblAssociatedEvents = new JLabel("Registered Events");
 			lblAssociatedEvents.setBounds(438, 170, 173, 16);
+			lblAssociatedEvents
+					.setFont(new Font("Lucido Grande", Font.BOLD, 13));
 			panel.add(lblAssociatedEvents);
 
 			final JLabel lblTeacherInformation = new JLabel(
 					"Teacher Information");
 			lblTeacherInformation.setBounds(56, 233, 251, 16);
+			lblTeacherInformation.setFont(new Font("Lucido Grande", Font.BOLD,
+					13));
 			panel.add(lblTeacherInformation);
 
 			final JLabel lblEvents = new JLabel("Add Event");
@@ -221,6 +227,8 @@ public class AthletePnl extends JPanel {
 
 			final JLabel lblRegisterForEvent = new JLabel("Register for Event");
 			lblRegisterForEvent.setBounds(438, 6, 146, 16);
+			lblRegisterForEvent
+					.setFont(new Font("Lucido Grande", Font.BOLD, 13));
 			panel.add(lblRegisterForEvent);
 
 			lblFilterBy = new JLabel("Filter by: ");
@@ -367,13 +375,11 @@ public class AthletePnl extends JPanel {
 
 						deleteBtn.setEnabled(true);
 					}
-					if (athleteTable.getRowCount() > 0)
+					if (athleteTable.getRowCount() > 0) {
 
-						if (mevt.getClickCount() == 1) {
-
-							fillPanel();
-							btnRegister.setEnabled(true);
-						}
+						fillPanel();
+						btnRegister.setEnabled(true);
+					}
 				}
 			});
 
@@ -573,9 +579,12 @@ public class AthletePnl extends JPanel {
 		groupLeaderComboBox.setSelectedItem(t);
 
 		// set group code
-		String groupCode = t.getGroupCode();
-		schoolGroupCodeComboBox.setSelectedItem(groupCode);
-
+		if (t != null) {
+			String groupCode = t.getGroupCode();
+			schoolGroupCodeComboBox.setSelectedItem(groupCode);
+		} else {
+			schoolGroupCodeComboBox.setSelectedIndex(0);
+		}
 		// fill event list
 		for (String ref : arefs) {
 			DatabaseAccessObject<Registration> daor = DaoRepository
@@ -644,6 +653,12 @@ public class AthletePnl extends JPanel {
 		athlete.setSchoolRef(schoolRef);
 
 		return athlete;
+	}
+
+	public Registration getRegistration() {
+		Registration r = null;
+
+		return r;
 	}
 
 	public void clearPanel() {
