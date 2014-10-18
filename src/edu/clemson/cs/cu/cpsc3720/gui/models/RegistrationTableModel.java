@@ -38,7 +38,7 @@ public class RegistrationTableModel extends AbstractTableModel {
 	 * @param row int
 	 * @return Registration
 	 */
-	public Registration getRegistrition(int row) {
+	public Registration getRegistration(int row) {
 		return regs.get(row);
 	}
 

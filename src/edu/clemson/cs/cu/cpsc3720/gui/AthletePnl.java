@@ -376,9 +376,12 @@ public class AthletePnl extends JPanel {
 					new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if (athleteTable.getSelectedRow() != -1)
+							if (athleteTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
-							else
+								if (athleteTable.getRowCount() > 0) {
+									fillPanel();
+								}
+							} else
 								deleteBtn.setEnabled(false);
 
 							if (registrationTable.getRowCount() > 0)
@@ -393,8 +396,14 @@ public class AthletePnl extends JPanel {
 							if (registrationTable.getSelectedRow() != -1
 									&& athleteTable.getSelectedRow() != -1) {
 								btnUnregister.setEnabled(true);
+								if (registrationTable.getRowCount() > 0) {
+									setRegistration(registrationTableModel
+											.getRegistration(registrationTable
+													.getSelectedRow()));
+								}
 							} else {
 								btnUnregister.setEnabled(false);
+								setRegistration(null);
 							}
 						}
 					});
@@ -561,6 +570,14 @@ public class AthletePnl extends JPanel {
 
 	}
 
+	private void loadRegistrations(Athlete a) {
+		if (a.getDbId() != null)
+			registrationTableModel.setRegistrations(a.getRegistrations());
+		else
+			registrationTableModel
+					.setRegistrations(new ArrayList<Registration>());
+	}
+
 	private void fillPanel() {
 
 		Athlete athlete = new Athlete("", "", "", new Integer(8), "", "",
@@ -572,7 +589,6 @@ public class AthletePnl extends JPanel {
 		}
 
 		associatedRegistrations = new ArrayList<Registration>();
-		ArrayList<String> arefs = athlete.getRegRefs();
 		ArrayList<String> rrefs = new ArrayList<>();
 
 		// set name
@@ -603,21 +619,13 @@ public class AthletePnl extends JPanel {
 			schoolGroupCodeComboBox.setSelectedIndex(0);
 		}
 
-		// fill registration list
-		for (String ref : arefs) {
-			DatabaseAccessObject<Registration> daor = DaoRepository
-					.getRegistrationsDao();
-			Registration r = daor.query(ref);
-			if (r != null)
-				associatedRegistrations.add(r);
-		}
-
-		registrationTableModel.setRegistrations(associatedRegistrations);
-
 		// set school
 		DatabaseAccessObject<School> daos = DaoRepository.getSchoolsDao();
 		School s = daos.query(athlete.getSchoolRef());
 		schoolNameComboBox.setSelectedItem(s);
+
+		setRegistration(null);
+		loadRegistrations(athlete);
 
 	}
 
@@ -677,11 +685,51 @@ public class AthletePnl extends JPanel {
 	 * @return Registration
 	 */
 	public Registration getRegistration() {
+		// Get athlete from the table
+		Athlete a = null;
+		String athRef = null;
+		int athIndex = athleteTable.getSelectedRow();
+		if (athIndex != -1)
+			a = athleteTableModel.getAthlete(athIndex);
+		if (a != null)
+			athRef = a.getDbId();
+
+		// Get event from the table
 		Event e = (Event) eventComboBox.getSelectedItem();
-		Athlete a = athleteTableModel.getAthlete(athleteTable.getSelectedRow());
-		// TODO get score form combo boxes
+		String eventRef = null;
+		if (e != null)
+			eventRef = e.getDbId();
+		// TODO get score from combo boxes
 		Integer score = new Integer(0);
-		return new Registration(e.getDbId(), a.getDbId(), score);
+
+		Registration r = registrationTableModel
+				.getRegistration(registrationTable.getSelectedRow());
+		r.setEventRef(eventRef);
+		r.setAthleteRef(athRef);
+		r.setScore(score);
+		return r;
+	}
+
+	/**
+	 * Method setRegistration.
+	 * @param Registration r
+	 */
+	public void setRegistration(Registration r) {
+		if (r == null) {
+			r = new Registration("", "", 0);
+			registrationTable.clearSelection();
+		} else {
+			int index = registrationTableModel.indexOf(r);
+			if (index == -1)
+				registrationTable.clearSelection();
+			else
+				registrationTable.setRowSelectionInterval(index, index);
+		}
+		if (r.getEvent() != null) {
+			eventComboBox.setSelectedItem(r.getEvent());
+		} else {
+			eventComboBox.setSelectedIndex(0);
+		}
 	}
 
 	public void clearPanel() {
@@ -693,6 +741,7 @@ public class AthletePnl extends JPanel {
 		groupLeaderComboBox.setSelectedIndex(0);
 		schoolGroupCodeComboBox.setSelectedIndex(0);
 		registrationTableModel.setRegistrations(new ArrayList<Registration>());
+		eventComboBox.setSelectedIndex(0);
 		schoolNameComboBox.setSelectedIndex(0);
 	}
 
