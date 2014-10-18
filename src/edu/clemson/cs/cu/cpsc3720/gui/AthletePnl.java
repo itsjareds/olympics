@@ -56,10 +56,10 @@ public class AthletePnl extends JPanel {
 	private JComboBox<String> genderComboBox;
 	private JComboBox<Teacher> groupLeaderComboBox;
 	private JComboBox<Event> eventComboBox;
-	private JComboBox<String> inchComboBox;
-	private JComboBox<String> feetComboBox;
-	private JComboBox<String> minComboBox;
-	private JComboBox<String> secComboBox;
+	private JComboBox<Integer> inchComboBox;
+	private JComboBox<Integer> feetComboBox;
+	private JComboBox<Integer> minComboBox;
+	private JComboBox<Integer> secComboBox;
 	private JComboBox<String> schoolGroupCodeComboBox;
 	private JComboBox<School> schoolNameComboBox;
 	private JComboBox<String> filterComboBox;
@@ -253,22 +253,22 @@ public class AthletePnl extends JPanel {
 			genderComboBox.setBounds(66, 165, 98, 27);
 			panel.add(genderComboBox);
 
-			minComboBox = new JComboBox<String>();
+			minComboBox = new JComboBox<Integer>();
 			minComboBox.setBounds(513, 97, 61, 27);
 			panel.add(minComboBox);
 			minComboBox.setEnabled(false);
 
-			secComboBox = new JComboBox<String>();
+			secComboBox = new JComboBox<Integer>();
 			secComboBox.setBounds(609, 94, 61, 27);
 			panel.add(secComboBox);
 			secComboBox.setEnabled(false);
 
-			inchComboBox = new JComboBox<String>();
+			inchComboBox = new JComboBox<Integer>();
 			inchComboBox.setBounds(609, 66, 61, 27);
 			panel.add(inchComboBox);
 			inchComboBox.setEnabled(false);
 
-			feetComboBox = new JComboBox<String>();
+			feetComboBox = new JComboBox<Integer>();
 			feetComboBox.setBounds(513, 66, 61, 27);
 			panel.add(feetComboBox);
 			feetComboBox.setEnabled(false);
@@ -407,12 +407,18 @@ public class AthletePnl extends JPanel {
 							}
 						}
 					});
+		}
+		// ------------ End Table Events --------------- //
 
+		// ------------ Start Combo Box Events ----------------- //
+		{
 			eventComboBox.addItemListener(new ItemListener() {
-				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED) {
 						Event event = (Event) eventComboBox.getSelectedItem();
+
+						setUnits(event);
+
 						if (athleteTable.getSelectedRow() != -1
 								&& event != null
 								&& event.getEventName() != null
@@ -421,18 +427,6 @@ public class AthletePnl extends JPanel {
 						else
 							btnRegister.setEnabled(false);
 					}
-				}
-			});
-		}
-		// ------------ End Table Events --------------- //
-
-		// ------------ Start Combo Box Events ----------------- //
-		{
-			eventComboBox.addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-					if (e.getStateChange() == ItemEvent.SELECTED)
-						setUnits();
 				}
 			});
 		}
@@ -758,12 +752,37 @@ public class AthletePnl extends JPanel {
 		registrationTableModel.update();
 	}
 
-	private void setUnits() {
-		// TODO
-		// this.feetComboBox
-		// this.inchComboBox
-		// this.minComboBox
-		// this.secComboBox
+	private void setUnits(Event e) {
+		Integer minMajor = Event.extractMajorScore(e.getScoreMin());
+		Integer minMinor = Event.extractMinorScore(e.getScoreMin());
+		Integer maxMajor = Event.extractMajorScore(e.getScoreMax());
+		Integer maxMinor = Event.extractMinorScore(e.getScoreMax());
+
+		feetComboBox.removeAllItems();
+		inchComboBox.removeAllItems();
+		minComboBox.removeAllItems();
+		secComboBox.removeAllItems();
+
+		feetComboBox.setEnabled(false);
+		inchComboBox.setEnabled(false);
+		minComboBox.setEnabled(false);
+		secComboBox.setEnabled(false);
+
+		if (e.getScoreUnit().equals("D")) {
+			feetComboBox.setEnabled(true);
+			inchComboBox.setEnabled(true);
+			for (Integer i = minMajor; i < maxMajor; i++)
+				feetComboBox.addItem(i);
+			for (Integer i = minMinor; i < maxMinor; i++)
+				inchComboBox.addItem(i);
+		} else if (e.getScoreUnit().equals("T")) {
+			minComboBox.setEnabled(true);
+			secComboBox.setEnabled(true);
+			for (Integer i = minMajor; i < maxMajor; i++)
+				minComboBox.addItem(i);
+			for (Integer i = minMinor; i < maxMinor; i++)
+				secComboBox.addItem(i);
+		}
 	}
 
 	/**
