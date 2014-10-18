@@ -429,6 +429,7 @@ public class AthletePnl extends JPanel {
 		// ------------ Start Combo Box Events ----------------- //
 		{
 			eventComboBox.addItemListener(new ItemListener() {
+				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED)
 						setUnits();
@@ -660,9 +661,14 @@ public class AthletePnl extends JPanel {
 
 		ArrayList<String> regRefs = new ArrayList<>();
 		registrationTableModel.setRegistrations(athlete.getRegistrations());
-		for (int row = 0; row < registrationTableModel.getRowCount(); row++)
-			regRefs.add(registrationTableModel.getRegistration(row).getDbId());
-
+		for (int row = 0; row < registrationTableModel.getRowCount(); row++) {
+			Registration r = registrationTableModel.getRegistration(row);
+			String ref = "";
+			if (r != null) {
+				ref = r.getDbId();
+				regRefs.add(ref);
+			}
+		}
 		athlete.setFirstName(firstName);
 		athlete.setLastName(lastName);
 		athlete.setAge(age);

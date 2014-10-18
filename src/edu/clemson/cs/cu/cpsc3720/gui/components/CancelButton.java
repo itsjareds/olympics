@@ -20,13 +20,9 @@ public class CancelButton extends JButton implements CommandInterface {
 	/**
 	 * Instantiates a button called "Cancel" and gives it the action to close a
 	 * window.
-	 * 
-	 * @param aL
-	 *            - ActionListerner for the button
-	 * @param mediator
-	 *            - a instance of the mediator
-	 * @param dialog
-	 *            - a instance of the window being used
+	 * @param aL - ActionListerner for the button
+	 * @param mediator - a instance of the mediator
+	 * @param dialog - a instance of the window being used
 	 */
 	public CancelButton(ActionListener aL, Mediator mediator, JDialog dialog) {
 		super("Cancel");
@@ -39,8 +35,6 @@ public class CancelButton extends JButton implements CommandInterface {
 	/**
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
-	 * 
-	
 	 * @param arg0 ActionEvent
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */

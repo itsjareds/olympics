@@ -19,13 +19,8 @@ public class AddButton extends JButton implements CommandInterface {
 
 	/**
 	 * Instantiates a button called "Add" and performs an add action.
-	 * 
-	 * @param aL
-	 *            - ActionListerner for the button
-	 * @param mediator
-	 *            - a instance of the mediator
-	
-	 * @param panel JPanel
+	 * @param aL - ActionListerner for the button
+	 * @param mediator - a instance of the mediator @param panel JPanel
 	 */
 	public AddButton(ActionListener aL, Mediator mediator, JPanel panel) {
 		super("Add");
@@ -38,8 +33,6 @@ public class AddButton extends JButton implements CommandInterface {
 	/**
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
-	 * 
-	
 	 * @param arg0 ActionEvent
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */

@@ -72,48 +72,42 @@ public class Registration implements DatabaseSerializable,
 		this.athleteRef = athleteRef;
 	}
 
-	/**
-	
-	 * @return the event */
+	/** @return the event
+	 */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
 	}
 
-	/**
-	
-	 * @return the athlete */
+	/** @return the athlete
+	 */
 	public Athlete getAthlete() {
 		loadAthlete();
 		return this.athlete;
 	}
 
-	/**
-	
-	 * @return the score */
+	/** @return the score
+	 */
 	public Integer getScore() {
 		return this.score;
 	}
 
 	/**
-	 * @param event
-	 *            the event to set
+	 * @param event the event to set
 	 */
 	public void setEvent(Event event) {
 		this.event = event;
 	}
 
 	/**
-	 * @param athlete
-	 *            the athlete to set
+	 * @param athlete the athlete to set
 	 */
 	public void setAthlete(Athlete athlete) {
 		this.athlete = athlete;
 	}
 
 	/**
-	 * @param score
-	 *            the score to set
+	 * @param score the score to set
 	 */
 	public void setScore(Integer score) {
 		this.score = score;

@@ -123,9 +123,16 @@ public class RegistrationTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		switch (col) {
 		case 0:
-			return regs.get(row).getEvent().getEventName();
+			String retVal = "";
+			if (regs.get(row) != null && regs.get(row).getEvent() != null
+					&& regs.get(row).getEvent().getEventName() != null)
+				retVal = regs.get(row).getEvent().getEventName();
+			return retVal;
 		case 1:
-			return regs.get(row).getScore();
+			Integer retValInt = new Integer(0);
+			if (regs.get(row) != null && regs.get(row).getScore() != null)
+				retValInt = regs.get(row).getScore();
+			return retValInt;
 		}
 		return null;
 	}

@@ -19,13 +19,9 @@ public class RemoveButton extends JButton implements CommandInterface {
 
 	/**
 	 * Instantiates a button called "Remove" and performs a remove action.
-	 * 
-	 * @param aL
-	 *            - ActionListener for the button
-	 * @param mediator
-	 *            - a instance of the mediator
-	 * @param panel
-	 *            - a instance of the panel being used
+	 * @param aL - ActionListener for the button
+	 * @param mediator - a instance of the mediator
+	 * @param panel - a instance of the panel being used
 	 */
 	public RemoveButton(ActionListener aL, Mediator mediator, JPanel panel) {
 		super("Remove");
@@ -38,8 +34,6 @@ public class RemoveButton extends JButton implements CommandInterface {
 	/**
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
-	 * 
-	
 	 * @param arg0 ActionEvent
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */
