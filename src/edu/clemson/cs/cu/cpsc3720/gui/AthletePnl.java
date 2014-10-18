@@ -245,11 +245,15 @@ public class AthletePnl extends JPanel {
 			// filter combo box
 			String[] filters = { "First Name", "Last Name", "Age",
 					"School Name", "Group Leader", "Group Code" };
-			filterComboBox = new JComboBox<String>(filters);
+			filterComboBox = new JComboBox<String>();
+			for (String filter : filters)
+				filterComboBox.addItem(filter);
 
 			// gender combo box
 			String[] genders = { "", "Male", "Female" };
-			genderComboBox = new JComboBox<String>(genders);
+			genderComboBox = new JComboBox<String>();
+			for (String gender : genders)
+				genderComboBox.addItem(gender);
 			genderComboBox.setBounds(66, 165, 98, 27);
 			panel.add(genderComboBox);
 
@@ -280,7 +284,9 @@ public class AthletePnl extends JPanel {
 			Collections.sort(eventList);
 			Event[] listEvents = new Event[eventList.size()];
 			listEvents = eventList.toArray(listEvents);
-			eventComboBox = new JComboBox<Event>(listEvents);
+			eventComboBox = new JComboBox<Event>();
+			for (Event event : listEvents)
+				eventComboBox.addItem(event);
 			eventComboBox.setBounds(430, 34, 240, 27);
 			panel.add(eventComboBox);
 
@@ -295,7 +301,9 @@ public class AthletePnl extends JPanel {
 			Collections.sort(groupCodes);
 			String[] listCodes = new String[groupCodes.size()];
 			listCodes = groupCodes.toArray(listCodes);
-			schoolGroupCodeComboBox = new JComboBox<String>(listCodes);
+			schoolGroupCodeComboBox = new JComboBox<String>();
+			for (String code : listCodes)
+				schoolGroupCodeComboBox.addItem(code);
 			schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
 			panel.add(schoolGroupCodeComboBox);
 
@@ -307,7 +315,9 @@ public class AthletePnl extends JPanel {
 			}
 			Integer[] listAges = new Integer[ages.size()];
 			listAges = ages.toArray(listAges);
-			ageComboBox = new JComboBox<>(listAges);
+			ageComboBox = new JComboBox<>();
+			for (Integer age : listAges)
+				ageComboBox.addItem(age);
 			ageComboBox.setBounds(66, 139, 75, 27);
 			panel.add(ageComboBox);
 
@@ -318,7 +328,9 @@ public class AthletePnl extends JPanel {
 			Collections.sort(teacherList);
 			Teacher[] listNames = new Teacher[teacherList.size()];
 			listNames = teacherList.toArray(listNames);
-			groupLeaderComboBox = new JComboBox<Teacher>(listNames);
+			groupLeaderComboBox = new JComboBox<Teacher>();
+			for (Teacher teacher : listNames)
+				groupLeaderComboBox.addItem(teacher);
 			groupLeaderComboBox.setBounds(16, 276, 291, 27);
 			panel.add(groupLeaderComboBox);
 
@@ -330,7 +342,9 @@ public class AthletePnl extends JPanel {
 			Collections.sort(schoolList);
 			School[] listSchools = new School[schoolList.size()];
 			listSchools = schoolList.toArray(listSchools);
-			schoolNameComboBox = new JComboBox<School>(listSchools);
+			schoolNameComboBox = new JComboBox<School>();
+			for (School school : listSchools)
+				schoolNameComboBox.addItem(school);
 			schoolNameComboBox.setBounds(16, 315, 291, 27);
 			panel.add(schoolNameComboBox);
 		}
