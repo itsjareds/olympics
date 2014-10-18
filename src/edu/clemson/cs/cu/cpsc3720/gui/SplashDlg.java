@@ -12,6 +12,7 @@ public class SplashDlg extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JProgressBar progressBar;
+	private JLabel lblLoadingDatabase;
 
 	/**
 	 * Create the dialog.
@@ -25,16 +26,17 @@ public class SplashDlg extends JDialog {
 		contentPanel.setLayout(null);
 
 		progressBar = new JProgressBar(0, 6);
+		progressBar.setStringPainted(true);
 		progressBar.setBounds(6, 34, 438, 43);
 		contentPanel.add(progressBar);
 
-		JLabel lblLoadingDatabase = new JLabel("Loading database...");
+		lblLoadingDatabase = new JLabel("Loading database...");
 		lblLoadingDatabase.setBounds(6, 17, 179, 16);
 		contentPanel.add(lblLoadingDatabase);
 	}
 
-	public void setProgress(int val) {
+	public void setProgress(int val, String message) {
 		progressBar.setValue(val);
-		progressBar.setStringPainted(true);
+		lblLoadingDatabase.setText(message);
 	}
 }

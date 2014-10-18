@@ -39,19 +39,19 @@ public class MainDriver {
 		}
 
 		try {
-			dialog.setProgress(0);
+			dialog.setProgress(0, "Loading Athletes...");
 			DaoRepository.getAthletesDao().load();
-			dialog.setProgress(1);
+			dialog.setProgress(1, "Loading Events...");
 			DaoRepository.getEventsDao().load();
-			dialog.setProgress(2);
+			dialog.setProgress(2, "Loading Heats...");
 			DaoRepository.getHeatsDao().load();
-			dialog.setProgress(3);
+			dialog.setProgress(3, "Loading Registrations...");
 			DaoRepository.getRegistrationsDao().load();
-			dialog.setProgress(4);
+			dialog.setProgress(4, "Loading Schools...");
 			DaoRepository.getSchoolsDao().load();
-			dialog.setProgress(5);
+			dialog.setProgress(5, "Loading Teachers...");
 			DaoRepository.getTeachersDao().load();
-			dialog.setProgress(6);
+			dialog.setProgress(6, "Initializing main interface...");
 		} catch (OIOException e) {
 			JOptionPane
 					.showMessageDialog(null,
