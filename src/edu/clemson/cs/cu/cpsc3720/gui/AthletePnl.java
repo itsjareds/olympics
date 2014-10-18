@@ -26,7 +26,6 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
-import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.AthleteTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.RegistrationTableModel;
@@ -50,7 +49,6 @@ public class AthletePnl extends JPanel {
 	private final ArrayList<Event> events;
 	private final JTable registrationTable;
 	private final Mediator mediator;
-	private final JTextField searchTxtBox;
 	private final JTable athleteTable;
 	private double dividerLocation;
 	private JComboBox<Integer> ageComboBox;
@@ -63,8 +61,6 @@ public class AthletePnl extends JPanel {
 	private JComboBox<Integer> secComboBox;
 	private JComboBox<String> schoolGroupCodeComboBox;
 	private JComboBox<School> schoolNameComboBox;
-	private JComboBox<String> filterComboBox;
-	private SearchButton searchBtn;
 	private RegisterButton btnRegister;
 	private UnregisterButton btnUnregister;
 	private NewButton newBtn;
@@ -76,7 +72,6 @@ public class AthletePnl extends JPanel {
 	private JPanel panel;
 	private JScrollPane eventsScrollPane;
 	private JScrollPane heatsScrollPane;
-	private JLabel lblFilterBy;
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<School> schoolList;
 	private ArrayList<Event> eventList;
@@ -142,9 +137,6 @@ public class AthletePnl extends JPanel {
 			athleteLastNameTxtBox.setColumns(10);
 			athleteLastNameTxtBox.setBounds(16, 90, 291, 28);
 			panel.add(athleteLastNameTxtBox);
-
-			searchTxtBox = new JTextField();
-			searchTxtBox.setColumns(10);
 		}
 		// ------- End Text Boxes ------------- //
 
@@ -237,19 +229,11 @@ public class AthletePnl extends JPanel {
 					.setFont(new Font("Lucido Grande", Font.BOLD, 13));
 			panel.add(lblRegisterForEvent);
 
-			lblFilterBy = new JLabel("Filter by: ");
-
 		}
 		// --------- End Labels ------------ //
 
 		// ------- Start Combo Boxes -------- //
 		{
-			// filter combo box
-			String[] filters = { "First Name", "Last Name", "Age",
-					"School Name", "Group Leader", "Group Code" };
-			filterComboBox = new JComboBox<String>();
-			for (String filter : filters)
-				filterComboBox.addItem(filter);
 
 			// gender combo box
 			String[] genders = { "", "Male", "Female" };
@@ -354,9 +338,6 @@ public class AthletePnl extends JPanel {
 
 		// ----------- Start Buttons -------- //
 		{
-			// Search Button
-			searchBtn = new SearchButton(new MediatorActionListener(),
-					mediator, this);
 
 			// Register Button
 			btnRegister = new RegisterButton(new MediatorActionListener(),
@@ -467,8 +448,12 @@ public class AthletePnl extends JPanel {
 										.addGroup(
 												groupLayout
 														.createParallelGroup(
-																Alignment.LEADING,
-																false)
+																Alignment.LEADING)
+														.addComponent(
+																splitPane,
+																GroupLayout.PREFERRED_SIZE,
+																937,
+																GroupLayout.PREFERRED_SIZE)
 														.addGroup(
 																groupLayout
 																		.createSequentialGroup()
@@ -490,41 +475,8 @@ public class AthletePnl extends JPanel {
 																				saveBtn,
 																				GroupLayout.PREFERRED_SIZE,
 																				111,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				lblFilterBy)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				filterComboBox,
-																				GroupLayout.PREFERRED_SIZE,
-																				148,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED,
-																				338,
-																				Short.MAX_VALUE)
-																		.addComponent(
-																				searchTxtBox,
-																				GroupLayout.PREFERRED_SIZE,
-																				194,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				searchBtn,
-																				GroupLayout.PREFERRED_SIZE,
-																				103,
-																				GroupLayout.PREFERRED_SIZE))
-														.addComponent(
-																splitPane,
-																GroupLayout.PREFERRED_SIZE,
-																937,
-																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap()));
+																				GroupLayout.PREFERRED_SIZE)))
+										.addGap(15)));
 		groupLayout
 				.setVerticalGroup(groupLayout
 						.createParallelGroup(Alignment.TRAILING)
@@ -532,36 +484,9 @@ public class AthletePnl extends JPanel {
 								groupLayout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addGroup(
-												groupLayout
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																groupLayout
-																		.createParallelGroup(
-																				Alignment.BASELINE)
-																		.addComponent(
-																				filterComboBox,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addComponent(
-																				lblFilterBy)
-																		.addComponent(
-																				searchTxtBox,
-																				GroupLayout.PREFERRED_SIZE,
-																				GroupLayout.DEFAULT_SIZE,
-																				GroupLayout.PREFERRED_SIZE))
-														.addComponent(
-																searchBtn,
-																GroupLayout.PREFERRED_SIZE,
-																23,
-																GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(
-												ComponentPlacement.UNRELATED)
 										.addComponent(splitPane,
 												GroupLayout.PREFERRED_SIZE,
-												417, GroupLayout.PREFERRED_SIZE)
+												457, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												ComponentPlacement.RELATED)
 										.addGroup(

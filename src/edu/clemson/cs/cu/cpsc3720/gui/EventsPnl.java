@@ -26,7 +26,6 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RemoveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
-import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
@@ -61,13 +60,11 @@ public class EventsPnl extends JPanel {
 	private final JButton newBtn;
 	private final JButton saveBtn;
 	private final JButton deleteBtn;
-	private final JButton searchBtn;
 	private final JButton addBtn;
 	private final JButton removeBtn;
 	private final JButton clearBtn;
 
 	private final Mediator mediator;
-	private final JTextField searchTxtBox;
 	private final JSplitPane splitPane;
 
 	private EventTableModel eventTableModel;
@@ -284,12 +281,6 @@ public class EventsPnl extends JPanel {
 			divisionCombo.setBounds(565, 141, 80, 26);
 			panel.add(divisionCombo);
 
-			searchTxtBox = new JTextField();
-			searchTxtBox.setColumns(10);
-
-			searchBtn = new SearchButton(new MediatorActionListener(),
-					mediator, this);
-
 			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
 
 			deleteBtn = new DeleteButton(new MediatorActionListener(),
@@ -368,6 +359,7 @@ public class EventsPnl extends JPanel {
 		{
 			eventsTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
+						@Override
 						public void valueChanged(ListSelectionEvent e) {
 							if (eventsTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
@@ -391,6 +383,7 @@ public class EventsPnl extends JPanel {
 		{
 			heatsTable.getSelectionModel().addListSelectionListener(
 					new ListSelectionListener() {
+						@Override
 						public void valueChanged(ListSelectionEvent e) {
 							if (heatsTable.getSelectedRow() != -1) {
 								removeBtn.setEnabled(true);
@@ -409,6 +402,7 @@ public class EventsPnl extends JPanel {
 		/* Score unit combo change listener */
 		{
 			scoreUnitCombo.addItemListener(new ItemListener() {
+				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED)
 						setUnits();
@@ -432,9 +426,13 @@ public class EventsPnl extends JPanel {
 										.addGroup(
 												groupLayout
 														.createParallelGroup(
-																Alignment.TRAILING)
+																Alignment.LEADING)
+														.addComponent(
+																splitPane,
+																GroupLayout.PREFERRED_SIZE,
+																937,
+																GroupLayout.PREFERRED_SIZE)
 														.addGroup(
-																Alignment.LEADING,
 																groupLayout
 																		.createSequentialGroup()
 																		.addComponent(
@@ -455,60 +453,40 @@ public class EventsPnl extends JPanel {
 																				saveBtn,
 																				GroupLayout.PREFERRED_SIZE,
 																				111,
-																				GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																groupLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				searchTxtBox,
-																				GroupLayout.PREFERRED_SIZE,
-																				194,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(
-																				searchBtn,
-																				GroupLayout.PREFERRED_SIZE,
-																				103,
-																				GroupLayout.PREFERRED_SIZE))
+																				GroupLayout.PREFERRED_SIZE)))
+										.addContainerGap(19, Short.MAX_VALUE)));
+		groupLayout
+				.setVerticalGroup(groupLayout
+						.createParallelGroup(Alignment.TRAILING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(splitPane,
+												GroupLayout.DEFAULT_SIZE, 505,
+												Short.MAX_VALUE)
+										.addPreferredGap(
+												ComponentPlacement.RELATED)
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																Alignment.TRAILING)
 														.addComponent(
-																splitPane,
+																newBtn,
 																GroupLayout.PREFERRED_SIZE,
-																937,
+																31,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																deleteBtn,
+																GroupLayout.PREFERRED_SIZE,
+																31,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																saveBtn,
+																GroupLayout.PREFERRED_SIZE,
+																31,
 																GroupLayout.PREFERRED_SIZE))
 										.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				Alignment.TRAILING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addComponent(searchTxtBox,
-												GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(searchBtn,
-												GroupLayout.PREFERRED_SIZE, 23,
-												GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(splitPane, GroupLayout.PREFERRED_SIZE,
-								417, GroupLayout.PREFERRED_SIZE)
-						.addGap(6)
-						.addGroup(
-								groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addComponent(deleteBtn,
-												GroupLayout.PREFERRED_SIZE, 31,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(newBtn,
-												GroupLayout.PREFERRED_SIZE, 31,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(saveBtn,
-												GroupLayout.PREFERRED_SIZE, 31,
-												GroupLayout.PREFERRED_SIZE))
-						.addGap(88)));
 		setLayout(groupLayout);
 	}
 
