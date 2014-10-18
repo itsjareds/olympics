@@ -34,91 +34,79 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
-	/**
-	
-	 * @return the eventCode */
+	/** @return the eventCode
+	 */
 	public String getEventCode() {
 		return this.eventCode;
 	}
 
-	/**
-	
-	 * @return the eventName */
+	/** @return the eventName
+	 */
 	public String getEventName() {
 		return this.eventName;
 	}
 
-	/**
-	
-	 * @return the scoreUnit */
+	/** @return the scoreUnit
+	 */
 	public String getScoreUnit() {
 		return this.scoreUnit;
 	}
 
-	/**
-	
-	 * @return the scoreMin */
+	/** @return the scoreMin
+	 */
 	public Integer getScoreMin() {
 		return this.scoreMin;
 	}
 
-	/**
-	
-	 * @return the scoreMax */
+	/** @return the scoreMax
+	 */
 	public Integer getScoreMax() {
 		return this.scoreMax;
 	}
 
-	/**
-	
-	 * @return the sortSeq */
+	/** @return the sortSeq
+	 */
 	public Integer getSortSeq() {
 		return this.sortSeq;
 	}
 
 	/**
-	 * @param eventCode
-	 *            the eventCode to set
+	 * @param eventCode the eventCode to set
 	 */
 	public void setEventCode(String eventCode) {
 		this.eventCode = eventCode;
 	}
 
 	/**
-	 * @param eventName
-	 *            the eventName to set
+	 * @param eventName the eventName to set
 	 */
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
 
 	/**
-	 * @param scoreUnit
-	 *            the scoreUnit to set
+	 * @param scoreUnit the scoreUnit to set
 	 */
 	public void setScoreUnit(String scoreUnit) {
 		this.scoreUnit = scoreUnit;
 	}
 
 	/**
-	 * @param scoreMin
-	 *            the scoreMin to set
+	 * @param scoreMin the scoreMin to set
 	 */
 	public void setScoreMin(Integer scoreMin) {
 		this.scoreMin = scoreMin;
 	}
 
 	/**
-	 * @param scoreMax
-	 *            the scoreMax to set
+	 * @param scoreMax the scoreMax to set
 	 */
 	public void setScoreMax(Integer scoreMax) {
 		this.scoreMax = scoreMax;
 	}
 
 	/**
-	 * @param sortSeq
-	 *            the sortSeq to set
+	 * @param sortSeq the sortSeq to set
 	 */
 	public void setSortSeq(Integer sortSeq) {
 		this.sortSeq = sortSeq;
@@ -151,6 +139,16 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		Integer ft = score / 100;
 		Integer in = score % 100;
 		return ft.toString() + in.toString();
+	}
+
+	/**
+	 * Method combineMinorMajorScores.
+	 * @param major Integer
+	 * @param minor Integer
+	 * @return Integer
+	 */
+	public static Integer combineMajorMinorScores(Integer major, Integer minor) {
+		return new Integer(major * 100 + minor);
 	}
 
 	/**

@@ -216,19 +216,19 @@ public class AthletePnl extends JPanel {
 			panel.add(lblEvents);
 
 			final JLabel lblFt = new JLabel("ft.");
-			lblFt.setBounds(481, 70, 50, 16);
+			lblFt.setBounds(467, 70, 50, 16);
 			panel.add(lblFt);
 
 			final JLabel lblIn = new JLabel("In.");
-			lblIn.setBounds(586, 70, 61, 16);
+			lblIn.setBounds(571, 70, 61, 16);
 			panel.add(lblIn);
 
 			final JLabel lblMin = new JLabel("min");
-			lblMin.setBounds(481, 98, 61, 16);
+			lblMin.setBounds(467, 98, 61, 16);
 			panel.add(lblMin);
 
 			final JLabel lblSec = new JLabel("sec");
-			lblSec.setBounds(586, 98, 50, 16);
+			lblSec.setBounds(571, 98, 50, 16);
 			panel.add(lblSec);
 
 			final JLabel lblRegisterForEvent = new JLabel("Register for Event");
@@ -260,22 +260,22 @@ public class AthletePnl extends JPanel {
 			panel.add(genderComboBox);
 
 			minComboBox = new JComboBox<Integer>();
-			minComboBox.setBounds(513, 97, 61, 27);
+			minComboBox.setBounds(490, 94, 80, 27);
 			panel.add(minComboBox);
 			minComboBox.setEnabled(false);
 
 			secComboBox = new JComboBox<Integer>();
-			secComboBox.setBounds(609, 94, 61, 27);
+			secComboBox.setBounds(594, 94, 80, 27);
 			panel.add(secComboBox);
 			secComboBox.setEnabled(false);
 
 			inchComboBox = new JComboBox<Integer>();
-			inchComboBox.setBounds(609, 66, 61, 27);
+			inchComboBox.setBounds(594, 66, 80, 27);
 			panel.add(inchComboBox);
 			inchComboBox.setEnabled(false);
 
 			feetComboBox = new JComboBox<Integer>();
-			feetComboBox.setBounds(513, 66, 61, 27);
+			feetComboBox.setBounds(490, 66, 80, 27);
 			panel.add(feetComboBox);
 			feetComboBox.setEnabled(false);
 
@@ -361,14 +361,14 @@ public class AthletePnl extends JPanel {
 			// Register Button
 			btnRegister = new RegisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnRegister.setBounds(361, 133, 117, 29);
+			btnRegister.setBounds(361, 133, 103, 29);
 			panel.add(btnRegister);
 			btnRegister.setEnabled(false);
 
 			// Unregister Button
 			btnUnregister = new UnregisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnUnregister.setBounds(481, 133, 103, 29);
+			btnUnregister.setBounds(467, 133, 117, 29);
 			panel.add(btnUnregister);
 			btnUnregister.setEnabled(false);
 
@@ -718,8 +718,17 @@ public class AthletePnl extends JPanel {
 		String eventRef = null;
 		if (e != null)
 			eventRef = e.getDbId();
-		// TODO get score from combo boxes
-		Integer score = new Integer(0);
+
+		Integer score = 0;
+		if (e.getScoreUnit().equals("D")) {
+			Integer feet = (Integer) feetComboBox.getSelectedItem();
+			Integer inch = (Integer) inchComboBox.getSelectedItem();
+			score = Event.combineMajorMinorScores(feet, inch);
+		} else if (e.getScoreUnit().equals("T")) {
+			Integer min = (Integer) minComboBox.getSelectedItem();
+			Integer sec = (Integer) secComboBox.getSelectedItem();
+			score = Event.combineMajorMinorScores(min, sec);
+		}
 
 		Registration r = null;
 
@@ -750,8 +759,10 @@ public class AthletePnl extends JPanel {
 			else
 				registrationTable.setRowSelectionInterval(index, index);
 		}
-		if (r.getEvent() != null) {
-			eventComboBox.setSelectedItem(r.getEvent());
+		Event e = r.getEvent();
+		if (e != null) {
+			eventComboBox.setSelectedItem(e);
+			setScore(e, r.getScore());
 		} else {
 			eventComboBox.setSelectedIndex(0);
 		}
@@ -775,36 +786,60 @@ public class AthletePnl extends JPanel {
 		registrationTableModel.update();
 	}
 
-	private void setUnits(Event e) {
+	private void setScore(Event e, Integer score) {
 		Integer minMajor = Event.extractMajorScore(e.getScoreMin());
 		Integer minMinor = Event.extractMinorScore(e.getScoreMin());
 		Integer maxMajor = Event.extractMajorScore(e.getScoreMax());
 		Integer maxMinor = Event.extractMinorScore(e.getScoreMax());
+		Integer scoreMajor = Event.extractMajorScore(score);
+		Integer scoreMinor = Event.extractMinorScore(score);
 
+		if (e.getScoreUnit().equals("D")) {
+			if (scoreMajor <= maxMajor && scoreMajor >= minMajor
+					&& scoreMinor <= maxMinor && scoreMinor >= minMinor) {
+				feetComboBox.setSelectedItem(scoreMajor);
+				inchComboBox.setSelectedItem(scoreMinor);
+			}
+		} else if (e.getScoreUnit().equals("T")) {
+			if (scoreMajor <= maxMajor && scoreMajor >= minMajor
+					&& scoreMinor <= maxMinor && scoreMinor >= minMinor) {
+				minComboBox.setSelectedItem(scoreMajor);
+				secComboBox.setSelectedItem(scoreMinor);
+			}
+		}
+	}
+
+	private void setUnits(Event e) {
 		feetComboBox.removeAllItems();
 		inchComboBox.removeAllItems();
 		minComboBox.removeAllItems();
 		secComboBox.removeAllItems();
-
 		feetComboBox.setEnabled(false);
 		inchComboBox.setEnabled(false);
 		minComboBox.setEnabled(false);
 		secComboBox.setEnabled(false);
 
-		if (e.getScoreUnit().equals("D")) {
-			feetComboBox.setEnabled(true);
-			inchComboBox.setEnabled(true);
-			for (Integer i = minMajor; i < maxMajor; i++)
-				feetComboBox.addItem(i);
-			for (Integer i = minMinor; i < maxMinor; i++)
-				inchComboBox.addItem(i);
-		} else if (e.getScoreUnit().equals("T")) {
-			minComboBox.setEnabled(true);
-			secComboBox.setEnabled(true);
-			for (Integer i = minMajor; i < maxMajor; i++)
-				minComboBox.addItem(i);
-			for (Integer i = minMinor; i < maxMinor; i++)
-				secComboBox.addItem(i);
+		if (e != null) {
+			Integer minMajor = Event.extractMajorScore(e.getScoreMin());
+			Integer minMinor = Event.extractMinorScore(e.getScoreMin());
+			Integer maxMajor = Event.extractMajorScore(e.getScoreMax());
+			Integer maxMinor = Event.extractMinorScore(e.getScoreMax());
+
+			if (e.getScoreUnit().equals("D")) {
+				feetComboBox.setEnabled(true);
+				inchComboBox.setEnabled(true);
+				for (Integer i = minMajor; i <= maxMajor; i++)
+					feetComboBox.addItem(i);
+				for (Integer i = minMinor; i <= maxMinor; i++)
+					inchComboBox.addItem(i);
+			} else if (e.getScoreUnit().equals("T")) {
+				minComboBox.setEnabled(true);
+				secComboBox.setEnabled(true);
+				for (Integer i = minMajor; i <= maxMajor; i++)
+					minComboBox.addItem(i);
+				for (Integer i = minMinor; i <= maxMinor; i++)
+					secComboBox.addItem(i);
+			}
 		}
 	}
 
