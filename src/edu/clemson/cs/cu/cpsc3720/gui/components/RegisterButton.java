@@ -38,6 +38,6 @@ public class RegisterButton extends JButton implements CommandInterface {
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {
-		mediator.newItem(arg0, panel);
+		mediator.registerAthlete(arg0, panel);
 	}
 }

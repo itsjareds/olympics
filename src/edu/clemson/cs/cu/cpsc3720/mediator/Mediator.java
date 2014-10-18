@@ -235,10 +235,22 @@ public class Mediator implements MediatorInterface {
 	 */
 	@Override
 	public void registerAthlete(ActionEvent e, JPanel panel) {
-		AthletePnl apl = (AthletePnl) panel;
-		RegisterAthleteController rac = new RegisterAthleteController();
-		rac.saveRegistration(apl.getRegistration());
-		apl.updateTables();
+		if (panel.getName().equals("AthletePanel")) {
+			RegisterAthleteController rac = new RegisterAthleteController();
+			AthletePnl apl = (AthletePnl) panel;
+			boolean saved = rac.saveRegistration(apl.getRegistration());
+			if (saved) {
+				System.out.println("Correctly added athlete "
+						+ apl.getAthlete());
+				apl.loadRegistrations(apl.getAthlete());
+				apl.setRegistration(null);
+			} else {
+				JOptionPane
+						.showMessageDialog(null,
+								"Could not add registration. Save your athlete before editing registrations.");
+			}
+		}
+		System.out.println(panel.getName());
 	}
 
 	/**
@@ -250,8 +262,14 @@ public class Mediator implements MediatorInterface {
 	 */
 	@Override
 	public void unregisterAthlete(ActionEvent e, JPanel panel) {
-		AthletePnl apl = (AthletePnl) panel;
-
+		if (panel.getName().equals("AthletePanel")) {
+			RegisterAthleteController rac = new RegisterAthleteController();
+			AthletePnl apl = (AthletePnl) panel;
+			rac.deleteRegistration(apl.getRegistration());
+			apl.loadRegistrations(apl.getAthlete());
+			apl.setRegistration(null);
+		}
+		System.out.println(panel.getName());
 	}
 
 	/**

@@ -570,12 +570,13 @@ public class AthletePnl extends JPanel {
 
 	}
 
-	private void loadRegistrations(Athlete a) {
+	public void loadRegistrations(Athlete a) {
 		if (a.getDbId() != null)
 			registrationTableModel.setRegistrations(a.getRegistrations());
 		else
 			registrationTableModel
 					.setRegistrations(new ArrayList<Registration>());
+		registrationTableModel.update();
 	}
 
 	private void fillPanel() {
@@ -587,9 +588,6 @@ public class AthletePnl extends JPanel {
 			athlete = athleteTableModel.getAthlete(athleteTable
 					.getSelectedRow());
 		}
-
-		associatedRegistrations = new ArrayList<Registration>();
-		ArrayList<String> rrefs = new ArrayList<>();
 
 		// set name
 		athleteFirstNameTextBox.setText(athlete.getFirstName());
@@ -620,8 +618,7 @@ public class AthletePnl extends JPanel {
 		}
 
 		// set school
-		DatabaseAccessObject<School> daos = DaoRepository.getSchoolsDao();
-		School s = daos.query(athlete.getSchoolRef());
+		School s = athlete.getSchool();
 		schoolNameComboBox.setSelectedItem(s);
 
 		setRegistration(null);
@@ -662,10 +659,9 @@ public class AthletePnl extends JPanel {
 		String schoolRef = school.getDbId();
 
 		ArrayList<String> regRefs = new ArrayList<>();
-		if (associatedRegistrations != null)
-			for (Registration r : associatedRegistrations) {
-				regRefs.add(r.getDbId());
-			}
+		registrationTableModel.setRegistrations(athlete.getRegistrations());
+		for (int row = 0; row < registrationTableModel.getRowCount(); row++)
+			regRefs.add(registrationTableModel.getRegistration(row).getDbId());
 
 		athlete.setFirstName(firstName);
 		athlete.setLastName(lastName);
@@ -702,8 +698,14 @@ public class AthletePnl extends JPanel {
 		// TODO get score from combo boxes
 		Integer score = new Integer(0);
 
-		Registration r = registrationTableModel
-				.getRegistration(registrationTable.getSelectedRow());
+		Registration r = null;
+
+		if (registrationTable.getSelectedRow() == -1)
+			r = new Registration(null, null, 0);
+		else
+			r = registrationTableModel.getRegistration(registrationTable
+					.getSelectedRow());
+
 		r.setEventRef(eventRef);
 		r.setAthleteRef(athRef);
 		r.setScore(score);
