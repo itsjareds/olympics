@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DatabaseAccessObject;
+import edu.clemson.cs.cu.cpsc3720.gui.components.ClearButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.DeleteButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.NewButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.RegisterButton;
@@ -81,6 +82,7 @@ public class AthletePnl extends JPanel {
 	private ArrayList<Event> eventList;
 	private ArrayList<Registration> associatedRegistrations;
 	private Athlete loadedAthlete;
+	private ClearButton clearButton;
 
 	/**
 	 * Create the panel.
@@ -359,16 +361,22 @@ public class AthletePnl extends JPanel {
 			// Register Button
 			btnRegister = new RegisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnRegister.setBounds(440, 131, 117, 29);
+			btnRegister.setBounds(361, 133, 117, 29);
 			panel.add(btnRegister);
 			btnRegister.setEnabled(false);
 
 			// Unregister Button
 			btnUnregister = new UnregisterButton(new MediatorActionListener(),
 					mediator, this);
-			btnUnregister.setBounds(557, 131, 113, 29);
+			btnUnregister.setBounds(481, 133, 103, 29);
 			panel.add(btnUnregister);
 			btnUnregister.setEnabled(false);
+
+			// Clear Button
+			clearButton = new ClearButton(new MediatorActionListener(),
+					mediator, this);
+			clearButton.setBounds(586, 134, 88, 28);
+			panel.add(clearButton);
 
 			// New Button
 			newBtn = new NewButton(new MediatorActionListener(), mediator, this);
@@ -427,6 +435,7 @@ public class AthletePnl extends JPanel {
 		// ------------ Start Combo Box Events ----------------- //
 		{
 			eventComboBox.addItemListener(new ItemListener() {
+				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED) {
 						Event event = (Event) eventComboBox.getSelectedItem();

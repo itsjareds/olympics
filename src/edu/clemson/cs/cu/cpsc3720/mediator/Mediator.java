@@ -349,6 +349,10 @@ public class Mediator implements MediatorInterface {
 			EventsPnl epl = (EventsPnl) panel;
 			epl.setHeat(null);
 		}
+		if (panel.getName().equals("AthletePanel")) {
+			AthletePnl apl = (AthletePnl) panel;
+			apl.setRegistration(null);
+		}
 		System.out.println(panel.getName());
 	}
 
