@@ -56,8 +56,10 @@ public class MainDriver {
 			JOptionPane
 					.showMessageDialog(null,
 							"Failed to connect to database. Check your network connection.");
+			quit(1);
 		} catch (IllegalArgumentException e) {
-			// classes not in database, do not load
+			JOptionPane.showMessageDialog(null, "Invalid database objects.");
+			quit(1);
 		}
 
 		/**
@@ -77,8 +79,14 @@ public class MainDriver {
 			}
 		});
 
+		quit(0);
+	}
+
+	public static void quit(int code) {
 		ODatabaseDocumentTx db = DatabaseAccessObject.getDb();
 		if (!db.isClosed())
 			DatabaseAccessObject.getDb().close();
+
+		System.exit(code);
 	}
 }
