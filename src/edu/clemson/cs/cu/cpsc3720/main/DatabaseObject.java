@@ -25,14 +25,7 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	}
 
 	public void registerDeletionObserver(DeletionObserver observer) {
-		boolean found = false;
-		for (DeletionObserver registered : deletionObservers) {
-			if (registered.equals(observer)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found)
+		if (!deletionObservers.contains(observer))
 			deletionObservers.add(observer);
 	}
 
