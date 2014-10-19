@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
+
 /**
  */
 public class Teacher extends DatabaseObject implements Comparable<Teacher> {
@@ -105,7 +107,7 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 	}
 
 	@Override
-	public void deleteReference() {
+	public void deleteReference(DeletionSubject subject) {
 		// TODO Auto-generated method stub
 
 	}

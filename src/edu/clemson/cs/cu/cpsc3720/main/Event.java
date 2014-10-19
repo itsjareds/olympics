@@ -1,5 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
+
 /**
  */
 public class Event extends DatabaseObject implements Comparable<Event> {
@@ -194,7 +196,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 	}
 
 	@Override
-	public void deleteReference() {
+	public void deleteReference(DeletionSubject subject) {
 		// TODO Auto-generated method stub
 
 	}

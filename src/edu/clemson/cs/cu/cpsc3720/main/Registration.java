@@ -1,6 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  */
@@ -127,7 +128,7 @@ public class Registration extends DatabaseObject implements
 	}
 
 	@Override
-	public void deleteReference() {
+	public void deleteReference(DeletionSubject subject) {
 		// TODO Auto-generated method stub
 
 	}

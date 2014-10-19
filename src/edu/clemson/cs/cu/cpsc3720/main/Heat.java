@@ -3,6 +3,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import java.text.DecimalFormat;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  */
@@ -227,7 +228,7 @@ public class Heat extends DatabaseObject {
 	}
 
 	@Override
-	public void deleteReference() {
+	public void deleteReference(DeletionSubject subject) {
 		// TODO Auto-generated method stub
 
 	}

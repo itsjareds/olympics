@@ -3,6 +3,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import java.util.ArrayList;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  */
@@ -244,7 +245,7 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	}
 
 	@Override
-	public void deleteReference() {
+	public void deleteReference(DeletionSubject subject) {
 		// TODO Auto-generated method stub
 
 	}
