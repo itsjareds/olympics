@@ -37,9 +37,8 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	}
 
 	public void notifyDelete() {
-		for (DeletionObserver observer : deletionObservers) {
+		for (DeletionObserver observer : deletionObservers)
 			observer.deleteReference(this);
-		}
 	}
 
 }
