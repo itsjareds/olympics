@@ -3,13 +3,11 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import java.text.DecimalFormat;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
  */
-public class Heat implements DatabaseSerializable {
+public class Heat extends DatabaseObject {
 
-	private transient String dbId;
 	private transient Event event;
 	private String eventRef;
 	private String gender;
@@ -79,99 +77,74 @@ public class Heat implements DatabaseSerializable {
 	}
 
 	/**
-	
-	 * @return the gender */
+	 * @return the gender
+	 */
 	public String getGender() {
 		return this.gender;
 	}
 
 	/**
-	
-	 * @return the minAge */
+	 * @return the minAge
+	 */
 	public Integer getMinAge() {
 		return this.minAge;
 	}
 
 	/**
-	
-	 * @return the maxAge */
+	 * @return the maxAge
+	 */
 	public Integer getMaxAge() {
 		return this.maxAge;
 	}
 
 	/**
-	
-	 * @return the time */
+	 * @return the time
+	 */
 	public String getTime() {
 		return this.time;
 	}
 
 	/**
-	 * @param gender
-	 *            the gender to set
+	 * @param gender the gender to set
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
 	/**
-	 * @param minAge
-	 *            the minAge to set
+	 * @param minAge the minAge to set
 	 */
 	public void setMinAge(Integer minAge) {
 		this.minAge = minAge;
 	}
 
 	/**
-	 * @param maxAge
-	 *            the maxAge to set
+	 * @param maxAge the maxAge to set
 	 */
 	public void setMaxAge(Integer maxAge) {
 		this.maxAge = maxAge;
 	}
 
 	/**
-	 * @param time
-	 *            the time to set
+	 * @param time the time to set
 	 */
 	public void setTime(String time) {
 		this.time = time;
 	}
 
 	/**
-	
-	 * @return the event */
+	 * @return the event
+	 */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
 	}
 
 	/**
-	 * @param event
-	 *            the event to set
+	 * @param event the event to set
 	 */
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
 	}
 
 	/**
@@ -251,5 +224,11 @@ public class Heat implements DatabaseSerializable {
 		String m = df.format(minute);
 		String s = df.format(second);
 		return h + ":" + m + ":" + s;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 }

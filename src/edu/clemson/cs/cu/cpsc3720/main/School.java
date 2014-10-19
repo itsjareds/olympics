@@ -1,12 +1,9 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
-
 /**
  */
-public class School implements DatabaseSerializable, Comparable<School> {
+public class School extends DatabaseObject implements Comparable<School> {
 
-	private transient String dbId;
 	private String schoolName;
 
 	/**
@@ -18,38 +15,17 @@ public class School implements DatabaseSerializable, Comparable<School> {
 	}
 
 	/**
-	
-	 * @return the schoolName */
+	 * @return the schoolName
+	 */
 	public String getSchoolName() {
 		return this.schoolName;
 	}
 
 	/**
-	 * @param schoolName
-	 *            the schoolName to set
+	 * @param schoolName the schoolName to set
 	 */
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
-	}
-
-	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
 	}
 
 	/**
@@ -89,6 +65,12 @@ public class School implements DatabaseSerializable, Comparable<School> {
 				retVal = true;
 		}
 		return retVal;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

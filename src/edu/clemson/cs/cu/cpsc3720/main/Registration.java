@@ -1,14 +1,12 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
  */
-public class Registration implements DatabaseSerializable,
+public class Registration extends DatabaseObject implements
 		Comparable<Registration> {
 
-	private transient String dbId;
 	private transient Event event;
 	private String eventRef;
 	private transient Athlete athlete;
@@ -72,21 +70,24 @@ public class Registration implements DatabaseSerializable,
 		this.athleteRef = athleteRef;
 	}
 
-	/** @return the event
+	/**
+	 * @return the event
 	 */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
 	}
 
-	/** @return the athlete
+	/**
+	 * @return the athlete
 	 */
 	public Athlete getAthlete() {
 		loadAthlete();
 		return this.athlete;
 	}
 
-	/** @return the score
+	/**
+	 * @return the score
 	 */
 	public Integer getScore() {
 		return this.score;
@@ -114,26 +115,6 @@ public class Registration implements DatabaseSerializable,
 	}
 
 	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
-	}
-
-	/**
 	 * Method compareTo.
 	 * @param o Registration
 	 * @return int
@@ -143,6 +124,12 @@ public class Registration implements DatabaseSerializable,
 		int retVal = 0;
 		retVal = this.getDbId().compareTo(o.getDbId());
 		return retVal;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

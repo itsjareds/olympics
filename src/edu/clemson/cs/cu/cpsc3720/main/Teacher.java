@@ -1,12 +1,9 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
-
 /**
  */
-public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
+public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 
-	private transient String dbId;
 	private String firstName;
 	private String lastName;
 	private String groupCode;
@@ -25,68 +22,45 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 	}
 
 	/**
-	
-	 * @return the groupCode */
+	 * @return the groupCode
+	 */
 	public String getGroupCode() {
 		return this.groupCode;
 	}
 
 	/**
-	 * @param groupCode
-	 *            the groupCode to set
+	 * @param groupCode the groupCode to set
 	 */
 	public void setGroupCode(String groupCode) {
 		this.groupCode = groupCode;
 	}
 
 	/**
-	
-	 * @return the firstName */
+	 * @return the firstName
+	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
 	/**
-	
-	 * @return the lastName */
+	 * @return the lastName
+	 */
 	public String getLastName() {
 		return this.lastName;
 	}
 
 	/**
-	 * @param firstName
-	 *            the firstName to set
+	 * @param firstName the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	/**
-	 * @param lastName
-	 *            the lastName to set
+	 * @param lastName the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
 	}
 
 	/**
@@ -128,5 +102,11 @@ public class Teacher implements DatabaseSerializable, Comparable<Teacher> {
 				retVal = true;
 		}
 		return retVal;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 }

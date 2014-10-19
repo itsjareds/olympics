@@ -3,13 +3,11 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import java.util.ArrayList;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
  */
-public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
+public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
-	private transient String dbId;
 	private transient Teacher teacher;
 	private String teacherRef;
 	private String firstName;
@@ -120,75 +118,71 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	/**
-	
-	 * @return the firstName */
+	 * @return the firstName
+	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
 	/**
-	
-	 * @return the lastName */
+	 * @return the lastName
+	 */
 	public String getLastName() {
 		return this.lastName;
 	}
 
 	/**
-	
-	 * @return the age */
+	 * @return the age
+	 */
 	public Integer getAge() {
 		return this.age;
 	}
 
 	/**
-	
-	 * @return the gender */
+	 * @return the gender
+	 */
 	public String getGender() {
 		return this.gender;
 	}
 
 	/**
-	 * @param firstName
-	 *            the firstName to set
+	 * @param firstName the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	/**
-	 * @param lastName
-	 *            the lastName to set
+	 * @param lastName the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
 	/**
-	 * @param age
-	 *            the age to set
+	 * @param age the age to set
 	 */
 	public void setAge(Integer age) {
 		this.age = age;
 	}
 
 	/**
-	 * @param gender
-	 *            the gender to set
+	 * @param gender the gender to set
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
 	/**
-	
-	 * @return the groupLeader */
+	 * @return the groupLeader
+	 */
 	public Teacher getGroupLeader() {
 		return this.teacher;
 	}
 
 	/**
-	
-	 * @return the school */
+	 * @return the school
+	 */
 	public School getSchool() {
 		loadSchool();
 		return this.school;
@@ -199,8 +193,8 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	/**
-	
-	 * @return the registrations */
+	 * @return the registrations
+	 */
 	public ArrayList<Registration> getRegistrations() {
 		loadRegistrations();
 		return this.registrations;
@@ -215,47 +209,24 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 	}
 
 	/**
-	 * @param groupLeader
-	 *            the groupLeader to set
+	 * @param groupLeader the groupLeader to set
 	 */
 	public void setGroupLeader(Teacher groupLeader) {
 		this.teacher = groupLeader;
 	}
 
 	/**
-	 * @param school
-	 *            the school to set
+	 * @param school the school to set
 	 */
 	public void setSchool(School school) {
 		this.school = school;
 	}
 
 	/**
-	 * @param registrations
-	 *            the registrations to set
+	 * @param registrations the registrations to set
 	 */
 	public void setRegistrations(ArrayList<Registration> registrations) {
 		this.registrations = registrations;
-	}
-
-	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
 	}
 
 	/**
@@ -270,5 +241,11 @@ public class Athlete implements DatabaseSerializable, Comparable<Athlete> {
 		if (retVal == 0)
 			retVal = this.getFirstName().compareTo(o.getFirstName());
 		return retVal;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 }

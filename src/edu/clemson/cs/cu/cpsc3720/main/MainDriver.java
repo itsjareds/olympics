@@ -56,9 +56,11 @@ public class MainDriver {
 			JOptionPane
 					.showMessageDialog(null,
 							"Failed to connect to database. Check your network connection.");
+			dialog.dispose();
 			quit(1);
 		} catch (IllegalArgumentException e) {
 			JOptionPane.showMessageDialog(null, "Invalid database objects.");
+			dialog.dispose();
 			quit(1);
 		}
 
@@ -78,8 +80,6 @@ public class MainDriver {
 				}
 			}
 		});
-
-		quit(0);
 	}
 
 	public static void quit(int code) {

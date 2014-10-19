@@ -1,12 +1,9 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
-
 /**
  */
-public class Event implements DatabaseSerializable, Comparable<Event> {
+public class Event extends DatabaseObject implements Comparable<Event> {
 
-	private transient String dbId;
 	private String eventCode;
 	private String eventName;
 	private String scoreUnit;
@@ -34,37 +31,43 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
-	/** @return the eventCode
+	/**
+	 * @return the eventCode
 	 */
 	public String getEventCode() {
 		return this.eventCode;
 	}
 
-	/** @return the eventName
+	/**
+	 * @return the eventName
 	 */
 	public String getEventName() {
 		return this.eventName;
 	}
 
-	/** @return the scoreUnit
+	/**
+	 * @return the scoreUnit
 	 */
 	public String getScoreUnit() {
 		return this.scoreUnit;
 	}
 
-	/** @return the scoreMin
+	/**
+	 * @return the scoreMin
 	 */
 	public Integer getScoreMin() {
 		return this.scoreMin;
 	}
 
-	/** @return the scoreMax
+	/**
+	 * @return the scoreMax
 	 */
 	public Integer getScoreMax() {
 		return this.scoreMax;
 	}
 
-	/** @return the sortSeq
+	/**
+	 * @return the sortSeq
 	 */
 	public Integer getSortSeq() {
 		return this.sortSeq;
@@ -152,26 +155,6 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 	}
 
 	/**
-	 * Method getDbId.
-	 * @return String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#getDbId()
-	 */
-	@Override
-	public String getDbId() {
-		return this.dbId;
-	}
-
-	/**
-	 * Method setDbId.
-	 * @param id String
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
-	 */
-	@Override
-	public void setDbId(String id) {
-		this.dbId = id;
-	}
-
-	/**
 	 * Method toString.
 	 * @return String
 	 */
@@ -208,5 +191,11 @@ public class Event implements DatabaseSerializable, Comparable<Event> {
 				retVal = true;
 		}
 		return retVal;
+	}
+
+	@Override
+	public void deleteReference() {
+		// TODO Auto-generated method stub
+
 	}
 }
