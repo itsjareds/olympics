@@ -45,4 +45,9 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 			observer.deleteReference(this);
 	}
 
+	/*
+	 * deleteReference(DeletionSubject subject) not implemented so that
+	 * extending classes are forced to implement the method.
+	 */
+
 }

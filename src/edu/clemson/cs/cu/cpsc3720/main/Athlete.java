@@ -246,7 +246,10 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
 	@Override
 	public void deleteReference(DeletionSubject subject) {
-		// TODO Auto-generated method stub
-
+		if (subject instanceof Registration) {
+			Registration reg = (Registration) subject;
+			regRefs.remove(reg.getDbId());
+		}
+		DaoRepository.getAthletesDao().save(this);
 	}
 }
