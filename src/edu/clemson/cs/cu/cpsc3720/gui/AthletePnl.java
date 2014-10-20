@@ -715,6 +715,9 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		}
 	}
 
+	/**
+	 * Method udpateEvents.
+	 */
 	private void updateEvents() {
 		// reload the events list
 		events = DaoRepository.getEventsDao().objects;
@@ -728,11 +731,17 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			eventComboBox.addItem(event);
 	}
 
+	/**
+	 * Method clearPanel.
+	 */
 	public void clearPanel() {
 		athleteTable.clearSelection();
 		fillPanel();
 	}
 
+	/**
+	 * Method updateTables.
+	 */
 	public void updateTables() {
 		athleteTableModel.update();
 		registrationTableModel.update();
