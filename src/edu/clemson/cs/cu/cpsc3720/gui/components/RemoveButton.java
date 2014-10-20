@@ -10,10 +10,15 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * <h1>Remove Button</h1>
+ * <p>
+ * JButton that holds a reference to the Mediator and calls its appropriate
+ * execute funtion.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class RemoveButton extends JButton implements CommandInterface {
 

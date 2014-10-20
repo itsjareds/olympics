@@ -3,10 +3,14 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Event</h1>
+ * <p>
+ * Main Event class that holds information regarding a single event.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class Event extends DatabaseObject implements Comparable<Event> {
 
@@ -123,7 +127,8 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method extractMajorScore.
-	 * @param score Integer @return Integer
+	 * @param score Integer
+	 * @return Integer
 	 */
 	public static Integer extractMajorScore(Integer score) {
 		return score / 100;
@@ -131,7 +136,8 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method extractMinorScore.
-	 * @param score Integer @return Integer
+	 * @param score Integer
+	 * @return Integer
 	 */
 	public static Integer extractMinorScore(Integer score) {
 		return score % 100;
@@ -139,7 +145,8 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method scoreToString.
-	 * @param score Integer @return String
+	 * @param score Integer
+	 * @return String
 	 */
 	public static String scoreToString(Integer score) {
 		Integer ft = score / 100;
@@ -150,14 +157,16 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 	/**
 	 * Method combineMinorMajorScores.
 	 * @param major Integer
-	 * @param minor Integer @return Integer
+	 * @param minor Integer
+	 * @return Integer
 	 */
 	public static Integer combineMajorMinorScores(Integer major, Integer minor) {
 		return new Integer(major * 100 + minor);
 	}
 
 	/**
-	 * Method toString. @return String
+	 * Method toString.
+	 * @return String
 	 */
 	@Override
 	public String toString() {
@@ -166,18 +175,20 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method compareTo.
-	 * @param o Event @return int
+	 * @param e Event
+	 * @return int
 	 */
 	@Override
-	public int compareTo(Event o) {
+	public int compareTo(Event e) {
 		int retVal = 0;
-		retVal = this.getEventName().compareTo(o.getEventName());
+		retVal = this.getEventName().compareTo(e.getEventName());
 		return retVal;
 	}
 
 	/**
 	 * Method equals.
-	 * @param o Object @return boolean
+	 * @param o Object
+	 * @return boolean
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -194,9 +205,9 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see
-	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
-	 *            .DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *      .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

@@ -5,6 +5,10 @@ import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 
 /**
+ * <h1>Register Athlete Controller</h1>
+ * <p>
+ * Handles creation, saving, deleting, and updating of a Registration in the
+ * database. Called by the mediator.
  * @author bbest
  * @author shiz
  * @author klinge2
@@ -14,6 +18,8 @@ public class RegisterAthleteController {
 
 	/**
 	 * Method saveRegistration.
+	 * <p>
+	 * Creates, updates, and saves a Registration in the database.
 	 * @param r Registration
 	 * @return boolean
 	 */
@@ -32,6 +38,8 @@ public class RegisterAthleteController {
 
 	/**
 	 * Method deleteRegistration.
+	 * <p>
+	 * Deletes a Registration in the database.
 	 * @param r Registration
 	 * @return Registration
 	 */

@@ -34,6 +34,9 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 /**
+ * <h1>Events Panel</h1>
+ * <p>
+ * Responsible for maintaining Events and their associated heats.
  * @author bbest
  * @author shiz
  * @author klinge2
@@ -639,7 +642,7 @@ public class EventsPnl extends JPanel {
 			genderCombo.setSelectedItem("Both");
 		hourCombo.setSelectedItem(Heat.extractHour(h.getTime()));
 		minCombo.setSelectedItem(Heat.extractMinute(h.getTime()));
-		divisionCombo.setSelectedItem(h.getNumHeats());
+		divisionCombo.setSelectedItem(h.getDivision());
 	}
 
 	/**

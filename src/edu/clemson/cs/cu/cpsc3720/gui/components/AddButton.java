@@ -10,10 +10,15 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * <h1>Add Button</h1>
+ * <p>
+ * JButton that holds a reference to the Mediator and calls its appropriate
+ * execute funtion.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class AddButton extends JButton implements CommandInterface {
 
@@ -25,7 +30,6 @@ public class AddButton extends JButton implements CommandInterface {
 	 * Instantiates a button called "Add" and performs an add action.
 	 * @param aL - ActionListerner for the button
 	 * @param mediator - a instance of the mediator @param panel JPanel
-	 * @param panel JPanel
 	 * @param panel JPanel
 	 */
 	public AddButton(ActionListener aL, Mediator mediator, JPanel panel) {

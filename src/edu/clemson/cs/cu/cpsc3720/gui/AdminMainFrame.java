@@ -15,6 +15,10 @@ import javax.swing.border.EmptyBorder;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * <h1>Admin Main Frame</h1>
+ * <p>
+ * Responsible for holding the AthletePnl, EventsPnl, SchoolsPnl, and UsersPnl
+ * in a series of tabs.
  * @author bbest
  * @author shiz
  * @author klinge2
@@ -27,7 +31,7 @@ public class AdminMainFrame extends JFrame {
 	private Mediator mediator;
 
 	/**
-	 * Create the frame.
+	 * Create the frame and load panels.
 	 * @param mediator Mediator
 	 */
 	public AdminMainFrame(Mediator mediator) {

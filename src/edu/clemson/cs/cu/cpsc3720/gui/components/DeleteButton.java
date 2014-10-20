@@ -10,10 +10,15 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 /**
+ * <h1>Delete Button</h1>
+ * <p>
+ * JButton that holds a reference to the Mediator and calls its appropriate
+ * execute funtion.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class DeleteButton extends JButton implements CommandInterface {
 
@@ -22,7 +27,7 @@ public class DeleteButton extends JButton implements CommandInterface {
 	private JPanel panel;
 
 	/**
-	 * Constructor for DeleteButton.
+	 * Instantiates a button called "Delete" and performs a delete action.
 	 * @param aL MediatorActionListener
 	 * @param mediator Mediator
 	 * @param panel JPanel
@@ -37,7 +42,8 @@ public class DeleteButton extends JButton implements CommandInterface {
 	}
 
 	/**
-	 * Method execute.
+	 * Executes the intended method specified by the
+	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
 	 * @param arg0 ActionEvent @see
 	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface
 	 *            #execute(ActionEvent)

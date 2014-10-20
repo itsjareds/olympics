@@ -38,6 +38,9 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 /**
+ * <h1>Athlete Panel</h1>
+ * <p>
+ * Responsible for maintaining Athletes and their registrations for events.
  * @author bbest
  * @author shiz
  * @author klinge2
@@ -585,7 +588,8 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method getAthlete. @return Athlete
+	 * Method getAthlete.
+	 * @return Athlete
 	 * @return Athlete
 	 */
 	public Athlete getAthlete() {
@@ -640,7 +644,8 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method getRegistration. @return Registration
+	 * Method getRegistration.
+	 * @return Registration
 	 * @return Registration
 	 */
 	public Registration getRegistration() {
@@ -685,7 +690,8 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method setRegistration. @param r Registration
+	 * Method setRegistration.
+	 * @param r Registration
 	 * @param r Registration
 	 */
 	public void setRegistration(Registration r) {

@@ -10,10 +10,15 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * <h1>Clear Button</h1>
+ * <p>
+ * JButton that holds a reference to the Mediator and calls its appropriate
+ * execute funtion.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class ClearButton extends JButton implements CommandInterface {
 
@@ -24,8 +29,7 @@ public class ClearButton extends JButton implements CommandInterface {
 	/**
 	 * Instantiates a button called "Clear" and performs a clear action.
 	 * @param aL - ActionListerner for the button
-	 * @param mediator - a instance of the mediator @param panel JPanel
-	 * @param panel JPanel
+	 * @param mediator - a instance of the mediator
 	 * @param panel JPanel
 	 */
 	public ClearButton(ActionListener aL, Mediator mediator, JPanel panel) {

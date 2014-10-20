@@ -7,10 +7,14 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Database Object</h1>
+ * <p>
+ * Observer pattern class to implement cascading deletion in the database.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public abstract class DatabaseObject implements DatabaseSerializable,
 		DeletionSubject, DeletionObserver {
@@ -33,9 +37,10 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	}
 
 	/**
-	 * Method getDbId. @return String * @see
-	 * edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable
-	 * #getDbId()
+	 * Method getDbId.
+	 * @return String
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable
+	 *      #getDbId()
 	 */
 	@Override
 	public String getDbId() {

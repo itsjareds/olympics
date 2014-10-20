@@ -7,12 +7,17 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Heat</h1>
+ * <p>
+ * Main Heat class that holds database references to an Event and stores the
+ * information of a single heat.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
-public class Heat extends DatabaseObject {
+public class Heat extends DatabaseObject implements Comparable<Heat> {
 
 	private transient Event event;
 	private String eventRef;
@@ -51,9 +56,10 @@ public class Heat extends DatabaseObject {
 	}
 
 	/**
-	 * Method getNumHeats. @return Integer
+	 * Method getNumHeats.
+	 * @return Integer
 	 */
-	public Integer getNumHeats() {
+	public Integer getDivision() {
 		return numHeats;
 	}
 
@@ -66,7 +72,8 @@ public class Heat extends DatabaseObject {
 	}
 
 	/**
-	 * Method getEventRef. @return String
+	 * Method getEventRef.
+	 * @return String
 	 */
 	public String getEventRef() {
 		return eventRef;
@@ -160,7 +167,8 @@ public class Heat extends DatabaseObject {
 
 	/**
 	 * Method extractHour.
-	 * @param time String @return Integer
+	 * @param time String
+	 * @return Integer
 	 */
 	public static Integer extractHour(String time) {
 		Integer ret = 0;
@@ -180,7 +188,8 @@ public class Heat extends DatabaseObject {
 
 	/**
 	 * Method extractMinute.
-	 * @param time String @return Integer
+	 * @param time String
+	 * @return Integer
 	 */
 	public static Integer extractMinute(String time) {
 		Integer ret = 0;
@@ -200,7 +209,8 @@ public class Heat extends DatabaseObject {
 
 	/**
 	 * Method extractSecond.
-	 * @param time String @return Integer
+	 * @param time String
+	 * @return Integer
 	 */
 	public static Integer extractSecond(String time) {
 		Integer ret = 0;
@@ -222,7 +232,8 @@ public class Heat extends DatabaseObject {
 	 * Method createTimeString.
 	 * @param hour Integer
 	 * @param minute Integer
-	 * @param second Integer @return String
+	 * @param second Integer
+	 * @return String
 	 */
 	public static String createTimeString(Integer hour, Integer minute,
 			Integer second) {
@@ -235,9 +246,9 @@ public class Heat extends DatabaseObject {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see
-	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
-	 *            .DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *      .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
@@ -256,5 +267,14 @@ public class Heat extends DatabaseObject {
 	@Override
 	public void runHooks() {
 		setEventRef(getEventRef());
+	}
+
+	@Override
+	public int compareTo(Heat h) {
+		int retVal = 0;
+		retVal = this.getTime().compareTo(h.getTime());
+		if (retVal == 0)
+			retVal = this.getDivision().compareTo(h.getDivision());
+		return retVal;
 	}
 }

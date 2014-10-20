@@ -3,10 +3,14 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Teacher</h1>
+ * <p>
+ * Main Teacher class that holds information regarding a single teacher.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 

@@ -15,10 +15,15 @@ import edu.clemson.cs.cu.cpsc3720.gui.SplashDlg;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * <h1>Main Driver</h1>
+ * <p>
+ * Main driver class that instantiates the main frame and loads data from the
+ * database.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class MainDriver {
 	// owns a private static database object and mediator
@@ -26,7 +31,7 @@ public class MainDriver {
 	private static SplashDlg dialog;
 
 	/**
-	 * Method main.
+	 * Main method
 	 * @param args String[]
 	 */
 	public static void main(String[] args) {
@@ -95,7 +100,8 @@ public class MainDriver {
 	}
 
 	/**
-	 * Method quit.
+	 * Method quit exists the system. This is called if there is an OIOException
+	 * or IllegalArgumentException.
 	 * @param code int
 	 */
 	public static void quit(int code) {

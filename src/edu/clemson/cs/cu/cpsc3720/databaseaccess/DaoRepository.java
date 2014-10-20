@@ -10,6 +10,10 @@ import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 
 /**
+ * <h1>Data Access Repository</h1>
+ * <p>
+ * Singleton that holds references to DatabaseAccessObjects for the classes:
+ * Athlete, Event, Heat, Registration, School, and Teacher.
  * @author bbest
  * @author shiz
  * @author klinge2
@@ -27,6 +31,10 @@ public class DaoRepository {
 
 	}
 
+	/**
+	 * Method initialize creates schema of the main classes in the database if
+	 * they do not exist.
+	 */
 	public static void initialize() {
 		ODatabaseDocumentTx db = DatabaseAccessObject.getDb();
 
@@ -52,7 +60,8 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getAthletesDao. @return DatabaseAccessObject<Athlete>
+	 * Method getAthletesDao.
+	 * @return DatabaseAccessObject<Athlete>
 	 */
 	public static DatabaseAccessObject<Athlete> getAthletesDao() {
 		if (athletesDao == null)

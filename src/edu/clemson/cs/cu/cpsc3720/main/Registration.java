@@ -5,10 +5,15 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Registration</h1>
+ * <p>
+ * Main Registration class that holds database references to a and event and an
+ * athlete as well as that athletes qualifing score.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class Registration extends DatabaseObject implements
 		Comparable<Registration> {
@@ -45,7 +50,8 @@ public class Registration extends DatabaseObject implements
 	}
 
 	/**
-	 * Method getEventRef. @return String
+	 * Method getEventRef.
+	 * @return String
 	 */
 	public String getEventRef() {
 		return eventRef;
@@ -67,7 +73,8 @@ public class Registration extends DatabaseObject implements
 	}
 
 	/**
-	 * Method getAthleteRef. @return String
+	 * Method getAthleteRef.
+	 * @return String
 	 */
 	public String getAthleteRef() {
 		return athleteRef;
@@ -135,7 +142,8 @@ public class Registration extends DatabaseObject implements
 
 	/**
 	 * Method compareTo.
-	 * @param o Registration @return int
+	 * @param o Registration
+	 * @return int
 	 */
 	@Override
 	public int compareTo(Registration o) {
@@ -146,9 +154,9 @@ public class Registration extends DatabaseObject implements
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see
-	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
-	 *            .DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *      .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

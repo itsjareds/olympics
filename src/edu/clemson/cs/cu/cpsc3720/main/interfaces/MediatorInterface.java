@@ -24,6 +24,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
  * @author bbest
  * @author shiz
  * @author klinge2
+ * @since 10/20/2014
  */
 public interface MediatorInterface {
 

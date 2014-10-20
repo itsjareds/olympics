@@ -7,10 +7,15 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * <h1>Athlete</h1>
+ * <p>
+ * Main Athlete class that holds database references to a Teach, a school, and a
+ * registration. Stores the information of a single athlete.
  * @author bbest
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @since 10/20/2014
  */
 public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
@@ -55,7 +60,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	}
 
 	/**
-	 * Method getTeacher. @return Teacher
+	 * Method getTeacher.
+	 * @return Teacher
 	 */
 	public Teacher getTeacher() {
 		loadTeacher();
@@ -75,7 +81,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	}
 
 	/**
-	 * Method getTeacherRef. @return String
+	 * Method getTeacherRef.
+	 * @return String
 	 */
 	public String getTeacherRef() {
 		return teacherRef;
@@ -98,7 +105,9 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	}
 
 	/**
-	 * Method getSchoolRef. @return String
+	 * Method getSchoolRef.
+	 * @return String
+	 * @return String
 	 */
 	public String getSchoolRef() {
 		return schoolRef;
@@ -120,7 +129,9 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	}
 
 	/**
-	 * Method getRegRefs. @return ArrayList<String>
+	 * Method getRegRefs.
+	 * @return ArrayList<String>
+	 * @return ArrayList<String>
 	 */
 	public ArrayList<String> getRegRefs() {
 		return regRefs;
@@ -279,7 +290,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
 	/**
 	 * Method compareTo.
-	 * @param o Athlete @return int
+	 * @param o Athlete
+	 * @return int
 	 */
 	@Override
 	public int compareTo(Athlete o) {
@@ -292,9 +304,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see
-	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
-	 *            .DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

@@ -11,6 +11,10 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
+ * <h1>Database Access Object</h1>
+ * <p>
+ * Template class that extends the DatabaseSerializable class. Holds a list of
+ * objects loaded from the database referenced by ClassOfT.
  * @author bbest
  * @author shiz
  * @author klinge2

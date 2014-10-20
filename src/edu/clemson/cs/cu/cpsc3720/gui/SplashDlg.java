@@ -9,6 +9,10 @@ import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * <h1>Splash Dialog</h1>
+ * <p>
+ * Responsible for displaying a loading bar when the application runs at start
+ * up.
  * @author bbest
  * @author shiz
  * @author klinge2
