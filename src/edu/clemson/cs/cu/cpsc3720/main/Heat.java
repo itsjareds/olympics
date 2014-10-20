@@ -2,6 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.text.DecimalFormat;
 
+import edu.clemson.cs.cu.cpsc3720.controllers.MaintainHeatController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
@@ -74,7 +75,13 @@ public class Heat extends DatabaseObject {
 	 * @param eventRef String
 	 */
 	public void setEventRef(String eventRef) {
-		this.eventRef = eventRef;
+		Event oldEvent = DaoRepository.getEventsDao().query(this.eventRef);
+		Event newEvent = DaoRepository.getEventsDao().query(eventRef);
+		if (oldEvent != null && newEvent != null) {
+			oldEvent.unregisterDeletionObserver(this);
+			newEvent.registerDeletionObserver(this);
+			this.eventRef = eventRef;
+		}
 	}
 
 	/**
@@ -229,7 +236,11 @@ public class Heat extends DatabaseObject {
 
 	@Override
 	public void deleteReference(DeletionSubject subject) {
-		// TODO Auto-generated method stub
-
+		if (subject instanceof Event) {
+			// Deleted last reference to Event,
+			// so Heat should also be deleted
+			MaintainHeatController mhc = new MaintainHeatController();
+			mhc.removeHeat(this);
+		}
 	}
 }

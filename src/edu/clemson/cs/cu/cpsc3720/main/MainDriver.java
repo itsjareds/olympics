@@ -62,6 +62,8 @@ public class MainDriver {
 				refs.addAll(a.getRegRefs());
 				a.setRegRefs(refs);
 			}
+			for (Heat h : DaoRepository.getHeatsDao().objects)
+				h.setEventRef(h.getEventRef());
 			dialog.setProgress(++progress, "Initializing main interface...");
 		} catch (OIOException e) {
 			JOptionPane
