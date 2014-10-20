@@ -712,25 +712,15 @@ public class AthletePnl extends JPanel {
 	}
 
 	private void setScore(Event e, Integer score) {
-		Integer minMajor = Event.extractMajorScore(e.getScoreMin());
-		Integer minMinor = Event.extractMinorScore(e.getScoreMin());
-		Integer maxMajor = Event.extractMajorScore(e.getScoreMax());
-		Integer maxMinor = Event.extractMinorScore(e.getScoreMax());
 		Integer scoreMajor = Event.extractMajorScore(score);
 		Integer scoreMinor = Event.extractMinorScore(score);
 
 		if (e.getScoreUnit().equals("D")) {
-			if (scoreMajor <= maxMajor && scoreMajor >= minMajor
-					&& scoreMinor <= maxMinor && scoreMinor >= minMinor) {
-				feetComboBox.setSelectedItem(scoreMajor);
-				inchComboBox.setSelectedItem(scoreMinor);
-			}
+			feetComboBox.setSelectedItem(scoreMajor);
+			inchComboBox.setSelectedItem(scoreMinor);
 		} else if (e.getScoreUnit().equals("T")) {
-			if (scoreMajor <= maxMajor && scoreMajor >= minMajor
-					&& scoreMinor <= maxMinor && scoreMinor >= minMinor) {
-				minComboBox.setSelectedItem(scoreMajor);
-				secComboBox.setSelectedItem(scoreMinor);
-			}
+			minComboBox.setSelectedItem(scoreMajor);
+			secComboBox.setSelectedItem(scoreMinor);
 		}
 	}
 
@@ -745,24 +735,21 @@ public class AthletePnl extends JPanel {
 		secComboBox.setEnabled(false);
 
 		if (e != null) {
-			Integer minMajor = Event.extractMajorScore(e.getScoreMin());
-			Integer minMinor = Event.extractMinorScore(e.getScoreMin());
 			Integer maxMajor = Event.extractMajorScore(e.getScoreMax());
-			Integer maxMinor = Event.extractMinorScore(e.getScoreMax());
 
 			if (e.getScoreUnit().equals("D")) {
 				feetComboBox.setEnabled(true);
 				inchComboBox.setEnabled(true);
-				for (Integer i = minMajor; i <= maxMajor; i++)
+				for (Integer i = 0; i <= maxMajor; i++)
 					feetComboBox.addItem(i);
-				for (Integer i = minMinor; i <= maxMinor; i++)
+				for (Integer i = 0; i < 12; i++)
 					inchComboBox.addItem(i);
 			} else if (e.getScoreUnit().equals("T")) {
 				minComboBox.setEnabled(true);
 				secComboBox.setEnabled(true);
-				for (Integer i = minMajor; i <= maxMajor; i++)
+				for (Integer i = 0; i <= maxMajor; i++)
 					minComboBox.addItem(i);
-				for (Integer i = minMinor; i <= maxMinor; i++)
+				for (Integer i = 0; i < 60; i++)
 					secComboBox.addItem(i);
 			}
 		}

@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import edu.clemson.cs.cu.cpsc3720.controllers.RegisterAthleteController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
@@ -147,13 +148,13 @@ public class Registration extends DatabaseObject implements
 		if (subject instanceof Athlete) {
 			// Deleted last reference to Athlete,
 			// so Registration should also be deleted
-			notifyDelete();
-			DaoRepository.getRegistrationsDao().delete(this);
+			RegisterAthleteController rac = new RegisterAthleteController();
+			rac.deleteRegistration(this);
 		} else if (subject instanceof Event) {
 			// Deleted last reference to Event,
 			// so Registration should also be deleted
-			notifyDelete();
-			DaoRepository.getRegistrationsDao().delete(this);
+			RegisterAthleteController rac = new RegisterAthleteController();
+			rac.deleteRegistration(this);
 		}
 	}
 
