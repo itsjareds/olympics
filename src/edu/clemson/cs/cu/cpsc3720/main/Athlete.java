@@ -270,7 +270,7 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	public void deleteReference(DeletionSubject subject) {
 		if (subject instanceof Registration) {
 			Registration reg = (Registration) subject;
-			regRefs.remove(reg.getDbId());
+			removeRegRef(reg.getDbId());
 
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.saveAthlete(this);
