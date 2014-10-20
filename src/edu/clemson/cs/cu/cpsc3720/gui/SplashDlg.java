@@ -17,7 +17,7 @@ public class SplashDlg extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SplashDlg() {
+	public SplashDlg(final int MAX_PROGRESS) {
 		setTitle("JT - 1.0");
 		setBounds(100, 100, 450, 108);
 		getContentPane().setLayout(new BorderLayout());
@@ -25,7 +25,7 @@ public class SplashDlg extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		progressBar = new JProgressBar(0, 6);
+		progressBar = new JProgressBar(0, MAX_PROGRESS);
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(6, 34, 438, 43);
 		contentPanel.add(progressBar);

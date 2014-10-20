@@ -66,6 +66,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 			ODocument doc = db.getRecord(new ORecordId(ref));
 			T dbObject = new Gson().fromJson(doc.toJSON(), classOfT);
+			dbObject.initialize();
 			dbObject.setDbId(doc.getIdentity().toString());
 			if (doc != null) {
 				db.delete(doc);
@@ -107,6 +108,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 					.existsClass(classOfT.getSimpleName())) {
 				for (ODocument doc : db.browseClass(classOfT.getSimpleName())) {
 					T t = new Gson().fromJson(doc.toJSON(), classOfT);
+					t.initialize();
 					t.setDbId(doc.getIdentity().toString());
 					if (t.getDbId().equals(ref)) {
 						ret = t;
@@ -127,6 +129,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 		for (ODocument objDoc : db.browseClass(classOfT.getSimpleName())) {
 			T obj = new Gson().fromJson(objDoc.toJSON(), classOfT);
+			obj.initialize();
 			obj.setDbId(objDoc.getIdentity().toString());
 			objects.add(obj);
 		}

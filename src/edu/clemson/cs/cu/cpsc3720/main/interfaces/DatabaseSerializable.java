@@ -14,4 +14,11 @@ public interface DatabaseSerializable {
 	 * @param id String
 	 */
 	public void setDbId(String id);
+
+	/*
+	 * This method is necessary because Gson doesn't allow for initialization
+	 * blocks. Gson will leave instance fields uninitialized. Call this method
+	 * whenever you deserialize using Gson.
+	 */
+	public void initialize();
 }

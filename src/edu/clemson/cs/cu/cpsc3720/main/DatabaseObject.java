@@ -10,10 +10,15 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 		DeletionSubject, DeletionObserver {
 
 	private transient String dbId;
-	private static ArrayList<DeletionObserver> deletionObservers;
+	private transient ArrayList<DeletionObserver> deletionObservers;
 
-	static {
-		deletionObservers = new ArrayList<DeletionObserver>();
+	{
+		initialize();
+	}
+
+	public void initialize() {
+		if (deletionObservers == null)
+			deletionObservers = new ArrayList<DeletionObserver>();
 	}
 
 	public String getDbId() {

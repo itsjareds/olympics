@@ -1,6 +1,7 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -29,29 +30,39 @@ public class MainDriver {
 
 		MainDriver.mediator = new Mediator();
 
+		final int MAX_PROGRESS = 7;
+
 		try {
-			dialog = new SplashDlg();
+			dialog = new SplashDlg(MAX_PROGRESS);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setLocationRelativeTo(null);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
+			quit(1);
 		}
 
 		try {
-			dialog.setProgress(0, "Loading Athletes...");
+			int progress = -1;
+			dialog.setProgress(++progress, "Loading Athletes...");
 			DaoRepository.getAthletesDao().load();
-			dialog.setProgress(1, "Loading Events...");
+			dialog.setProgress(++progress, "Loading Events...");
 			DaoRepository.getEventsDao().load();
-			dialog.setProgress(2, "Loading Heats...");
+			dialog.setProgress(++progress, "Loading Heats...");
 			DaoRepository.getHeatsDao().load();
-			dialog.setProgress(3, "Loading Registrations...");
+			dialog.setProgress(++progress, "Loading Registrations...");
 			DaoRepository.getRegistrationsDao().load();
-			dialog.setProgress(4, "Loading Schools...");
+			dialog.setProgress(++progress, "Loading Schools...");
 			DaoRepository.getSchoolsDao().load();
-			dialog.setProgress(5, "Loading Teachers...");
+			dialog.setProgress(++progress, "Loading Teachers...");
 			DaoRepository.getTeachersDao().load();
-			dialog.setProgress(6, "Initializing main interface...");
+			dialog.setProgress(++progress, "Executing database hooks...");
+			for (Athlete a : DaoRepository.getAthletesDao().objects) {
+				ArrayList<String> refs = new ArrayList<String>();
+				refs.addAll(a.getRegRefs());
+				a.setRegRefs(refs);
+			}
+			dialog.setProgress(++progress, "Initializing main interface...");
 		} catch (OIOException e) {
 			JOptionPane
 					.showMessageDialog(null,
