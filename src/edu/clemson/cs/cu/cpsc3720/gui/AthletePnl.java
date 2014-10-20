@@ -46,7 +46,7 @@ public class AthletePnl extends JPanel {
 	private final JTextField athleteFirstNameTextBox;
 	private final JTextField athleteLastNameTxtBox;
 	private final ArrayList<Athlete> athletes;
-	private final ArrayList<Event> events;
+	private ArrayList<Event> events;
 	private final JTable registrationTable;
 	private final Mediator mediator;
 	private final JTable athleteTable;
@@ -379,10 +379,12 @@ public class AthletePnl extends JPanel {
 					new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
+
 							if (athleteTable.getSelectedRow() != -1) {
 								deleteBtn.setEnabled(true);
 								if (athleteTable.getRowCount() > 0) {
 									fillPanel();
+
 								}
 							} else
 								deleteBtn.setEnabled(false);
@@ -418,7 +420,9 @@ public class AthletePnl extends JPanel {
 			eventComboBox.addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
+
 					if (e.getStateChange() == ItemEvent.SELECTED) {
+
 						Event event = (Event) eventComboBox.getSelectedItem();
 
 						setUnits(event);
@@ -531,6 +535,9 @@ public class AthletePnl extends JPanel {
 			athlete = athleteTableModel.getAthlete(athleteTable
 					.getSelectedRow());
 		}
+
+		// refresh the events combo box
+		updateEvents();
 
 		// set name
 		athleteFirstNameTextBox.setText(athlete.getFirstName());
@@ -691,6 +698,18 @@ public class AthletePnl extends JPanel {
 		} else {
 			eventComboBox.setSelectedIndex(0);
 		}
+	}
+
+	private void updateEvents() {
+
+		// reload the events list
+		DaoRepository.getEventsDao().update();
+		events = DaoRepository.getEventsDao().objects;
+		eventComboBox.removeAllItems();
+
+		// add to the combo box
+		for (Event event : events)
+			eventComboBox.addItem(event);
 	}
 
 	public void clearPanel() {
