@@ -1,6 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.databaseaccess;
 
-import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
@@ -25,9 +24,9 @@ public class DaoRepository {
 	}
 
 	public static void initialize() {
-		// create schema in case of empty database
-		ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(
-				"remote:localhost:2424/BugSquasher", "root", "passw0rd");
+		ODatabaseDocumentTx db = DatabaseAccessObject.getDb();
+
+		/* Create schema in case of empty database */
 
 		if (!db.getMetadata().getSchema().existsClass("Athlete"))
 			db.getMetadata().getSchema().createClass("Athlete");
