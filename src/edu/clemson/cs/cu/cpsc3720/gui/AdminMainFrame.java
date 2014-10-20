@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class AdminMainFrame extends JFrame {
 

@@ -11,6 +11,8 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	public final ArrayList<T> objects = new ArrayList<T>();
@@ -27,8 +29,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 	}
 
 	/**
-	 * Method getDb.
-	 * @return ODatabaseDocumentTx
+	 * Method getDb. @return ODatabaseDocumentTx
 	 */
 	public static ODatabaseDocumentTx getDb() {
 		return ODatabaseDocumentPool.global().acquire(
@@ -37,8 +38,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	/**
 	 * Method searchCache.
-	 * @param ref String
-	 * @return T
+	 * @param ref String @return T
 	 */
 	public T searchCache(String ref) {
 		T ret = null;
@@ -53,8 +53,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	/**
 	 * Method delete.
-	 * @param ref String
-	 * @return T
+	 * @param ref String @return T
 	 */
 	public T delete(String ref) {
 		T ret = null;
@@ -82,8 +81,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	/**
 	 * Method delete.
-	 * @param t T
-	 * @return T
+	 * @param t T @return T
 	 */
 	public T delete(T t) {
 		T ret = null;
@@ -94,8 +92,7 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 
 	/**
 	 * Method query.
-	 * @param ref String
-	 * @return T
+	 * @param ref String @return T
 	 */
 	public T query(String ref) {
 		T ret = null;

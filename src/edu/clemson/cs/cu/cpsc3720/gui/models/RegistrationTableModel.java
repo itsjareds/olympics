@@ -8,6 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class RegistrationTableModel extends AbstractTableModel {
 
@@ -35,8 +37,7 @@ public class RegistrationTableModel extends AbstractTableModel {
 
 	/**
 	 * Method getRegistrition.
-	 * @param row int
-	 * @return Registration
+	 * @param row int @return Registration
 	 */
 	public Registration getRegistration(int row) {
 		return regs.get(row);
@@ -44,8 +45,7 @@ public class RegistrationTableModel extends AbstractTableModel {
 
 	/**
 	 * Method indexOf.
-	 * @param r Registration
-	 * @return Integer
+	 * @param r Registration @return Integer
 	 */
 	public Integer indexOf(Registration r) {
 		return regs.indexOf(r);
@@ -71,9 +71,8 @@ public class RegistrationTableModel extends AbstractTableModel {
 
 	/**
 	 * Method getColumnName.
-	 * @param col int
-	 * @return String
-	 * @see javax.swing.table.TableModel#getColumnName(int)
+	 * @param col int @return String * @see javax.swing.table.TableModel#getColumnName(int) * @see
+	 *         javax.swing.table.TableModel#getColumnName(int)
 	 */
 	@Override
 	public String getColumnName(final int col) {
@@ -83,9 +82,8 @@ public class RegistrationTableModel extends AbstractTableModel {
 	/**
 	 * Method isCellEditable.
 	 * @param row int
-	 * @param col int
-	 * @return boolean
-	 * @see javax.swing.table.TableModel#isCellEditable(int, int)
+	 * @param col int @return boolean * @see javax.swing.table.TableModel#isCellEditable(int,
+	 *         int) * @see javax.swing.table.TableModel#isCellEditable(int, int)
 	 */
 	@Override
 	public boolean isCellEditable(final int row, final int col) {
@@ -93,9 +91,8 @@ public class RegistrationTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Method getRowCount.
-	 * @return int
-	 * @see javax.swing.table.TableModel#getRowCount()
+	 * Method getRowCount. @return int * @see javax.swing.table.TableModel#getRowCount() * @see
+	 *         javax.swing.table.TableModel#getRowCount()
 	 */
 	@Override
 	public int getRowCount() {
@@ -103,9 +100,8 @@ public class RegistrationTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Method getColumnCount.
-	 * @return int
-	 * @see javax.swing.table.TableModel#getColumnCount()
+	 * Method getColumnCount. @return int * @see javax.swing.table.TableModel#getColumnCount() * @see
+	 *         javax.swing.table.TableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
@@ -115,9 +111,8 @@ public class RegistrationTableModel extends AbstractTableModel {
 	/**
 	 * Method getValueAt.
 	 * @param row int
-	 * @param col int
-	 * @return Object
-	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	 * @param col int @return Object * @see javax.swing.table.TableModel#getValueAt(int, int) * @see
+	 *         javax.swing.table.TableModel#getValueAt(int, int)
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {

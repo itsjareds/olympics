@@ -15,6 +15,10 @@ import edu.clemson.cs.cu.cpsc3720.gui.SplashDlg;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * @author bbest
+ * @author shiz
+ * @author klinge2
+ * @version $Revision: 1.0 $
  */
 public class MainDriver {
 	// owns a private static database object and mediator
@@ -90,6 +94,10 @@ public class MainDriver {
 		});
 	}
 
+	/**
+	 * Method quit.
+	 * @param code int
+	 */
 	public static void quit(int code) {
 		ODatabaseDocumentTx db = DatabaseAccessObject.getDb();
 		if (!db.isClosed())

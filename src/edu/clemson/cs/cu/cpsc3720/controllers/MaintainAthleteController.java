@@ -4,6 +4,10 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 
 /**
+ * @author bbest
+ * @author shiz
+ * @author klinge2
+ * @version $Revision: 1.0 $
  */
 public class MaintainAthleteController {
 
@@ -18,6 +22,7 @@ public class MaintainAthleteController {
 	/**
 	 * Method deleteAthlete.
 	 * @param athlete Athlete
+	 * @return Athlete
 	 */
 	public Athlete deleteAthlete(Athlete athlete) {
 		athlete.notifyDelete();

@@ -10,6 +10,8 @@ import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class DaoRepository {
 	private static DatabaseAccessObject<Athlete> athletesDao;
@@ -48,8 +50,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getAthletesDao.
-	 * @return DatabaseAccessObject<Athlete>
+	 * Method getAthletesDao. @return DatabaseAccessObject<Athlete>
 	 */
 	public static DatabaseAccessObject<Athlete> getAthletesDao() {
 		if (athletesDao == null)
@@ -58,8 +59,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getEventsDao.
-	 * @return DatabaseAccessObject<Event>
+	 * Method getEventsDao. @return DatabaseAccessObject<Event>
 	 */
 	public static DatabaseAccessObject<Event> getEventsDao() {
 		if (eventsDao == null)
@@ -68,8 +68,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getHeatsDao.
-	 * @return DatabaseAccessObject<Heat>
+	 * Method getHeatsDao. @return DatabaseAccessObject<Heat>
 	 */
 	public static DatabaseAccessObject<Heat> getHeatsDao() {
 		if (heatsDao == null)
@@ -78,8 +77,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getRegistrationsDao.
-	 * @return DatabaseAccessObject<Registration>
+	 * Method getRegistrationsDao. @return DatabaseAccessObject<Registration>
 	 */
 	public static DatabaseAccessObject<Registration> getRegistrationsDao() {
 		if (registrationsDao == null)
@@ -89,8 +87,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getSchoolsDao.
-	 * @return DatabaseAccessObject<School>
+	 * Method getSchoolsDao. @return DatabaseAccessObject<School>
 	 */
 	public static DatabaseAccessObject<School> getSchoolsDao() {
 		if (schoolsDao == null)
@@ -99,8 +96,7 @@ public class DaoRepository {
 	}
 
 	/**
-	 * Method getTeachersDao.
-	 * @return DatabaseAccessObject<Teacher>
+	 * Method getTeachersDao. @return DatabaseAccessObject<Teacher>
 	 */
 	public static DatabaseAccessObject<Teacher> getTeachersDao() {
 		if (teachersDao == null)

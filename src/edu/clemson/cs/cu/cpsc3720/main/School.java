@@ -3,6 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class School extends DatabaseObject implements Comparable<School> {
 
@@ -16,8 +18,7 @@ public class School extends DatabaseObject implements Comparable<School> {
 		this.schoolName = schoolName;
 	}
 
-	/**
-	 * @return the schoolName
+	/** @return the schoolName
 	 */
 	public String getSchoolName() {
 		return this.schoolName;
@@ -31,8 +32,7 @@ public class School extends DatabaseObject implements Comparable<School> {
 	}
 
 	/**
-	 * Method toString.
-	 * @return String
+	 * Method toString. @return String
 	 */
 	@Override
 	public String toString() {
@@ -43,8 +43,7 @@ public class School extends DatabaseObject implements Comparable<School> {
 
 	/**
 	 * Method compareTo.
-	 * @param o School
-	 * @return int
+	 * @param o School @return int
 	 */
 	@Override
 	public int compareTo(School o) {
@@ -55,8 +54,7 @@ public class School extends DatabaseObject implements Comparable<School> {
 
 	/**
 	 * Method equals.
-	 * @param o Object
-	 * @return boolean
+	 * @param o Object @return boolean
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -69,6 +67,10 @@ public class School extends DatabaseObject implements Comparable<School> {
 		return retVal;
 	}
 
+	/**
+	 * Method deleteReference.
+	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete

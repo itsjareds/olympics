@@ -3,6 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class Event extends DatabaseObject implements Comparable<Event> {
 
@@ -33,43 +35,37 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
-	/**
-	 * @return the eventCode
+	/** @return the eventCode
 	 */
 	public String getEventCode() {
 		return this.eventCode;
 	}
 
-	/**
-	 * @return the eventName
+	/** @return the eventName
 	 */
 	public String getEventName() {
 		return this.eventName;
 	}
 
-	/**
-	 * @return the scoreUnit
+	/** @return the scoreUnit
 	 */
 	public String getScoreUnit() {
 		return this.scoreUnit;
 	}
 
-	/**
-	 * @return the scoreMin
+	/** @return the scoreMin
 	 */
 	public Integer getScoreMin() {
 		return this.scoreMin;
 	}
 
-	/**
-	 * @return the scoreMax
+	/** @return the scoreMax
 	 */
 	public Integer getScoreMax() {
 		return this.scoreMax;
 	}
 
-	/**
-	 * @return the sortSeq
+	/** @return the sortSeq
 	 */
 	public Integer getSortSeq() {
 		return this.sortSeq;
@@ -119,8 +115,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method extractMajorScore.
-	 * @param score Integer
-	 * @return Integer
+	 * @param score Integer @return Integer
 	 */
 	public static Integer extractMajorScore(Integer score) {
 		return score / 100;
@@ -128,8 +123,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method extractMinorScore.
-	 * @param score Integer
-	 * @return Integer
+	 * @param score Integer @return Integer
 	 */
 	public static Integer extractMinorScore(Integer score) {
 		return score % 100;
@@ -137,8 +131,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method scoreToString.
-	 * @param score Integer
-	 * @return String
+	 * @param score Integer @return String
 	 */
 	public static String scoreToString(Integer score) {
 		Integer ft = score / 100;
@@ -149,16 +142,14 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 	/**
 	 * Method combineMinorMajorScores.
 	 * @param major Integer
-	 * @param minor Integer
-	 * @return Integer
+	 * @param minor Integer @return Integer
 	 */
 	public static Integer combineMajorMinorScores(Integer major, Integer minor) {
 		return new Integer(major * 100 + minor);
 	}
 
 	/**
-	 * Method toString.
-	 * @return String
+	 * Method toString. @return String
 	 */
 	@Override
 	public String toString() {
@@ -167,8 +158,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method compareTo.
-	 * @param o Event
-	 * @return int
+	 * @param o Event @return int
 	 */
 	@Override
 	public int compareTo(Event o) {
@@ -179,8 +169,7 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method equals.
-	 * @param o Object
-	 * @return boolean
+	 * @param o Object @return boolean
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -195,6 +184,10 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 		return retVal;
 	}
 
+	/**
+	 * Method deleteReference.
+	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete

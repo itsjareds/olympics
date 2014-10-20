@@ -4,6 +4,8 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class MaintainEventController {
 
@@ -17,8 +19,7 @@ public class MaintainEventController {
 
 	/**
 	 * Method deleteEvent.
-	 * @param event Event
-	 * @return Event
+	 * @param event Event @return Event
 	 */
 	public Event deleteEvent(Event event) {
 		event.notifyDelete();

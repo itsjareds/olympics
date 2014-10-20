@@ -5,6 +5,8 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class Registration extends DatabaseObject implements
 		Comparable<Registration> {
@@ -41,8 +43,7 @@ public class Registration extends DatabaseObject implements
 	}
 
 	/**
-	 * Method getEventRef.
-	 * @return String
+	 * Method getEventRef. @return String
 	 */
 	public String getEventRef() {
 		return eventRef;
@@ -64,8 +65,7 @@ public class Registration extends DatabaseObject implements
 	}
 
 	/**
-	 * Method getAthleteRef.
-	 * @return String
+	 * Method getAthleteRef. @return String
 	 */
 	public String getAthleteRef() {
 		return athleteRef;
@@ -87,24 +87,21 @@ public class Registration extends DatabaseObject implements
 		}
 	}
 
-	/**
-	 * @return the event
+	/** @return the event
 	 */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
 	}
 
-	/**
-	 * @return the athlete
+	/** @return the athlete
 	 */
 	public Athlete getAthlete() {
 		loadAthlete();
 		return this.athlete;
 	}
 
-	/**
-	 * @return the score
+	/** @return the score
 	 */
 	public Integer getScore() {
 		return this.score;
@@ -133,8 +130,7 @@ public class Registration extends DatabaseObject implements
 
 	/**
 	 * Method compareTo.
-	 * @param o Registration
-	 * @return int
+	 * @param o Registration @return int
 	 */
 	@Override
 	public int compareTo(Registration o) {
@@ -143,6 +139,10 @@ public class Registration extends DatabaseObject implements
 		return retVal;
 	}
 
+	/**
+	 * Method deleteReference.
+	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		if (subject instanceof Athlete) {
@@ -158,6 +158,10 @@ public class Registration extends DatabaseObject implements
 		}
 	}
 
+	/**
+	 * Method runHooks.
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#runHooks()
+	 */
 	@Override
 	public void runHooks() {
 		setEventRef(getEventRef());

@@ -1,11 +1,12 @@
 package edu.clemson.cs.cu.cpsc3720.main.interfaces;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public interface DatabaseSerializable {
 	/**
-	 * Method getDbId.
-	 * @return String
+	 * Method getDbId. @return String
 	 */
 	public String getDbId();
 

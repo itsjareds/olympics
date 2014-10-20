@@ -38,6 +38,10 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 /**
+ * @author bbest
+ * @author shiz
+ * @author klinge2
+ * @version $Revision: 1.0 $
  */
 public class AthletePnl extends JPanel {
 	private static final long serialVersionUID = -3647303070052872171L;
@@ -517,6 +521,10 @@ public class AthletePnl extends JPanel {
 
 	}
 
+	/**
+	 * Method loadRegistrations.
+	 * @param a Athlete
+	 */
 	public void loadRegistrations(Athlete a) {
 		if (a.getDbId() != null)
 			registrationTableModel.setRegistrations(a.getRegistrations());
@@ -577,7 +585,7 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method getAthlete.
+	 * Method getAthlete. @return Athlete
 	 * @return Athlete
 	 */
 	public Athlete getAthlete() {
@@ -632,7 +640,7 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method getRegistration.
+	 * Method getRegistration. @return Registration
 	 * @return Registration
 	 */
 	public Registration getRegistration() {
@@ -677,8 +685,8 @@ public class AthletePnl extends JPanel {
 	}
 
 	/**
-	 * Method setRegistration.
-	 * @param Registration r
+	 * Method setRegistration. @param r Registration
+	 * @param r Registration
 	 */
 	public void setRegistration(Registration r) {
 		if (r == null) {
@@ -730,6 +738,11 @@ public class AthletePnl extends JPanel {
 		registrationTableModel.update();
 	}
 
+	/**
+	 * Method setScore.
+	 * @param e Event
+	 * @param score Integer
+	 */
 	private void setScore(Event e, Integer score) {
 		Integer scoreMajor = Event.extractMajorScore(score);
 		Integer scoreMinor = Event.extractMinorScore(score);
@@ -743,6 +756,10 @@ public class AthletePnl extends JPanel {
 		}
 	}
 
+	/**
+	 * Method setUnits.
+	 * @param e Event
+	 */
 	private void setUnits(Event e) {
 		feetComboBox.removeAllItems();
 		inchComboBox.removeAllItems();

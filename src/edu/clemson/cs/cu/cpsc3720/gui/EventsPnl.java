@@ -34,6 +34,8 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 @SuppressWarnings("serial")
 public class EventsPnl extends JPanel {
@@ -565,8 +567,7 @@ public class EventsPnl extends JPanel {
 	}
 
 	/**
-	 * Method getEvent.
-	 * @return Event
+	 * Method getEvent. @return Event
 	 */
 	public Event getEvent() {
 		String eventCode = eventCodeTextBox.getText();
@@ -640,8 +641,7 @@ public class EventsPnl extends JPanel {
 	}
 
 	/**
-	 * Method getHeat.
-	 * @return Heat
+	 * Method getHeat. @return Heat
 	 */
 	public Heat getHeat() {
 		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
@@ -682,16 +682,14 @@ public class EventsPnl extends JPanel {
 	}
 
 	/**
-	 * Method getEventTableModel.
-	 * @return EventTableModel
+	 * Method getEventTableModel. @return EventTableModel
 	 */
 	public EventTableModel getEventTableModel() {
 		return eventTableModel;
 	}
 
 	/**
-	 * Method getHeatTableModel.
-	 * @return HeatTableModel
+	 * Method getHeatTableModel. @return HeatTableModel
 	 */
 	public HeatTableModel getHeatTableModel() {
 		return heatTableModel;

@@ -5,12 +5,15 @@ import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class RegisterAthleteController {
 
 	/**
 	 * Method saveRegistration.
 	 * @param r Registration
+	 * @return boolean
 	 */
 	public boolean saveRegistration(Registration r) {
 		boolean saved = false;
@@ -28,6 +31,7 @@ public class RegisterAthleteController {
 	/**
 	 * Method deleteRegistration.
 	 * @param r Registration
+	 * @return Registration
 	 */
 	public Registration deleteRegistration(Registration r) {
 		r.notifyDelete();

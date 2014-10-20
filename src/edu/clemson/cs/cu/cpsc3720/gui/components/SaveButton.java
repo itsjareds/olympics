@@ -10,6 +10,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class SaveButton extends JButton implements CommandInterface {
 
@@ -33,8 +35,7 @@ public class SaveButton extends JButton implements CommandInterface {
 
 	/**
 	 * Method execute.
-	 * @param arg0 ActionEvent
-	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
+	 * @param arg0 ActionEvent @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {

@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @author bbest
+ * @version $Revision: 1.0 $
+ */
 public class SplashDlg extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -16,6 +20,7 @@ public class SplashDlg extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param MAX_PROGRESS int
 	 */
 	public SplashDlg(final int MAX_PROGRESS) {
 		setTitle("JT - 1.0");
@@ -35,6 +40,11 @@ public class SplashDlg extends JDialog {
 		contentPanel.add(lblLoadingDatabase);
 	}
 
+	/**
+	 * Method setProgress.
+	 * @param val int
+	 * @param message String
+	 */
 	public void setProgress(int val, String message) {
 		progressBar.setValue(val);
 		lblLoadingDatabase.setText(message);

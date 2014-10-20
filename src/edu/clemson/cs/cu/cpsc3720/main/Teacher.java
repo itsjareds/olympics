@@ -3,6 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.main;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 
@@ -23,8 +25,7 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * @return the groupCode
+	/** @return the groupCode
 	 */
 	public String getGroupCode() {
 		return this.groupCode;
@@ -37,15 +38,13 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 		this.groupCode = groupCode;
 	}
 
-	/**
-	 * @return the firstName
+	/** @return the firstName
 	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
-	/**
-	 * @return the lastName
+	/** @return the lastName
 	 */
 	public String getLastName() {
 		return this.lastName;
@@ -66,8 +65,7 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 	}
 
 	/**
-	 * Method toString.
-	 * @return String
+	 * Method toString. @return String
 	 */
 	@Override
 	public String toString() {
@@ -80,8 +78,7 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 
 	/**
 	 * Method compareTo.
-	 * @param t Teacher
-	 * @return int
+	 * @param t Teacher @return int
 	 */
 	@Override
 	public int compareTo(Teacher t) {
@@ -92,8 +89,7 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 
 	/**
 	 * Method equals.
-	 * @param o Object
-	 * @return boolean
+	 * @param o Object @return boolean
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -106,6 +102,10 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 		return retVal;
 	}
 
+	/**
+	 * Method deleteReference.
+	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete

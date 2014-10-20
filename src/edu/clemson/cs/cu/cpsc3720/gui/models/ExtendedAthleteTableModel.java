@@ -8,6 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 
 /**
+ * @author bbest
+ * @version $Revision: 1.0 $
  */
 public class ExtendedAthleteTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 8932721969724439783L;
@@ -52,9 +54,8 @@ public class ExtendedAthleteTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Method getColumnCount.
-	 * @return int
-	 * @see javax.swing.table.TableModel#getColumnCount()
+	 * Method getColumnCount. @return int * @see javax.swing.table.TableModel#getColumnCount() * @see
+	 *         javax.swing.table.TableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
@@ -63,9 +64,8 @@ public class ExtendedAthleteTableModel extends AbstractTableModel {
 
 	/**
 	 * Method getColumnName.
-	 * @param col int
-	 * @return String
-	 * @see javax.swing.table.TableModel#getColumnName(int)
+	 * @param col int @return String * @see javax.swing.table.TableModel#getColumnName(int) * @see
+	 *         javax.swing.table.TableModel#getColumnName(int)
 	 */
 	@Override
 	public String getColumnName(final int col) {
@@ -73,9 +73,8 @@ public class ExtendedAthleteTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Method getRowCount.
-	 * @return int
-	 * @see javax.swing.table.TableModel#getRowCount()
+	 * Method getRowCount. @return int * @see javax.swing.table.TableModel#getRowCount() * @see
+	 *         javax.swing.table.TableModel#getRowCount()
 	 */
 	@Override
 	public int getRowCount() {
@@ -85,9 +84,8 @@ public class ExtendedAthleteTableModel extends AbstractTableModel {
 	/**
 	 * Method getValueAt.
 	 * @param row int
-	 * @param col int
-	 * @return Object
-	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	 * @param col int @return Object * @see javax.swing.table.TableModel#getValueAt(int, int) * @see
+	 *         javax.swing.table.TableModel#getValueAt(int, int)
 	 */
 	@Override
 	public Object getValueAt(final int row, final int col) {
@@ -118,9 +116,8 @@ public class ExtendedAthleteTableModel extends AbstractTableModel {
 	/**
 	 * Method isCellEditable.
 	 * @param row int
-	 * @param col int
-	 * @return boolean
-	 * @see javax.swing.table.TableModel#isCellEditable(int, int)
+	 * @param col int @return boolean * @see javax.swing.table.TableModel#isCellEditable(int,
+	 *         int) * @see javax.swing.table.TableModel#isCellEditable(int, int)
 	 */
 	@Override
 	public boolean isCellEditable(final int row, final int col) {
