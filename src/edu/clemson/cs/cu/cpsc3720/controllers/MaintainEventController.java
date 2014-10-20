@@ -12,18 +12,17 @@ public class MaintainEventController {
 	 * @param e Event
 	 */
 	public void saveEvent(Event e) {
-		System.out.println("Saving event " + e);
 		DaoRepository.getEventsDao().save(e);
 	}
 
 	/**
 	 * Method deleteEvent.
-	 * @param e Event
+	 * @param event Event
 	 * @return Event
 	 */
-	public Event deleteEvent(Event e) {
-		System.out.println("Deleting event " + e);
-		return DaoRepository.getEventsDao().delete(e);
+	public Event deleteEvent(Event event) {
+		event.notifyDelete();
+		return DaoRepository.getEventsDao().delete(event);
 	}
 
 }

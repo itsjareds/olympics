@@ -15,7 +15,6 @@ public class MaintainHeatController {
 	public boolean addHeat(Heat h) {
 		boolean added = false;
 		if (h.getEventRef() != null) {
-			System.out.println("Adding heat with Event=" + h.getEvent());
 			DaoRepository.getHeatsDao().save(h);
 			added = true;
 		}
@@ -28,7 +27,7 @@ public class MaintainHeatController {
 	 * @return Heat
 	 */
 	public Heat removeHeat(Heat h) {
-		System.out.println("Removing heat with @rid=" + h.getDbId());
+		h.notifyDelete();
 		return DaoRepository.getHeatsDao().delete(h);
 	}
 

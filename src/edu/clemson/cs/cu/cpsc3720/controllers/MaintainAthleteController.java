@@ -19,8 +19,9 @@ public class MaintainAthleteController {
 	 * Method deleteAthlete.
 	 * @param athlete Athlete
 	 */
-	public void deleteAthlete(Athlete athlete) {
-		DaoRepository.getAthletesDao().delete(athlete);
+	public Athlete deleteAthlete(Athlete athlete) {
+		athlete.notifyDelete();
+		return DaoRepository.getAthletesDao().delete(athlete);
 	}
 
 }

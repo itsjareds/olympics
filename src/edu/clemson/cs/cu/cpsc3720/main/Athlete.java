@@ -2,6 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.util.ArrayList;
 
+import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
@@ -115,7 +116,28 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	 * @param regRefs ArrayList<String>
 	 */
 	public void setRegRefs(ArrayList<String> regRefs) {
-		this.regRefs = regRefs;
+		ArrayList<String> newRefs = new ArrayList<String>();
+		newRefs.addAll(this.regRefs);
+		for (String ref : newRefs)
+			removeRegRef(ref);
+		newRefs = regRefs;
+		for (String ref : regRefs)
+			addRegRef(ref);
+	}
+
+	public void addRegRef(String ref) {
+		if (!this.regRefs.contains(ref))
+			this.regRefs.add(ref);
+		Registration r = DaoRepository.getRegistrationsDao().query(ref);
+		if (r != null)
+			r.registerDeletionObserver(this);
+	}
+
+	public void removeRegRef(String ref) {
+		this.regRefs.remove(ref);
+		Registration r = DaoRepository.getRegistrationsDao().query(ref);
+		if (r != null)
+			r.unregisterDeletionObserver(this);
 	}
 
 	/**
@@ -249,7 +271,14 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		if (subject instanceof Registration) {
 			Registration reg = (Registration) subject;
 			regRefs.remove(reg.getDbId());
+
+			MaintainAthleteController mac = new MaintainAthleteController();
+			mac.saveAthlete(this);
+		} else if (subject instanceof School) {
+			// Deleted last reference to School, so Athlete should also be
+			// deleted
+			MaintainAthleteController mac = new MaintainAthleteController();
+			mac.deleteAthlete(this);
 		}
-		DaoRepository.getAthletesDao().save(this);
 	}
 }

@@ -10,9 +10,9 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 		DeletionSubject, DeletionObserver {
 
 	private transient String dbId;
-	private ArrayList<DeletionObserver> deletionObservers;
+	private static ArrayList<DeletionObserver> deletionObservers;
 
-	{
+	static {
 		deletionObservers = new ArrayList<DeletionObserver>();
 	}
 
@@ -34,8 +34,10 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	}
 
 	public void notifyDelete() {
-		for (DeletionObserver observer : deletionObservers)
+		for (DeletionObserver observer : deletionObservers) {
+			System.out.println("Notifying observer " + observer);
 			observer.deleteReference(this);
+		}
 	}
 
 	/*
