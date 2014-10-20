@@ -29,7 +29,7 @@ public class MainDriver {
 
 		MainDriver.mediator = new Mediator();
 
-		final int MAX_PROGRESS = 7;
+		final int MAX_PROGRESS = 8;
 
 		try {
 			dialog = new SplashDlg(MAX_PROGRESS);
@@ -43,6 +43,8 @@ public class MainDriver {
 
 		try {
 			int progress = -1;
+			dialog.setProgress(++progress, "Verifying schema...");
+			DaoRepository.initialize();
 			dialog.setProgress(++progress, "Loading Athletes...");
 			DaoRepository.getAthletesDao().load();
 			dialog.setProgress(++progress, "Loading Events...");

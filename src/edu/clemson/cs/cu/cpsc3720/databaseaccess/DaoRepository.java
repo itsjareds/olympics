@@ -1,5 +1,8 @@
 package edu.clemson.cs.cu.cpsc3720.databaseaccess;
 
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentPool;
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
+
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
@@ -19,6 +22,30 @@ public class DaoRepository {
 
 	private DaoRepository() {
 
+	}
+
+	public static void initialize() {
+		// create schema in case of empty database
+		ODatabaseDocumentTx db = ODatabaseDocumentPool.global().acquire(
+				"remote:localhost:2424/BugSquasher", "root", "passw0rd");
+
+		if (!db.getMetadata().getSchema().existsClass("Athlete"))
+			db.getMetadata().getSchema().createClass("Athlete");
+
+		if (!db.getMetadata().getSchema().existsClass("Event"))
+			db.getMetadata().getSchema().createClass("Event");
+
+		if (!db.getMetadata().getSchema().existsClass("Heat"))
+			db.getMetadata().getSchema().createClass("Heat");
+
+		if (!db.getMetadata().getSchema().existsClass("Registration"))
+			db.getMetadata().getSchema().createClass("Registration");
+
+		if (!db.getMetadata().getSchema().existsClass("School"))
+			db.getMetadata().getSchema().createClass("School");
+
+		if (!db.getMetadata().getSchema().existsClass("Teacher"))
+			db.getMetadata().getSchema().createClass("Teacher");
 	}
 
 	/**
