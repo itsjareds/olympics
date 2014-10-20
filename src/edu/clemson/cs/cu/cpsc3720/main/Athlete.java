@@ -8,6 +8,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class Athlete extends DatabaseObject implements Comparable<Athlete> {
@@ -161,25 +163,29 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 			r.unregisterDeletionObserver(this);
 	}
 
-	/** @return the firstName
+	/**
+	 * @return the firstName
 	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
-	/** @return the lastName
+	/**
+	 * @return the lastName
 	 */
 	public String getLastName() {
 		return this.lastName;
 	}
 
-	/** @return the age
+	/**
+	 * @return the age
 	 */
 	public Integer getAge() {
 		return this.age;
 	}
 
-	/** @return the gender
+	/**
+	 * @return the gender
 	 */
 	public String getGender() {
 		return this.gender;
@@ -213,13 +219,15 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		this.gender = gender;
 	}
 
-	/** @return the groupLeader
+	/**
+	 * @return the groupLeader
 	 */
 	public Teacher getGroupLeader() {
 		return this.teacher;
 	}
 
-	/** @return the school
+	/**
+	 * @return the school
 	 */
 	public School getSchool() {
 		loadSchool();
@@ -230,7 +238,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		school = DaoRepository.getSchoolsDao().query(schoolRef);
 	}
 
-	/** @return the registrations
+	/**
+	 * @return the registrations
 	 */
 	public ArrayList<Registration> getRegistrations() {
 		loadRegistrations();
@@ -283,7 +292,9 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class SplashDlg extends JDialog {

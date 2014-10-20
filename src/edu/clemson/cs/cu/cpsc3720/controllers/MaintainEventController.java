@@ -4,7 +4,9 @@ import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 
 /**
- * @author bbest
+ * @author bbes
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class MaintainEventController {

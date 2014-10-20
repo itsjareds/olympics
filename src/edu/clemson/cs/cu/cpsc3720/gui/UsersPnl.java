@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class UsersPnl extends JPanel {

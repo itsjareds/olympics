@@ -12,6 +12,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class DatabaseAccessObject<T extends DatabaseSerializable> {

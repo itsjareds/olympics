@@ -8,6 +8,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class Heat extends DatabaseObject {
@@ -85,25 +87,29 @@ public class Heat extends DatabaseObject {
 		}
 	}
 
-	/** @return the gender
+	/**
+	 * @return the gender
 	 */
 	public String getGender() {
 		return this.gender;
 	}
 
-	/** @return the minAge
+	/**
+	 * @return the minAge
 	 */
 	public Integer getMinAge() {
 		return this.minAge;
 	}
 
-	/** @return the maxAge
+	/**
+	 * @return the maxAge
 	 */
 	public Integer getMaxAge() {
 		return this.maxAge;
 	}
 
-	/** @return the time
+	/**
+	 * @return the time
 	 */
 	public String getTime() {
 		return this.time;
@@ -137,7 +143,8 @@ public class Heat extends DatabaseObject {
 		this.time = time;
 	}
 
-	/** @return the event
+	/**
+	 * @return the event
 	 */
 	public Event getEvent() {
 		loadEvent();
@@ -228,7 +235,9 @@ public class Heat extends DatabaseObject {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

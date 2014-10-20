@@ -11,6 +11,8 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class AddButton extends JButton implements CommandInterface {
@@ -37,7 +39,9 @@ public class AddButton extends JButton implements CommandInterface {
 	/**
 	 * Executes the intended method specified by the
 	 * {@link edu.clemson.cs.cu.cpsc3720.mediator.Mediator} class.
-	 * @param arg0 ActionEvent @see edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface#execute(ActionEvent)
+	 * @param arg0 ActionEvent @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces.CommandInterface
+	 *            #execute(ActionEvent)
 	 */
 	@Override
 	public void execute(ActionEvent arg0) {

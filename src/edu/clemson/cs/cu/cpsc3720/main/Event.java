@@ -4,6 +4,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class Event extends DatabaseObject implements Comparable<Event> {
@@ -35,37 +37,43 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 		this.sortSeq = sortSeq;
 	}
 
-	/** @return the eventCode
+	/**
+	 * @return the eventCode
 	 */
 	public String getEventCode() {
 		return this.eventCode;
 	}
 
-	/** @return the eventName
+	/**
+	 * @return the eventName
 	 */
 	public String getEventName() {
 		return this.eventName;
 	}
 
-	/** @return the scoreUnit
+	/**
+	 * @return the scoreUnit
 	 */
 	public String getScoreUnit() {
 		return this.scoreUnit;
 	}
 
-	/** @return the scoreMin
+	/**
+	 * @return the scoreMin
 	 */
 	public Integer getScoreMin() {
 		return this.scoreMin;
 	}
 
-	/** @return the scoreMax
+	/**
+	 * @return the scoreMax
 	 */
 	public Integer getScoreMax() {
 		return this.scoreMax;
 	}
 
-	/** @return the sortSeq
+	/**
+	 * @return the sortSeq
 	 */
 	public Integer getSortSeq() {
 		return this.sortSeq;
@@ -186,7 +194,9 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

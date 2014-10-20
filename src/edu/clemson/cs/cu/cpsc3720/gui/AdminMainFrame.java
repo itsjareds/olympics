@@ -16,6 +16,8 @@ import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class AdminMainFrame extends JFrame {
@@ -44,6 +46,7 @@ public class AdminMainFrame extends JFrame {
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}

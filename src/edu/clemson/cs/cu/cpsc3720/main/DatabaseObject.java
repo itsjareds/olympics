@@ -8,6 +8,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public abstract class DatabaseObject implements DatabaseSerializable,
@@ -24,6 +26,7 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	 * Method initialize.
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#initialize()
 	 */
+	@Override
 	public void initialize() {
 		if (deletionObservers == null)
 			deletionObservers = new ArrayList<DeletionObserver>();
@@ -31,25 +34,32 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 
 	/**
 	 * Method getDbId. @return String * @see
-	 *         edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable
-	 *         #getDbId()
+	 * edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable
+	 * #getDbId()
 	 */
+	@Override
 	public String getDbId() {
 		return this.dbId;
 	}
 
 	/**
 	 * Method setDbId.
-	 * @param id String @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#setDbId(String)
+	 * @param id String @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable
+	 *            #setDbId(String)
 	 */
+	@Override
 	public void setDbId(String id) {
 		this.dbId = id;
 	}
 
 	/**
 	 * Method registerDeletionObserver.
-	 * @param observer DeletionObserver @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject#registerDeletionObserver(DeletionObserver)
+	 * @param observer DeletionObserver @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionSubject#registerDeletionObserver(DeletionObserver)
 	 */
+	@Override
 	public void registerDeletionObserver(DeletionObserver observer) {
 		if (!deletionObservers.contains(observer))
 			deletionObservers.add(observer);
@@ -57,8 +67,11 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 
 	/**
 	 * Method unregisterDeletionObserver.
-	 * @param observer DeletionObserver @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject#unregisterDeletionObserver(DeletionObserver)
+	 * @param observer DeletionObserver @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionSubject#unregisterDeletionObserver(DeletionObserver)
 	 */
+	@Override
 	public void unregisterDeletionObserver(DeletionObserver observer) {
 		deletionObservers.remove(observer);
 	}
@@ -67,6 +80,7 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	 * Method notifyDelete.
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject#notifyDelete()
 	 */
+	@Override
 	public void notifyDelete() {
 		ArrayList<DeletionObserver> observers = new ArrayList<DeletionObserver>();
 		observers.addAll(deletionObservers);
@@ -87,6 +101,7 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	 * Method runHooks.
 	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#runHooks()
 	 */
+	@Override
 	public void runHooks() {
 
 	}

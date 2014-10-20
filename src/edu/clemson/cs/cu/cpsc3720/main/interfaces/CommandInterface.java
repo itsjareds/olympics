@@ -7,9 +7,10 @@ import java.awt.event.ActionEvent;
  * <p>
  * This interface is the base of all actions performed with the aid of buttons
  * or menu items.
- * @author Darrell Best - bbest
- * @version 1.0
- * @since 2014-09-22
+ * @author bbest
+ * @author shiz
+ * @author klinge2
+ * @version $Revision: 1.0 $
  */
 public interface CommandInterface {
 

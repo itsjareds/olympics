@@ -21,9 +21,9 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
  * <p>
  * This interface is the base of the mediator pattern that provides
  * functionality to buttons.
- * @author Darrell Best - bbest
- * @version 1.0
- * @since 2014-09-22
+ * @author bbest
+ * @author shiz
+ * @author klinge2
  */
 public interface MediatorInterface {
 

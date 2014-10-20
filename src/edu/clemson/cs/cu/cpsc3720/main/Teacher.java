@@ -4,6 +4,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class Teacher extends DatabaseObject implements Comparable<Teacher> {
@@ -25,7 +27,8 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 		this.lastName = lastName;
 	}
 
-	/** @return the groupCode
+	/**
+	 * @return the groupCode
 	 */
 	public String getGroupCode() {
 		return this.groupCode;
@@ -38,13 +41,15 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 		this.groupCode = groupCode;
 	}
 
-	/** @return the firstName
+	/**
+	 * @return the firstName
 	 */
 	public String getFirstName() {
 		return this.firstName;
 	}
 
-	/** @return the lastName
+	/**
+	 * @return the lastName
 	 */
 	public String getLastName() {
 		return this.lastName;
@@ -104,7 +109,9 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {

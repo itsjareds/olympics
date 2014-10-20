@@ -6,6 +6,8 @@ import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
  * @author bbest
+ * @author shiz
+ * @author klinge2
  * @version $Revision: 1.0 $
  */
 public class Registration extends DatabaseObject implements
@@ -87,21 +89,24 @@ public class Registration extends DatabaseObject implements
 		}
 	}
 
-	/** @return the event
+	/**
+	 * @return the event
 	 */
 	public Event getEvent() {
 		loadEvent();
 		return this.event;
 	}
 
-	/** @return the athlete
+	/**
+	 * @return the athlete
 	 */
 	public Athlete getAthlete() {
 		loadAthlete();
 		return this.athlete;
 	}
 
-	/** @return the score
+	/**
+	 * @return the score
 	 */
 	public Integer getScore() {
 		return this.score;
@@ -141,7 +146,9 @@ public class Registration extends DatabaseObject implements
 
 	/**
 	 * Method deleteReference.
-	 * @param subject DeletionSubject @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionObserver#deleteReference(DeletionSubject)
+	 * @param subject DeletionSubject @see
+	 *            edu.clemson.cs.cu.cpsc3720.main.interfaces
+	 *            .DeletionObserver#deleteReference(DeletionSubject)
 	 */
 	@Override
 	public void deleteReference(DeletionSubject subject) {
