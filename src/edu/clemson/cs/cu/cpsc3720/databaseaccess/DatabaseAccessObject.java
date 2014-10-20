@@ -142,20 +142,6 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 		db.close();
 	}
 
-	public void update() {
-		this.objects.clear();
-		ODatabaseDocumentTx db = getDb();
-
-		for (ODocument objDoc : db.browseClass(classOfT.getSimpleName())) {
-			T obj = new Gson().fromJson(objDoc.toJSON(), classOfT);
-			obj.initialize();
-			obj.setDbId(objDoc.getIdentity().toString());
-			objects.add(obj);
-		}
-
-		db.close();
-	}
-
 	/**
 	 * Method save.
 	 * @param t T

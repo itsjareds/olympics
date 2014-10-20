@@ -34,6 +34,7 @@ import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.School;
 import edu.clemson.cs.cu.cpsc3720.main.Teacher;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
@@ -46,7 +47,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
  * @author klinge2
  * @version $Revision: 1.0 $
  */
-public class AthletePnl extends JPanel {
+public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private static final long serialVersionUID = -3647303070052872171L;
 	private static AthleteTableModel athleteTableModel;
 	private static RegistrationTableModel registrationTableModel;
@@ -715,31 +716,21 @@ public class AthletePnl extends JPanel {
 	}
 
 	private void updateEvents() {
-
 		// reload the events list
-		DaoRepository.getEventsDao().update();
 		events = DaoRepository.getEventsDao().objects;
-		eventComboBox.removeAllItems();
 
 		// sort events
 		Collections.sort(events);
 
-		// add to the combo box
+		// refresh the combo box
+		eventComboBox.removeAllItems();
 		for (Event event : events)
 			eventComboBox.addItem(event);
 	}
 
 	public void clearPanel() {
 		athleteTable.clearSelection();
-		athleteFirstNameTextBox.setText("");
-		athleteLastNameTxtBox.setText("");
-		ageComboBox.setSelectedIndex(0);
-		genderComboBox.setSelectedIndex(0);
-		groupLeaderComboBox.setSelectedIndex(0);
-		schoolGroupCodeComboBox.setSelectedIndex(0);
-		registrationTableModel.setRegistrations(new ArrayList<Registration>());
-		eventComboBox.setSelectedIndex(0);
-		schoolNameComboBox.setSelectedIndex(0);
+		fillPanel();
 	}
 
 	public void updateTables() {

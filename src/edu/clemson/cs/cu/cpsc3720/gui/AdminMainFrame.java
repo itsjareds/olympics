@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.gui;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +12,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 
 /**
@@ -79,7 +83,7 @@ public class AdminMainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 
 		AthletePnl athletePnl = new AthletePnl(this.mediator);
@@ -93,6 +97,16 @@ public class AdminMainFrame extends JFrame {
 
 		SchoolsPnl schoolPnl = new SchoolsPnl();
 		tabbedPane.addTab("Schools", null, schoolPnl, null);
-	}
 
+		tabbedPane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Component c = tabbedPane.getSelectedComponent();
+				if (c instanceof AdminPanelInterface) {
+					AdminPanelInterface pnl = (AdminPanelInterface) c;
+					pnl.clearPanel();
+				}
+			}
+		});
+	}
 }

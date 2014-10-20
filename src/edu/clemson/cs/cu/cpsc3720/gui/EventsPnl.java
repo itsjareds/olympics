@@ -31,6 +31,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.models.EventTableModel;
 import edu.clemson.cs.cu.cpsc3720.gui.models.HeatTableModel;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
 
@@ -44,7 +45,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
  * @version $Revision: 1.0 $
  */
 @SuppressWarnings("serial")
-public class EventsPnl extends JPanel {
+public class EventsPnl extends JPanel implements AdminPanelInterface {
 
 	private final JTextField eventCodeTextBox;
 	private final JTextField eventNameTextBox;
@@ -701,6 +702,11 @@ public class EventsPnl extends JPanel {
 	 */
 	public HeatTableModel getHeatTableModel() {
 		return heatTableModel;
+	}
+
+	@Override
+	public void clearPanel() {
+		setEvent(null);
 	}
 
 }
