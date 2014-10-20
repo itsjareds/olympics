@@ -721,6 +721,9 @@ public class AthletePnl extends JPanel {
 		events = DaoRepository.getEventsDao().objects;
 		eventComboBox.removeAllItems();
 
+		// sort events
+		Collections.sort(events);
+
 		// add to the combo box
 		for (Event event : events)
 			eventComboBox.addItem(event);

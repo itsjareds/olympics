@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -80,6 +81,7 @@ public class EventsPnl extends JPanel {
 	private final JTable eventsTable;
 	private Event loadedEvent;
 	private Heat loadedHeat;
+	private ArrayList<Event> events;
 
 	/**
 	 * Create the panel.
@@ -91,15 +93,15 @@ public class EventsPnl extends JPanel {
 
 		loadedEvent = new Event("", "", "", 0, 0, 0);
 
-		eventTableModel = new EventTableModel(
-				DaoRepository.getEventsDao().objects);
+		events = DaoRepository.getEventsDao().objects;
+		Collections.sort(events);
+		eventTableModel = new EventTableModel(events);
 		heatTableModel = new HeatTableModel(new ArrayList<Heat>());
 
 		/* Add components */
 		{
 			splitPane = new JSplitPane();
 			splitPane.setDividerSize(1);
-			double dividerLocation = 1.8;
 			splitPane.setDividerLocation(250);
 
 			final JScrollPane scrollPane = new JScrollPane();
@@ -356,6 +358,7 @@ public class EventsPnl extends JPanel {
 			genderCombo.addItem("Both");
 			genderCombo.addItem("Male");
 			genderCombo.addItem("Female");
+
 			// Division
 			for (Integer i = 1; i <= 10; i++) {
 				divisionCombo.addItem(i);
