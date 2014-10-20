@@ -663,6 +663,8 @@ public class AthletePnl extends JPanel {
 			r = registrationTableModel.getRegistration(registrationTable
 					.getSelectedRow());
 
+		System.out.println("athRef=" + athRef + " eventRef=" + eventRef);
+
 		r.setEventRef(eventRef);
 		r.setAthleteRef(athRef);
 		r.setScore(score);

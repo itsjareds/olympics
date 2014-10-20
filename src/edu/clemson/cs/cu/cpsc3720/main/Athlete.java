@@ -84,7 +84,15 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	 * @param teacherRef String
 	 */
 	public void setTeacherRef(String teacherRef) {
-		this.teacherRef = teacherRef;
+		Teacher oldTeacher = DaoRepository.getTeachersDao().query(
+				this.teacherRef);
+		Teacher newTeacher = DaoRepository.getTeachersDao().query(teacherRef);
+		if (newTeacher != null) {
+			if (oldTeacher != null)
+				oldTeacher.unregisterDeletionObserver(this);
+			newTeacher.registerDeletionObserver(this);
+			this.teacherRef = teacherRef;
+		}
 	}
 
 	/**
@@ -100,7 +108,14 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	 * @param schoolRef String
 	 */
 	public void setSchoolRef(String schoolRef) {
-		this.schoolRef = schoolRef;
+		School oldSchool = DaoRepository.getSchoolsDao().query(this.schoolRef);
+		School newSchool = DaoRepository.getSchoolsDao().query(schoolRef);
+		if (newSchool != null) {
+			if (oldSchool != null)
+				oldSchool.unregisterDeletionObserver(this);
+			newSchool.registerDeletionObserver(this);
+			this.schoolRef = schoolRef;
+		}
 	}
 
 	/**
@@ -275,10 +290,25 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.saveAthlete(this);
 		} else if (subject instanceof School) {
-			// Deleted last reference to School, so Athlete should also be
-			// deleted
+			// Deleted last reference to School,
+			// so Athlete should also be deleted
+			MaintainAthleteController mac = new MaintainAthleteController();
+			mac.deleteAthlete(this);
+		} else if (subject instanceof Teacher) {
+			// Deleted last reference to Teacher,
+			// so Athlete should also be deleted
 			MaintainAthleteController mac = new MaintainAthleteController();
 			mac.deleteAthlete(this);
 		}
+	}
+
+	@Override
+	public void runHooks() {
+		ArrayList<String> refs = new ArrayList<String>();
+		refs.addAll(getRegRefs());
+		setRegRefs(refs);
+
+		setSchoolRef(getSchoolRef());
+		setTeacherRef(getTeacherRef());
 	}
 }

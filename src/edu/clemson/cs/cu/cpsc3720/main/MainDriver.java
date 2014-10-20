@@ -1,7 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -57,13 +56,7 @@ public class MainDriver {
 			dialog.setProgress(++progress, "Loading Teachers...");
 			DaoRepository.getTeachersDao().load();
 			dialog.setProgress(++progress, "Executing database hooks...");
-			for (Athlete a : DaoRepository.getAthletesDao().objects) {
-				ArrayList<String> refs = new ArrayList<String>();
-				refs.addAll(a.getRegRefs());
-				a.setRegRefs(refs);
-			}
-			for (Heat h : DaoRepository.getHeatsDao().objects)
-				h.setEventRef(h.getEventRef());
+			DaoRepository.runHooks();
 			dialog.setProgress(++progress, "Initializing main interface...");
 		} catch (OIOException e) {
 			JOptionPane

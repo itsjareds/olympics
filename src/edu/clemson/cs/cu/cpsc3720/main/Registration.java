@@ -52,7 +52,14 @@ public class Registration extends DatabaseObject implements
 	 * @param eventRef String
 	 */
 	public void setEventRef(String eventRef) {
-		this.eventRef = eventRef;
+		Event oldEvent = DaoRepository.getEventsDao().query(this.eventRef);
+		Event newEvent = DaoRepository.getEventsDao().query(eventRef);
+		if (newEvent != null) {
+			if (oldEvent != null)
+				oldEvent.unregisterDeletionObserver(this);
+			newEvent.registerDeletionObserver(this);
+			this.eventRef = eventRef;
+		}
 	}
 
 	/**
@@ -68,7 +75,15 @@ public class Registration extends DatabaseObject implements
 	 * @param athleteRef String
 	 */
 	public void setAthleteRef(String athleteRef) {
-		this.athleteRef = athleteRef;
+		Athlete oldAthlete = DaoRepository.getAthletesDao().query(
+				this.athleteRef);
+		Athlete newAthlete = DaoRepository.getAthletesDao().query(athleteRef);
+		if (newAthlete != null) {
+			if (oldAthlete != null)
+				oldAthlete.unregisterDeletionObserver(this);
+			newAthlete.registerDeletionObserver(this);
+			this.athleteRef = athleteRef;
+		}
 	}
 
 	/**
@@ -129,8 +144,23 @@ public class Registration extends DatabaseObject implements
 
 	@Override
 	public void deleteReference(DeletionSubject subject) {
-		// TODO Auto-generated method stub
+		if (subject instanceof Athlete) {
+			// Deleted last reference to Athlete,
+			// so Registration should also be deleted
+			notifyDelete();
+			DaoRepository.getRegistrationsDao().delete(this);
+		} else if (subject instanceof Event) {
+			// Deleted last reference to Event,
+			// so Registration should also be deleted
+			notifyDelete();
+			DaoRepository.getRegistrationsDao().delete(this);
+		}
+	}
 
+	@Override
+	public void runHooks() {
+		setEventRef(getEventRef());
+		setAthleteRef(getAthleteRef());
 	}
 
 }

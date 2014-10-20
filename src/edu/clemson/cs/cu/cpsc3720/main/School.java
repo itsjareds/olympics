@@ -71,8 +71,7 @@ public class School extends DatabaseObject implements Comparable<School> {
 
 	@Override
 	public void deleteReference(DeletionSubject subject) {
-		// TODO Auto-generated method stub
-
+		// No references to delete
 	}
 
 }

@@ -81,4 +81,13 @@ public class DaoRepository {
 			teachersDao = new DatabaseAccessObject<Teacher>(Teacher.class);
 		return teachersDao;
 	}
+
+	public static void runHooks() {
+		for (Athlete a : DaoRepository.getAthletesDao().objects)
+			a.runHooks();
+		for (Registration r : DaoRepository.getRegistrationsDao().objects)
+			r.runHooks();
+		for (Heat h : DaoRepository.getHeatsDao().objects)
+			h.runHooks();
+	}
 }

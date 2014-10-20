@@ -58,4 +58,8 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	 * extending classes are forced to implement the method.
 	 */
 
+	public void runHooks() {
+
+	}
+
 }

@@ -77,8 +77,9 @@ public class Heat extends DatabaseObject {
 	public void setEventRef(String eventRef) {
 		Event oldEvent = DaoRepository.getEventsDao().query(this.eventRef);
 		Event newEvent = DaoRepository.getEventsDao().query(eventRef);
-		if (oldEvent != null && newEvent != null) {
-			oldEvent.unregisterDeletionObserver(this);
+		if (newEvent != null) {
+			if (oldEvent != null)
+				oldEvent.unregisterDeletionObserver(this);
 			newEvent.registerDeletionObserver(this);
 			this.eventRef = eventRef;
 		}
@@ -242,5 +243,10 @@ public class Heat extends DatabaseObject {
 			MaintainHeatController mhc = new MaintainHeatController();
 			mhc.removeHeat(this);
 		}
+	}
+
+	@Override
+	public void runHooks() {
+		setEventRef(getEventRef());
 	}
 }
