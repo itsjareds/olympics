@@ -242,6 +242,8 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		if (registrations == null)
 			registrations = new ArrayList<Registration>();
 		registrations.clear();
+		if (regRefs == null)
+			regRefs = new ArrayList<String>();
 		for (String ref : regRefs)
 			registrations.add(DaoRepository.getRegistrationsDao().query(ref));
 	}
@@ -285,6 +287,7 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	public void deleteReference(DeletionSubject subject) {
 		if (subject instanceof Registration) {
 			Registration reg = (Registration) subject;
+			unregisterDeletionObserver(reg);
 			removeRegRef(reg.getDbId());
 
 			MaintainAthleteController mac = new MaintainAthleteController();

@@ -23,6 +23,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
+import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 
 /**
@@ -238,10 +239,10 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("AthletePanel")) {
 			RegisterAthleteController rac = new RegisterAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			boolean saved = rac.saveRegistration(apl.getRegistration());
+			Registration r = apl.getRegistration();
+			boolean saved = rac.saveRegistration(r);
+			apl.getAthlete().registerDeletionObserver(r);
 			if (saved) {
-				System.out.println("Correctly added athlete "
-						+ apl.getAthlete());
 				apl.loadRegistrations(apl.getAthlete());
 				apl.setRegistration(null);
 			} else {
@@ -250,7 +251,6 @@ public class Mediator implements MediatorInterface {
 								"Could not add registration. Save your athlete before editing registrations.");
 			}
 		}
-		System.out.println(panel.getName());
 	}
 
 	/**
@@ -269,7 +269,6 @@ public class Mediator implements MediatorInterface {
 			apl.loadRegistrations(apl.getAthlete());
 			apl.setRegistration(null);
 		}
-		System.out.println(panel.getName());
 	}
 
 	/**
@@ -294,7 +293,6 @@ public class Mediator implements MediatorInterface {
 								"Could not add heat. Save your event before editing heats.");
 			}
 		}
-		System.out.println(panel.getName());
 	}
 
 	/**
@@ -313,7 +311,6 @@ public class Mediator implements MediatorInterface {
 			epl.loadHeats(epl.getEvent());
 			epl.setHeat(null);
 		}
-		System.out.println(panel.getName());
 	}
 
 	/**
@@ -353,7 +350,6 @@ public class Mediator implements MediatorInterface {
 			AthletePnl apl = (AthletePnl) panel;
 			apl.setRegistration(null);
 		}
-		System.out.println(panel.getName());
 	}
 
 	/**

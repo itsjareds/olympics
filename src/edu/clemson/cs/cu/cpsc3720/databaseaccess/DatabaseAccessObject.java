@@ -65,12 +65,14 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 				objects.remove(cached);
 
 			ODocument doc = db.getRecord(new ORecordId(ref));
-			T dbObject = new Gson().fromJson(doc.toJSON(), classOfT);
-			dbObject.initialize();
-			dbObject.setDbId(doc.getIdentity().toString());
 			if (doc != null) {
-				db.delete(doc);
-				ret = dbObject;
+				T dbObject = new Gson().fromJson(doc.toJSON(), classOfT);
+				dbObject.initialize();
+				dbObject.setDbId(doc.getIdentity().toString());
+				if (doc != null) {
+					db.delete(doc);
+					ret = dbObject;
+				}
 			}
 
 			db.close();
