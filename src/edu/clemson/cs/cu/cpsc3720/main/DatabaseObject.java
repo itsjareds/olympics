@@ -89,10 +89,8 @@ public abstract class DatabaseObject implements DatabaseSerializable,
 	public void notifyDelete() {
 		ArrayList<DeletionObserver> observers = new ArrayList<DeletionObserver>();
 		observers.addAll(deletionObservers);
-		for (DeletionObserver observer : observers) {
-			System.out.println(this + " notifying observer " + observer);
+		for (DeletionObserver observer : observers)
 			observer.deleteReference(this);
-		}
 
 		deletionObservers.clear();
 	}

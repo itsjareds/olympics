@@ -706,6 +706,8 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 
 	@Override
 	public void clearPanel() {
+		// unfocuses table cell by focusing on something else
+		newBtn.requestFocusInWindow();
 		setEvent(null);
 	}
 

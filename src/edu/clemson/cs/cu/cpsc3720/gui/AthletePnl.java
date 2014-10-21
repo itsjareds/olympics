@@ -736,6 +736,8 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	 */
 	public void clearPanel() {
 		athleteTable.clearSelection();
+		// unfocuses table cell by focusing on something else
+		newBtn.requestFocusInWindow();
 		fillPanel();
 	}
 
