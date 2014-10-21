@@ -37,6 +37,7 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
+import javax.swing.ListSelectionModel;
 
 /**
  * <h1>Athlete Panel</h1>
@@ -151,6 +152,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		// --------- Start Tables ------------ //
 		{
 			athleteTable = new JTable(athleteTableModel);
+			athleteTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			athleteScrollPane.setViewportView(athleteTable);
 
 			registrationTable = new JTable(AthletePnl.registrationTableModel);

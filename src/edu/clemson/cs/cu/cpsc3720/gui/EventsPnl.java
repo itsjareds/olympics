@@ -268,7 +268,7 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 			panel.add(lblTime);
 
 			hourCombo = new JComboBox<Integer>();
-			hourCombo.setBounds(473, 104, 80, 50);
+			hourCombo.setBounds(473, 119, 68, 22);
 			panel.add(hourCombo);
 
 			JLabel lblH = new JLabel("h");
@@ -276,7 +276,7 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 			panel.add(lblH);
 
 			minCombo = new JComboBox<Integer>();
-			minCombo.setBounds(565, 115, 80, 26);
+			minCombo.setBounds(565, 115, 68, 26);
 			panel.add(minCombo);
 
 			JLabel lblM = new JLabel("m");
