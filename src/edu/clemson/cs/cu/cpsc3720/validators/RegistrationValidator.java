@@ -41,6 +41,11 @@ public class RegistrationValidator extends DatabaseObjectValidator {
 		if (!ret)
 			throw new InvalidObjectException("Invalid score");
 
+		ret &= (checkAthlete.getRegistrations().size() <= 2);
+		if (!ret)
+			throw new InvalidObjectException(
+					"Cannot excede more than 2 registrations");
+
 		return ret;
 	}
 }

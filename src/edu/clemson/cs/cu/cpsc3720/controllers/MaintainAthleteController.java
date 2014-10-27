@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.controllers;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
+import edu.clemson.cs.cu.cpsc3720.validators.AthleteValidator;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
 
 /**
  * <h1>Maintain Athlete Controller</h1>
@@ -20,9 +22,14 @@ public class MaintainAthleteController {
 	 * <p>
 	 * Creates, updates, and saves an Athlete in the database.
 	 * @param athlete Athlete
+	 * @throws InvalidObjectException
 	 */
-	public void saveAthlete(Athlete athlete) {
-		DaoRepository.getAthletesDao().save(athlete);
+	public void saveAthlete(Athlete a) throws InvalidObjectException {
+		AthleteValidator validator = new AthleteValidator();
+
+		if (validator.isValid(a)) {
+			DaoRepository.getAthletesDao().save(a);
+		}
 	}
 
 	/**

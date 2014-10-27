@@ -221,9 +221,15 @@ public class Mediator implements MediatorInterface {
 					&& a.getTeacherRef().trim().length() >= 1
 					&& a.getRegRefs().size() <= 2) {
 
-				mac.saveAthlete(apl.getAthlete());
-				apl.updateTables();
-				apl.clearPanel();
+				try {
+					mac.saveAthlete(apl.getAthlete());
+					apl.updateTables();
+					apl.clearPanel();
+				} catch (InvalidObjectException e) {
+					JOptionPane.showMessageDialog(null,
+							"Error saving athlete: " + e.getMessage());
+
+				}
 			}
 
 		} else if (panel.getName().equals("EventPanel")) {

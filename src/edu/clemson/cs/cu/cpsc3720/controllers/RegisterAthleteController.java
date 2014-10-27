@@ -26,19 +26,16 @@ public class RegisterAthleteController {
 	 * @return boolean
 	 * @throws InvalidObjectException
 	 */
-	public boolean saveRegistration(Registration r)
-			throws InvalidObjectException {
+	public void saveRegistration(Registration r) throws InvalidObjectException {
 		RegistrationValidator validator = new RegistrationValidator();
-		boolean saved = false;
+
 		if (validator.isValid(r)) {
 			DaoRepository.getRegistrationsDao().save(r);
-			saved = true;
-
 			Athlete a = r.getAthlete();
 			a.addRegRef(r.getDbId());
+			// update the athlete
 			DaoRepository.getAthletesDao().save(a);
 		}
-		return saved;
 	}
 
 	/**

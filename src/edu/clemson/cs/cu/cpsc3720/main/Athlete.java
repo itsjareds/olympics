@@ -2,9 +2,12 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
 
 /**
  * <h1>Athlete</h1>
@@ -315,7 +318,13 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 			removeRegRef(reg.getDbId());
 
 			MaintainAthleteController mac = new MaintainAthleteController();
-			mac.saveAthlete(this);
+			try {
+				// saving existing athlete with updated references
+				mac.saveAthlete(this);
+			} catch (InvalidObjectException e) {
+				JOptionPane.showMessageDialog(null,
+						"Error deleting reference: " + e.getMessage());
+			}
 		} else if (subject instanceof School) {
 			// Deleted last reference to School,
 			// so Athlete should also be deleted
