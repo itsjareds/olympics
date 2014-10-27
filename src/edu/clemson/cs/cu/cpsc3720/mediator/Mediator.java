@@ -253,15 +253,17 @@ public class Mediator implements MediatorInterface {
 			RegisterAthleteController rac = new RegisterAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
 			Registration r = apl.getRegistration();
-			boolean saved = rac.saveRegistration(r);
-			apl.getAthlete().registerDeletionObserver(r);
-			if (saved) {
+
+			try {
+				rac.saveRegistration(r);
 				apl.loadRegistrations(apl.getAthlete());
 				apl.setRegistration(null);
-			} else {
+				apl.getAthlete().registerDeletionObserver(r);
+			} catch (InvalidObjectException e1) {
 				JOptionPane
 						.showMessageDialog(null,
 								"Could not add registration. Save your athlete before editing registrations.");
+
 			}
 		}
 	}

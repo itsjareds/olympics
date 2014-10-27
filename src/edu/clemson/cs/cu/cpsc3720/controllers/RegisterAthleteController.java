@@ -3,6 +3,8 @@ package edu.clemson.cs.cu.cpsc3720.controllers;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
+import edu.clemson.cs.cu.cpsc3720.validators.RegistrationValidator;
 
 /**
  * <h1>Register Athlete Controller</h1>
@@ -22,10 +24,13 @@ public class RegisterAthleteController {
 	 * Creates, updates, and saves a Registration in the database.
 	 * @param r Registration
 	 * @return boolean
+	 * @throws InvalidObjectException
 	 */
-	public boolean saveRegistration(Registration r) {
+	public boolean saveRegistration(Registration r)
+			throws InvalidObjectException {
+		RegistrationValidator validator = new RegistrationValidator();
 		boolean saved = false;
-		if (r.getAthleteRef() != null && r.getEventRef() != null) {
+		if (validator.isValid(r)) {
 			DaoRepository.getRegistrationsDao().save(r);
 			saved = true;
 
