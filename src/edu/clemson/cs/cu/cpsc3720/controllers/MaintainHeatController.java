@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.controllers;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
+import edu.clemson.cs.cu.cpsc3720.validators.HeatValidator;
 
 /**
  * <h1>Maintain Heat Controller</h1>
@@ -21,13 +23,10 @@ public class MaintainHeatController {
 	 * Creates, updates, and saves a Heat in the database.
 	 * @param h Heat @return boolean
 	 */
-	public boolean addHeat(Heat h) {
-		boolean added = false;
-		if (h.getEventRef() != null) {
+	public void addHeat(Heat h) throws InvalidObjectException {
+		HeatValidator validator = new HeatValidator();
+		if (validator.isValid(h))
 			DaoRepository.getHeatsDao().save(h);
-			added = true;
-		}
-		return added;
 	}
 
 	/**

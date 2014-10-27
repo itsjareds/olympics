@@ -25,6 +25,7 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
 
 /**
  * <h1>Mediator</h1>
@@ -228,10 +229,14 @@ public class Mediator implements MediatorInterface {
 		} else if (panel.getName().equals("EventPanel")) {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
-			mec.saveEvent(epl.getEvent());
-			epl.getEventTableModel().update();
-			epl.setEvent(null);
-
+			try {
+				mec.saveEvent(epl.getEvent());
+				epl.getEventTableModel().update();
+				epl.setEvent(null);
+			} catch (InvalidObjectException e) {
+				JOptionPane.showMessageDialog(null,
+						"Error saving event: " + e.getMessage());
+			}
 		}
 	}
 
@@ -291,14 +296,13 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("EventPanel")) {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
-			boolean added = mhc.addHeat(epl.getHeat());
-			if (added) {
+			try {
+				mhc.addHeat(epl.getHeat());
 				epl.loadHeats(epl.getEvent());
 				epl.setHeat(null);
-			} else {
-				JOptionPane
-						.showMessageDialog(null,
-								"Could not add heat. Save your event before editing heats.");
+			} catch (InvalidObjectException e) {
+				JOptionPane.showMessageDialog(null,
+						"Error adding heat: " + e.getMessage());
 			}
 		}
 	}

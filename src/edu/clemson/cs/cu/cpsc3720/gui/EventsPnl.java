@@ -340,7 +340,7 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				hourCombo.addItem(i);
 			}
 			// Minutes
-			for (Integer i = 0; i <= 9999; i++) {
+			for (Integer i = 0; i <= 99; i++) {
 				minMinCombo.addItem(i);
 				maxMinCombo.addItem(i);
 				minCombo.addItem(i);

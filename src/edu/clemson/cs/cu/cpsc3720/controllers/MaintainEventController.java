@@ -2,6 +2,8 @@ package edu.clemson.cs.cu.cpsc3720.controllers;
 
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
+import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
+import edu.clemson.cs.cu.cpsc3720.validators.EventValidator;
 
 /**
  * <h1>Maintain Event Controller</h1>
@@ -21,8 +23,10 @@ public class MaintainEventController {
 	 * Creates, updates, and saves an Event in the database.
 	 * @param e Event
 	 */
-	public void saveEvent(Event e) {
-		DaoRepository.getEventsDao().save(e);
+	public void saveEvent(Event e) throws InvalidObjectException {
+		EventValidator validator = new EventValidator();
+		if (validator.isValid(e))
+			DaoRepository.getEventsDao().save(e);
 	}
 
 	/**
