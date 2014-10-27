@@ -260,9 +260,8 @@ public class Mediator implements MediatorInterface {
 				apl.setRegistration(null);
 				apl.getAthlete().registerDeletionObserver(r);
 			} catch (InvalidObjectException e1) {
-				JOptionPane
-						.showMessageDialog(null,
-								"Could not add registration. Save your athlete before editing registrations.");
+				JOptionPane.showMessageDialog(null,
+						"Could not add registration.\n" + e1.getMessage());
 
 			}
 		}
