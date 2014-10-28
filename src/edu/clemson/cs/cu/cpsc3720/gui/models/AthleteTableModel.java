@@ -77,7 +77,7 @@ public class AthleteTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getColumnCount() {
-		return 2;
+		return colNames.length;
 	}
 
 	/**

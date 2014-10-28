@@ -154,9 +154,18 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			athleteTable = new JTable(athleteTableModel);
 			athleteTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			athleteScrollPane.setViewportView(athleteTable);
+			athleteTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			TableColumnAdjuster athleteTca = new TableColumnAdjuster(
+					athleteTable);
+			athleteTca.setDynamicAdjustment(true);
+			athleteTca.adjustColumns();
 
 			registrationTable = new JTable(AthletePnl.registrationTableModel);
 			eventsScrollPane.setViewportView(registrationTable);
+			TableColumnAdjuster regTca = new TableColumnAdjuster(
+					registrationTable);
+			regTca.setDynamicAdjustment(true);
+			regTca.adjustColumns();
 
 		}
 		// --------- End Tables --------------- //

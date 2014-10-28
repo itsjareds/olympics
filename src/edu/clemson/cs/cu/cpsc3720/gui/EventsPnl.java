@@ -110,6 +110,10 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 
 			eventsTable = new JTable(eventTableModel);
 			scrollPane.setViewportView(eventsTable);
+			eventsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			TableColumnAdjuster eventsTca = new TableColumnAdjuster(eventsTable);
+			eventsTca.setDynamicAdjustment(true);
+			eventsTca.adjustColumns();
 
 			final JScrollPane informationScrollPane = new JScrollPane();
 			splitPane.setRightComponent(informationScrollPane);
@@ -157,6 +161,10 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 
 			heatsTable = new JTable(heatTableModel);
 			heatsScrollPane.setViewportView(heatsTable);
+			heatsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			TableColumnAdjuster heatsTca = new TableColumnAdjuster(heatsTable);
+			heatsTca.setDynamicAdjustment(true);
+			heatsTca.adjustColumns();
 
 			final JLabel lblFt = new JLabel("ft.");
 			lblFt.setBounds(108, 214, 50, 16);
