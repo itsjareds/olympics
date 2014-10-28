@@ -356,6 +356,7 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				maxAgeCombo.addItem(i);
 			}
 			// Gender
+			genderCombo.addItem("");
 			genderCombo.addItem("Both");
 			genderCombo.addItem("Male");
 			genderCombo.addItem("Female");

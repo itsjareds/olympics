@@ -23,31 +23,10 @@ public class AthleteValidator extends DatabaseObjectValidator {
 		ArrayList<String> regRefs = a.getRegRefs();
 
 		// Ensure non null fields
-		// ret &= (teacherRef != null && firstName != null && lastName != null
-		// && age != null && gender != null && schoolRef != null && regRefs !=
-		// null);
-
-		ret &= (teacherRef != null);
+		ret &= (teacherRef != null && firstName != null && lastName != null
+				&& age != null && gender != null && schoolRef != null && regRefs != null);
 		if (!ret)
-			throw new InvalidObjectException("Null teacherRef in Athlete");
-		ret &= (firstName != null);
-		if (!ret)
-			throw new InvalidObjectException("Null firstName in Athlete");
-		ret &= (lastName != null);
-		if (!ret)
-			throw new InvalidObjectException("Null lastName in Athlete");
-		ret &= (age != null);
-		if (!ret)
-			throw new InvalidObjectException("Null age in Athlete");
-		ret &= (gender != null);
-		if (!ret)
-			throw new InvalidObjectException("Null gender in Athlete");
-		ret &= (schoolRef != null);
-		if (!ret)
-			throw new InvalidObjectException("Null schoolRef in Athlete");
-		ret &= (regRefs != null);
-		if (!ret)
-			throw new InvalidObjectException("Null regRefs in Athlete");
+			throw new InvalidObjectException("Null field in Athlete");
 
 		// Validate teacher ref
 		Teacher checkTeacher = DaoRepository.getTeachersDao().query(teacherRef);

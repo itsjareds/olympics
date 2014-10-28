@@ -619,7 +619,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			gender = "F";
 
 		School school = (School) schoolNameComboBox.getSelectedItem();
-		System.out.println(school + " ref=" + school.getDbId());
 		String schoolRef = school.getDbId();
 
 		ArrayList<String> regRefs = new ArrayList<>();
