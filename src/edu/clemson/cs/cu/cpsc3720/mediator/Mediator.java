@@ -27,9 +27,11 @@ import edu.clemson.cs.cu.cpsc3720.main.Event;
 import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
+import edu.clemson.cs.cu.cpsc3720.validators.AthleteValidator;
 import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
 import edu.clemson.cs.cu.cpsc3720.validators.EventValidator;
 import edu.clemson.cs.cu.cpsc3720.validators.HeatValidator;
+import edu.clemson.cs.cu.cpsc3720.validators.RegistrationValidator;
 
 /**
  * <h1>Mediator</h1>
@@ -156,7 +158,7 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("AthletePanel")) {
 			MaintainAthleteController mac = new MaintainAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			mac.deleteAthlete(apl.getAthlete());
+			mac.deleteAthlete(apl.getLoadedAthlete());
 			apl.updateTables();
 			apl.clearPanel();
 		} else if (panel.getName().equals("EventPanel")) {
@@ -215,12 +217,19 @@ public class Mediator implements MediatorInterface {
 
 			MaintainAthleteController mac = new MaintainAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			Athlete a = apl.getAthlete();
+			Athlete formAthlete = apl.getAthlete();
+			Athlete loadedAthlete = apl.getLoadedAthlete();
+			AthleteValidator validator = new AthleteValidator();
 
 			try {
-				mac.saveAthlete(apl.getAthlete());
-				apl.updateTables();
-				apl.clearPanel();
+				if (loadedAthlete != null && validator.isValid(formAthlete)) {
+					loadedAthlete.copy(formAthlete);
+					mac.saveAthlete(loadedAthlete);
+					apl.updateTables();
+					apl.clearPanel();
+				} else {
+					System.out.println("Athlete is null");
+				}
 			} catch (InvalidObjectException e) {
 				JOptionPane.showMessageDialog(null, "Error saving athlete: "
 						+ e.getMessage());
@@ -230,11 +239,11 @@ public class Mediator implements MediatorInterface {
 		} else if (panel.getName().equals("EventPanel")) {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
-			try {
-				Event formEvent = epl.getEvent();
-				Event loadedEvent = epl.getLoadedEvent();
+			Event formEvent = epl.getEvent();
+			Event loadedEvent = epl.getLoadedEvent();
+			EventValidator validator = new EventValidator();
 
-				EventValidator validator = new EventValidator();
+			try {
 				if (validator.isValid(formEvent)) {
 					loadedEvent.copy(formEvent);
 					mec.saveEvent(loadedEvent);
@@ -260,13 +269,18 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("AthletePanel")) {
 			RegisterAthleteController rac = new RegisterAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			Registration r = apl.getRegistration();
+			Registration formReg = apl.getRegistration();
+			Registration loadedReg = apl.getLoadedRegistration();
+			RegistrationValidator validator = new RegistrationValidator();
 
 			try {
-				rac.saveRegistration(r);
-				apl.loadRegistrations(apl.getAthlete());
-				apl.setRegistration(null);
-				apl.getAthlete().registerDeletionObserver(r);
+				if (loadedReg != null && validator.isValid(formReg)) {
+					loadedReg.copy(formReg);
+					rac.saveRegistration(loadedReg);
+					apl.loadRegistrations(apl.getLoadedAthlete());
+					apl.setRegistration(null);
+					apl.getLoadedAthlete().registerDeletionObserver(loadedReg);
+				}
 			} catch (InvalidObjectException e1) {
 				JOptionPane.showMessageDialog(null,
 						"Could not add registration.\n" + e1.getMessage());
@@ -287,8 +301,8 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("AthletePanel")) {
 			RegisterAthleteController rac = new RegisterAthleteController();
 			AthletePnl apl = (AthletePnl) panel;
-			rac.deleteRegistration(apl.getRegistration());
-			apl.loadRegistrations(apl.getAthlete());
+			rac.deleteRegistration(apl.getLoadedRegistration());
+			apl.loadRegistrations(apl.getLoadedAthlete());
 			apl.setRegistration(null);
 		}
 	}
@@ -305,11 +319,11 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("EventPanel")) {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
-			try {
-				Heat formHeat = epl.getHeat();
-				Heat loadedHeat = epl.getLoadedHeat();
+			Heat formHeat = epl.getHeat();
+			Heat loadedHeat = epl.getLoadedHeat();
+			HeatValidator validator = new HeatValidator();
 
-				HeatValidator validator = new HeatValidator();
+			try {
 				if (validator.isValid(formHeat)) {
 					loadedHeat.copy(formHeat);
 					mhc.addHeat(loadedHeat);

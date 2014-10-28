@@ -25,6 +25,10 @@ public class Registration extends DatabaseObject implements
 	private String athleteRef;
 	private Integer score;
 
+	public Registration() {
+		super();
+	}
+
 	/**
 	 * Constructor for Registration.
 	 * @param eventRef String

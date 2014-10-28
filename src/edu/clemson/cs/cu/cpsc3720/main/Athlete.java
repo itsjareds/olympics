@@ -34,6 +34,10 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	private transient ArrayList<Registration> registrations;
 	private ArrayList<String> regRefs;
 
+	public Athlete() {
+		super();
+	}
+
 	/**
 	 * Constructor for Athlete.
 	 * @param teacherRef String
@@ -55,10 +59,6 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		this.gender = gender;
 		this.schoolRef = schoolRef;
 		this.regRefs = regRefs;
-	}
-
-	public Athlete() {
-		super();
 	}
 
 	public void loadRefs() {
@@ -150,11 +150,17 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 	 * @param regRefs ArrayList<String>
 	 */
 	public void setRegRefs(ArrayList<String> regRefs) {
+		// Remove old listeners when new references set
+		if (this.regRefs == null)
+			this.regRefs = new ArrayList<String>();
+		if (regRefs == null)
+			regRefs = new ArrayList<String>();
 		ArrayList<String> newRefs = new ArrayList<String>();
 		newRefs.addAll(this.regRefs);
 		for (String ref : newRefs)
 			removeRegRef(ref);
 		newRefs = regRefs;
+
 		for (String ref : regRefs)
 			addRegRef(ref);
 	}
@@ -367,7 +373,7 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 			this.setLastName(a.getLastName());
 			this.setAge(a.getAge());
 			this.setGender(a.getGender());
-			this.setSchool(a.getSchool());
+			this.setSchoolRef(a.getSchoolRef());
 			this.setRegRefs(a.getRegRefs());
 		}
 	}

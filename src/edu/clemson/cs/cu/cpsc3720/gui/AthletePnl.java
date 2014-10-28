@@ -16,6 +16,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -37,7 +38,6 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
-import javax.swing.ListSelectionModel;
 
 /**
  * <h1>Athlete Panel</h1>
@@ -596,13 +596,11 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	 * @return Athlete
 	 */
 	public Athlete getAthlete() {
-		Athlete athlete = null;
-
-		if (athleteTable.getSelectedRow() != -1) {
-			athlete = athleteTableModel.getAthlete(athleteTable
-					.getSelectedRow());
-		} else {
-			athlete = new Athlete(null, "", "", null, "", "", null);
+		Athlete athlete = new Athlete();
+		Athlete loadedAthlete = getLoadedAthlete();
+		if (loadedAthlete != null) {
+			athlete.copy(loadedAthlete);
+			athlete.setDbId(loadedAthlete.getDbId());
 		}
 
 		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
@@ -621,26 +619,22 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			gender = "F";
 
 		School school = (School) schoolNameComboBox.getSelectedItem();
+		System.out.println(school + " ref=" + school.getDbId());
 		String schoolRef = school.getDbId();
 
 		ArrayList<String> regRefs = new ArrayList<>();
-		registrationTableModel.setRegistrations(athlete.getRegistrations());
-		for (int row = 0; row < registrationTableModel.getRowCount(); row++) {
-			Registration r = registrationTableModel.getRegistration(row);
-			String ref = "";
-			if (r != null) {
-				ref = r.getDbId();
-				regRefs.add(ref);
-			}
+		ArrayList<Registration> regs = athlete.getRegistrations();
+		for (Registration r : regs) {
+			String ref = r.getDbId();
+			regRefs.add(ref);
 		}
+
 		athlete.setFirstName(firstName);
 		athlete.setLastName(lastName);
 		athlete.setAge(age);
 		athlete.setGender(gender);
 		athlete.setRegRefs(regRefs);
-		athlete.setTeacher(teacher);
 		athlete.setTeacherRef(teacherRef);
-		athlete.setSchool(school);
 		athlete.setSchoolRef(schoolRef);
 
 		return athlete;
@@ -678,7 +672,12 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			score = Event.combineMajorMinorScores(min, sec);
 		}
 
-		Registration r = null;
+		Registration r = new Registration();
+		Registration loadedReg = getLoadedRegistration();
+		if (loadedReg != null) {
+			r.copy(loadedReg);
+			r.setDbId(loadedReg.getDbId());
+		}
 
 		if (registrationTable.getSelectedRow() == -1)
 			r = new Registration(null, null, 0);
@@ -689,6 +688,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		r.setEventRef(eventRef);
 		r.setAthleteRef(athRef);
 		r.setScore(score);
+
 		return r;
 	}
 
@@ -819,4 +819,20 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	public void setUnregEnabled(boolean bool) {
 		btnUnregister.setEnabled(bool);
 	}
+
+	public Athlete getLoadedAthlete() {
+		Athlete ret = new Athlete();
+		if (athleteTable.getSelectedRow() != -1)
+			ret = athleteTableModel.getAthlete(athleteTable.getSelectedRow());
+		return ret;
+	}
+
+	public Registration getLoadedRegistration() {
+		Registration ret = new Registration();
+		if (registrationTable.getSelectedRow() != -1)
+			ret = registrationTableModel.getRegistration(registrationTable
+					.getSelectedRow());
+		return ret;
+	}
+
 }
