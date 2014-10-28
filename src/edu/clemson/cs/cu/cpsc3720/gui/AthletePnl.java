@@ -16,6 +16,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -37,7 +38,6 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
-import javax.swing.ListSelectionModel;
 
 /**
  * <h1>Athlete Panel</h1>
@@ -606,7 +606,9 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		}
 
 		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
-		String teacherRef = teacher.getDbId();
+		String teacherRef = null;
+		if (teacher != null)
+			teacherRef = teacher.getDbId();
 
 		String firstName = athleteFirstNameTextBox.getText();
 
@@ -736,6 +738,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	/**
 	 * Method clearPanel.
 	 */
+	@Override
 	public void clearPanel() {
 		athleteTable.clearSelection();
 		// unfocuses table cell by focusing on something else

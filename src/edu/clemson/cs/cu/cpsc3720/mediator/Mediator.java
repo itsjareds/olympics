@@ -213,23 +213,13 @@ public class Mediator implements MediatorInterface {
 			AthletePnl apl = (AthletePnl) panel;
 			Athlete a = apl.getAthlete();
 
-			if (a.getFirstName().trim().length() > 0
-					&& a.getFirstName().trim().length() > 0
-					&& a.getGender().trim().length() >= 1
-					&& a.getAge().toString().length() >= 1
-					&& a.getSchoolRef().trim().length() >= 1
-					&& a.getTeacherRef().trim().length() >= 1
-					&& a.getRegRefs().size() <= 2) {
-
-				try {
-					mac.saveAthlete(apl.getAthlete());
-					apl.updateTables();
-					apl.clearPanel();
-				} catch (InvalidObjectException e) {
-					JOptionPane.showMessageDialog(null,
-							"Error saving athlete: " + e.getMessage());
-
-				}
+			try {
+				mac.saveAthlete(apl.getAthlete());
+				apl.updateTables();
+				apl.clearPanel();
+			} catch (InvalidObjectException e) {
+				JOptionPane.showMessageDialog(null, "Error saving athlete: "
+						+ e.getMessage());
 			}
 
 		} else if (panel.getName().equals("EventPanel")) {
