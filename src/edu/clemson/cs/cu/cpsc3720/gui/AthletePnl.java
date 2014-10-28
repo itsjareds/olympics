@@ -305,7 +305,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 
 			// age combo box
 			ArrayList<Integer> ages = new ArrayList<>();
-			for (int i = 8; i < 100; i++) {
+			for (int i = 6; i < 100; i++) {
 				Integer val = new Integer(i);
 				ages.add(val);
 			}
