@@ -73,6 +73,15 @@ public class AdminMainFrame extends JFrame {
 		JMenuItem mntmGenerateHeatSheets = new JMenuItem("Heat Sheets");
 		mnGenerate.add(mntmGenerateHeatSheets);
 
+		JMenu mnRegister = new JMenu("Registration");
+		menuBar.add(mnRegister);
+
+		JMenuItem mntmBeginRegistration = new JMenuItem("Begin Registration");
+		mnRegister.add(mntmBeginRegistration);
+
+		JMenuItem mntmEndRegistration = new JMenuItem("End Registration");
+		mnRegister.add(mntmEndRegistration);
+
 		JMenu mnAbout = new JMenu("Help");
 		menuBar.add(mnAbout);
 
