@@ -59,7 +59,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private final JTable registrationTable;
 	private final Mediator mediator;
 	private final JTable athleteTable;
-	private double dividerLocation;
 	private JComboBox<Integer> ageComboBox;
 	private JComboBox<String> genderComboBox;
 	private JComboBox<Teacher> groupLeaderComboBox;
@@ -80,12 +79,10 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private JScrollPane informationScrollPane;
 	private JPanel panel;
 	private JScrollPane eventsScrollPane;
-	private JScrollPane heatsScrollPane;
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<School> schoolList;
 	private ArrayList<Event> eventList;
 	private ArrayList<Registration> associatedRegistrations;
-	private Athlete loadedAthlete;
 	private ClearButton clearButton;
 
 	/**
@@ -114,7 +111,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		{
 			splitPane = new JSplitPane();
 			splitPane.setDividerSize(1);
-			dividerLocation = 0.8;
 			splitPane.setDividerLocation(250);
 			{
 				athleteScrollPane = new JScrollPane();
@@ -648,7 +644,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 
 	/**
 	 * Method getRegistration.
-	 * @return Registration
 	 * @return Registration
 	 */
 	public Registration getRegistration() {
