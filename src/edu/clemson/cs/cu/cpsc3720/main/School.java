@@ -1,6 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -84,15 +83,6 @@ public class School extends DatabaseObject implements Comparable<School> {
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete
-	}
-
-	@Override
-	public void copy(DatabaseSerializable o) {
-		if (o instanceof School) {
-			School s = (School) o;
-
-			this.setSchoolName(s.getSchoolName());
-		}
 	}
 
 }

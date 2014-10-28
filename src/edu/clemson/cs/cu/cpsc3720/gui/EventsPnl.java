@@ -579,13 +579,6 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getEvent. @return Event
 	 */
 	public Event getEvent() {
-		Event e = new Event();
-
-		if (loadedEvent != null)
-			e.setDbId(loadedEvent.getDbId());
-
-		e.copy(loadedEvent);
-
 		String eventCode = eventCodeTextBox.getText();
 		String eventName = eventNameTextBox.getText();
 		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
@@ -617,14 +610,13 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				}
 			}
 		}
-		e.setEventCode(eventCode);
-		e.setEventName(eventName);
-		e.setScoreUnit(scoreUnit);
-		e.setScoreMin(scoreMin);
-		e.setScoreMax(scoreMax);
-		e.setSortSeq(sortSeq);
-
-		return e;
+		loadedEvent.setEventCode(eventCode);
+		loadedEvent.setEventName(eventName);
+		loadedEvent.setScoreUnit(scoreUnit);
+		loadedEvent.setScoreMin(scoreMin);
+		loadedEvent.setScoreMax(scoreMax);
+		loadedEvent.setSortSeq(sortSeq);
+		return loadedEvent;
 	}
 
 	/**
@@ -661,13 +653,6 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getHeat. @return Heat
 	 */
 	public Heat getHeat() {
-		Heat h = new Heat();
-
-		if (loadedHeat != null)
-			h.setDbId(loadedHeat.getDbId());
-
-		h.copy(loadedHeat);
-
 		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
 		Integer maxAge = (Integer) maxAgeCombo.getSelectedItem();
 		String gender = (String) genderCombo.getSelectedItem();
@@ -675,18 +660,17 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				(Integer) hourCombo.getSelectedItem(),
 				(Integer) minCombo.getSelectedItem(), 0);
 		Integer division = (Integer) divisionCombo.getSelectedItem();
-		h.setMinAge(minAge);
-		h.setMaxAge(maxAge);
+		loadedHeat.setMinAge(minAge);
+		loadedHeat.setMaxAge(maxAge);
 		if (gender.equals("Male"))
-			h.setGender("M");
+			loadedHeat.setGender("M");
 		else if (gender.equals("Female"))
-			h.setGender("F");
+			loadedHeat.setGender("F");
 		else if (gender.equals("Both"))
-			h.setGender("B");
-		h.setTime(time);
-		h.setNumHeats(division);
-
-		return h;
+			loadedHeat.setGender("B");
+		loadedHeat.setTime(time);
+		loadedHeat.setNumHeats(division);
+		return loadedHeat;
 	}
 
 	/**

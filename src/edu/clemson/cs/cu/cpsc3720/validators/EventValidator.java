@@ -1,6 +1,5 @@
 package edu.clemson.cs.cu.cpsc3720.validators;
 
-import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
 import edu.clemson.cs.cu.cpsc3720.main.DatabaseObject;
 import edu.clemson.cs.cu.cpsc3720.main.Event;
 
@@ -25,13 +24,6 @@ public class EventValidator extends DatabaseObjectValidator {
 		// Validate eventCode
 		eventCode = eventCode.trim();
 		ret &= (!eventCode.equals(""));
-		for (Event event : DaoRepository.getEventsDao().objects) {
-			if (eventCode.equals(event.getEventCode().trim())
-					&& !event.getDbId().equals(e.getDbId())) {
-				ret = false;
-				break;
-			}
-		}
 		if (!ret)
 			throw new InvalidObjectException("Invalid event code");
 
@@ -58,4 +50,5 @@ public class EventValidator extends DatabaseObjectValidator {
 
 		return ret;
 	}
+
 }

@@ -162,8 +162,6 @@ public class DatabaseAccessObject<T extends DatabaseSerializable> {
 			T cached = searchCache(t.getDbId());
 			if (cached == null)
 				objects.add(t);
-			else
-				cached.copy(t);
 		}
 
 		db.close();

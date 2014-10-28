@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainAthleteController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
-import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
 
@@ -55,10 +54,6 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		this.gender = gender;
 		this.schoolRef = schoolRef;
 		this.regRefs = regRefs;
-	}
-
-	public Athlete() {
-		super();
 	}
 
 	public void loadRefs() {
@@ -355,20 +350,5 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 
 		setSchoolRef(getSchoolRef());
 		setTeacherRef(getTeacherRef());
-	}
-
-	@Override
-	public void copy(DatabaseSerializable o) {
-		if (o instanceof Athlete) {
-			Athlete a = (Athlete) o;
-
-			this.setTeacherRef(a.getTeacherRef());
-			this.setFirstName(a.getFirstName());
-			this.setLastName(a.getLastName());
-			this.setAge(a.getAge());
-			this.setGender(a.getGender());
-			this.setSchool(a.getSchool());
-			this.setRegRefs(a.getRegRefs());
-		}
 	}
 }

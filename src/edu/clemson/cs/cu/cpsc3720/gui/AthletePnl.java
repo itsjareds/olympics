@@ -16,7 +16,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -38,6 +37,7 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.AdminPanelInterface;
 import edu.clemson.cs.cu.cpsc3720.mediator.Mediator;
 import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
+import javax.swing.ListSelectionModel;
 
 /**
  * <h1>Athlete Panel</h1>
@@ -47,7 +47,6 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
- * @random
  */
 public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private static final long serialVersionUID = -3647303070052872171L;
@@ -60,6 +59,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private final JTable registrationTable;
 	private final Mediator mediator;
 	private final JTable athleteTable;
+	private double dividerLocation;
 	private JComboBox<Integer> ageComboBox;
 	private JComboBox<String> genderComboBox;
 	private JComboBox<Teacher> groupLeaderComboBox;
@@ -80,10 +80,12 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private JScrollPane informationScrollPane;
 	private JPanel panel;
 	private JScrollPane eventsScrollPane;
+	private JScrollPane heatsScrollPane;
 	private ArrayList<Teacher> teacherList;
 	private ArrayList<School> schoolList;
 	private ArrayList<Event> eventList;
 	private ArrayList<Registration> associatedRegistrations;
+	private Athlete loadedAthlete;
 	private ClearButton clearButton;
 
 	/**
@@ -112,6 +114,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		{
 			splitPane = new JSplitPane();
 			splitPane.setDividerSize(1);
+			dividerLocation = 0.8;
 			splitPane.setDividerLocation(250);
 			{
 				athleteScrollPane = new JScrollPane();
@@ -593,17 +596,17 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	 * @return Athlete
 	 */
 	public Athlete getAthlete() {
-		Athlete athlete = new Athlete();
+		Athlete athlete = null;
 
 		if (athleteTable.getSelectedRow() != -1) {
-			athlete.setDbId(athleteTableModel.getAthlete(
-					athleteTable.getSelectedRow()).getDbId());
+			athlete = athleteTableModel.getAthlete(athleteTable
+					.getSelectedRow());
+		} else {
+			athlete = new Athlete(null, "", "", null, "", "", null);
 		}
 
 		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
-		String teacherRef = null;
-		if (teacher != null)
-			teacherRef = teacher.getDbId();
+		String teacherRef = teacher.getDbId();
 
 		String firstName = athleteFirstNameTextBox.getText();
 
@@ -645,6 +648,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 
 	/**
 	 * Method getRegistration.
+	 * @return Registration
 	 * @return Registration
 	 */
 	public Registration getRegistration() {
@@ -732,7 +736,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	/**
 	 * Method clearPanel.
 	 */
-	@Override
 	public void clearPanel() {
 		athleteTable.clearSelection();
 		// unfocuses table cell by focusing on something else

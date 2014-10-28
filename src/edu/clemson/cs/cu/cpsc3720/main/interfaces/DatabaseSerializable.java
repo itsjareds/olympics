@@ -32,13 +32,4 @@ public interface DatabaseSerializable {
 	 * whenever you deserialize using Gson.
 	 */
 	public void initialize();
-
-	/**
-	 * Method copyFields
-	 * <p>
-	 * This method copies all fields from the other DatabaseSerializable object.
-	 * Subclasses must implement this method for their own fields.
-	 * @param o DatabaseSerializable
-	 */
-	public void copy(DatabaseSerializable o);
 }
