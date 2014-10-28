@@ -57,6 +57,10 @@ public class Athlete extends DatabaseObject implements Comparable<Athlete> {
 		this.regRefs = regRefs;
 	}
 
+	public Athlete() {
+		super();
+	}
+
 	public void loadRefs() {
 		loadTeacher();
 		loadSchool();

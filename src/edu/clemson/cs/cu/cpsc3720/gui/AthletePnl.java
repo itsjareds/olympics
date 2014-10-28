@@ -596,13 +596,11 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	 * @return Athlete
 	 */
 	public Athlete getAthlete() {
-		Athlete athlete = null;
+		Athlete athlete = new Athlete();
 
 		if (athleteTable.getSelectedRow() != -1) {
-			athlete = athleteTableModel.getAthlete(athleteTable
-					.getSelectedRow());
-		} else {
-			athlete = new Athlete(null, "", "", null, "", "", null);
+			athlete.setDbId(athleteTableModel.getAthlete(
+					athleteTable.getSelectedRow()).getDbId());
 		}
 
 		Teacher teacher = (Teacher) groupLeaderComboBox.getSelectedItem();
