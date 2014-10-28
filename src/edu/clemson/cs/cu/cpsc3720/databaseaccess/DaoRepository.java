@@ -115,6 +115,12 @@ public class DaoRepository {
 		return teachersDao;
 	}
 
+	/**
+	 * Method runHooks.
+	 * <p>
+	 * Triggers runHooks method on DeletionObserver objects.
+	 * @see edu.clemson.cs.cu.cpsc3720.interfaces.DeletionObserver#runHooks()
+	 */
 	public static void runHooks() {
 		for (Athlete a : DaoRepository.getAthletesDao().objects)
 			a.runHooks();

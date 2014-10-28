@@ -8,6 +8,13 @@ import edu.clemson.cs.cu.cpsc3720.main.Registration;
 
 public class RegistrationValidator extends DatabaseObjectValidator {
 
+	/**
+	 * Method isValid.
+	 * @param r Registration
+	 * @return bool Boolean
+	 * @throws InvalidObjectException
+	 * @see edu.clemson.cs.cu.cpsc3720.DatabaseObjectValidator#isValid(DatabaseObject)
+	 */
 	public boolean isValid(Registration r) throws InvalidObjectException {
 		boolean ret = isValid((DatabaseObject) r);
 

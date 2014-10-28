@@ -86,6 +86,11 @@ public class School extends DatabaseObject implements Comparable<School> {
 		// No references to delete
 	}
 
+	/**
+	 * Method copy.
+	 * @param o DatabaseSerializable
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#copy(DatabaseSerializable)
+	 */
 	@Override
 	public void copy(DatabaseSerializable o) {
 		if (o instanceof School) {

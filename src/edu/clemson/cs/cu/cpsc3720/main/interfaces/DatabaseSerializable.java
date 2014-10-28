@@ -34,7 +34,7 @@ public interface DatabaseSerializable {
 	public void initialize();
 
 	/**
-	 * Method copyFields
+	 * Method copy.
 	 * <p>
 	 * This method copies all fields from the other DatabaseSerializable object.
 	 * Subclasses must implement this method for their own fields.

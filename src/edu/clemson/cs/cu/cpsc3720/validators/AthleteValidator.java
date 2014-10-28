@@ -11,6 +11,13 @@ import edu.clemson.cs.cu.cpsc3720.main.Teacher;
 
 public class AthleteValidator extends DatabaseObjectValidator {
 
+	/**
+	 * Method isValid.
+	 * @param a Athlete
+	 * @return bool Boolean
+	 * @throws InvalidObjectException
+	 * @see edu.clemson.cs.cu.cpsc3720.DatabaseObjectValidator#isValid(DatabaseObject)
+	 */
 	public boolean isValid(Athlete a) throws InvalidObjectException {
 		boolean ret = isValid((DatabaseObject) a);
 

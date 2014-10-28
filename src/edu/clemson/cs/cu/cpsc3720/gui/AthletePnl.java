@@ -863,6 +863,13 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		btnUnregister.setEnabled(bool);
 	}
 
+	/**
+	 * Method getLoadedAthlete
+	 * @return athlete Athlete
+	 *         <p>
+	 *         Returns the selected athlete from the panel. If no athlete is
+	 *         selected, a new Athlete instance will be instantiated.
+	 */
 	public Athlete getLoadedAthlete() {
 		Athlete ret = new Athlete();
 		if (athleteTable.getSelectedRow() != -1)
@@ -870,6 +877,13 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 		return ret;
 	}
 
+	/**
+	 * Method getLoadedRegistration
+	 * @return registration Registration
+	 *         <p>
+	 *         Returns the selected registration from the panel. If none is
+	 *         selected, a new Registration instance will be instantiated.
+	 */
 	public Registration getLoadedRegistration() {
 		Registration ret = new Registration();
 		if (registrationTable.getSelectedRow() != -1)

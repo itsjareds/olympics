@@ -22,5 +22,10 @@ public interface DeletionSubject {
 	 */
 	public void unregisterDeletionObserver(DeletionObserver observer);
 
+	/**
+	 * Method notifyDelete.
+	 * <p>
+	 * Calls hook functions on DeletionObservers
+	 */
 	public void notifyDelete();
 }

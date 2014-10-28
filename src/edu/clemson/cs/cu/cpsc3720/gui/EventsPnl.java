@@ -730,10 +730,24 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 		setEvent(null);
 	}
 
+	/**
+	 * Method getLoadedEvent.
+	 * @return event Event
+	 *         <p>
+	 *         Returns the selected athlete from the panel. If no athlete is
+	 *         selected, a new Athlete instance will be instantiated.
+	 */
 	public Event getLoadedEvent() {
 		return loadedEvent;
 	}
 
+	/**
+	 * Method getLoadedHeat.
+	 * @return heat Heat
+	 *         <p>
+	 *         Returns the selected heat from the panel. If no heat is selected,
+	 *         a new Heat instance will be instantiated.
+	 */
 	public Heat getLoadedHeat() {
 		return loadedHeat;
 	}

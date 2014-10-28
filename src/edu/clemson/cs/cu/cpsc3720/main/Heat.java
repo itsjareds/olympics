@@ -286,6 +286,11 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 		return retVal;
 	}
 
+	/**
+	 * Method copy.
+	 * @param o DatabaseSerializable
+	 * @see edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable#copy(DatabaseSerializable)
+	 */
 	@Override
 	public void copy(DatabaseSerializable o) {
 		if (o instanceof Heat) {

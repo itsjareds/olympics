@@ -7,6 +7,13 @@ import edu.clemson.cs.cu.cpsc3720.main.Heat;
 
 public class HeatValidator extends DatabaseObjectValidator {
 
+	/**
+	 * Method isValid.
+	 * @param h Heat
+	 * @return bool Boolean
+	 * @throws InvalidObjectException
+	 * @see edu.clemson.cs.cu.cpsc3720.DatabaseObjectValidator#isValid(DatabaseObject)
+	 */
 	public boolean isValid(Heat h) throws InvalidObjectException {
 		boolean ret = isValid((DatabaseObject) h);
 

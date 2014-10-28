@@ -6,6 +6,13 @@ import edu.clemson.cs.cu.cpsc3720.main.Event;
 
 public class EventValidator extends DatabaseObjectValidator {
 
+	/**
+	 * Method isValid.
+	 * @param e Event
+	 * @return bool Boolean
+	 * @throws InvalidObjectException
+	 * @see edu.clemson.cs.cu.cpsc3720.DatabaseObjectValidator#isValid(DatabaseObject)
+	 */
 	public boolean isValid(Event e) throws InvalidObjectException {
 		boolean ret = isValid((DatabaseObject) e);
 
