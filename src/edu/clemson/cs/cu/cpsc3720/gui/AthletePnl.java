@@ -47,6 +47,7 @@ import edu.clemson.cs.cu.cpsc3720.mediator.MediatorActionListener;
  * @author shiz
  * @author klinge2
  * @version $Revision: 1.0 $
+ * @random
  */
 public class AthletePnl extends JPanel implements AdminPanelInterface {
 	private static final long serialVersionUID = -3647303070052872171L;
