@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainHeatController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -28,6 +29,13 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 	private Integer numHeats;
 
 	/**
+	 * Empty constructor for Heat.
+	 */
+	public Heat() {
+		super();
+	}
+
+	/**
 	 * Constructor for Heat.
 	 * @param eventRef String
 	 * @param gender String
@@ -37,7 +45,7 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 	 * @param numHeats int
 	 */
 	public Heat(String eventRef, String gender, Integer minAge, Integer maxAge,
-			String time, int numHeats) {
+			String time, Integer numHeats) {
 		super();
 		this.eventRef = eventRef;
 		this.gender = gender;
@@ -277,4 +285,19 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 			retVal = this.getDivision().compareTo(h.getDivision());
 		return retVal;
 	}
+
+	@Override
+	public void copy(DatabaseSerializable o) {
+		if (o instanceof Heat) {
+			Heat h = (Heat) o;
+
+			this.setEventRef(h.getEventRef());
+			this.setGender(h.getGender());
+			this.setMinAge(h.getMinAge());
+			this.setMaxAge(h.getMaxAge());
+			this.setTime(h.getTime());
+			this.setNumHeats(h.getDivision());
+		}
+	}
+
 }

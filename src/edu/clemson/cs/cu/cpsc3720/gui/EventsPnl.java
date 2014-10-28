@@ -579,6 +579,10 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getEvent. @return Event
 	 */
 	public Event getEvent() {
+		Event e = new Event();
+		e.copy(loadedEvent);
+		e.setDbId(loadedEvent.getDbId());
+
 		String eventCode = eventCodeTextBox.getText();
 		String eventName = eventNameTextBox.getText();
 		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
@@ -610,13 +614,13 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				}
 			}
 		}
-		loadedEvent.setEventCode(eventCode);
-		loadedEvent.setEventName(eventName);
-		loadedEvent.setScoreUnit(scoreUnit);
-		loadedEvent.setScoreMin(scoreMin);
-		loadedEvent.setScoreMax(scoreMax);
-		loadedEvent.setSortSeq(sortSeq);
-		return loadedEvent;
+		e.setEventCode(eventCode);
+		e.setEventName(eventName);
+		e.setScoreUnit(scoreUnit);
+		e.setScoreMin(scoreMin);
+		e.setScoreMax(scoreMax);
+		e.setSortSeq(sortSeq);
+		return e;
 	}
 
 	/**
@@ -653,6 +657,10 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getHeat. @return Heat
 	 */
 	public Heat getHeat() {
+		Heat h = new Heat();
+		h.copy(loadedHeat);
+		h.setDbId(loadedHeat.getDbId());
+
 		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
 		Integer maxAge = (Integer) maxAgeCombo.getSelectedItem();
 		String gender = (String) genderCombo.getSelectedItem();
@@ -660,17 +668,19 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				(Integer) hourCombo.getSelectedItem(),
 				(Integer) minCombo.getSelectedItem(), 0);
 		Integer division = (Integer) divisionCombo.getSelectedItem();
-		loadedHeat.setMinAge(minAge);
-		loadedHeat.setMaxAge(maxAge);
+
+		h.setMinAge(minAge);
+		h.setMaxAge(maxAge);
 		if (gender.equals("Male"))
-			loadedHeat.setGender("M");
+			h.setGender("M");
 		else if (gender.equals("Female"))
-			loadedHeat.setGender("F");
+			h.setGender("F");
 		else if (gender.equals("Both"))
-			loadedHeat.setGender("B");
-		loadedHeat.setTime(time);
-		loadedHeat.setNumHeats(division);
-		return loadedHeat;
+			h.setGender("B");
+		h.setTime(time);
+		h.setNumHeats(division);
+
+		return h;
 	}
 
 	/**
@@ -709,6 +719,14 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 		// unfocuses table cell by focusing on something else
 		newBtn.requestFocusInWindow();
 		setEvent(null);
+	}
+
+	public Event getLoadedEvent() {
+		return loadedEvent;
+	}
+
+	public Heat getLoadedHeat() {
+		return loadedHeat;
 	}
 
 }

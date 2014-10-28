@@ -2,6 +2,7 @@ package edu.clemson.cs.cu.cpsc3720.main;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.RegisterAthleteController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -181,6 +182,17 @@ public class Registration extends DatabaseObject implements
 	public void runHooks() {
 		setEventRef(getEventRef());
 		setAthleteRef(getAthleteRef());
+	}
+
+	@Override
+	public void copy(DatabaseSerializable o) {
+		if (o instanceof Registration) {
+			Registration r = (Registration) o;
+
+			this.setEventRef(r.getEventRef());
+			this.setAthleteRef(r.getAthleteRef());
+			this.setScore(r.getScore());
+		}
 	}
 
 }

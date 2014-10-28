@@ -23,9 +23,13 @@ import edu.clemson.cs.cu.cpsc3720.gui.components.SaveButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.SearchButton;
 import edu.clemson.cs.cu.cpsc3720.gui.components.UnregisterButton;
 import edu.clemson.cs.cu.cpsc3720.main.Athlete;
+import edu.clemson.cs.cu.cpsc3720.main.Event;
+import edu.clemson.cs.cu.cpsc3720.main.Heat;
 import edu.clemson.cs.cu.cpsc3720.main.Registration;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.MediatorInterface;
 import edu.clemson.cs.cu.cpsc3720.validators.DatabaseObjectValidator.InvalidObjectException;
+import edu.clemson.cs.cu.cpsc3720.validators.EventValidator;
+import edu.clemson.cs.cu.cpsc3720.validators.HeatValidator;
 
 /**
  * <h1>Mediator</h1>
@@ -158,7 +162,7 @@ public class Mediator implements MediatorInterface {
 		} else if (panel.getName().equals("EventPanel")) {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
-			mec.deleteEvent(epl.getEvent());
+			mec.deleteEvent(epl.getLoadedEvent());
 			epl.getEventTableModel().update();
 			epl.setEvent(null);
 		}
@@ -227,9 +231,16 @@ public class Mediator implements MediatorInterface {
 			MaintainEventController mec = new MaintainEventController();
 			EventsPnl epl = (EventsPnl) panel;
 			try {
-				mec.saveEvent(epl.getEvent());
-				epl.getEventTableModel().update();
-				epl.setEvent(null);
+				Event formEvent = epl.getEvent();
+				Event loadedEvent = epl.getLoadedEvent();
+
+				EventValidator validator = new EventValidator();
+				if (validator.isValid(formEvent)) {
+					loadedEvent.copy(formEvent);
+					mec.saveEvent(loadedEvent);
+					epl.getEventTableModel().update();
+					epl.setEvent(null);
+				}
 			} catch (InvalidObjectException e) {
 				JOptionPane.showMessageDialog(null,
 						"Error saving event: " + e.getMessage());
@@ -295,9 +306,16 @@ public class Mediator implements MediatorInterface {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
 			try {
-				mhc.addHeat(epl.getHeat());
-				epl.loadHeats(epl.getEvent());
-				epl.setHeat(null);
+				Heat formHeat = epl.getHeat();
+				Heat loadedHeat = epl.getLoadedHeat();
+
+				HeatValidator validator = new HeatValidator();
+				if (validator.isValid(formHeat)) {
+					loadedHeat.copy(formHeat);
+					mhc.addHeat(loadedHeat);
+					epl.loadHeats(epl.getLoadedEvent());
+					epl.setHeat(null);
+				}
 			} catch (InvalidObjectException e) {
 				JOptionPane.showMessageDialog(null,
 						"Error adding heat: " + e.getMessage());
@@ -317,8 +335,8 @@ public class Mediator implements MediatorInterface {
 		if (panel.getName().equals("EventPanel")) {
 			MaintainHeatController mhc = new MaintainHeatController();
 			EventsPnl epl = (EventsPnl) panel;
-			mhc.removeHeat(epl.getHeat());
-			epl.loadHeats(epl.getEvent());
+			mhc.removeHeat(epl.getLoadedHeat());
+			epl.loadHeats(epl.getLoadedEvent());
 			epl.setHeat(null);
 		}
 	}
