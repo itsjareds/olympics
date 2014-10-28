@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import edu.clemson.cs.cu.cpsc3720.controllers.MaintainHeatController;
 import edu.clemson.cs.cu.cpsc3720.databaseaccess.DaoRepository;
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -277,4 +278,19 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 			retVal = this.getDivision().compareTo(h.getDivision());
 		return retVal;
 	}
+
+	@Override
+	public void copy(DatabaseSerializable o) {
+		if (o instanceof Heat) {
+			Heat h = (Heat) o;
+
+			this.setEventRef(h.getEventRef());
+			this.setGender(h.getGender());
+			this.setMinAge(h.getMinAge());
+			this.setMaxAge(h.getMaxAge());
+			this.setTime(h.getTime());
+			this.setNumHeats(h.getDivision());
+		}
+	}
+
 }

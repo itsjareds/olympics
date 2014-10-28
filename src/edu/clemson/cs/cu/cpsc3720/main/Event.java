@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -212,5 +213,19 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete
+	}
+
+	@Override
+	public void copy(DatabaseSerializable o) {
+		if (o instanceof Event) {
+			Event e = (Event) o;
+
+			this.setEventCode(e.getEventCode());
+			this.setEventName(e.getEventName());
+			this.setScoreUnit(e.getScoreUnit());
+			this.setScoreMin(e.getScoreMin());
+			this.setScoreMax(e.getScoreMax());
+			this.setSortSeq(e.getSortSeq());
+		}
 	}
 }

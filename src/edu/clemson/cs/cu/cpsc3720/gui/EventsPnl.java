@@ -579,44 +579,53 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getEvent. @return Event
 	 */
 	public Event getEvent() {
-		String eventCode = eventCodeTextBox.getText();
-		String eventName = eventNameTextBox.getText();
-		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
-		Integer scoreMin = 0;
-		Integer scoreMax = 0;
-		Integer sortSeq = 0;
-		if (scoreUnitCombo.getSelectedItem() != null) {
-			if (scoreUnit.equals("D")) {
-				if (minFtCombo.getSelectedItem() != null
-						&& minInCombo.getSelectedItem() != null) {
-					scoreMin = ((Integer) minFtCombo.getSelectedItem()) * 100
-							+ (Integer) minInCombo.getSelectedItem();
-				}
-				if (maxFtCombo.getSelectedItem() != null
-						&& maxInCombo.getSelectedItem() != null) {
-					scoreMax = ((Integer) maxFtCombo.getSelectedItem()) * 100
-							+ (Integer) maxInCombo.getSelectedItem();
-				}
-			} else if (scoreUnit.equals("T")) {
-				if (minMinCombo.getSelectedItem() != null
-						&& minSecCombo.getSelectedItem() != null) {
-					scoreMin = ((Integer) minMinCombo.getSelectedItem()) * 100
-							+ (Integer) minSecCombo.getSelectedItem();
-				}
-				if (maxMinCombo.getSelectedItem() != null
-						&& maxSecCombo.getSelectedItem() != null) {
-					scoreMax = ((Integer) maxMinCombo.getSelectedItem()) * 100
-							+ (Integer) maxSecCombo.getSelectedItem();
+		Event e = new Event(null, null, null, -1, -1, -1);
+		if (loadedEvent != null) {
+			e = new Event(loadedEvent.getEventCode(),
+					loadedEvent.getEventName(), loadedEvent.getScoreUnit(),
+					loadedEvent.getScoreMin(), loadedEvent.getScoreMax(),
+					loadedEvent.getSortSeq());
+
+			e.setDbId(loadedEvent.getDbId());
+			String eventCode = eventCodeTextBox.getText();
+			String eventName = eventNameTextBox.getText();
+			String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
+			Integer scoreMin = 0;
+			Integer scoreMax = 0;
+			Integer sortSeq = 0;
+			if (scoreUnitCombo.getSelectedItem() != null) {
+				if (scoreUnit.equals("D")) {
+					if (minFtCombo.getSelectedItem() != null
+							&& minInCombo.getSelectedItem() != null) {
+						scoreMin = ((Integer) minFtCombo.getSelectedItem())
+								* 100 + (Integer) minInCombo.getSelectedItem();
+					}
+					if (maxFtCombo.getSelectedItem() != null
+							&& maxInCombo.getSelectedItem() != null) {
+						scoreMax = ((Integer) maxFtCombo.getSelectedItem())
+								* 100 + (Integer) maxInCombo.getSelectedItem();
+					}
+				} else if (scoreUnit.equals("T")) {
+					if (minMinCombo.getSelectedItem() != null
+							&& minSecCombo.getSelectedItem() != null) {
+						scoreMin = ((Integer) minMinCombo.getSelectedItem())
+								* 100 + (Integer) minSecCombo.getSelectedItem();
+					}
+					if (maxMinCombo.getSelectedItem() != null
+							&& maxSecCombo.getSelectedItem() != null) {
+						scoreMax = ((Integer) maxMinCombo.getSelectedItem())
+								* 100 + (Integer) maxSecCombo.getSelectedItem();
+					}
 				}
 			}
+			e.setEventCode(eventCode);
+			e.setEventName(eventName);
+			e.setScoreUnit(scoreUnit);
+			e.setScoreMin(scoreMin);
+			e.setScoreMax(scoreMax);
+			e.setSortSeq(sortSeq);
 		}
-		loadedEvent.setEventCode(eventCode);
-		loadedEvent.setEventName(eventName);
-		loadedEvent.setScoreUnit(scoreUnit);
-		loadedEvent.setScoreMin(scoreMin);
-		loadedEvent.setScoreMax(scoreMax);
-		loadedEvent.setSortSeq(sortSeq);
-		return loadedEvent;
+		return e;
 	}
 
 	/**

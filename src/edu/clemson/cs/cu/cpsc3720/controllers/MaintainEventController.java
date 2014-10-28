@@ -25,8 +25,10 @@ public class MaintainEventController {
 	 */
 	public void saveEvent(Event e) throws InvalidObjectException {
 		EventValidator validator = new EventValidator();
-		if (validator.isValid(e))
+		if (validator.isValid(e)) {
+			System.out.println("is valid!");
 			DaoRepository.getEventsDao().save(e);
+		}
 	}
 
 	/**

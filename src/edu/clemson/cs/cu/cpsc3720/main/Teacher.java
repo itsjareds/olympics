@@ -1,5 +1,6 @@
 package edu.clemson.cs.cu.cpsc3720.main;
 
+import edu.clemson.cs.cu.cpsc3720.main.interfaces.DatabaseSerializable;
 import edu.clemson.cs.cu.cpsc3720.main.interfaces.DeletionSubject;
 
 /**
@@ -120,5 +121,16 @@ public class Teacher extends DatabaseObject implements Comparable<Teacher> {
 	@Override
 	public void deleteReference(DeletionSubject subject) {
 		// No references to delete
+	}
+
+	@Override
+	public void copy(DatabaseSerializable o) {
+		if (o instanceof Teacher) {
+			Teacher t = (Teacher) o;
+
+			this.setFirstName(t.getFirstName());
+			this.setLastName(t.getLastName());
+			this.setGroupCode(t.getGroupCode());
+		}
 	}
 }
