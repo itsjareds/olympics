@@ -23,6 +23,13 @@ public class Event extends DatabaseObject implements Comparable<Event> {
 	private Integer sortSeq;
 
 	/**
+	 * Empty constructor for Event.
+	 */
+	public Event() {
+		super();
+	}
+
+	/**
 	 * Constructor for Event.
 	 * @param eventCode String
 	 * @param eventName String

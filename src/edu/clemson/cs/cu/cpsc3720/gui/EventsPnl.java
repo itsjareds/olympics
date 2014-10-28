@@ -579,52 +579,51 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getEvent. @return Event
 	 */
 	public Event getEvent() {
-		Event e = new Event(null, null, null, -1, -1, -1);
-		if (loadedEvent != null) {
-			e = new Event(loadedEvent.getEventCode(),
-					loadedEvent.getEventName(), loadedEvent.getScoreUnit(),
-					loadedEvent.getScoreMin(), loadedEvent.getScoreMax(),
-					loadedEvent.getSortSeq());
+		Event e = new Event();
 
+		if (loadedEvent != null)
 			e.setDbId(loadedEvent.getDbId());
-			String eventCode = eventCodeTextBox.getText();
-			String eventName = eventNameTextBox.getText();
-			String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
-			Integer scoreMin = 0;
-			Integer scoreMax = 0;
-			Integer sortSeq = 0;
-			if (scoreUnitCombo.getSelectedItem() != null) {
-				if (scoreUnit.equals("D")) {
-					if (minFtCombo.getSelectedItem() != null
-							&& minInCombo.getSelectedItem() != null) {
-						scoreMin = ((Integer) minFtCombo.getSelectedItem())
-								* 100 + (Integer) minInCombo.getSelectedItem();
-					}
-					if (maxFtCombo.getSelectedItem() != null
-							&& maxInCombo.getSelectedItem() != null) {
-						scoreMax = ((Integer) maxFtCombo.getSelectedItem())
-								* 100 + (Integer) maxInCombo.getSelectedItem();
-					}
-				} else if (scoreUnit.equals("T")) {
-					if (minMinCombo.getSelectedItem() != null
-							&& minSecCombo.getSelectedItem() != null) {
-						scoreMin = ((Integer) minMinCombo.getSelectedItem())
-								* 100 + (Integer) minSecCombo.getSelectedItem();
-					}
-					if (maxMinCombo.getSelectedItem() != null
-							&& maxSecCombo.getSelectedItem() != null) {
-						scoreMax = ((Integer) maxMinCombo.getSelectedItem())
-								* 100 + (Integer) maxSecCombo.getSelectedItem();
-					}
+
+		e.copy(loadedEvent);
+
+		String eventCode = eventCodeTextBox.getText();
+		String eventName = eventNameTextBox.getText();
+		String scoreUnit = (String) scoreUnitCombo.getSelectedItem();
+		Integer scoreMin = 0;
+		Integer scoreMax = 0;
+		Integer sortSeq = 0;
+		if (scoreUnitCombo.getSelectedItem() != null) {
+			if (scoreUnit.equals("D")) {
+				if (minFtCombo.getSelectedItem() != null
+						&& minInCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) minFtCombo.getSelectedItem()) * 100
+							+ (Integer) minInCombo.getSelectedItem();
+				}
+				if (maxFtCombo.getSelectedItem() != null
+						&& maxInCombo.getSelectedItem() != null) {
+					scoreMax = ((Integer) maxFtCombo.getSelectedItem()) * 100
+							+ (Integer) maxInCombo.getSelectedItem();
+				}
+			} else if (scoreUnit.equals("T")) {
+				if (minMinCombo.getSelectedItem() != null
+						&& minSecCombo.getSelectedItem() != null) {
+					scoreMin = ((Integer) minMinCombo.getSelectedItem()) * 100
+							+ (Integer) minSecCombo.getSelectedItem();
+				}
+				if (maxMinCombo.getSelectedItem() != null
+						&& maxSecCombo.getSelectedItem() != null) {
+					scoreMax = ((Integer) maxMinCombo.getSelectedItem()) * 100
+							+ (Integer) maxSecCombo.getSelectedItem();
 				}
 			}
-			e.setEventCode(eventCode);
-			e.setEventName(eventName);
-			e.setScoreUnit(scoreUnit);
-			e.setScoreMin(scoreMin);
-			e.setScoreMax(scoreMax);
-			e.setSortSeq(sortSeq);
 		}
+		e.setEventCode(eventCode);
+		e.setEventName(eventName);
+		e.setScoreUnit(scoreUnit);
+		e.setScoreMin(scoreMin);
+		e.setScoreMax(scoreMax);
+		e.setSortSeq(sortSeq);
+
 		return e;
 	}
 
@@ -662,6 +661,13 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 	 * Method getHeat. @return Heat
 	 */
 	public Heat getHeat() {
+		Heat h = new Heat();
+
+		if (loadedHeat != null)
+			h.setDbId(loadedHeat.getDbId());
+
+		h.copy(loadedHeat);
+
 		Integer minAge = (Integer) minAgeCombo.getSelectedItem();
 		Integer maxAge = (Integer) maxAgeCombo.getSelectedItem();
 		String gender = (String) genderCombo.getSelectedItem();
@@ -669,17 +675,18 @@ public class EventsPnl extends JPanel implements AdminPanelInterface {
 				(Integer) hourCombo.getSelectedItem(),
 				(Integer) minCombo.getSelectedItem(), 0);
 		Integer division = (Integer) divisionCombo.getSelectedItem();
-		loadedHeat.setMinAge(minAge);
-		loadedHeat.setMaxAge(maxAge);
+		h.setMinAge(minAge);
+		h.setMaxAge(maxAge);
 		if (gender.equals("Male"))
-			loadedHeat.setGender("M");
+			h.setGender("M");
 		else if (gender.equals("Female"))
-			loadedHeat.setGender("F");
+			h.setGender("F");
 		else if (gender.equals("Both"))
-			loadedHeat.setGender("B");
-		loadedHeat.setTime(time);
-		loadedHeat.setNumHeats(division);
-		return loadedHeat;
+			h.setGender("B");
+		h.setTime(time);
+		h.setNumHeats(division);
+
+		return h;
 	}
 
 	/**

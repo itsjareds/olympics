@@ -29,6 +29,13 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 	private Integer numHeats;
 
 	/**
+	 * Empty constructor for Heat.
+	 */
+	public Heat() {
+		super();
+	}
+
+	/**
 	 * Constructor for Heat.
 	 * @param eventRef String
 	 * @param gender String
@@ -38,7 +45,7 @@ public class Heat extends DatabaseObject implements Comparable<Heat> {
 	 * @param numHeats int
 	 */
 	public Heat(String eventRef, String gender, Integer minAge, Integer maxAge,
-			String time, int numHeats) {
+			String time, Integer numHeats) {
 		super();
 		this.eventRef = eventRef;
 		this.gender = gender;
