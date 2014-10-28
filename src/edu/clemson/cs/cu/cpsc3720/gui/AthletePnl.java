@@ -450,10 +450,23 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 						if (athleteTable.getSelectedRow() != -1
 								&& event != null
 								&& event.getEventName() != null
-								&& event.getEventName().trim().length() != 0)
+								&& event.getEventName().trim().length() != 0) {
 							btnRegister.setEnabled(true);
-						else
+							for (int row = 0; row < registrationTable
+									.getRowCount(); row++) {
+								Registration r = registrationTableModel
+										.getRegistration(row);
+								if (r.getEvent() != null
+										&& r.getEvent().getDbId()
+												.equals(event.getDbId())) {
+									registrationTable.setRowSelectionInterval(
+											row, row);
+									break;
+								}
+							}
+						} else {
 							btnRegister.setEnabled(false);
+						}
 					}
 				}
 			});
@@ -714,12 +727,6 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			r.setDbId(loadedReg.getDbId());
 		}
 
-		if (registrationTable.getSelectedRow() == -1)
-			r = new Registration(null, null, 0);
-		else
-			r = registrationTableModel.getRegistration(registrationTable
-					.getSelectedRow());
-
 		r.setEventRef(eventRef);
 		r.setAthleteRef(athRef);
 		r.setScore(score);
@@ -734,7 +741,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	 */
 	public void setRegistration(Registration r) {
 		if (r == null) {
-			r = new Registration("", "", 0);
+			r = new Registration();
 			registrationTable.clearSelection();
 		} else {
 			int index = registrationTableModel.indexOf(r);
