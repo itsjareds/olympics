@@ -41,7 +41,15 @@ public class RegistrationValidator extends DatabaseObjectValidator {
 		if (!ret)
 			throw new InvalidObjectException("Invalid score");
 
-		ret &= (checkAthlete.getRegistrations().size() < 2);
+		for (Registration reg : checkAthlete.getRegistrations()) {
+			ret &= (!reg.getEventRef().equals(r.getEventRef()));
+			if (!ret)
+				throw new InvalidObjectException("Duplicate event registration");
+		}
+
+		Registration queryReg = DaoRepository.getRegistrationsDao().query(
+				r.getDbId());
+		ret &= (queryReg != null || checkAthlete.getRegistrations().size() < 2);
 		if (!ret)
 			throw new InvalidObjectException(
 					"Cannot excede more than 2 registrations");
