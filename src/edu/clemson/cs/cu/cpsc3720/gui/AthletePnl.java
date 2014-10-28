@@ -181,11 +181,11 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			panel.add(lblLastName);
 
 			final JLabel lblSchoolName = new JLabel("School Name");
-			lblSchoolName.setBounds(16, 302, 291, 16);
+			lblSchoolName.setBounds(16, 262, 291, 16);
 			panel.add(lblSchoolName);
 
 			final JLabel lblGroupLeader = new JLabel("Group Leader");
-			lblGroupLeader.setBounds(16, 261, 291, 16);
+			lblGroupLeader.setBounds(17, 302, 291, 16);
 			panel.add(lblGroupLeader);
 
 			final JLabel lblNewLabel = new JLabel("Athlete Information");
@@ -310,6 +310,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			for (String code : listCodes)
 				schoolGroupCodeComboBox.addItem(code);
 			schoolGroupCodeComboBox.setBounds(16, 359, 291, 27);
+			schoolGroupCodeComboBox.setEnabled(false);
 			panel.add(schoolGroupCodeComboBox);
 
 			// age combo box
@@ -336,7 +337,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			groupLeaderComboBox = new JComboBox<Teacher>();
 			for (Teacher teacher : listNames)
 				groupLeaderComboBox.addItem(teacher);
-			groupLeaderComboBox.setBounds(16, 276, 291, 27);
+			groupLeaderComboBox.setBounds(17, 317, 291, 27);
 			panel.add(groupLeaderComboBox);
 
 			// schools combo box
@@ -350,7 +351,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 			schoolNameComboBox = new JComboBox<School>();
 			for (School school : listSchools)
 				schoolNameComboBox.addItem(school);
-			schoolNameComboBox.setBounds(16, 315, 291, 27);
+			schoolNameComboBox.setBounds(16, 275, 291, 27);
 			panel.add(schoolNameComboBox);
 		}
 		// ----------- End Combo Box -------- //
@@ -453,6 +454,32 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 							btnRegister.setEnabled(true);
 						else
 							btnRegister.setEnabled(false);
+					}
+				}
+			});
+
+			schoolNameComboBox.addItemListener(new ItemListener() {
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+
+						School school = (School) schoolNameComboBox
+								.getSelectedItem();
+					}
+				}
+			});
+
+			groupLeaderComboBox.addItemListener(new ItemListener() {
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+
+						Teacher teacher = (Teacher) groupLeaderComboBox
+								.getSelectedItem();
+						schoolGroupCodeComboBox.setSelectedItem(teacher
+								.getGroupCode());
 					}
 				}
 			});
@@ -744,6 +771,7 @@ public class AthletePnl extends JPanel implements AdminPanelInterface {
 	/**
 	 * Method clearPanel.
 	 */
+	@Override
 	public void clearPanel() {
 		athleteTable.clearSelection();
 		// unfocuses table cell by focusing on something else
