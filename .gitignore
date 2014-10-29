@@ -1,0 +1,7 @@
+doc/
+bin/
+
+*.swo
+*.swp
+*~
+*.class
